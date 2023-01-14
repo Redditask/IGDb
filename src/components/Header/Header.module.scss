@@ -1,0 +1,21 @@
+.Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0.75rem 2.5rem 0 2.5rem;
+
+  &__items {
+    display: flex;
+    justify-content: space-around;
+
+    font-size: 1.25rem;
+
+    gap: 5rem;
+  }
+
+  &__item {
+    cursor: pointer;
+  }
+}

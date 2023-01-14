@@ -1,4 +1,4 @@
-@import url('satoshi.css');
+@import url('satoshi.scss');
 
 * {
   font-family: 'Satoshi-Variable';
@@ -14,5 +14,11 @@
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
 
+  &__body {
+    display: flex;
+    flex-direction: row;
+  }
 }
