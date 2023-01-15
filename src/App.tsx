@@ -13,6 +13,7 @@ import Body from "./components/Body/Body";
 //  авторизация (jwt)
 //  анимации при наведении на ссылки
 //  лоадер добавить
+//  в Home буду популярные игры
 
 const App: React.FC = () => {
   return (

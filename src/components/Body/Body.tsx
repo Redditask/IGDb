@@ -5,6 +5,7 @@ import styles from "./Body.module.scss";
 import {useGetAllGamesQuery} from "../../API/rawgApi";
 
 import {ServerResponse} from "../../types/types";
+
 import GameCard from "../GameCard/GameCard";
 
 const Body: React.FC = () => {
@@ -14,6 +15,7 @@ const Body: React.FC = () => {
     const response: ServerResponse = data;
 
     //console.log(response.results[0].tags[0].name)
+    //console.log(response)
 
     return (
         <div className={styles.Body}>

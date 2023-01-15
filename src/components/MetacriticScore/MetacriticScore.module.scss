@@ -1,0 +1,38 @@
+@mixin scoreColor($color){
+  font-size: 1.1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $color;
+
+  width: 2.2rem;
+  height: 2.2rem;
+
+  border-radius: 50%;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+
+.green {
+  @include scoreColor(green);
+}
+
+.yellow {
+  @include scoreColor(yellow);
+}
+
+.red {
+  @include scoreColor(red);
+}
+
+.notAvailable {
+  font-size: 1.2rem;
+
+  background-color: gray;
+
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+
+  padding: 0.25rem;
+}

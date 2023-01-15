@@ -1,13 +1,18 @@
 import React from 'react';
 
 import styles from "./GameCard.module.scss";
-import {GameInfo} from "../../types/types";
+
+import {Game} from "../../types/types";
+
+import PlatformsRow from "../PlatofrmsRow/PlatformsRow";
+import MetacriticScore from "../MetacriticScore/MetacriticScore";
 
 interface GameCardProps {
-    game: GameInfo;
+    game: Game;
 }
 
 const GameCard: React.FC<GameCardProps> = ({game}) => {
+
     return (
         <div className={styles.GameCard}>
             <img
@@ -20,8 +25,12 @@ const GameCard: React.FC<GameCardProps> = ({game}) => {
                 <h3 className={styles.GameCard__gameTitle}>
                     {game.name}
                 </h3>
+                <PlatformsRow platformsArray={game.platforms}/>
                 <p>Release date: {game.released}</p>
-                <p>Metacritic: {game.metacritic}</p>
+                <div className={styles.GameCard__metacriticArea}>
+                    <p>Metacritic: </p>
+                    <MetacriticScore score={game.metacritic}/>
+                </div>
             </div>
         </div>
     );
