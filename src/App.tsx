@@ -12,6 +12,7 @@ import Body from "./components/Body/Body";
 //    больше запросов
 //  авторизация (jwt)
 //  анимации при наведении на ссылки
+//  лоадер добавить
 
 const App: React.FC = () => {
   return (

@@ -1,7 +1,7 @@
-@import url('satoshi.scss');
+@import url("satoshi.scss");
 
 * {
-  font-family: 'Satoshi-Variable';
+  font-family: "Satoshi-Variable";
 
   margin: 0;
   padding: 0;
@@ -11,6 +11,10 @@
   list-style-type: none;
 
   transition: all 0.5s ease;
+}
+
+p, li {
+  font-family: "Satoshi-Medium";
 }
 
 .App {
