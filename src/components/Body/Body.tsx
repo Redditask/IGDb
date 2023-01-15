@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styles from "./Body.module.scss";
 
-//тут в пропсах будет приходить игры
+import {useGetAllGamesQuery} from "../../API/rawgApi";
+
 const Body: React.FC = () => {
+    const [page, setPage] = useState<number>(1);
+    const {data = [], error, isLoading} = useGetAllGamesQuery(page);
+
     return (
         <div className={styles.Body}>
-            Games will be here...
+
         </div>
     );
 };

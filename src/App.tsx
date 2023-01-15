@@ -6,10 +6,12 @@ import Header from "./components/Header/Header";
 import AsideBar from "./components/AsideBar/AsideBar";
 import Body from "./components/Body/Body";
 
-// Ссылки в компонентах сделать через map, названия ссылок в константы
-// добавить RTK store/query
-// авторизация (jwt)
-// анимации при наведении на ссылки
+// ToDo:
+//  Ссылки в компонентах сделать через map, названия ссылок в константы, добавить роутинг
+//  Query:
+//    больше запросов
+//  авторизация (jwt)
+//  анимации при наведении на ссылки
 
 const App: React.FC = () => {
   return (
