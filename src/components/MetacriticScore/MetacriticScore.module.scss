@@ -1,38 +1,39 @@
-@mixin scoreColor($color){
+@import url("../../satoshi.scss");
+
+@mixin scoreColor($background-color){
+  font-family: Satoshi-Bold;
   font-size: 1.1rem;
+
+  color: white;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: $color;
+  background-color: $background-color;
 
   width: 2.2rem;
   height: 2.2rem;
 
-  border-radius: 50%;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+  border-radius: 0.5rem;
+  border: 0.1rem solid white;
+  box-shadow: 0 0 10px 5px lightgray;
 }
 
 .green {
-  @include scoreColor(green);
+  @include scoreColor(#53e153);
 }
 
 .yellow {
-  @include scoreColor(yellow);
+  @include scoreColor(#e7e758);
 }
 
 .red {
-  @include scoreColor(red);
+  @include scoreColor(#ff6767);
 }
 
 .notAvailable {
-  font-size: 1.2rem;
+  @include scoreColor(gray);
 
-  background-color: gray;
-
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-
-  padding: 0.25rem;
+  font-size: 0.9rem;
 }

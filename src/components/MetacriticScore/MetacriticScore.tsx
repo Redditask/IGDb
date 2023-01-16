@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 import styles from "./MetacriticScore.module.scss";
 
-interface MeracriticScoreProps {
+interface MetacriticScoreProps {
     score: number;
 }
 
-const MetacriticScore:React.FC<MeracriticScoreProps> = ({score}) => {
+const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
     let className = styles.green;
 
     if (score < 75) className = styles.yellow;
@@ -15,11 +15,19 @@ const MetacriticScore:React.FC<MeracriticScoreProps> = ({score}) => {
     return (
         score
             ?
-            <div className={className} title="Game rating on metacritic">
+            <div
+                className={className}
+                title="Game rating on metacritic"
+            >
                 {score}
             </div>
             :
-            <div className={styles.notAvailable}>Not available</div>
+            <div
+                className={styles.notAvailable}
+                title="Game rating not available"
+            >
+                N/A
+            </div>
     );
 };
 

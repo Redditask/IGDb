@@ -1,5 +1,5 @@
 .Container {
-  width: 100%;
+  width: 100vw;
 
   background: white;
 
@@ -27,5 +27,9 @@
 
   &__item {
     cursor: pointer;
+  }
+
+  &__title {
+    user-select: none
   }
 }
