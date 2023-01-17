@@ -25,3 +25,9 @@ export interface Platform {
         name: string;
     }
 }
+
+export interface ScrollEvent {
+    targer : {
+
+    }
+}

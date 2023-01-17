@@ -3,9 +3,12 @@ import React from "react";
 import styles from "./PlatformsRow.module.scss";
 
 import {Platform} from "../../types/types";
+
 import {platformIconSize} from "../../utils/consts";
+import {platformDefinition} from "../../utils/helpers";
 
 import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
+
 
 interface PlatformsRowProps {
     platformsArray: Platform[]
@@ -14,22 +17,22 @@ interface PlatformsRowProps {
 const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
 
     return (
-        <div className={styles.PlatformsRow}>
-            {platformsArray.map((item)=>item.platform.name.includes("PC"))
+        <div className={styles.platformsRow}>
+            {platformDefinition(platformsArray, "PC")
                 &&
                 <FaWindows
                     size={platformIconSize}
                     title="Personal computer"
                 />
             }
-            {platformsArray.map((item)=>item.platform.name.includes("Xbox"))
+            {platformDefinition(platformsArray, "Xbox")
                 &&
                 <FaXbox
                     size={platformIconSize}
                     title="Xbox"
                 />
             }
-            {platformsArray.map((item)=>item.platform.name.includes("PlayStation"))
+            {platformDefinition(platformsArray, "PlayStation")
                 &&
                 <FaPlaystation
                     size={platformIconSize}

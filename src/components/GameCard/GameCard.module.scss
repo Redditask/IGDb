@@ -1,4 +1,7 @@
-.GameCard {
+.gameCard {
+  display: flex;
+  flex-direction: column;
+
   box-shadow: 0 0 10px 5px lightgray;
   border-radius: 1rem;
 
@@ -24,6 +27,8 @@
   &__image {
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+
+    object-fit: cover;
   }
 
   &__gameTitle {
@@ -31,7 +36,7 @@
 
     font-size: 1.5rem;
 
-    width: 17rem;
+    width: 23rem;
   }
 
   &__metacriticArea {

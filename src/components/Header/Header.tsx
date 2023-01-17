@@ -5,16 +5,16 @@ import styles from "./Header.module.scss";
 const Header: React.FC = () => {
 
     return (
-        <header className={styles.Container}>
-            <div className={styles.Header}>
-                <h1 className={styles.Header__title}>
+        <header className={styles.container}>
+            <div className={styles.header}>
+                <h1 className={styles.header__title}>
                     I G D b
                 </h1>
-                <nav className={styles.Header__items}>
-                    <p className={styles.Header__item}>
+                <nav className={styles.header__items}>
+                    <p className={styles.header__item}>
                         My library
                     </p>
-                    <p className={styles.Header__item}>
+                    <p className={styles.header__item}>
                         Log out
                     </p>
                 </nav>

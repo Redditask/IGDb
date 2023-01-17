@@ -1,0 +1,30 @@
+@import url("../../satoshi.scss");
+
+.container {
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 10rem;
+}
+
+.gameList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 3rem;
+}
+
+.loaderArea {
+  font-size: 1.35rem;
+  font-family: Satoshi-Regular;
+
+  width: 7rem;
+
+  margin: 3.5rem 0 2.5rem 0;
+}
