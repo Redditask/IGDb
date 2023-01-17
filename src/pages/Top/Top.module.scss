@@ -1,0 +1,9 @@
+.Top {
+  display: flex;
+  flex-direction: column;
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+  }
+}

@@ -18,7 +18,10 @@ const GameList: React.FC<BodyProps> = ({games}) => {
             <div className={styles.gameList}>
                 {
                     games.map(
-                        (game) => <GameCard game={game} key={game.name}/>
+                        (game) =>
+                            game.background_image
+                            ? <GameCard game={game} key={game.name}/>
+                            : null
                     )
                 }
             </div>

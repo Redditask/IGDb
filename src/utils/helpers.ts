@@ -22,7 +22,21 @@ export const platformDefinition = (platformsArray: Platform[], platform: string)
 };
 
 export const imageCrop = (imageSrc: string): string => {
-    const imageUrl = imageSrc.split("media/")[1];
+    const imageUrl = String(imageSrc).split("media/")[1];
 
     return `https://media.rawg.io/media/crop/600/400/${imageUrl}`;
 };
+
+export const getDates = ():string => {
+    const date: Date = new Date();
+
+    const currYear: number = date.getFullYear();
+    const currMonth: number = date.getMonth();
+
+    const [prevYear, prevMonth]: [number, number] = (currMonth === 0) ? [currYear-1, 11] : [currYear, currMonth-1];
+
+    const prevMonthZero: string = prevMonth+1 < 10 ? "0" : "";
+    const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
+
+    return `${prevYear}-${prevMonthZero}${prevMonth+1}-01,${currYear}-${currMonthZero}${currMonth+1}-01`;
+}

@@ -13,16 +13,6 @@
   transition: all 0.5s ease;
 }
 
-p, li {
+p, a {
   font-family: "Satoshi-Medium";
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-
-  &__body {
-    display: flex;
-    flex-direction: row;
-  }
 }

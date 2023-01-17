@@ -1,3 +1,8 @@
+import {FC} from "react";
+
+import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
+import {BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryDefinition} from "@reduxjs/toolkit/query";
+
 export interface ServerResponse {
     count: number,
     next: string | null,
@@ -22,12 +27,21 @@ export interface Tag {
 
 export interface Platform {
     platform: {
+        id: number;
         name: string;
     }
 }
 
-export interface ScrollEvent {
-    targer : {
-
-    }
+export interface CustomRoute {
+    path: string,
+    Component: FC<{}>;
 }
+
+export interface CustomLink {
+    path: string;
+    name: string;
+}
+
+export type apiHookType = {
+   useGetAllGamesQuery: UseQuery<QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">>
+};
