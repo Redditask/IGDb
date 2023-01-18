@@ -42,6 +42,5 @@ export interface CustomLink {
     name: string;
 }
 
-export type apiHookType = {
-   useGetAllGamesQuery: UseQuery<QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">>
-};
+export type apiHookType =
+    QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">;

@@ -1,6 +1,7 @@
 import React from "react";
 
 import {publicRoutes} from "../../routes/routes";
+
 import {HOME_ROUTE} from "../../utils/consts";
 
 import CustomRoutes from "../CustomRoutes/CustomRoutes";

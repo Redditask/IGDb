@@ -2,15 +2,15 @@ import React, {memo} from "react";
 
 import styles from "./GameCard.module.scss";
 
-import {Game} from "../../types/types";
-
-import {imageCrop} from "../../utils/helpers";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import PlatformsRow from "../PlatofrmsRow/PlatformsRow";
 import MetacriticScore from "../MetacriticScore/MetacriticScore";
 
-import {LazyLoadImage} from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import {Game} from "../../types/types";
+
+import {imageCrop} from "../../utils/helpers";
 
 interface GameCardProps {
     game: Game;

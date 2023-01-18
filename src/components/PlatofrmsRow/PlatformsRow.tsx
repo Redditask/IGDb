@@ -2,13 +2,12 @@ import React from "react";
 
 import styles from "./PlatformsRow.module.scss";
 
+import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
+
 import {Platform} from "../../types/types";
 
 import {platformIconSize} from "../../utils/consts";
 import {platformDefinition} from "../../utils/helpers";
-
-import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
-
 
 interface PlatformsRowProps {
     platformsArray: Platform[]

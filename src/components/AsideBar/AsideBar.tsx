@@ -1,8 +1,8 @@
 import React from "react";
 
-import {NavLink} from "react-router-dom";
-
 import styles from "./AsideBar.module.scss";
+
+import {NavLink} from "react-router-dom";
 
 import {AsideLinks} from "../../utils/consts";
 

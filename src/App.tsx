@@ -6,15 +6,18 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
-//  аналогично AsideBar сделать Header
-//  в AsideBar сделать подкатегории
-//  декомпозировать pages (?)
-//  Query:
-//    больше запросов
-//  авторизация (jwt)
-//  анимации при наведении, нажатии на ссылки
+//  Query: больше запросов
+//  AllGames => Home
 //  в Home будут популярные игры
 //  решить проблему с pageLimit, event: any
+//  анимации при наведении, нажатии на ссылки
+//  New releases -> last 30 days, upcoming releases
+//  Top -> Top games ever
+//  и везде фильтры прикрутить
+//  //
+//  аналогично AsideBar сделать Header
+//  в AsideBar сделать подкатегории
+//  авторизация (jwt)
 
 const App: React.FC = () => {
 
@@ -24,7 +27,7 @@ const App: React.FC = () => {
                 <AppRouter/>
             </BrowserRouter>
         </div>
-    )
+    );
 };
 
 export default App;
