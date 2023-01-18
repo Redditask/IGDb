@@ -27,7 +27,7 @@ export const imageCrop = (imageSrc: string): string => {
     return `https://media.rawg.io/media/crop/600/400/${imageUrl}`;
 };
 
-export const getDates = ():string => {
+export const getRecentDates = ():string => {
     const date: Date = new Date();
 
     const currYear: number = date.getFullYear();
@@ -39,4 +39,18 @@ export const getDates = ():string => {
     const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
 
     return `${prevYear}-${prevMonthZero}${prevMonth+1}-01,${currYear}-${currMonthZero}${currMonth+1}-01`;
+};
+
+export const getUpcomingDates = ():string => {
+    const date: Date = new Date();
+
+    const currYear: number = date.getFullYear();
+    const currMonth: number = date.getMonth();
+
+    const [nextYear, nextMonth]: [number, number] = (currMonth === 11) ? [currYear+1, 0] : [currYear, currMonth+1];
+
+    const nextMonthZero: string = nextMonth+1 < 10 ? "0" : "";
+    const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
+
+    return `${currYear}-${currMonthZero}${currMonth+1}-01,${nextYear}-${nextMonthZero}${nextMonth+1}-01`;
 }

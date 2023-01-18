@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const Home = () => {
+import {useGetAllGamesQuery} from "../../API/rawgApi";
+
+import PageWithGames from "../../components/PageWithGames/PageWithGames";
+
+const Home:React.FC = () => {
+
     return (
-        <div>
-            
-        </div>
+        <PageWithGames apiHook={useGetAllGamesQuery}/>
     );
 };
 

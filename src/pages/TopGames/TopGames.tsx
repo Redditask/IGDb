@@ -4,11 +4,11 @@ import {useGetTopGamesQuery} from "../../API/rawgApi";
 
 import PageWithGames from "../../components/PageWithGames/PageWithGames";
 
-const Top:React.FC = () => {
+const TopGames:React.FC = () => {
 
     return (
         <PageWithGames apiHook={useGetTopGamesQuery}/>
     );
 };
 
-export default Top;
+export default TopGames;
