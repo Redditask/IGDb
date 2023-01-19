@@ -1,15 +1,8 @@
-import React from "react";
-
 import {Platform} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
-    event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 250;
+    event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
-export const scrollHandler = (event: any, setPage: React.Dispatch<React.SetStateAction<number>>): void => {
-    if (scrollCheck(event)) {
-        setPage((prevState: number) => prevState + 1);
-    }
-};
 
 export const platformDefinition = (platformsArray: Platform[], platform: string): boolean => {
     let isOnPlatform = false;

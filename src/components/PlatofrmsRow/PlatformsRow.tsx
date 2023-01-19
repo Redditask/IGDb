@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./PlatformsRow.module.scss";
 
 import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
+import {SiNintendoswitch} from "react-icons/si";
 
 import {Platform} from "../../types/types";
 
@@ -36,6 +37,13 @@ const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
                 <FaPlaystation
                     size={platformIconSize}
                     title="PlayStation"
+                />
+            }
+            {platformDefinition(platformsArray, "Nintendo")
+                &&
+                <SiNintendoswitch
+                    size={platformIconSize}
+                    title="Nintendo"
                 />
             }
         </div>

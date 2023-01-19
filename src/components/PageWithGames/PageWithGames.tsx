@@ -11,7 +11,7 @@ import GameList from "../GameList/GameList";
 
 import {apiHookType, Game} from "../../types/types";
 
-import {scrollHandler} from "../../utils/helpers";
+import {scrollCheck} from "../../utils/helpers";
 
 interface PageWithGamesProps {
     apiHook: UseQuery<apiHookType>;
@@ -20,22 +20,37 @@ interface PageWithGamesProps {
 const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const [games, setGames] = useState<Game []>([]);
     const [page, setPage] = useState<number>(1);
+    const [pageLimit, setPageLimit] = useState<number>(2);
+    const [isLimit, setIsLimit] = useState<boolean>(false);
 
     const {data: response, error, isSuccess} = apiHook(page);
 
     useEffect(() => {
         if (isSuccess) {
-            setGames(() => [...games, ...response.results]);
+            setGames([...games, ...response.results]);
+            setPageLimit(Math.ceil(response.count/20));
         }
     }, [response]);
 
+    const scrollHandler = (event: any, setPage: React.Dispatch<React.SetStateAction<number>>): void => {
+        if (scrollCheck(event) && page < pageLimit) {
+            setPage((prevState: number) => prevState + 1);
+        } else if (page === pageLimit) {
+            setIsLimit(true);
+        }
+    };
+
+    const scrollListener = (event: Event) => {
+        scrollHandler(event, setPage);
+    };
+
     useEffect(() => {
-        document.addEventListener("scroll", (event)=>scrollHandler(event, setPage));
+        document.addEventListener("scroll", scrollListener);
 
         return function () {
-            document.removeEventListener("scroll", (event)=>scrollHandler(event, setPage));
+            document.removeEventListener("scroll", scrollListener);
         }
-    }, []);
+    }, [response]);
 
     return (
         <div className={styles.PageWithGames}>
@@ -44,8 +59,8 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                 <AsideBar/>
                 {
                     error
-                        ? <ErrorMessage />
-                        : <GameList games={games}/>
+                        ? <ErrorMessage/>
+                        : <GameList games={games} isLimit={isLimit}/>
                 }
             </div>
         </div>

@@ -6,8 +6,7 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
-//  Query: больше запросов
-//  решить проблему с pageLimit, event: any
+//  wishlist, my library, all time top, best of the year, platforms, genres - добавить страницы
 //  анимации при наведении, нажатии на ссылки
 //  и везде фильтры прикрутить
 //  //

@@ -9,9 +9,10 @@ import {Game} from "../../types/types";
 
 interface BodyProps {
     games: Game[];
+    isLimit: boolean;
 }
 
-const GameList: React.FC<BodyProps> = ({games}) => {
+const GameList: React.FC<BodyProps> = ({games, isLimit}) => {
 
     return (
         <div className={styles.container}>
@@ -20,13 +21,13 @@ const GameList: React.FC<BodyProps> = ({games}) => {
                     games.map(
                         (game) =>
                             game.background_image
-                            ? <GameCard game={game} key={game.name}/>
-                            : null
+                                ? <GameCard game={game} key={game.name}/>
+                                : null
                     )
                 }
             </div>
             <div className={styles.loaderArea}>
-                <SmallLoader/>
+                {isLimit ? null : <SmallLoader/>}
             </div>
         </div>
     );
