@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {ServerResponse} from "../types/types";
 
-import {getRecentDates, getUpcomingDates} from "../utils/helpers";
+import {getLastYearDates, getRecentDates, getUpcomingDates} from "../utils/helpers";
 
 export const rawgApi = createApi({
     reducerPath: "rawgApi",
@@ -17,8 +17,11 @@ export const rawgApi = createApi({
         getUpcomingReleases: builder.query<ServerResponse, number>({
             query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&dates=${getUpcomingDates()}`,
         }),
-        getTopGames: builder.query<ServerResponse, number>({
+        getAllTimeTopGames: builder.query<ServerResponse, number>({
             query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100`
+        }),
+        getLastYearTopGames: builder.query<ServerResponse, number>({
+           query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100&dates=${getLastYearDates()}`
         }),
     }),
 });
@@ -27,5 +30,6 @@ export const {
     useGetAllGamesQuery,
     useGetRecentReleasesQuery,
     useGetUpcomingReleasesQuery,
-    useGetTopGamesQuery,
+    useGetAllTimeTopGamesQuery,
+    useGetLastYearTopGamesQuery,
 } = rawgApi;

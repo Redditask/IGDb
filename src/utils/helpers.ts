@@ -46,4 +46,19 @@ export const getUpcomingDates = ():string => {
     const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
 
     return `${currYear}-${currMonthZero}${currMonth+1}-01,${nextYear}-${nextMonthZero}${nextMonth+1}-01`;
-}
+};
+
+export const getLastYearDates = (): string => {
+    const date: Date = new Date();
+
+    const currYear: number = date.getFullYear();
+    const currYearMonth: number = date.getMonth();
+
+    const prevYear: number = currYear-1;
+    const prevYearMonth: number = currYearMonth;
+
+    const prevMonthZero: string = prevYearMonth+1 < 10 ? "0" : "";
+    const currMonthZero: string = currYearMonth+1 < 10 ? "0" : "";
+
+    return `${prevYear}-${prevMonthZero}${prevYearMonth+1}-01,${currYear}-${currMonthZero}${currYearMonth+1}-01`;
+};

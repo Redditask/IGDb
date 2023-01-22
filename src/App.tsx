@@ -6,8 +6,7 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
-//  wishlist, my library, all time top, best of the year, platforms, genres - добавить страницы
-//  и везде фильтры прикрутить
+//  wishlist, my library - добавить страницы
 //  //
 //  аналогично AsideBar сделать Header
 //  //
