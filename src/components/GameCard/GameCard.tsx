@@ -32,7 +32,7 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                 <h3 className={styles.gameCard__gameTitle}>
                     {game.name}
                 </h3>
-                <PlatformsRow platformsArray={game.platforms}/>
+                <PlatformsRow platformsArray={game.parent_platforms}/>
                 <p>Release date: {game.released}</p>
                 <div className={styles.gameCard__metacriticArea}>
                     <p>Metacritic: </p>

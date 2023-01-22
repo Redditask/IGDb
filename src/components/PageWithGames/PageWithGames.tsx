@@ -26,11 +26,21 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const {data: response, error, isSuccess} = apiHook(page);
 
     useEffect(() => {
+        document.addEventListener("scroll", scrollListener);
+
         if (isSuccess) {
             setGames([...games, ...response.results]);
             setPageLimit(Math.ceil(response.count/20));
         }
+
+        return function () {
+            document.removeEventListener("scroll", scrollListener);
+        };
     }, [response]);
+
+    const scrollListener = (event: Event) => {
+        scrollHandler(event, setPage);
+    };
 
     const scrollHandler = (event: any, setPage: React.Dispatch<React.SetStateAction<number>>): void => {
         if (scrollCheck(event) && page < pageLimit) {
@@ -39,18 +49,6 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
             setIsLimit(true);
         }
     };
-
-    const scrollListener = (event: Event) => {
-        scrollHandler(event, setPage);
-    };
-
-    useEffect(() => {
-        document.addEventListener("scroll", scrollListener);
-
-        return function () {
-            document.removeEventListener("scroll", scrollListener);
-        }
-    }, [response]);
 
     return (
         <div className={styles.PageWithGames}>

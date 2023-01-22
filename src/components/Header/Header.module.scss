@@ -27,6 +27,16 @@
 
   &__item {
     cursor: pointer;
+
+    color: black;
+
+    &:hover {
+      color: lightgrey;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 
   &__title {
