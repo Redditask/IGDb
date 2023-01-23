@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
 //  wishlist, my library - добавить страницы
+//  фильтры в pagewithgames
 //  //
 //  аналогично AsideBar сделать Header
 //  //

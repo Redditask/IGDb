@@ -1,4 +1,4 @@
-import {CustomLink} from "../types/types";
+import {CustomLink, CustomOption} from "../types/types";
 
 export const platformIconSize: number = 15;
 
@@ -33,4 +33,38 @@ export const AsideLinks: CustomLink [] = [
         path: LAST_YEAR_TOP_ROUTE,
         name: "Last Year Top",
     }
+];
+
+export const genresList: CustomOption[] = [
+    {
+        name: "Action",
+        value: "action",
+    },
+    {
+        name: "Shooter",
+        value: "shooter",
+    },
+    {
+        name: "Racing",
+        value: "racing",
+    },
+];
+
+export const platformsList: CustomOption[] = [
+    {
+        name: "PC",
+        value: 1,
+    },
+    {
+        name: "PlayStation",
+        value: 2,
+    },
+    {
+        name: "Xbox",
+        value: 3,
+    },
+    {
+        name: "Nintendo",
+        value: 7,
+    },
 ];

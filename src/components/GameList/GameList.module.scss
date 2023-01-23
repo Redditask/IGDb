@@ -1,14 +1,12 @@
 @import url("../../satoshi.scss");
 
 .container {
-  width: 100vw;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  margin-top: 10rem;
+  margin-top: 1.5rem;
 }
 
 .gameList {

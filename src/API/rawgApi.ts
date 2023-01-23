@@ -8,20 +8,20 @@ export const rawgApi = createApi({
     reducerPath: "rawgApi",
     baseQuery: fetchBaseQuery({baseUrl: `https://api.rawg.io/api/`}),
     endpoints: (builder) => ({
-        getAllGames: builder.query<ServerResponse, number>({
-            query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}`,
+        getAllGames: builder.query<ServerResponse, { page: number, genres: string, platforms: string }>({
+            query: ({page, genres, platforms}) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}${genres}${platforms}`,
         }),
-        getRecentReleases: builder.query<ServerResponse, number>({
-            query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&dates=${getRecentDates()}`,
+        getRecentReleases: builder.query<ServerResponse, { page: number, genres: string, platforms: string }>({
+            query: ({page, genres, platforms}) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&dates=${getRecentDates()}${genres}${platforms}`,
         }),
-        getUpcomingReleases: builder.query<ServerResponse, number>({
-            query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&dates=${getUpcomingDates()}`,
+        getUpcomingReleases: builder.query<ServerResponse, { page: number, genres: string, platforms: string }>({
+            query: ({page, genres, platforms}) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&dates=${getUpcomingDates()}${genres}${platforms}`,
         }),
-        getAllTimeTopGames: builder.query<ServerResponse, number>({
-            query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100`
+        getAllTimeTopGames: builder.query<ServerResponse, { page: number, genres: string, platforms: string }>({
+            query: ({page, genres, platforms}) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100${genres}${platforms}`
         }),
-        getLastYearTopGames: builder.query<ServerResponse, number>({
-           query: (page) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100&dates=${getLastYearDates()}`
+        getLastYearTopGames: builder.query<ServerResponse, { page: number, genres: string, platforms: string }>({
+           query: ({page, genres, platforms}) => `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&metacritic=85,100&dates=${getLastYearDates()}${genres}${platforms}`
         }),
     }),
 });

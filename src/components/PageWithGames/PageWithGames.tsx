@@ -8,10 +8,12 @@ import Header from "../Header/Header";
 import AsideBar from "../AsideBar/AsideBar";
 import ErrorMessage from "../UI/ErrorMesage/ErrorMessage";
 import GameList from "../GameList/GameList";
+import Filter from "../Filter/Filter";
 
 import {apiHookType, Game} from "../../types/types";
 
 import {scrollCheck} from "../../utils/helpers";
+import {genresList, platformsList} from "../../utils/consts";
 
 interface PageWithGamesProps {
     apiHook: UseQuery<apiHookType>;
@@ -22,15 +24,22 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(2);
     const [isLimit, setIsLimit] = useState<boolean>(false);
+    const [genres, setGenres] = useState<string>("");
+    const [platforms, setPlatforms] = useState<string>("");
 
-    const {data: response, error, isSuccess} = apiHook(page);
+    const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
+
+    useEffect(()=>{
+        setPage(1);
+        setGames([]);
+    }, [genres, platforms]);
 
     useEffect(() => {
         document.addEventListener("scroll", scrollListener);
 
         if (isSuccess) {
             setGames([...games, ...response.results]);
-            setPageLimit(Math.ceil(response.count/20));
+            setPageLimit(Math.ceil(response.count / 20));
         }
 
         return function () {
@@ -53,13 +62,19 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     return (
         <div className={styles.PageWithGames}>
             <Header/>
-            <div className={styles.PageWithGames__body}>
+            <div className={styles.PageWithGames__container}>
                 <AsideBar/>
-                {
-                    error
-                        ? <ErrorMessage/>
-                        : <GameList games={games} isLimit={isLimit}/>
-                }
+                <div className={styles.PageWithGames__body}>
+                    <div className={styles.PageWithGames__filters}>
+                        <Filter setState={setGenres} filterString="&genres" options={genresList}/>
+                        <Filter setState={setPlatforms} filterString="&parent_platforms" options={platformsList}/>
+                    </div>
+                    {
+                        error
+                            ? <ErrorMessage/>
+                            : <GameList games={games} isLimit={isLimit}/>
+                    }
+                </div>
             </div>
         </div>
     );

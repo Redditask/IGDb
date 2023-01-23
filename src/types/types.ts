@@ -3,25 +3,25 @@ import {FC} from "react";
 import {BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryDefinition} from "@reduxjs/toolkit/query";
 
 export interface ServerResponse {
-    count: number,
-    next: string | null,
-    previous: string | null,
-    results: Game[]
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: Game[];
 }
 
 export interface Game {
-    id: number,
-    name: string,
-    released: string,
-    background_image: string,
-    metacritic: number,
-    tags: Tag[],
-    parent_platforms: Platform[]
+    id: number;
+    name: string;
+    released: string;
+    background_image: string;
+    metacritic: number;
+    tags: Tag[];
+    parent_platforms: Platform[];
 }
 
 export interface Tag {
-    name: string,
-    id: number
+    name: string;
+    id: number;
 }
 
 export interface Platform {
@@ -32,7 +32,7 @@ export interface Platform {
 }
 
 export interface CustomRoute {
-    path: string,
+    path: string;
     Component: FC<{}>;
 }
 
@@ -41,5 +41,11 @@ export interface CustomLink {
     name: string;
 }
 
+export interface CustomOption {
+    name: string;
+    value: string | number;
+}
+
 export type apiHookType =
-    QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">;
+    QueryDefinition<{page: number, genres: string, platforms: string},
+        BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">;

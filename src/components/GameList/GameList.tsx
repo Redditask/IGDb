@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./GameList.module.scss";
 
 import GameCard from "../GameCard/GameCard";
-import SmallLoader from "../UI/SmallLoader/SmallLoader";
+import Loader from "../UI/Loader/Loader";
 
 import {Game} from "../../types/types";
 
@@ -27,7 +27,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit}) => {
                 }
             </div>
             <div className={styles.loaderArea}>
-                {isLimit ? null : <SmallLoader/>}
+                {isLimit ? null : <Loader/>}
             </div>
         </div>
     );
