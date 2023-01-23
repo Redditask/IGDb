@@ -29,11 +29,6 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
 
     const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
 
-    useEffect(()=>{
-        setPage(1);
-        setGames([]);
-    }, [genres, platforms]);
-
     useEffect(() => {
         document.addEventListener("scroll", scrollListener);
 
@@ -66,8 +61,24 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                 <AsideBar/>
                 <div className={styles.PageWithGames__body}>
                     <div className={styles.PageWithGames__filters}>
-                        <Filter setState={setGenres} filterString="&genres" options={genresList}/>
-                        <Filter setState={setPlatforms} filterString="&parent_platforms" options={platformsList}/>
+                        <Filter
+                            title="Genre"
+                            defaultValue="All"
+                            setState={setGenres}
+                            filterString="&genres"
+                            options={genresList}
+                            setGames={setGames}
+                            setPage={setPage}
+                        />
+                        <Filter
+                            title="Platform"
+                            defaultValue="All"
+                            setState={setPlatforms}
+                            filterString="&parent_platforms"
+                            options={platformsList}
+                            setGames={setGames}
+                            setPage={setPage}
+                        />
                     </div>
                     {
                         error

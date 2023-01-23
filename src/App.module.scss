@@ -13,6 +13,26 @@
   transition: all 0.25s ease;
 }
 
-p, a {
+p, a, select, option {
   font-family: "Satoshi-Medium";
+}
+
+option {
+  text-align: start;
+}
+
+select {
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 20px 2.5px lightgray;
+
+  font-size: 1.15rem;
+
+  width: 8.5rem;
+
+  padding: 0.5rem 0.45rem;
+
+  &:focus {
+    outline: 0;
+  }
 }

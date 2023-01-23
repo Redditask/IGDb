@@ -7,7 +7,8 @@ import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
 //  wishlist, my library - добавить страницы
-//  фильтры в pagewithgames
+//  выбор нескольких значений в фильтре
+//  пофиксить баг с количеством страниц при выбранных фильтрах
 //  //
 //  аналогично AsideBar сделать Header
 //  //

@@ -1,3 +1,5 @@
+@import url("../../satoshi.scss");
+
 .PageWithGames {
   display: flex;
   flex-direction: column;
@@ -16,8 +18,15 @@
     align-items: center;
   }
 
-  &__filter {
+  &__filters {
+    width: 86vw;
+
     display: flex;
     flex-direction: row;
+    justify-content: start;
+
+    margin-top: 9.35rem;
+
+    gap: 5rem
   }
 }

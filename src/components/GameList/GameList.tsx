@@ -21,7 +21,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit}) => {
                     games.map(
                         (game) =>
                             game.background_image
-                                ? <GameCard game={game} key={game.name}/>
+                                ? <GameCard game={game} key={game.id}/>
                                 : null
                     )
                 }
