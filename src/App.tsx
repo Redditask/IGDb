@@ -6,10 +6,9 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
-//  пофиксить баг с количеством страниц при выбранных фильтрах
 //  wishlist, my library - добавить страницы
 //  //
-//  проинспектировать стили
+//  проинспектировать стили, filter зарефакторить
 //  аналогично AsideBar сделать Header
 //  //
 //  авторизация (jwt)

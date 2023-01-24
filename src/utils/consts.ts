@@ -1,5 +1,7 @@
 import {CustomLink, CustomOption} from "../types/types";
 
+export const gamesLimit: number = 20;
+
 export const platformIconSize: number = 15;
 
 export const HOME_ROUTE: string = "/home";

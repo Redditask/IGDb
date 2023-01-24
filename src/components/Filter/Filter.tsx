@@ -1,30 +1,28 @@
-import React from "react";
+import React, {memo} from "react";
 
 import styles from "./Filter.module.scss";
 
-import {CustomOption, Game} from "../../types/types";
+import {CustomOption} from "../../types/types";
 
 interface FilterProps {
     title: string;
     options: CustomOption[];
     filterString: string;
     setState: (option: string) => void;
-    setGames: (games:Game []) => void;
-    setPage: (page: number) => void;
+    resetState: () => void;
     defaultValue: string;
 }
 
-const Filter: React.FC<FilterProps> = ({title, options, setState, filterString, setPage, setGames, defaultValue}) => {
+const Filter: React.FC<FilterProps> = memo(
+    ({title, options, setState, filterString, resetState, defaultValue}) => {
 
     const selectHandler = (event: any) => {
         if (event.target.value) {
-            setGames([]);
+            resetState();
             setState(`${filterString}=${event.target.value}`);
-            setPage(1);
         }else {
-            setGames([]);
+            resetState();
             setState("");
-            setPage(1);
         }
     };
 
@@ -43,12 +41,12 @@ const Filter: React.FC<FilterProps> = ({title, options, setState, filterString, 
                             value={option.value}
                         >
                             {option.name}
-                        </option>)
-
+                        </option>
+                    )
                 }
             </select>
         </form>
     );
-};
+});
 
 export default Filter;

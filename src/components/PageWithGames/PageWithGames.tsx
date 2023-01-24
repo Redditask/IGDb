@@ -6,14 +6,14 @@ import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 import Header from "../Header/Header";
 import AsideBar from "../AsideBar/AsideBar";
-import ErrorMessage from "../UI/ErrorMesage/ErrorMessage";
+import Message from "../UI/ErrorMesage/Message";
 import GameList from "../GameList/GameList";
 import Filter from "../Filter/Filter";
 
 import {apiHookType, Game} from "../../types/types";
 
 import {scrollCheck} from "../../utils/helpers";
-import {genresList, platformsList} from "../../utils/consts";
+import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 
 interface PageWithGamesProps {
     apiHook: UseQuery<apiHookType>;
@@ -24,17 +24,22 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(2);
     const [isLimit, setIsLimit] = useState<boolean>(false);
+    const [isEmpty, setIsEmpty] = useState<boolean>(false);
     const [genres, setGenres] = useState<string>("");
     const [platforms, setPlatforms] = useState<string>("");
 
     const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
 
     useEffect(() => {
-        document.addEventListener("scroll", scrollListener);
-
         if (isSuccess) {
             setGames([...games, ...response.results]);
-            setPageLimit(Math.ceil(response.count / 20));
+            setPageLimit(Math.ceil(response.count / gamesLimit));
+
+            response.count < 20
+                ? setIsLimit(true)
+                : document.addEventListener("scroll", scrollListener);
+
+            if (response.results.length === 0) setIsEmpty(true);
         }
 
         return function () {
@@ -54,6 +59,14 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
         }
     };
 
+    const resetState = () => {
+        setGames([]);
+        setPage(1);
+        setPageLimit(2);
+        setIsEmpty(false);
+        setIsLimit(false);
+    };
+
     return (
         <div className={styles.PageWithGames}>
             <Header/>
@@ -67,8 +80,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                             setState={setGenres}
                             filterString="&genres"
                             options={genresList}
-                            setGames={setGames}
-                            setPage={setPage}
+                            resetState={resetState}
                         />
                         <Filter
                             title="Platform"
@@ -76,14 +88,13 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                             setState={setPlatforms}
                             filterString="&parent_platforms"
                             options={platformsList}
-                            setGames={setGames}
-                            setPage={setPage}
+                            resetState={resetState}
                         />
                     </div>
                     {
                         error
-                            ? <ErrorMessage/>
-                            : <GameList games={games} isLimit={isLimit}/>
+                            ? <Message text="Oops, something go wrong..."/>
+                            : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
                     }
                 </div>
             </div>
