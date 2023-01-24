@@ -13,7 +13,7 @@
   transition: all 0.25s ease;
 }
 
-p, a, select, option {
+p, a, select, option, label {
   font-family: "Satoshi-Medium";
 }
 
@@ -31,6 +31,8 @@ select {
   width: 8.5rem;
 
   padding: 0.5rem 0.45rem;
+
+  cursor: pointer;
 
   &:focus {
     outline: 0;

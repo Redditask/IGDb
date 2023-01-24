@@ -31,7 +31,7 @@
     object-fit: cover;
   }
 
-  &__gameTitle {
+  &__title {
     overflow-wrap: normal;
 
     font-size: 1.5rem;
@@ -39,11 +39,18 @@
     width: 23rem;
   }
 
-  &__metacriticArea {
+  &__metacritic {
     display: flex;
     justify-content: start;
     align-items: center;
 
     gap: 0.3rem
+  }
+
+  &__genres {
+    display: flex;
+    align-items: center;
+
+    gap: 0.25rem
   }
 }

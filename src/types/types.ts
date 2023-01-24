@@ -15,13 +15,14 @@ export interface Game {
     released: string;
     background_image: string;
     metacritic: number;
-    tags: Tag[];
+    tags: Label[];
+    genres: Label[];
     parent_platforms: Platform[];
 }
 
-export interface Tag {
-    name: string;
+export interface Label {
     id: number;
+    name: string;
 }
 
 export interface Platform {

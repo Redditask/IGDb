@@ -11,6 +11,7 @@ import MetacriticScore from "../MetacriticScore/MetacriticScore";
 import {Game} from "../../types/types";
 
 import {imageCrop} from "../../utils/helpers";
+import LabelRow from "../LabelRow/LabelRow";
 
 interface GameCardProps {
     game: Game;
@@ -29,14 +30,18 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                 alt="Background"
             />
             <div className={styles.gameCard__description}>
-                <h3 className={styles.gameCard__gameTitle}>
+                <h3 className={styles.gameCard__title}>
                     {game.name}
                 </h3>
                 <PlatformsRow platformsArray={game.parent_platforms}/>
                 <p>Release date: {game.released}</p>
-                <div className={styles.gameCard__metacriticArea}>
+                <div className={styles.gameCard__metacritic}>
                     <p>Metacritic: </p>
                     <MetacriticScore score={game.metacritic}/>
+                </div>
+                <div className={styles.gameCard__genres}>
+                    <p>Genres: </p>
+                    <LabelRow labels={game.genres}/>
                 </div>
             </div>
         </div>

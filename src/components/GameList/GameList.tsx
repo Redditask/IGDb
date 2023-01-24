@@ -26,7 +26,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit}) => {
                     )
                 }
             </div>
-            <div className={styles.loaderArea}>
+            <div className={styles.loader}>
                 {isLimit ? null : <Loader/>}
             </div>
         </div>
