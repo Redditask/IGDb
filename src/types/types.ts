@@ -29,7 +29,7 @@ export interface Platform {
     platform: {
         id: number;
         name: string;
-    }
+    };
 }
 
 export interface CustomRoute {
@@ -48,5 +48,7 @@ export interface CustomOption {
 }
 
 export type apiHookType =
-    QueryDefinition<{page: number, genres: string, platforms: string},
-        BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi">;
+    QueryDefinition<
+        {page: number, genres: string, platforms: string},
+        BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi"
+    >;

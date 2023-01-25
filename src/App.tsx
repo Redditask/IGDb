@@ -6,9 +6,10 @@ import AppRouter from "./components/AppRouter/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
+//  отдельная страница игры
+//  добавить конкретные платформы на отдельной странице игры
 //  wishlist, my library - добавить страницы
 //  //
-//  проинспектировать стили, filter зарефакторить
 //  аналогично AsideBar сделать Header
 //  //
 //  авторизация (jwt)

@@ -6,7 +6,7 @@ import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 import Header from "../Header/Header";
 import AsideBar from "../AsideBar/AsideBar";
-import Message from "../UI/ErrorMesage/Message";
+import Message from "../UI/Mesage/Message";
 import GameList from "../GameList/GameList";
 import Filter from "../Filter/Filter";
 
@@ -31,15 +31,14 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
 
     useEffect(() => {
+
         if (isSuccess) {
             setGames([...games, ...response.results]);
             setPageLimit(Math.ceil(response.count / gamesLimit));
 
             response.count < 20
-                ? setIsLimit(true)
+                ? response.count === 0 ? setIsEmpty(true) : setIsLimit(true)
                 : document.addEventListener("scroll", scrollListener);
-
-            if (response.results.length === 0) setIsEmpty(true);
         }
 
         return function () {
@@ -77,7 +76,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                         <Filter
                             title="Genre"
                             defaultValue="All"
-                            setState={setGenres}
+                            setFilter={setGenres}
                             filterString="&genres"
                             options={genresList}
                             resetState={resetState}
@@ -85,7 +84,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
                         <Filter
                             title="Platform"
                             defaultValue="All"
-                            setState={setPlatforms}
+                            setFilter={setPlatforms}
                             filterString="&parent_platforms"
                             options={platformsList}
                             resetState={resetState}

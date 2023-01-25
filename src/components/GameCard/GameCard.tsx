@@ -7,11 +7,11 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 import PlatformsRow from "../PlatofrmsRow/PlatformsRow";
 import MetacriticScore from "../MetacriticScore/MetacriticScore";
+import LabelRow from "../LabelRow/LabelRow";
 
 import {Game} from "../../types/types";
 
 import {imageCrop} from "../../utils/helpers";
-import LabelRow from "../LabelRow/LabelRow";
 
 interface GameCardProps {
     game: Game;

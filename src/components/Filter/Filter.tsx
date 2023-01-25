@@ -8,30 +8,28 @@ interface FilterProps {
     title: string;
     options: CustomOption[];
     filterString: string;
-    setState: (option: string) => void;
+    setFilter: (option: string) => void;
     resetState: () => void;
     defaultValue: string;
 }
 
 const Filter: React.FC<FilterProps> = memo(
-    ({title, options, setState, filterString, resetState, defaultValue}) => {
+    ({title, options, setFilter, filterString, resetState, defaultValue}) => {
 
     const selectHandler = (event: any) => {
         if (event.target.value) {
             resetState();
-            setState(`${filterString}=${event.target.value}`);
+            setFilter(`${filterString}=${event.target.value}`);
         }else {
             resetState();
-            setState("");
+            setFilter("");
         }
     };
 
     return (
         <form className={styles.filter}>
             <p className={styles.filter__title}>{title}:</p>
-            <select
-                onChange={selectHandler}
-            >
+            <select onChange={selectHandler}>
                 <option value="">{defaultValue}</option>
                 {
                     options.map(option=>

@@ -4,7 +4,7 @@ import styles from "./GameList.module.scss";
 
 import GameCard from "../GameCard/GameCard";
 import Loader from "../UI/Loader/Loader";
-import Message from "../UI/ErrorMesage/Message";
+import Message from "../UI/Mesage/Message";
 
 import {Game} from "../../types/types";
 

@@ -9,11 +9,12 @@ interface LabelRowProps {
 }
 
 const LabelRow: React.FC<LabelRowProps> = ({labels}) => {
+
     return (
         <div className={styles.LabelRow}>
             {labels.map((label, index) => {
-                if (index === labels.length - 1) return <p key={label.id}>{label.name}</p>
-                else if (index < 1) return <p key={label.id}>{label.name},</p>
+                if (index === 0) return <p key={label.id}>{label.name}</p>
+                else if (index === 1) return <p key={label.id}>, {label.name}</p>
             })}
         </div>
     );

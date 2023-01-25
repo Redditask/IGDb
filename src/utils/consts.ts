@@ -37,18 +37,83 @@ export const AsideLinks: CustomLink [] = [
     }
 ];
 
+
 export const genresList: CustomOption[] = [
     {
         name: "Action",
         value: "action",
     },
     {
+        name: "Indie",
+        value: "indie"
+    },
+    {
+        name: "Adventure",
+        value: "adventure",
+    },
+    {
+        name: "RPG",
+        value: "role-playing-games-rpg",
+    },
+    {
+        name: "Strategy",
+        value: "strategy",
+    },
+    {
         name: "Shooter",
         value: "shooter",
     },
     {
+        name: "Casual",
+        value: "casual",
+    },
+    {
+        name: "Simulation",
+        value: "simulation",
+    },
+    {
+        name: "Puzzle",
+        value: "puzzle",
+    },
+    {
+        name: "Arcade",
+        value: "arcade",
+    },
+    {
+        name: "Platformer",
+        value: "platformer",
+    },
+    {
         name: "Racing",
         value: "racing",
+    },
+    {
+        name: "Massively Multiplayer",
+        value: "massively-multiplayer",
+    },
+    {
+        name: "Sports",
+        value: "sports",
+    },
+    {
+        name: "Fighting",
+        value: "fighting",
+    },
+    {
+        name: "Family",
+        value: "family",
+    },
+    {
+        name: "Board Games",
+        value: "board-games",
+    },
+    {
+        name: "Educational",
+        value: "educational",
+    },
+    {
+        name: "Card",
+        value: "card",
     },
 ];
 

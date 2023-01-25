@@ -7,6 +7,7 @@ interface MessageProps {
 }
 
 const Message:React.FC<MessageProps> = ({text}) => {
+
     return (
         <h1 className={styles.message}>{text}</h1>
     );

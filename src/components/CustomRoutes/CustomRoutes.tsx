@@ -10,6 +10,7 @@ interface CustomRoutesProps {
 }
 
 const CustomRoutes: React.FC<CustomRoutesProps> = ({routes, redirectRout}) => {
+
     return (
         <Routes>
             {routes.map((route)=>

@@ -3,7 +3,6 @@
   display: inline-block;
 
   &::before {
-
     content: 'Loading';
     color: black;
     font-family: Arial, Helvetica, sans-serif;
@@ -25,7 +24,7 @@
     filter: blur(4px);
     border-radius: 50%;
     box-sizing: border-box;
-    animation: animloader 1s ease-out infinite alternate;
+    animation: loader 1s ease-out infinite alternate;
   }
 }
 
@@ -38,7 +37,7 @@
   }
 }
 
-@keyframes animloader {
+@keyframes loader {
   0% {
     transform: scale(0.8);
   }

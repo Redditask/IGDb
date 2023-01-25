@@ -11,7 +11,7 @@ import {platformIconSize} from "../../utils/consts";
 import {platformDefinition} from "../../utils/helpers";
 
 interface PlatformsRowProps {
-    platformsArray: Platform[]
+    platformsArray: Platform[];
 }
 
 const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
