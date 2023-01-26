@@ -1,10 +1,10 @@
 import React from "react";
 
+import CustomRoutes from "../CustomRoutes/CustomRoutes";
+
 import {publicRoutes} from "../../routes/routes";
 
 import {HOME_ROUTE} from "../../utils/consts";
-
-import CustomRoutes from "../CustomRoutes/CustomRoutes";
 
 const AppRouter: React.FC = () => {
 

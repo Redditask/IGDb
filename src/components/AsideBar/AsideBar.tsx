@@ -6,15 +6,17 @@ import {NavLink} from "react-router-dom";
 
 import {AsideLinks} from "../../utils/consts";
 
+const isActive = ({isActive}: any) => isActive ? styles.AsideBar__active : styles.AsideBar__default;
+
 const AsideBar: React.FC = () => {
 
     return (
         <aside className={styles.AsideBar}>
-          <ul className={styles.AsideBar__items}>
+          <div className={styles.AsideBar__items}>
               {
                   AsideLinks.map((link)=>
                       <NavLink
-                          className={styles.AsideBar__item}
+                          className={isActive}
                           to={link.path}
                           key={link.name}
                       >
@@ -22,7 +24,7 @@ const AsideBar: React.FC = () => {
                       </NavLink>
                   )
               }
-          </ul>
+          </div>
         </aside>
     );
 };

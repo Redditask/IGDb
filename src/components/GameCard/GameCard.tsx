@@ -24,8 +24,8 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
             <LazyLoadImage
                 className={styles.gameCard__image}
                 src={imageCrop(game.background_image)}
-                width="380"
-                height="240"
+                width="443"
+                height="280"
                 effect="blur"
                 alt="Background"
             />
