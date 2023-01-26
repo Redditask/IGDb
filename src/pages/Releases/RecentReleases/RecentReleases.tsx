@@ -4,7 +4,7 @@ import {useGetRecentReleasesQuery} from "../../../API/rawgApi";
 
 import PageWithGames from "../../../components/PageWithGames/PageWithGames";
 
-const RecentReleases = () => {
+const RecentReleases: React.FC = () => {
 
     return (
         <PageWithGames apiHook={useGetRecentReleasesQuery}/>

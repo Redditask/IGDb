@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React from "react";
 
 import styles from "./Filter.module.scss";
 
@@ -13,8 +13,7 @@ interface FilterProps {
     defaultValue: string;
 }
 
-const Filter: React.FC<FilterProps> = memo(
-    ({title, options, setFilter, filterString, resetState, defaultValue}) => {
+const Filter: React.FC<FilterProps> = ({title, options, setFilter, filterString, resetState, defaultValue}) => {
 
     const selectHandler = (event: any) => {
         if (event.target.value) {
@@ -45,6 +44,6 @@ const Filter: React.FC<FilterProps> = memo(
             </select>
         </form>
     );
-});
+};
 
 export default Filter;

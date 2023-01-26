@@ -1,10 +1,6 @@
-import {CustomRoute} from "../types/types";
+import {lazy} from "react";
 
-import Home from "../pages/Home/Home";
-import RecentReleases from "../pages/Releases/RecentReleases/RecentReleases";
-import UpcomingReleases from "../pages/Releases/UpcomingReleases/UpcomingReleases";
-import AllTimeTop from "../pages/TopGames/AllTimeTop/AllTimeTop";
-import LastYearTop from "../pages/TopGames/LastYearTop/LastYearTop";
+import {CustomRoute} from "../types/types";
 
 import {
     HOME_ROUTE,
@@ -13,6 +9,12 @@ import {
     LAST_YEAR_TOP_ROUTE,
     UPCOMING_RELEASES_ROUTE,
 } from "../utils/consts";
+
+const Home = lazy(()=> import("../pages/Home/Home"));
+const RecentReleases = lazy(()=> import("../pages/Releases/RecentReleases/RecentReleases"));
+const UpcomingReleases = lazy(()=> import("../pages/Releases/UpcomingReleases/UpcomingReleases"));
+const AllTimeTop = lazy(()=> import("../pages/TopGames/AllTimeTop/AllTimeTop"));
+const LastYearTop = lazy(()=> import("../pages/TopGames/LastYearTop/LastYearTop"));
 
 export const publicRoutes: CustomRoute [] = [
     {

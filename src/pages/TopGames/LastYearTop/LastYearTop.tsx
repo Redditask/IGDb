@@ -4,7 +4,7 @@ import {useGetLastYearTopGamesQuery} from "../../../API/rawgApi";
 
 import PageWithGames from "../../../components/PageWithGames/PageWithGames";
 
-const LastYearTop = () => {
+const LastYearTop: React.FC = () => {
 
     return (
         <PageWithGames apiHook={useGetLastYearTopGamesQuery}/>

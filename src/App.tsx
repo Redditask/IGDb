@@ -5,7 +5,7 @@ import styles from "./App.module.scss";
 import AppRouter from "./components/AppRouter/AppRouter";
 
 // ToDo:
-//  lazy loading
+//  сделать одну page с разными хуками (?) (.../games)
 //  отдельная страница игры
 //  добавить конкретные платформы на отдельной странице игры
 //  wishlist, my library - добавить страницы
