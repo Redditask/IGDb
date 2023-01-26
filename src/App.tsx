@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./App.module.scss";
 
 import AppRouter from "./components/AppRouter/AppRouter";
-import {BrowserRouter} from "react-router-dom";
 
 // ToDo:
 //  отдельная страница игры
@@ -18,9 +17,7 @@ const App: React.FC = () => {
 
     return (
         <div className={styles}>
-            <BrowserRouter>
-                <AppRouter/>
-            </BrowserRouter>
+            <AppRouter/>
         </div>
     );
 };

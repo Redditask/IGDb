@@ -20,45 +20,70 @@ export const imageCrop = (imageSrc: string): string => {
     return `https://media.rawg.io/media/crop/600/400/${imageUrl}`;
 };
 
+const getStringZero = (value: number): string => value < 10 ? "0" : "";
+
+const getDaysAmount = (year: number, month: number): number => {
+    const date: Date = new Date(year, month, 1);
+    date.setMinutes(-1);
+    return date.getDate();
+};
+
 export const getRecentDates = ():string => {
-    const date: Date = new Date();
+    const today: Date = new Date();
 
-    const currYear: number = date.getFullYear();
-    const currMonth: number = date.getMonth();
+    const currentYear: number = today.getFullYear();
+    const currentMonth: number = today.getMonth();
+    const currentDate: number = today.getDate();
 
-    const [prevYear, prevMonth]: [number, number] = (currMonth === 0) ? [currYear-1, 11] : [currYear, currMonth-1];
+    const [previousYear, previousMonth]: [number, number] = (currentMonth === 0) ? [currentYear-1, 11] : [currentYear, currentMonth-1];
+    const previousMonthDayAmounts: number = getDaysAmount(currentYear, currentMonth);
+    const previousDate: number = previousMonthDayAmounts <= currentDate ? previousMonthDayAmounts : currentDate;
 
-    const prevMonthZero: string = prevMonth+1 < 10 ? "0" : "";
-    const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
+    const previous: string =
+        `${previousYear}-${getStringZero(previousMonth+1)}${previousMonth+1}-${getStringZero(previousDate)}${previousDate}`;
 
-    return `${prevYear}-${prevMonthZero}${prevMonth+1}-01,${currYear}-${currMonthZero}${currMonth+1}-01`;
+    const current: string =
+        `${currentYear}-${getStringZero(currentMonth+1)}${currentMonth+1}-${getStringZero(currentDate)}${currentDate}`;
+
+    return `${previous},${current}`;
 };
 
 export const getUpcomingDates = ():string => {
     const date: Date = new Date();
 
-    const currYear: number = date.getFullYear();
-    const currMonth: number = date.getMonth();
+    const currentYear: number = date.getFullYear();
+    const currentMonth: number = date.getMonth();
+    const currentDate: number = date.getDate();
 
-    const [nextYear, nextMonth]: [number, number] = (currMonth === 11) ? [currYear+1, 0] : [currYear, currMonth+1];
+    const [nextYear, nextMonth]: [number, number] = (currentMonth === 11) ? [currentYear+1, 0] : [currentYear, currentMonth+1];
+    const nextMonthDayAmounts: number = getDaysAmount(currentYear, currentMonth+2);
+    const nextDate: number = nextMonthDayAmounts <= currentDate ? nextMonthDayAmounts : currentDate;
 
-    const nextMonthZero: string = nextMonth+1 < 10 ? "0" : "";
-    const currMonthZero: string = currMonth+1 < 10 ? "0" : "";
+    const current: string =
+        `${currentYear}-${getStringZero(currentMonth+1)}${currentMonth+1}-${getStringZero(currentDate)}${currentDate}`;
 
-    return `${currYear}-${currMonthZero}${currMonth+1}-01,${nextYear}-${nextMonthZero}${nextMonth+1}-01`;
+    const next: string =
+        `${nextYear}-${getStringZero(nextMonth+1)}${nextMonth+1}-${getStringZero(nextDate)}${nextDate}`;
+
+    return `${current},${next}`;
 };
 
 export const getLastYearDates = (): string => {
     const date: Date = new Date();
 
-    const currYear: number = date.getFullYear();
-    const currYearMonth: number = date.getMonth();
+    const currentYear: number = date.getFullYear();
+    const month: number = date.getMonth();
+    const currentDate: number = date.getDate();
 
-    const prevYear: number = currYear-1;
-    const prevYearMonth: number = currYearMonth;
+    const previousYear: number = currentYear-1;
+    const previousYearMonthDayAmounts: number = getDaysAmount(previousYear, month+1);
+    const previousDate: number = previousYearMonthDayAmounts <= currentDate ? previousYearMonthDayAmounts : currentDate;
 
-    const prevMonthZero: string = prevYearMonth+1 < 10 ? "0" : "";
-    const currMonthZero: string = currYearMonth+1 < 10 ? "0" : "";
+    const previous: string =
+        `${previousYear}-${getStringZero(month+1)}${month+1}-${getStringZero(previousDate)}${previousDate}`;
 
-    return `${prevYear}-${prevMonthZero}${prevYearMonth+1}-01,${currYear}-${currMonthZero}${currYearMonth+1}-01`;
+    const current: string =
+        `${currentYear}-${getStringZero(month+1)}${month+1}-${getStringZero(currentDate)}${currentDate}`;
+
+    return `${previous},${current}`;
 };
