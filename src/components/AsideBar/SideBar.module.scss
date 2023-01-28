@@ -14,7 +14,7 @@
   }
 }
 
-.AsideBar {
+.SideBar {
   min-width: 8.5rem;
   margin-right: 5rem;
 
@@ -52,5 +52,13 @@
 
       margin: 0.4rem 0;
     }
+  }
+
+  &__scrollUp {
+    margin-top: 23vh;
+
+    cursor: pointer;
+
+    opacity: 1;
   }
 }

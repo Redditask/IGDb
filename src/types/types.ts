@@ -34,7 +34,7 @@ export interface Platform {
 
 export interface CustomRoute {
     path: string;
-    Component: React.LazyExoticComponent<React.FC<{}>>;
+    Component: React.FC<{}>;
 }
 
 export interface CustomLink {

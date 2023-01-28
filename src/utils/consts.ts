@@ -14,7 +14,7 @@ export const RECENT_RELEASES_ROUTE: string = "/recent-releases";
 
 export const UPCOMING_RELEASES_ROUTE: string = "/upcoming-releases";
 
-export const AsideLinks: CustomLink [] = [
+export const SideBarLinks: CustomLink [] = [
     {
         path: HOME_ROUTE,
         name: "Home",

@@ -5,12 +5,12 @@ import styles from "./App.module.scss";
 import AppRouter from "./components/AppRouter/AppRouter";
 
 // ToDo:
-//  сделать одну page с разными хуками (?) (.../games)
+//  multiply выбор фильтров
 //  отдельная страница игры
 //  добавить конкретные платформы на отдельной странице игры
 //  wishlist, my library - добавить страницы
 //  //
-//  аналогично AsideBar сделать Header
+//  аналогично SideBar сделать Header
 //  //
 //  авторизация (jwt)
 

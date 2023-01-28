@@ -5,14 +5,14 @@ import styles from "./PageWithGames.module.scss";
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 import Header from "../Header/Header";
-import AsideBar from "../AsideBar/AsideBar";
+import SideBar from "../AsideBar/SideBar";
 import Message from "../UI/Mesage/Message";
 import GameList from "../GameList/GameList";
 import Filter from "../Filter/Filter";
 
 import {apiHookType, Game} from "../../types/types";
 
-import {scrollCheck} from "../../utils/helpers";
+import {scrollCheck, scrollUpCheck} from "../../utils/helpers";
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 
 interface PageWithGamesProps {
@@ -58,7 +58,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
         }
     };
 
-    const resetState = () => {
+    const resetState = (): void => {
         setGames([]);
         setPage(1);
         setPageLimit(2);
@@ -70,7 +70,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
         <div className={styles.PageWithGames}>
             <Header/>
             <div className={styles.PageWithGames__container}>
-                <AsideBar/>
+                <SideBar/>
                 <div className={styles.PageWithGames__body}>
                     <div className={styles.PageWithGames__filters}>
                         <Filter

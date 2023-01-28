@@ -1,4 +1,4 @@
-import React, {Suspense} from "react";
+import React from "react";
 
 import {Routes, Route, Navigate} from "react-router-dom";
 
@@ -13,14 +13,10 @@ const CustomRoutes: React.FC<CustomRoutesProps> = ({routes, redirectRout}) => {
 
     return (
         <Routes>
-            {routes.map((route)=>
-                <Route key={route.path} path={route.path} element={
-                    <Suspense>
-                        <route.Component/>
-                    </Suspense>
-                }/>
+            {routes.map((route) =>
+                <Route key={route.path} path={route.path} element={<route.Component/>}/>
             )}
-            <Route path="/*" element={<Navigate to={redirectRout} replace />}/>
+            <Route path="/*" element={<Navigate to={redirectRout} replace/>}/>
         </Routes>
     );
 };

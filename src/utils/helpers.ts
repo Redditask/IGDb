@@ -3,6 +3,7 @@ import {Platform} from "../types/types";
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
+export const scrollUpCheck = (event: any): boolean => event.target.documentElement.scrollTop > 2500;
 
 export const platformDefinition = (platformsArray: Platform[], platform: string): boolean => {
     let isOnPlatform = false;
@@ -86,4 +87,11 @@ export const getLastYearDates = (): string => {
         `${currentYear}-${getStringZero(month+1)}${month+1}-${getStringZero(currentDate)}${currentDate}`;
 
     return `${previous},${current}`;
+};
+
+export const scrollUp = (): void => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
 };

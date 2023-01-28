@@ -20,28 +20,26 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
         <div className={styles.container}>
             {
                 isEmpty
-                ?
-                <Message text="No games"/>
-                :
-                <>
-                    <div className={styles.gameList}>
-                        {
-                            games.map(
-                                (game) =>
-                                    game.background_image
-                                        ?
-                                        <Suspense key={game.id}> {/* loader is already below */}
+                    ?
+                    <Message text="No games"/>
+                    :
+                    <>
+                        <div className={styles.gameList}>
+                            {
+                                games.map(
+                                    (game) =>
+                                        game.background_image
+                                        &&
+                                        <Suspense key={game.id} fallback={null}> {/* loader is already below */}
                                             <GameCard game={game}/>
                                         </Suspense>
-                                        :
-                                        null
-                            )
-                        }
-                    </div>
-                    <div className={styles.loader}>
-                        {isLimit ? null : <Loader/>}
-                    </div>
-                </>
+                                )
+                            }
+                        </div>
+                        <div className={styles.loader}>
+                            {!isLimit && <Loader/>}
+                        </div>
+                    </>
             }
         </div>
     );
