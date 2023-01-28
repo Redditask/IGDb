@@ -6,7 +6,7 @@ import AppRouter from "./routing/AppRouter";
 
 // ToDo:
 //  suspense для роутера
-//  PublicRoutes зарефакторить
+//  PublicRoutes зарефакторить (?)
 //  multiply выбор фильтров
 //  отдельная страница игры
 //  добавить конкретные платформы на отдельной странице игры

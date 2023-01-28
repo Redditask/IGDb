@@ -3,12 +3,11 @@ import React from "react";
 import {Routes, Route, Navigate} from "react-router-dom";
 
 import Layout from "./Layout/Layout";
-import PageWithGames from "../../pages/PageWithGames/PageWithGames";
 
-import {PageWithGamesRoute} from "../../types/types";
+import {CustomRoute} from "../../types/types";
 
 interface PublicRoutesProps {
-    publicRoutes: PageWithGamesRoute [];
+    publicRoutes: CustomRoute [];
     redirectRoute: string;
 }
 
@@ -18,7 +17,7 @@ const PublicRoutes: React.FC<PublicRoutesProps> = ({publicRoutes, redirectRoute}
         <Routes>
             <Route element={<Layout/>}>
                 {publicRoutes.map((route) =>
-                    <Route key={route.path} path={route.path} element={<PageWithGames apiHook={route.apiHook}/>}/>
+                    <Route key={route.path} path={route.path} element={<route.component/>}/>
                 )}
                 <Route path="*" element={<Navigate to={redirectRoute} replace/>}/>
             </Route>
