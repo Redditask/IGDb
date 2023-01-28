@@ -4,15 +4,15 @@ export const gamesLimit: number = 20;
 
 export const platformIconSize: number = 15;
 
-export const HOME_ROUTE: string = "/home";
+export const HOME_ROUTE: string = "/games/home";
 
-export const ALL_TIME_TOP_ROUTE: string = "/all-time-top";
+export const ALL_TIME_TOP_ROUTE: string = "/games/all-time-top";
 
-export const LAST_YEAR_TOP_ROUTE: string = "/last-year-top";
+export const LAST_YEAR_TOP_ROUTE: string = "/games/last-year-top";
 
-export const RECENT_RELEASES_ROUTE: string = "/recent-releases";
+export const RECENT_RELEASES_ROUTE: string = "/games/recent-releases";
 
-export const UPCOMING_RELEASES_ROUTE: string = "/upcoming-releases";
+export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
 export const SideBarLinks: CustomLink [] = [
     {

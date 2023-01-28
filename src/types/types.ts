@@ -1,6 +1,5 @@
-import {FC} from "react";
-
 import {BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryDefinition} from "@reduxjs/toolkit/query";
+import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
 export interface ServerResponse {
     count: number;
@@ -32,9 +31,9 @@ export interface Platform {
     };
 }
 
-export interface CustomRoute {
+export interface PageWithGamesRoute {
     path: string;
-    Component: React.FC<{}>;
+    apiHook: UseQuery<apiHookType>;
 }
 
 export interface CustomLink {

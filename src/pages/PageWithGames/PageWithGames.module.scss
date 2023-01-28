@@ -1,13 +1,6 @@
-@import url("../../satoshi.scss");
-
 .PageWithGames {
   display: flex;
-  flex-direction: column;
-
-  &__container {
-    display: flex;
-    flex-direction: row;
-  }
+  flex-direction: row;
 
   &__body {
     width: 100vw;

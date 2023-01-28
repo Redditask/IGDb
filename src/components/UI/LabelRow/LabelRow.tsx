@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./LabelRow.module.scss";
 
-import {Label} from "../../types/types";
+import {Label} from "../../../types/types";
 
 interface LabelRowProps {
     labels: Label [];

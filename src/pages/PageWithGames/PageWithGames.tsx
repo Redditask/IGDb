@@ -4,16 +4,15 @@ import styles from "./PageWithGames.module.scss";
 
 import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
 
-import Header from "../Header/Header";
-import SideBar from "../AsideBar/SideBar";
-import Message from "../UI/Mesage/Message";
-import GameList from "../GameList/GameList";
-import Filter from "../Filter/Filter";
+import SideBar from "../../components/SideBar/SideBar";
+import GameList from "../../components/GameList/GameList";
+import Filter from "../../components/Filter/Filter";
+import Message from "../../components/UI/Mesage/Message";
 
 import {apiHookType, Game} from "../../types/types";
 
-import {scrollCheck, scrollUpCheck} from "../../utils/helpers";
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
+import {scrollCheck} from "../../utils/helpers";
 
 interface PageWithGamesProps {
     apiHook: UseQuery<apiHookType>;
@@ -31,7 +30,6 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
 
     useEffect(() => {
-
         if (isSuccess) {
             setGames([...games, ...response.results]);
             setPageLimit(Math.ceil(response.count / gamesLimit));
@@ -68,34 +66,31 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
 
     return (
         <div className={styles.PageWithGames}>
-            <Header/>
-            <div className={styles.PageWithGames__container}>
-                <SideBar/>
-                <div className={styles.PageWithGames__body}>
-                    <div className={styles.PageWithGames__filters}>
-                        <Filter
-                            title="Genre"
-                            defaultValue="All"
-                            setFilter={setGenres}
-                            filterString="&genres"
-                            options={genresList}
-                            resetState={resetState}
-                        />
-                        <Filter
-                            title="Platform"
-                            defaultValue="All"
-                            setFilter={setPlatforms}
-                            filterString="&parent_platforms"
-                            options={platformsList}
-                            resetState={resetState}
-                        />
-                    </div>
-                    {
-                        error
-                            ? <Message text="Oops, something go wrong..."/>
-                            : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
-                    }
+            <SideBar/>
+            <div className={styles.PageWithGames__body}>
+                <div className={styles.PageWithGames__filters}>
+                    <Filter
+                        title="Genre"
+                        defaultValue="All"
+                        setFilter={setGenres}
+                        filterString="&genres"
+                        options={genresList}
+                        resetState={resetState}
+                    />
+                    <Filter
+                        title="Platform"
+                        defaultValue="All"
+                        setFilter={setPlatforms}
+                        filterString="&parent_platforms"
+                        options={platformsList}
+                        resetState={resetState}
+                    />
                 </div>
+                {
+                    error
+                        ? <Message text="Oops, something go wrong..."/>
+                        : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
+                }
             </div>
         </div>
     );

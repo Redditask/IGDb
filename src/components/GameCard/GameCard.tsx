@@ -5,9 +5,9 @@ import styles from "./GameCard.module.scss";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-import PlatformsRow from "../PlatofrmsRow/PlatformsRow";
-import MetacriticScore from "../MetacriticScore/MetacriticScore";
-import LabelRow from "../LabelRow/LabelRow";
+import PlatformsRow from "../UI/PlatofrmsRow/PlatformsRow";
+import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
+import LabelRow from "../UI/LabelRow/LabelRow";
 
 import {Game} from "../../types/types";
 
