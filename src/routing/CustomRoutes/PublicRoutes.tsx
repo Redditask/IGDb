@@ -7,16 +7,16 @@ import Layout from "./Layout/Layout";
 import {CustomRoute} from "../../types/types";
 
 interface PublicRoutesProps {
-    publicRoutes: CustomRoute [];
+    routes: CustomRoute [];
     redirectRoute: string;
 }
 
-const PublicRoutes: React.FC<PublicRoutesProps> = ({publicRoutes, redirectRoute}) => {
+const PublicRoutes: React.FC<PublicRoutesProps> = ({routes, redirectRoute}) => {
 
     return (
         <Routes>
             <Route element={<Layout/>}>
-                {publicRoutes.map((route) =>
+                {routes.map((route) =>
                     <Route key={route.path} path={route.path} element={<route.component/>}/>
                 )}
                 <Route path="*" element={<Navigate to={redirectRoute} replace/>}/>

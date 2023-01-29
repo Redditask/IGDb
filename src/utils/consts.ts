@@ -1,5 +1,7 @@
 import {CustomLink, CustomOption} from "../types/types";
 
+import {getLastYearDates, getRecentDates, getUpcomingDates} from "./helpers";
+
 export const gamesLimit: number = 20;
 
 export const platformIconSize: number = 15;
@@ -28,13 +30,13 @@ export const SideBarLinks: CustomLink [] = [
         name: "Upcoming Releases",
     },
     {
+        path: LAST_YEAR_TOP_ROUTE,
+        name: "Last Year Top",
+    },
+    {
         path: ALL_TIME_TOP_ROUTE,
         name: "All Time Top",
     },
-    {
-        path: LAST_YEAR_TOP_ROUTE,
-        name: "Last Year Top",
-    }
 ];
 
 
@@ -135,3 +137,26 @@ export const platformsList: CustomOption[] = [
         value: 7,
     },
 ];
+
+export const queryParams = {
+    allGames: {
+        metacritic: ``,
+        dates: ``,
+    },
+    recentReleases: {
+        metacritic: ``,
+        dates: `&dates=${getRecentDates()}`,
+    },
+    upcomingReleases: {
+        metacritic: ``,
+        dates: `&dates=${getUpcomingDates()}`,
+    },
+    allTimeTopGames: {
+        metacritic: `&metacritic=85,100`,
+        dates: ``,
+    },
+    lastYearTopGames: {
+        metacritic: `&metacritic=85,100`,
+        dates: `&dates=${getLastYearDates()}`
+    },
+};

@@ -9,7 +9,7 @@ import {HOME_ROUTE} from "../utils/consts";
 const AppRouter: React.FC = () => {
 
     return (
-        <PublicRoutes publicRoutes={publicRoutes} redirectRoute={HOME_ROUTE}/>
+        <PublicRoutes routes={publicRoutes} redirectRoute={HOME_ROUTE}/>
     );
 };
 

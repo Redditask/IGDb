@@ -5,8 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  suspense для роутера
-//  PublicRoutes зарефакторить (?)
 //  multiply выбор фильтров
 //  отдельная страница игры
 //  добавить конкретные платформы на отдельной странице игры

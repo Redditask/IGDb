@@ -1,24 +1,25 @@
 import React, {useEffect, useState} from "react";
 
-import styles from "./PageWithGames.module.scss";
+import styles from "./Games.module.scss";
 
-import {UseQuery} from "@reduxjs/toolkit/dist/query/react/buildHooks";
+import {useGetGamesQuery} from "../../API/rawgApi";
 
 import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import Message from "../../components/UI/Mesage/Message";
 
-import {apiHookType, Game} from "../../types/types";
+import {Game} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 import {scrollCheck} from "../../utils/helpers";
 
-interface PageWithGamesProps {
-    apiHook: UseQuery<apiHookType>;
+interface GamesProps {
+    metacritic: string;
+    dates: string;
 }
 
-const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
+const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [games, setGames] = useState<Game []>([]);
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(2);
@@ -27,7 +28,7 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     const [genres, setGenres] = useState<string>("");
     const [platforms, setPlatforms] = useState<string>("");
 
-    const {data: response, error, isSuccess} = apiHook({page: page, genres: genres, platforms: platforms});
+    const {data: response, error, isSuccess} = useGetGamesQuery({page, metacritic, dates, genres, platforms});
 
     useEffect(() => {
         if (isSuccess) {
@@ -65,10 +66,10 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     };
 
     return (
-        <div className={styles.PageWithGames}>
+        <div className={styles.Games}>
             <SideBar/>
-            <div className={styles.PageWithGames__body}>
-                <div className={styles.PageWithGames__filters}>
+            <div className={styles.Games__body}>
+                <div className={styles.Games__filters}>
                     <Filter
                         title="Genre"
                         defaultValue="All"
@@ -96,4 +97,4 @@ const PageWithGames:React.FC<PageWithGamesProps> = ({apiHook}) => {
     );
 };
 
-export default PageWithGames;
+export default Games;

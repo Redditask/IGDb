@@ -1,12 +1,18 @@
 import React from "react";
 
-import {BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryDefinition} from "@reduxjs/toolkit/query";
-
 export interface ServerResponse {
     count: number;
     next: string | null;
     previous: string | null;
     results: Game[];
+}
+
+export interface QueryArgs {
+    page: number;
+    metacritic: string;
+    dates: string
+    genres: string;
+    platforms: string;
 }
 
 export interface Game {
@@ -46,9 +52,3 @@ export interface CustomOption {
     name: string;
     value: string | number;
 }
-
-export type apiHookType =
-    QueryDefinition<
-        {page: number, genres: string, platforms: string},
-        BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, ServerResponse, "rawgApi"
-    >;
