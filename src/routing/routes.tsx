@@ -1,4 +1,5 @@
-import Games from "../pages/PageWithGames/Games";
+import Games from "../pages/Games/Games";
+import Game from "../pages/Game/Game";
 
 import {CustomRoute} from "../types/types";
 
@@ -8,7 +9,7 @@ import {
     ALL_TIME_TOP_ROUTE,
     LAST_YEAR_TOP_ROUTE,
     UPCOMING_RELEASES_ROUTE,
-    queryParams,
+    queryParams, GAME_ROUTE,
 } from "../utils/consts";
 
 export const publicRoutes: CustomRoute [] = [
@@ -47,6 +48,10 @@ export const publicRoutes: CustomRoute [] = [
             dates={queryParams.allTimeTopGames.dates}
         />,
     },
+    {
+        path: GAME_ROUTE,
+        component: () => <Game/>
+    }
 ];
 
 

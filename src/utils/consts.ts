@@ -16,6 +16,8 @@ export const RECENT_RELEASES_ROUTE: string = "/games/recent-releases";
 
 export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
+export const GAME_ROUTE: string = "/game/:slug";
+
 export const SideBarLinks: CustomLink [] = [
     {
         path: HOME_ROUTE,

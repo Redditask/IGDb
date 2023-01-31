@@ -1,11 +1,11 @@
-import {Platform} from "../types/types";
+import {Parent_platform, ServerGame} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
 export const scrollUpCheck = (event: any): boolean => event.target.documentElement.scrollTop > 2500;
 
-export const platformDefinition = (platformsArray: Platform[], platform: string): boolean => {
+export const platformDefinition = (platformsArray: Parent_platform[], platform: string): boolean => {
     let isOnPlatform = false;
 
     platformsArray.map((item)=>{
@@ -94,4 +94,17 @@ export const scrollUp = (): void => {
         top: 0,
         behavior: "smooth",
     });
+};
+
+export const itinitalServerGameState: ServerGame = {
+    background_image: "",
+    description_raw: "",
+    developers: [],
+    metacritic: 0,
+    metacritic_url: "",
+    name: "",
+    platforms: [],
+    reddit_url: "",
+    released: "",
+    website: ""
 };

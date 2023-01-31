@@ -3,6 +3,7 @@ import React, {memo} from "react";
 import styles from "./GameCard.module.scss";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import {NavLink} from "react-router-dom";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
 import PlatformsRow from "../UI/PlatofrmsRow/PlatformsRow";
@@ -20,7 +21,10 @@ interface GameCardProps {
 const GameCard: React.FC<GameCardProps> = memo(({game}) => {
 
     return (
-        <div className={styles.gameCard}>
+        <NavLink
+            className={styles.gameCard}
+            to={`/game/${game.slug}`}
+        >
             <LazyLoadImage
                 className={styles.gameCard__image}
                 src={imageCrop(game.background_image)}
@@ -44,7 +48,7 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                     <LabelRow labels={game.genres}/>
                 </div>
             </div>
-        </div>
+        </NavLink>
     );
 });
 
