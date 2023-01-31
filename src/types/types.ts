@@ -8,6 +8,7 @@ export interface ServerGames {
 }
 
 export interface ServerGame{
+    id: number;
     name: string;
     description_raw: string;
     metacritic: number;
@@ -40,6 +41,8 @@ export interface Game {
     parent_platforms: Parent_platform[];
 }
 
+export interface DLC extends Game {}
+
 export interface Label {
     id: number;
     name: string;
@@ -62,6 +65,10 @@ export interface Platform {
 export interface Developer {
     name: string;
     image_background: string;
+}
+
+export interface Screenshot {
+    image: string;
 }
 
 export interface CustomRoute {

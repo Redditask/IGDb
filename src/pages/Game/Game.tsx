@@ -1,25 +1,31 @@
 import React, {useEffect, useState} from "react";
 
 import {useParams} from "react-router-dom";
-import {useGetOneGameQuery} from "../../API/rawgApi";
+import {useGetGameDetailsQuery, useGetGameDLCQuery, useGetGameScreenshotsQuery} from "../../API/rawgApi";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import styles from "./Game.module.scss";
 
-import {ServerGame} from "../../types/types";
+import MetacriticScore from "../../components/UI/MetacriticScore/MetacriticScore";
+
+import {DLC, Screenshot, ServerGame} from "../../types/types";
 
 import {imageCrop, itinitalServerGameState} from "../../utils/helpers";
-import {LazyLoadImage} from "react-lazy-load-image-component";
-import MetacriticScore from "../../components/UI/MetacriticScore/MetacriticScore";
 
 const Game = () => {
     const [game, setGame] = useState<ServerGame>(itinitalServerGameState);
 
     const {slug} = useParams();
-    const {data: response, error, isSuccess} = useGetOneGameQuery({slug});
+    const {data: gameResponse, error: gameError, isSuccess: gameSuccess} = useGetGameDetailsQuery({slug});
+    const {data: screenshots, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
+    const {data: dlc, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
+
+    console.log(screenshots, dlc)
+    //
 
     useEffect(() => {
-        if (isSuccess) setGame(response);
-    }, [response]);
+        if (gameSuccess) setGame(gameResponse);
+    }, [gameResponse]);
 
     console.log(game.platforms[0])
 
@@ -41,6 +47,7 @@ const Game = () => {
             </div>
             <div className={styles.Game__details}>
                 <h1>Details about game: </h1>
+                <h3>Released: {game.released}</h3>
                 <div className={styles.Game__detail}>
                     <p>Metacritic: </p>
                     <MetacriticScore score={game.metacritic}/>
@@ -61,6 +68,13 @@ const Game = () => {
                         )}
                     </div>
                 </div>
+                <div className={styles.Game__detail}>
+                    <p>Links: </p>
+                    <a href={game.metacritic_url}>Metacritic</a>
+                    <a href={game.reddit_url}>Reddit</a>
+                    <a href={game.website}>Game Website</a>
+                </div>
+                {/*тут дальше скриншоты/видео и длс*/}
             </div>
         </div>
     );

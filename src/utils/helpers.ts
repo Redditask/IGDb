@@ -97,6 +97,7 @@ export const scrollUp = (): void => {
 };
 
 export const itinitalServerGameState: ServerGame = {
+    id: 0,
     background_image: "",
     description_raw: "",
     developers: [],

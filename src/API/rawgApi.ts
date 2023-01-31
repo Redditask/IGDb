@@ -10,14 +10,24 @@ export const rawgApi = createApi({
             query: ({page, metacritic, dates, genres, platforms}) =>
                 `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}${metacritic}${dates}${genres}${platforms}`,
         }),
-        getOneGame: builder.query<ServerGame, {slug: string | undefined}>({
+        getGameDetails: builder.query<ServerGame, {slug: string | undefined}>({
             query: ({slug}) =>
                 `games/${slug}?key=${process.env["REACT_APP_API_KEY"]}`,
+        }),
+        getGameDLC: builder.query<ServerGames, {id: number | undefined}>({
+            query: ({id}) =>
+                `games/${id}/additions?key=${process.env["REACT_APP_API_KEY"]}`,
+        }),
+        getGameScreenshots: builder.query<ServerGames, {id: number | undefined}>({
+            query: ({id}) =>
+                `games/${id}/screenshots?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
     }),
 });
 
 export const {
     useGetGamesQuery,
-    useGetOneGameQuery,
+    useGetGameDetailsQuery,
+    useGetGameDLCQuery,
+    useGetGameScreenshotsQuery,
 } = rawgApi;
