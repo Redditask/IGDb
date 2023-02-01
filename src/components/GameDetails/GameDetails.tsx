@@ -19,21 +19,25 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
             <p className={styles.GameDetail}>Released: {game.released}</p>
             <div className={styles.GameDetail}>
                 <p>Developers: </p>
-                {game.developers.map((developer, index) => {
-                        return index === game.developers.length - 1
-                            ? <p key={developer.name}>{developer.name}</p>
-                            : <p key={developer.name}>{developer.name}, </p>
-                    }
-                )}
+                <div className={styles.GameDetail__info}>
+                    {game.developers.map((developer, index) => {
+                            return index === game.developers.length - 1
+                                ? <p key={developer.name}>{developer.name}</p>
+                                : <p key={developer.name}>{developer.name}, </p>
+                        }
+                    )}
+                </div>
             </div>
             <div className={styles.GameDetail}>
                 <p>Platforms: </p>
-                {game.platforms.map((platform, index) => {
-                        return index === game.platforms.length - 1
-                            ? <p key={platform.platform.name}>{platform.platform.name}</p>
-                            : <p key={platform.platform.name}>{platform.platform.name}, </p>
-                    }
-                )}
+                <div className={styles.GameDetail__info}>
+                    {game.platforms.map((platform, index) => {
+                            return index === game.platforms.length - 1
+                                ? <p key={platform.platform.name}>{platform.platform.name}</p>
+                                : <p key={platform.platform.name}>{platform.platform.name}, </p>
+                        }
+                    )}
+                </div>
             </div>
             <div className={styles.GameDetail}>
                 <p>Metacritic: </p>
@@ -43,7 +47,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
                 <p>Links: </p>
                 <Link
                     name={"Metacritic"}
-                      link={game.metacritic_url}
+                    link={game.metacritic_url}
                 />
                 <Link
                     name={"Reddit"}
