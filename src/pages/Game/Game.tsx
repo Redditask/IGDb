@@ -30,50 +30,37 @@ const Game = () => {
     }, [gameResponse]);
 
     return (
-        <div className={styles.Container}>
-            <LazyLoadImage
-                className={styles.LeftBackground}
-                src={imageCrop(game.background_image)}
-                width="102%"
-                height="102%"
-                effect="blur"
-                alt="leftBackground"
-            />
-            <div>
-                <div className={styles.Game}>
-                    <div className={styles.Game__mainInfo}>
-                        <LazyLoadImage
-                            className={styles.Game__image}
-                            src={imageCrop(game.background_image)}
-                            width="600"
-                            height="500"
-                            effect="blur"
-                            alt="Game"
-                        />
-                        <GameDetails game={game}/>
-                    </div>
-                    <div className={styles.Game__about}>
-                        <h1>About</h1>
-                        <p className={styles.Game__text}>{game.description_raw}</p>
-                    </div>
-                    <div className={styles.Game__about}>
-                        <h1>About</h1>
-                        <p className={styles.Game__text}>{game.description_raw}</p>
-                    </div>
-                    <div className={styles.Game__about}>
-                        <h1>About</h1>
-                        <p className={styles.Game__text}>{game.description_raw}</p>
-                    </div>
+        <div
+            className={styles.Background}
+            style={{backgroundImage: `url(${game.background_image})`}}
+        >
+            <div className={styles.Container}>
+            <div className={styles.Game}>
+                <div className={styles.Game__mainInfo}>
+                    <LazyLoadImage
+                        className={styles.Game__image}
+                        src={imageCrop(game.background_image)}
+                        width="500"
+                        height="400"
+                        effect="blur"
+                        alt="Game"
+                    />
+                    <GameDetails game={game}/>
+                </div>
+                <div className={styles.Game__about}>
+                    <h1>About</h1>
+                    <p className={styles.Game__text}>{game.description_raw}</p>
+                </div>
+                <div className={styles.Game__about}>
+                    <h1>About</h1>
+                    <p className={styles.Game__text}>{game.description_raw}</p>
+                </div>
+                <div className={styles.Game__about}>
+                    <h1>About</h1>
+                    <p className={styles.Game__text}>{game.description_raw}</p>
                 </div>
             </div>
-            <LazyLoadImage
-                className={styles.RightBackground}
-                src={imageCrop(game.background_image)}
-                width="102%"
-                height="102%"
-                effect="blur"
-                alt="rightBackground"
-            />
+            </div>
         </div>
     );
 };
