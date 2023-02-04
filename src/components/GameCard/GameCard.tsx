@@ -10,12 +10,12 @@ import PlatformsRow from "../UI/PlatofrmsRow/PlatformsRow";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import LabelRow from "../UI/LabelRow/LabelRow";
 
-import {Game} from "../../types/types";
+import {GameFromList} from "../../types/types";
 
 import {imageCrop} from "../../utils/helpers";
 
 interface GameCardProps {
-    game: Game;
+    game: GameFromList;
 }
 
 const GameCard: React.FC<GameCardProps> = memo(({game}) => {

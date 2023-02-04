@@ -1,44 +1,54 @@
 .Background {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-y: 50%;
+  background-position-x: 50%;
 }
 
 .Container {
-  height: 100vh;
-
   display: flex;
-  justify-content: center;
 
   backdrop-filter: blur(6px);
 }
 
 .Game {
   font-size: 1.5rem;
-  width: 100vw;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
 
-  background: linear-gradient(180deg, transparent 0%, rgba(254, 254, 254, 0.97) 50%, white 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(254, 254, 254, 1) 40%, white 100%);
 
-  padding: 4.5rem 15rem;
-  margin-top: 3rem;
+  padding: 4.5rem 10rem;
+  margin-top: 8rem;
 
+  &__openingInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+
+    gap: 5rem
+  }
 
   &__mainInfo {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: start;
 
-    gap: 2.5rem;
+    gap: 4rem;
+
+    margin-top: 6rem;
   }
 
-  &__image {
-    border-radius: 1rem;
-
-    object-fit: cover;
+  &__details {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
   }
 
   &__text {
@@ -46,12 +56,6 @@
 
     overflow-wrap: normal;
 
-    padding-top: 1rem;
-  }
-
-  &__about {
-    width: 64rem;
-
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 }

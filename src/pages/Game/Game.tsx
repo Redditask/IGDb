@@ -2,17 +2,18 @@ import React, {useEffect, useState} from "react";
 
 import {useParams} from "react-router-dom";
 import {useGetGameDetailsQuery, useGetGameDLCQuery, useGetGameScreenshotsQuery} from "../../API/rawgApi";
-import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import styles from "./Game.module.scss";
 
-import {DLC, Screenshot, ServerGame} from "../../types/types";
-
-import {imageCrop, itinitalServerGameState} from "../../utils/helpers";
 import GameDetails from "../../components/GameDetails/GameDetails";
+import Screenshots from "../../components/Screenshots/Screenshots";
+
+import {DLC, Screenshot, ResponseWithGame} from "../../types/types";
+
+import {imageCrop, initialGameStateFromServer} from "../../utils/helpers";
 
 const Game = () => {
-    const [game, setGame] = useState<ServerGame>(itinitalServerGameState);
+    const [game, setGame] = useState<ResponseWithGame>(initialGameStateFromServer);
 
     const {slug} = useParams();
     const {
@@ -32,34 +33,30 @@ const Game = () => {
     return (
         <div
             className={styles.Background}
-            style={{backgroundImage: `url(${game.background_image})`}}
+            style={{backgroundImage: `url(${imageCrop(game.background_image)})`}}
         >
             <div className={styles.Container}>
-            <div className={styles.Game}>
-                <div className={styles.Game__mainInfo}>
-                    <LazyLoadImage
-                        className={styles.Game__image}
-                        src={imageCrop(game.background_image)}
-                        width="500"
-                        height="400"
-                        effect="blur"
-                        alt="Game"
-                    />
-                    <GameDetails game={game}/>
+                <div className={styles.Game}>
+                    <div className={styles.Game__openingInfo}>
+                        <h2>{game.released}</h2>
+                        <h1>{game.name}</h1>
+                        <div className={styles.Game__buttons}>
+                            {/* заглушки */}
+                            <p>Add to wishlist</p>
+                            <p>Add to my games</p>
+                        </div>
+                    </div>
+                    <div className={styles.Game__mainInfo}>
+                        <div className={styles.Game__details}>
+                            <GameDetails game={game}/>
+                            {screenshots && <Screenshots screenshots={screenshots}/>}
+                        </div>
+                        <div>
+                            <h1>About</h1>
+                            <p className={styles.Game__text}>{game.description_raw}</p>
+                        </div>
+                    </div>
                 </div>
-                <div className={styles.Game__about}>
-                    <h1>About</h1>
-                    <p className={styles.Game__text}>{game.description_raw}</p>
-                </div>
-                <div className={styles.Game__about}>
-                    <h1>About</h1>
-                    <p className={styles.Game__text}>{game.description_raw}</p>
-                </div>
-                <div className={styles.Game__about}>
-                    <h1>About</h1>
-                    <p className={styles.Game__text}>{game.description_raw}</p>
-                </div>
-            </div>
             </div>
         </div>
     );

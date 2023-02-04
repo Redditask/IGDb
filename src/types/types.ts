@@ -1,13 +1,13 @@
 import React from "react";
 
-export interface ServerGames {
+export interface ResponseWithGames {
     count: number;
     next: string | null;
     previous: string | null;
-    results: Game[];
+    results: GameFromList[];
 }
 
-export interface ServerGame{
+export interface ResponseWithGame {
     id: number;
     name: string;
     description_raw: string;
@@ -29,7 +29,7 @@ export interface QueryArgs {
     platforms: string;
 }
 
-export interface Game {
+export interface GameFromList {
     id: number;
     slug: string;
     name: string;
@@ -41,7 +41,17 @@ export interface Game {
     parent_platforms: Parent_platform[];
 }
 
-export interface DLC extends Game {}
+export interface DLC extends GameFromList {}
+
+export interface ResponseWithScreenshots {
+    count: number;
+    results: ScreenshotFromList [];
+}
+
+export interface ScreenshotFromList {
+    id: number;
+    image: string;
+}
 
 export interface Label {
     id: number;

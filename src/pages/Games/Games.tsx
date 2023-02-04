@@ -9,7 +9,7 @@ import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import Message from "../../components/UI/Mesage/Message";
 
-import {Game} from "../../types/types";
+import {GameFromList} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 import {scrollCheck} from "../../utils/helpers";
@@ -20,7 +20,7 @@ interface GamesProps {
 }
 
 const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
-    const [games, setGames] = useState<Game []>([]);
+    const [games, setGames] = useState<GameFromList []>([]);
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(2);
     const [isLimit, setIsLimit] = useState<boolean>(false);

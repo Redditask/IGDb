@@ -1,4 +1,4 @@
-import {Parent_platform, ServerGame} from "../types/types";
+import {Parent_platform, ResponseWithGame} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
@@ -96,7 +96,7 @@ export const scrollUp = (): void => {
     });
 };
 
-export const itinitalServerGameState: ServerGame = {
+export const initialGameStateFromServer: ResponseWithGame = {
     id: 0,
     background_image: "",
     description_raw: "",

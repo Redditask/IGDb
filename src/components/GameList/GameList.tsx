@@ -2,14 +2,14 @@ import React, {lazy, Suspense} from "react";
 
 import styles from "./GameList.module.scss";
 
-import {Game} from "../../types/types";
+import {GameFromList} from "../../types/types";
 
 import Loader from "../UI/Loader/Loader";
 import Message from "../UI/Mesage/Message";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));
 
 interface BodyProps {
-    games: Game[];
+    games: GameFromList[];
     isLimit: boolean;
     isEmpty: boolean;
 }
