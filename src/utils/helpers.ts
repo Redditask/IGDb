@@ -109,3 +109,16 @@ export const initialGameStateFromServer: ResponseWithGame = {
     released: "",
     website: ""
 };
+
+export const monthsList: string[] = [
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec",
+];
+
+export const dateFormatting = (date: string): string => {
+    const [year, month, day]: string[] = date.split("-");
+    const monthNumber = Number(month) - 1;
+
+    return `${day} ${monthsList[monthNumber]} ${year}`;
+};

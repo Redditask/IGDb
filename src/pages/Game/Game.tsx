@@ -13,9 +13,9 @@ import ImageModal from "../../components/UI/ImageModal/ImageModal";
 
 import {ResponseWithGame} from "../../types/types";
 
-import {imageCrop, initialGameStateFromServer} from "../../utils/helpers";
+import {dateFormatting, initialGameStateFromServer} from "../../utils/helpers";
 
-const Game = () => {
+const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
     const [game, setGame] = useState<ResponseWithGame>(initialGameStateFromServer);
 
@@ -33,13 +33,13 @@ const Game = () => {
     return (
         <div
             className={styles.Background}
-            style={{backgroundImage: `url(${imageCrop(game.background_image)})`}}
+            style={{backgroundImage: `url(${game.background_image})`}}
         >
             <div className={styles.Container}>
                 <div className={styles.Game}>
                     <div className={styles.Game__openingInfo}>
-                        <h2>{game.released}</h2>
-                        <h1>{game.name}</h1>
+                        <h2>{dateFormatting(game.released)}</h2>
+                        <h1 className={styles.Game__name}>{game.name}</h1>
                         <div className={styles.Game__buttons}>
                             {/* заглушки */}
                             <p>Add to wishlist</p>
