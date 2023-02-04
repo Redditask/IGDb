@@ -1,26 +1,26 @@
 import React, {useEffect, useState} from "react";
 
-import {useParams} from "react-router-dom";
 import {useGetGameDetailsQuery, useGetGameDLCQuery, useGetGameScreenshotsQuery} from "../../API/rawgApi";
+
+import {useParams} from "react-router-dom";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import styles from "./Game.module.scss";
 
 import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/Screenshots/Screenshots";
+import ImageModal from "../../components/UI/ImageModal/ImageModal";
 
-import {DLC, Screenshot, ResponseWithGame} from "../../types/types";
+import {ResponseWithGame} from "../../types/types";
 
 import {imageCrop, initialGameStateFromServer} from "../../utils/helpers";
 
 const Game = () => {
+    const [imageURL, setImageURL] = useState<string>("");
     const [game, setGame] = useState<ResponseWithGame>(initialGameStateFromServer);
 
     const {slug} = useParams();
-    const {
-        data: gameResponse,
-        error: gameError,
-        isSuccess: gameSuccess
-    } = useGetGameDetailsQuery({slug}, {skip: !slug});
+    const {data: gameResponse, error: gameError, isSuccess: gameSuccess} = useGetGameDetailsQuery({slug}, {skip: !slug});
     const {data: screenshots, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
     const {data: dlc, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
 
@@ -49,7 +49,14 @@ const Game = () => {
                     <div className={styles.Game__mainInfo}>
                         <div className={styles.Game__details}>
                             <GameDetails game={game}/>
-                            {screenshots && <Screenshots screenshots={screenshots}/>}
+                            {
+                                screenshots
+                                &&
+                                <Screenshots
+                                    setImageURL={setImageURL}
+                                    screenshots={screenshots}
+                                />
+                            }
                         </div>
                         <div>
                             <h1>About</h1>
@@ -58,6 +65,17 @@ const Game = () => {
                     </div>
                 </div>
             </div>
+            {
+                imageURL &&
+                <ImageModal imageURl={imageURL} setImageURL={setImageURL}>
+                    <LazyLoadImage
+                        className={styles.Game__image}
+                        src={imageURL}
+                        effect="blur"
+                        alt="Game screenshot"
+                    />
+                </ImageModal>
+            }
         </div>
     );
 };

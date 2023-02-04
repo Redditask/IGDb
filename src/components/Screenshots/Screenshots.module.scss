@@ -8,8 +8,8 @@
 
   gap: 1.5rem;
 
-  padding-top: 10rem;
   margin-left: 20rem;
+  margin-bottom: 4rem;
 }
 
 .Screenshot {
@@ -20,5 +20,11 @@
 
   cursor: pointer;
 
+  box-shadow: 0 0 15px 10px lightgray;
+
   object-fit: scale-down;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }

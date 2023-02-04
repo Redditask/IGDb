@@ -48,7 +48,7 @@
   &__details {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
   }
 
   &__text {
@@ -57,5 +57,12 @@
     overflow-wrap: normal;
 
     margin-top: 2rem;
+  }
+
+  &__image {
+    width: 1600px;
+    height: 900px;
+
+    object-fit: scale-down;
   }
 }
