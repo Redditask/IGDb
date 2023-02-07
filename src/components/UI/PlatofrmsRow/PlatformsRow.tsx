@@ -5,19 +5,19 @@ import styles from "./PlatformsRow.module.scss";
 import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
 import {SiNintendoswitch} from "react-icons/si";
 
-import {Parent_platform} from "../../../types/types";
+import {IPlatform} from "../../../types/types";
 
 import {platformIconSize} from "../../../utils/consts";
 import {platformDefinition} from "../../../utils/helpers";
 
 interface PlatformsRowProps {
-    platformsArray: Parent_platform[];
+    platformsArray: IPlatform[];
 }
 
 const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
 
     return (
-        <div className={styles.platformsRow}>
+        <div className={styles.row}>
             {platformDefinition(platformsArray, "PC")
                 &&
                 <FaWindows

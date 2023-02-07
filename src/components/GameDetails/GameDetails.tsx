@@ -4,21 +4,21 @@ import styles from "./GameDetails.module.scss";
 
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 
-import {ResponseWithGame} from "../../types/types";
+import {GameQueryResult} from "../../types/types";
 import Link from "../UI/Link/Link";
 
 interface GameDetailsProps {
-    game: ResponseWithGame;
+    game: GameQueryResult;
 }
 
 const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
 
     return (
-        <div className={styles.GameDetails}>
+        <div className={styles.details}>
             <h1>Details about game</h1>
-            <div className={styles.GameDetail}>
+            <div className={styles.detail}>
                 <p>Developers: </p>
-                <div className={styles.GameDetail__info}>
+                <div className={styles.detail__info}>
                     {game.developers.map((developer, index) => {
                             return index === game.developers.length - 1
                                 ? <p key={developer.name}>{developer.name}</p>
@@ -27,9 +27,9 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
                     )}
                 </div>
             </div>
-            <div className={styles.GameDetail}>
+            <div className={styles.detail}>
                 <p>Platforms: </p>
-                <div className={styles.GameDetail__info}>
+                <div className={styles.detail__info}>
                     {game.platforms.map((platform, index) => {
                             return index === game.platforms.length - 1
                                 ? <p key={platform.platform.name}>{platform.platform.name}</p>
@@ -38,11 +38,11 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
                     )}
                 </div>
             </div>
-            <div className={styles.GameDetail}>
+            <div className={styles.detail}>
                 <p>Metacritic: </p>
                 <MetacriticScore score={game.metacritic}/>
             </div>
-            <div className={styles.GameDetail}>
+            <div className={styles.detail}>
                 <p>Links: </p>
                 <Link
                     name={"Metacritic"}

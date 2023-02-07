@@ -1,27 +1,39 @@
 import React from "react";
 
-export interface ResponseWithGames {
+export interface GamesQueryResult {
     count: number;
     next: string | null;
     previous: string | null;
-    results: GameFromList[];
+    results: IGame[];
 }
 
-export interface ResponseWithGame {
+export interface GameQueryResult {
     id: number;
     name: string;
     description_raw: string;
     metacritic: number;
     released: string;
     background_image: string;
-    developers: Developer[];
+    developers: IDeveloper[];
     website: string;
     reddit_url: string;
     metacritic_url: string;
-    platforms: Platform[];
+    platforms: IPlatform[];
 }
 
-export interface QueryArgs {
+export interface DLCQueryResult extends GamesQueryResult {}
+
+export interface ScreenshotsQueryResult {
+    count: number;
+    results: IScreenshot [];
+}
+
+export interface TrailersQueryResult {
+    count: number;
+    results: ITrailer [];
+}
+
+export interface GamesQueryArgs {
     page: number;
     metacritic: string;
     dates: string
@@ -29,31 +41,23 @@ export interface QueryArgs {
     platforms: string;
 }
 
-export interface GameFromList {
+export type IdQueryArg = number | undefined;
+
+export type SlugQueryArg = string | undefined;
+
+export interface IGame {
     id: number;
     slug: string;
     name: string;
     released: string;
     background_image: string;
     metacritic: number;
-    tags: Label[];
-    genres: Label[];
-    parent_platforms: Parent_platform[];
+    tags: ILabel[];
+    genres: ILabel[];
+    parent_platforms: IPlatform[];
 }
 
-export interface DLC extends GameFromList {}
-
-export interface ResponseWithScreenshots {
-    count: number;
-    results: ScreenshotFromList [];
-}
-
-export interface ResponseWithTrailers {
-    count: number;
-    results: Trailer [];
-}
-
-export interface Trailer {
+export interface ITrailer {
     id: number;
     data: {
         480: string;
@@ -62,50 +66,39 @@ export interface Trailer {
     preview: string;
 }
 
-export interface ScreenshotFromList {
+export interface IScreenshot {
     id: number;
     image: string;
 }
 
-export interface Label {
+export interface ILabel {
     id: number;
     name: string;
 }
 
-export interface Parent_platform {
+export interface IPlatform {
     platform: {
         id: number;
         name: string;
     };
 }
 
-export interface Platform {
-    platform: {
-        id: number;
-        name: string;
-    };
-}
-
-export interface Developer {
+export interface IDeveloper {
     name: string;
     image_background: string;
 }
 
-export interface Screenshot {
-    image: string;
-}
-
-export interface CustomRoute {
+export interface ICustomRoute {
     path: string;
     component: React.FC;
 }
 
-export interface CustomLink {
+export interface ICustomLink {
     path: string;
     name: string;
 }
 
-export interface CustomOption {
+export interface ICustomOption {
     name: string;
     value: string | number;
 }

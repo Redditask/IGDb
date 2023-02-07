@@ -1,4 +1,4 @@
-import {CustomLink, CustomOption} from "../types/types";
+import {ICustomLink, ICustomOption} from "../types/types";
 
 import {getLastYearDates, getRecentDates, getUpcomingDates} from "./helpers";
 
@@ -18,7 +18,7 @@ export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
 export const GAME_ROUTE: string = "/game/:slug";
 
-export const SideBarLinks: CustomLink [] = [
+export const SideBarLinks: ICustomLink [] = [
     {
         path: HOME_ROUTE,
         name: "Home",
@@ -42,7 +42,7 @@ export const SideBarLinks: CustomLink [] = [
 ];
 
 
-export const genresList: CustomOption[] = [
+export const genresList: ICustomOption[] = [
     {
         name: "Action",
         value: "action",
@@ -121,7 +121,7 @@ export const genresList: CustomOption[] = [
     },
 ];
 
-export const platformsList: CustomOption[] = [
+export const platformsList: ICustomOption[] = [
     {
         name: "PC",
         value: 1,

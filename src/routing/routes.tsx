@@ -1,7 +1,7 @@
 import Games from "../pages/Games/Games";
 import Game from "../pages/Game/Game";
 
-import {CustomRoute} from "../types/types";
+import {ICustomRoute} from "../types/types";
 
 import {
     HOME_ROUTE,
@@ -12,7 +12,7 @@ import {
     queryParams, GAME_ROUTE,
 } from "../utils/consts";
 
-export const publicRoutes: CustomRoute [] = [
+export const publicRoutes: ICustomRoute [] = [
     {
         path: HOME_ROUTE,
         component: () => <Games

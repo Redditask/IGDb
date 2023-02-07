@@ -9,7 +9,7 @@ import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import Message from "../../components/UI/Mesage/Message";
 
-import {GameFromList} from "../../types/types";
+import {IGame} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 import {scrollCheck} from "../../utils/helpers";
@@ -20,7 +20,7 @@ interface GamesProps {
 }
 
 const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
-    const [games, setGames] = useState<GameFromList []>([]);
+    const [games, setGames] = useState<IGame []>([]);
     const [page, setPage] = useState<number>(1);
     const [pageLimit, setPageLimit] = useState<number>(2);
     const [isLimit, setIsLimit] = useState<boolean>(false);
@@ -66,10 +66,10 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     };
 
     return (
-        <div className={styles.Games}>
+        <div className={styles.games}>
             <SideBar/>
-            <div className={styles.Games__body}>
-                <div className={styles.Games__filters}>
+            <div className={styles.games__body}>
+                <div className={styles.games__filters}>
                     <Filter
                         title="Genre"
                         defaultValue="All"

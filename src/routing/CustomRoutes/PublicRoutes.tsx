@@ -4,10 +4,10 @@ import {Routes, Route, Navigate} from "react-router-dom";
 
 import Layout from "./Layout/Layout";
 
-import {CustomRoute} from "../../types/types";
+import {ICustomRoute} from "../../types/types";
 
 interface PublicRoutesProps {
-    routes: CustomRoute [];
+    routes: ICustomRoute [];
     redirectRoute: string;
 }
 

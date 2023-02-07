@@ -10,7 +10,7 @@ interface ImageModalProps {
 
 const ImageModal:React.FC<ImageModalProps> = ({imageURl, setImageURL, children}) => {
 
-    const root = [styles.ImageModal];
+    const root = [styles.modal];
     if (imageURl) root.push(styles.active);
 
     const closeModal = (): void => setImageURL("");
@@ -18,7 +18,7 @@ const ImageModal:React.FC<ImageModalProps> = ({imageURl, setImageURL, children})
 
     return (
         <div className={root.join(" ")} onClick={closeModal}>
-            <div className={styles.ImageModalContent} onClick={stopPropagation}>
+            <div className={styles.modalContent} onClick={stopPropagation}>
                 {children}
             </div>
         </div>

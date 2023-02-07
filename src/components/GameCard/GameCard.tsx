@@ -10,38 +10,38 @@ import PlatformsRow from "../UI/PlatofrmsRow/PlatformsRow";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import LabelRow from "../UI/LabelRow/LabelRow";
 
-import {GameFromList} from "../../types/types";
+import {IGame} from "../../types/types";
 
 import {dateFormatting, imageCrop} from "../../utils/helpers";
 
 interface GameCardProps {
-    game: GameFromList;
+    game: IGame;
 }
 
 const GameCard: React.FC<GameCardProps> = memo(({game}) => {
 
     return (
         <NavLink
-            className={styles.gameCard}
+            className={styles.card}
             to={`/game/${game.slug}`}
         >
             <LazyLoadImage
-                className={styles.gameCard__image}
+                className={styles.card__image}
                 src={imageCrop(game.background_image)}
                 effect="blur"
                 alt="Background"
             />
-            <div className={styles.gameCard__description}>
-                <h3 className={styles.gameCard__title}>
+            <div className={styles.card__description}>
+                <h3 className={styles.card__title}>
                     {game.name}
                 </h3>
                 <PlatformsRow platformsArray={game.parent_platforms}/>
                 <p>Release date: {dateFormatting(game.released)}</p>
-                <div className={styles.gameCard__metacritic}>
+                <div className={styles.card__metacritic}>
                     <p>Metacritic: </p>
                     <MetacriticScore score={game.metacritic}/>
                 </div>
-                <div className={styles.gameCard__genres}>
+                <div className={styles.card__genres}>
                     <p>Genres: </p>
                     <LabelRow labels={game.genres}/>
                 </div>

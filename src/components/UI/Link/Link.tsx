@@ -11,10 +11,12 @@ const Link:React.FC<LinkProps> = ({name, link}) => {
 
     return (
         <>
-            {link &&
+            {
+                link
+                &&
                 <a
                     href={link}
-                    className={styles.Link}
+                    className={styles.link}
                 >
                     {name}
                 </a>

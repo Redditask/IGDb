@@ -8,7 +8,7 @@ import {AiOutlineArrowUp} from "react-icons/ai";
 import {SideBarLinks} from "../../utils/consts";
 import {scrollUp} from "../../utils/helpers";
 
-const isActive = ({isActive}: any) => isActive ? styles.SideBar__active : styles.SideBar__default;
+const isActive = ({isActive}: any) => isActive ? styles.sideBar__active : styles.sideBar__default;
 
 const SideBar: React.FC = () => {
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
@@ -24,8 +24,8 @@ const SideBar: React.FC = () => {
     }, [])
 
     return (
-        <aside className={styles.SideBar}>
-            <nav className={styles.SideBar__items}>
+        <aside className={styles.sideBar}>
+            <nav className={styles.sideBar__items}>
                 {
                     SideBarLinks.map((link) =>
                         <NavLink
@@ -42,7 +42,7 @@ const SideBar: React.FC = () => {
                     &&
                     <AiOutlineArrowUp
                         title="Scroll up"
-                        className={styles.SideBar__scrollUp}
+                        className={styles.sideBar__scrollUp}
                         size={40}
                         onClick={scrollUp}
                     />

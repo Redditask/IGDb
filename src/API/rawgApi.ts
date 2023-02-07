@@ -1,34 +1,34 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    QueryArgs,
-    ResponseWithGame,
-    ResponseWithGames,
-    ResponseWithScreenshots,
-    ResponseWithTrailers
+    GamesQueryArgs,
+    GameQueryResult,
+    GamesQueryResult,
+    ScreenshotsQueryResult,
+    TrailersQueryResult, DLCQueryResult, SlugQueryArg, IdQueryArg
 } from "../types/types";
 
 export const rawgApi = createApi({
     reducerPath: "rawgApi",
     baseQuery: fetchBaseQuery({baseUrl: `https://api.rawg.io/api/`}),
     endpoints: (builder) => ({
-        getGames: builder.query<ResponseWithGames, QueryArgs>({
+        getGames: builder.query<GamesQueryResult, GamesQueryArgs>({
             query: ({page, metacritic, dates, genres, platforms}) =>
                 `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}${metacritic}${dates}${genres}${platforms}`,
         }),
-        getGameDetails: builder.query<ResponseWithGame, {slug: string | undefined}>({
+        getGameDetails: builder.query<GameQueryResult, {slug: SlugQueryArg}>({
             query: ({slug}) =>
                 `games/${slug}?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getGameDLC: builder.query<ResponseWithGames, {id: number | undefined}>({
+        getGameDLC: builder.query<DLCQueryResult, {id: IdQueryArg}>({
             query: ({id}) =>
                 `games/${id}/additions?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getGameScreenshots: builder.query<ResponseWithScreenshots, {id: number | undefined}>({
+        getGameScreenshots: builder.query<ScreenshotsQueryResult, {id: IdQueryArg}>({
             query: ({id}) =>
                 `games/${id}/screenshots?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getGameTrailers: builder.query<ResponseWithTrailers, {id: number | undefined}>({
+        getGameTrailers: builder.query<TrailersQueryResult, {id: IdQueryArg}>({
            query: ({id}) =>
                `games/${id}/movies?key=${process.env["REACT_APP_API_KEY"]}`,
         }),

@@ -2,11 +2,11 @@ import React from "react";
 
 import styles from "./Filter.module.scss";
 
-import {CustomOption} from "../../types/types";
+import {ICustomOption} from "../../types/types";
 
 interface FilterProps {
     title: string;
-    options: CustomOption[];
+    options: ICustomOption[];
     filterString: string;
     setFilter: (option: string) => void;
     resetState: () => void;

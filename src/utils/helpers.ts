@@ -1,11 +1,11 @@
-import {Parent_platform, ResponseWithGame} from "../types/types";
+import {IPlatform, GameQueryResult} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
 export const scrollUpCheck = (event: any): boolean => event.target.documentElement.scrollTop > 2500;
 
-export const platformDefinition = (platformsArray: Parent_platform[], platform: string): boolean => {
+export const platformDefinition = (platformsArray: IPlatform[], platform: string): boolean => {
     let isOnPlatform = false;
 
     platformsArray.map((item)=>{
@@ -96,7 +96,7 @@ export const scrollUp = (): void => {
     });
 };
 
-export const initialGameStateFromServer: ResponseWithGame = {
+export const initialGameStateFromServer: GameQueryResult = {
     id: 0,
     background_image: "",
     description_raw: "",
