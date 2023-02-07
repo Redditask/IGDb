@@ -12,7 +12,7 @@ import LabelRow from "../UI/LabelRow/LabelRow";
 
 import {GameFromList} from "../../types/types";
 
-import {imageCrop} from "../../utils/helpers";
+import {dateFormatting, imageCrop} from "../../utils/helpers";
 
 interface GameCardProps {
     game: GameFromList;
@@ -36,7 +36,7 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                     {game.name}
                 </h3>
                 <PlatformsRow platformsArray={game.parent_platforms}/>
-                <p>Release date: {game.released}</p>
+                <p>Release date: {dateFormatting(game.released)}</p>
                 <div className={styles.gameCard__metacritic}>
                     <p>Metacritic: </p>
                     <MetacriticScore score={game.metacritic}/>

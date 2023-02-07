@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from "react";
 
-import {useGetGameDetailsQuery, useGetGameDLCQuery, useGetGameScreenshotsQuery} from "../../API/rawgApi";
+import {
+    useGetGameDetailsQuery,
+    useGetGameDLCQuery,
+    useGetGameScreenshotsQuery,
+    useGetGameTrailersQuery
+} from "../../API/rawgApi";
 
 import {useParams} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -10,6 +15,7 @@ import styles from "./Game.module.scss";
 import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
+import GameTrailer from "../../components/GameTrailer/GameTrailer";
 
 import {ResponseWithGame} from "../../types/types";
 
@@ -20,9 +26,14 @@ const Game: React.FC = () => {
     const [game, setGame] = useState<ResponseWithGame>(initialGameStateFromServer);
 
     const {slug} = useParams();
-    const {data: gameResponse, error: gameError, isSuccess: gameSuccess} = useGetGameDetailsQuery({slug}, {skip: !slug});
+    const {
+        data: gameResponse,
+        error: gameError,
+        isSuccess: gameSuccess
+    } = useGetGameDetailsQuery({slug}, {skip: !slug});
     const {data: screenshots, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
     const {data: dlc, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
+    const {data: trailers, error: trailersError} = useGetGameTrailersQuery({id: game.id}, {skip: !game.id});
 
     //console.log(screenshots, dlc)
 
@@ -37,14 +48,22 @@ const Game: React.FC = () => {
         >
             <div className={styles.Container}>
                 <div className={styles.Game}>
-                    <div className={styles.Game__openingInfo}>
-                        <h2>{dateFormatting(game.released)}</h2>
-                        <h1 className={styles.Game__name}>{game.name}</h1>
-                        <div className={styles.Game__buttons}>
-                            {/* заглушки */}
-                            <p>Add to wishlist</p>
-                            <p>Add to my games</p>
+                    <div className={styles.Game__intro}>
+                        <div className={styles.Game__openingInfo}>
+                            <h2>{dateFormatting(game.released)}</h2>
+                            <h1 className={styles.Game__name}>{game.name}</h1>
+                            <div className={styles.Game__buttons}>
+                                {/* заглушки */}
+                                <p>Add to wishlist</p>
+                                <p>Add to my games</p>
+                            </div>
                         </div>
+                        {
+                            trailers &&
+                            <div>
+                                <GameTrailer trailer={trailers.results[0]}/>
+                            </div>
+                        }
                     </div>
                     <div className={styles.Game__mainInfo}>
                         <div className={styles.Game__details}>

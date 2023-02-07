@@ -25,7 +25,14 @@
   &__openingInfo {
     display: flex;
     flex-direction: column;
-    gap: 3rem
+    gap: 5rem;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
   }
 
   &__buttons {

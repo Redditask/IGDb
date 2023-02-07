@@ -1,6 +1,12 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-import {QueryArgs, ResponseWithGame, ResponseWithGames, ResponseWithScreenshots} from "../types/types";
+import {
+    QueryArgs,
+    ResponseWithGame,
+    ResponseWithGames,
+    ResponseWithScreenshots,
+    ResponseWithTrailers
+} from "../types/types";
 
 export const rawgApi = createApi({
     reducerPath: "rawgApi",
@@ -22,6 +28,10 @@ export const rawgApi = createApi({
             query: ({id}) =>
                 `games/${id}/screenshots?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
+        getGameTrailers: builder.query<ResponseWithTrailers, {id: number | undefined}>({
+           query: ({id}) =>
+               `games/${id}/movies?key=${process.env["REACT_APP_API_KEY"]}`,
+        }),
     }),
 });
 
@@ -30,4 +40,5 @@ export const {
     useGetGameDetailsQuery,
     useGetGameDLCQuery,
     useGetGameScreenshotsQuery,
+    useGetGameTrailersQuery,
 } = rawgApi;

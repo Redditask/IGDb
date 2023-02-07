@@ -48,6 +48,20 @@ export interface ResponseWithScreenshots {
     results: ScreenshotFromList [];
 }
 
+export interface ResponseWithTrailers {
+    count: number;
+    results: Trailer [];
+}
+
+export interface Trailer {
+    id: number;
+    data: {
+        480: string;
+        max: string;
+    };
+    preview: string;
+}
+
 export interface ScreenshotFromList {
     id: number;
     image: string;
