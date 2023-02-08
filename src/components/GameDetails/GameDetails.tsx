@@ -38,10 +38,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
                     )}
                 </div>
             </div>
-            <div className={styles.detail}>
-                <p>Metacritic: </p>
-                <MetacriticScore score={game.metacritic}/>
-            </div>
+            <MetacriticScore score={game.metacritic}/>
             <div className={styles.detail}>
                 <p>Links: </p>
                 <Link

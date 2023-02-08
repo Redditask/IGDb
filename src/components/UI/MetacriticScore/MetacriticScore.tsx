@@ -13,21 +13,26 @@ const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
     else if (score < 50) className = styles.red;
 
     return (
-        score
-            ?
-            <div
-                className={className}
-                title="Game rating on metacritic"
-            >
-                {score}
-            </div>
-            :
-            <div
-                className={styles.notAvailable}
-                title="Game rating is not available"
-            >
-                N/A
-            </div>
+        <div className={styles.metacriticScore}>
+            <p>Metacritic: </p>
+            {
+                score
+                    ?
+                    <div
+                        className={className}
+                        title="Game rating on metacritic"
+                    >
+                        {score}
+                    </div>
+                    :
+                    <div
+                        className={styles.notAvailable}
+                        title="Game rating is not available"
+                    >
+                        N/A
+                    </div>
+            }
+        </div>
     );
 };
 

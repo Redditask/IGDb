@@ -45,19 +45,4 @@
 
     width: 26rem;
   }
-
-  &__metacritic {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
-    gap: 0.3rem;
-  }
-
-  &__genres {
-    display: flex;
-    align-items: center;
-
-    gap: 0.25rem;
-  }
 }

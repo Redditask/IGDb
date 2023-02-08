@@ -34,3 +34,11 @@
 
   font-size: 0.9rem;
 }
+
+.metacriticScore {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  gap: 0.3rem;
+}

@@ -11,21 +11,21 @@ interface TrailerProps {
 const Trailer: React.FC<TrailerProps> = ({trailer}) => {
 
     return (
-        trailer
-            ?
-            <video
-                title="Game Trailer"
-                className={styles.trailer}
-                src={trailer.data["480"]}
-
-
-                controls
-                poster={trailer.preview}
-            >
-                Your browser doesn't support HTML5 video tag
-            </video>
-            :
-            <></>
+        <>
+            {
+                trailer
+                &&
+                <video
+                    title="Game Trailer"
+                    className={styles.trailer}
+                    src={trailer.data["480"]}
+                    controls
+                    poster={trailer.preview}
+                >
+                    Your browser doesn't support HTML5 video tag
+                </video>
+            }
+        </>
     );
 };
 

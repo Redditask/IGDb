@@ -22,9 +22,16 @@
     visibility: visible;
   }
 
-  &Content{
+  &__content{
     background-color: #232222;
 
     border-radius: 0.4rem;
+  }
+
+  &__image {
+    width: 1600px;
+    height: 900px;
+
+    object-fit: scale-down;
   }
 }

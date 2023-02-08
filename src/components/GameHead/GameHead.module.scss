@@ -1,0 +1,23 @@
+.textSide {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+
+    gap: 5rem
+  }
+
+  &__title {
+    width: 50rem;
+  }
+}
+
+.gameHead {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+}

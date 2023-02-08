@@ -1,5 +1,5 @@
 .background {
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-position-y: -5rem;
@@ -22,31 +22,7 @@
 
   padding: 12.5rem 6rem 4.5rem 6rem;
 
-  &__leftSide {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-  }
-
-  &__rightSide {
-    padding: 0 4rem;
-  }
-
-  &__main {
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
-  }
-
-  &__buttons {
-    display: flex;
-    flex-direction: row;
-
-    gap: 5rem
-  }
-
-  &__info {
+  &__body {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -56,7 +32,7 @@
     margin-top: 6rem;
   }
 
-  &__details {
+  &__info {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -68,16 +44,5 @@
     overflow-wrap: normal;
 
     margin-top: 2rem;
-  }
-
-  &__image {
-    width: 1600px;
-    height: 900px;
-
-    object-fit: scale-down;
-  }
-
-  &__title {
-    width: 50rem;
   }
 }

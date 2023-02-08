@@ -16,25 +16,27 @@ interface ScreenshotsProps {
 const Screenshots:React.FC<ScreenshotsProps> = ({screenshots, setImageURL}) => {
 
     return (
-        screenshots
-            ?
-            <div className={styles.screenshots}>
-                {
-                    screenshots.results.map((screenshot) =>
-                        <LazyLoadImage
-                            className={styles.screenshot}
-                            src={imageCrop(screenshot.image)}
-                            key={screenshot.id}
-                            onClick={() => setImageURL(screenshot.image)}
-                            title="Open screenshot"
-                            effect="blur"
-                            alt="Game screenshot"
-                        />
-                    )
-                }
-            </div>
-            :
-            <></>
+        <>
+            {
+                screenshots
+                &&
+                <div className={styles.screenshots}>
+                    {
+                        screenshots.results.map((screenshot) =>
+                            <LazyLoadImage
+                                className={styles.screenshot}
+                                src={imageCrop(screenshot.image)}
+                                key={screenshot.id}
+                                onClick={() => setImageURL(screenshot.image)}
+                                title="Open screenshot"
+                                effect="blur"
+                                alt="Game screenshot"
+                            />
+                        )
+                    }
+                </div>
+            }
+        </>
     );
 };
 
