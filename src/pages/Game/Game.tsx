@@ -14,20 +14,25 @@ import styles from "./Game.module.scss";
 import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/UI/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
-import Message from "../../components/UI/Mesage/Message";
-
-import {initialGameStateFromServer} from "../../utils/helpers";
+import Message from "../../components/UI/Message/Message";
 import GameHead from "../../components/GameHead/GameHead";
+
+import {
+    initialDLCState,
+    initialGameState,
+    initialScreenshotsState,
+    initialTrailersState
+} from "../../utils/helpers";
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
 
     const {slug} = useParams();
 
-    const {data: game = initialGameStateFromServer, error: gameError} = useGetGameDetailsQuery({slug}, {skip: !slug});
-    const {data: screenshots, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
-    const {data: dlc, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
-    const {data: trailers, error: trailersError} = useGetGameTrailersQuery({id: game.id}, {skip: !game.id});
+    const {data: game = initialGameState, error: gameError} = useGetGameDetailsQuery({slug}, {skip: !slug});
+    const {data: screenshots = initialScreenshotsState, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
+    const {data: dlc = initialDLCState, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
+    const {data: trailers = initialTrailersState, error: trailersError} = useGetGameTrailersQuery({id: game.id}, {skip: !game.id});
 
     //console.log(dlc)
 

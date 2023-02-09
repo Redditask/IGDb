@@ -2,8 +2,6 @@ import React from "react";
 
 export interface GamesQueryResult {
     count: number;
-    next: string | null;
-    previous: string | null;
     results: IGame[];
 }
 

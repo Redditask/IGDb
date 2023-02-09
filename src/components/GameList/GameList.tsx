@@ -5,7 +5,7 @@ import styles from "./GameList.module.scss";
 import {IGame} from "../../types/types";
 
 import Loader from "../UI/Loader/Loader";
-import Message from "../UI/Mesage/Message";
+import Message from "../UI/Message/Message";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));
 
 interface BodyProps {

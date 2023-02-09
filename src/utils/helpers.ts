@@ -1,4 +1,4 @@
-import {IPlatform, GameQueryResult} from "../types/types";
+import {DLCQueryResult, GameQueryResult, IPlatform, ScreenshotsQueryResult, TrailersQueryResult} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
@@ -96,7 +96,7 @@ export const scrollUp = (): void => {
     });
 };
 
-export const initialGameStateFromServer: GameQueryResult = {
+export const initialGameState: GameQueryResult = {
     id: 0,
     background_image: "",
     description_raw: "",
@@ -107,7 +107,22 @@ export const initialGameStateFromServer: GameQueryResult = {
     platforms: [],
     reddit_url: "",
     released: "",
-    website: ""
+    website: "",
+};
+
+export const initialScreenshotsState: ScreenshotsQueryResult = {
+    count: 0,
+    results: [],
+};
+
+export const initialDLCState: DLCQueryResult = {
+    count: 0,
+    results: [],
+};
+
+export const initialTrailersState: TrailersQueryResult = {
+    count: 0,
+    results: [],
 };
 
 export const monthsList: string[] = [

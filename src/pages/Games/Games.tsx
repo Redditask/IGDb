@@ -7,7 +7,7 @@ import {useGetGamesQuery} from "../../API/rawgApi";
 import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
-import Message from "../../components/UI/Mesage/Message";
+import Message from "../../components/UI/Message/Message";
 
 import {IGame} from "../../types/types";
 

@@ -10,7 +10,7 @@ import {dateFormatting} from "../../utils/helpers";
 
 interface GameHeadProps {
     game: GameQueryResult;
-    trailers: TrailersQueryResult | undefined;
+    trailers: TrailersQueryResult;
 }
 
 const GameHead: React.FC<GameHeadProps> = ({game, trailers}) => {
@@ -26,7 +26,7 @@ const GameHead: React.FC<GameHeadProps> = ({game, trailers}) => {
                     <p>Add to my games</p>
                 </div>
             </div>
-            <Trailer trailer={trailers && trailers.results[0]}/>
+            <Trailer trailer={trailers.results[0]}/>
         </div>
 
     );
