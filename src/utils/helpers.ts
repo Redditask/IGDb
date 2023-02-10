@@ -1,4 +1,11 @@
-import {DLCQueryResult, GameQueryResult, IPlatform, ScreenshotsQueryResult, TrailersQueryResult} from "../types/types";
+import {
+    DLCQueryResult,
+    GameQueryResult, IDeveloper,
+    ILabel,
+    IPlatform,
+    ScreenshotsQueryResult,
+    TrailersQueryResult
+} from "../types/types";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
@@ -105,9 +112,10 @@ export const initialGameState: GameQueryResult = {
     metacritic_url: "",
     name: "",
     platforms: [],
+    genres: [],
     reddit_url: "",
     released: "",
-    website: "",
+    website: ""
 };
 
 export const initialScreenshotsState: ScreenshotsQueryResult = {
@@ -133,7 +141,33 @@ export const monthsList: string[] = [
 
 export const dateFormatting = (date: string): string => {
     const [year, month, day]: string[] = date.split("-");
-    const monthNumber = Number(month) - 1;
+    const monthNumber: number = Number(month) - 1;
 
     return `${day} ${monthsList[monthNumber]} ${year}`;
+};
+
+export const platformsToLabels = (platforms: IPlatform []): ILabel[] => {
+    const labels: ILabel[] = [];
+
+    platforms.map(platforms => {
+       labels.push({
+           id: platforms.platform.id,
+           name: platforms.platform.name,
+       })
+    });
+
+    return labels;
+};
+
+export const developersToLabels = (developers: IDeveloper[]): ILabel[] => {
+    const labels: ILabel[] = [];
+
+    developers.map((developers, index)=>{
+        labels.push({
+           id: index,
+           name: developers.name,
+        });
+    });
+
+    return labels;
 };

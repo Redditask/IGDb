@@ -16,6 +16,7 @@ export interface GameQueryResult {
     website: string;
     reddit_url: string;
     metacritic_url: string;
+    genres: ILabel[];
     platforms: IPlatform[];
 }
 
@@ -50,7 +51,6 @@ export interface IGame {
     released: string;
     background_image: string;
     metacritic: number;
-    tags: ILabel[];
     genres: ILabel[];
     parent_platforms: IPlatform[];
 }
@@ -83,7 +83,6 @@ export interface IPlatform {
 
 export interface IDeveloper {
     name: string;
-    image_background: string;
 }
 
 export interface ICustomRoute {

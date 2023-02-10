@@ -19,6 +19,7 @@ interface GameCardProps {
 }
 
 const GameCard: React.FC<GameCardProps> = memo(({game}) => {
+    const genres = game.genres.filter(genre => genre.id !== 59);
 
     return (
         <NavLink
@@ -38,7 +39,7 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                 <PlatformsRow platformsArray={game.parent_platforms}/>
                 <p>Release date: {dateFormatting(game.released)}</p>
                 <MetacriticScore score={game.metacritic}/>
-                <LabelRow labels={game.genres} title="Genres"/>
+                <LabelRow labels={genres} title="Genres"/>
             </div>
         </NavLink>
     );

@@ -3,9 +3,12 @@ import React from "react";
 import styles from "./GameDetails.module.scss";
 
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
+import Link from "../UI/Link/Link";
+import LabelRow from "../UI/LabelRow/LabelRow";
 
 import {GameQueryResult} from "../../types/types";
-import Link from "../UI/Link/Link";
+
+import {developersToLabels, platformsToLabels} from "../../utils/helpers";
 
 interface GameDetailsProps {
     game: GameQueryResult;
@@ -17,27 +20,18 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
         <div className={styles.details}>
             <h1>Details about game</h1>
             <div className={styles.detail}>
-                <p>Developers: </p>
-                <div className={styles.detail__info}>
-                    {game.developers.map((developer, index) => {
-                            return index === game.developers.length - 1
-                                ? <p key={developer.name}>{developer.name}</p>
-                                : <p key={developer.name}>{developer.name}, </p>
-                        }
-                    )}
-                </div>
+                <LabelRow
+                    labels={developersToLabels(game.developers)}
+                    title="Developers"
+                />
             </div>
             <div className={styles.detail}>
-                <p>Platforms: </p>
-                <div className={styles.detail__info}>
-                    {game.platforms.map((platform, index) => {
-                            return index === game.platforms.length - 1
-                                ? <p key={platform.platform.name}>{platform.platform.name}</p>
-                                : <p key={platform.platform.name}>{platform.platform.name}, </p>
-                        }
-                    )}
-                </div>
+               <LabelRow
+                   labels={platformsToLabels(game.platforms)}
+                   title="Platforms"
+               />
             </div>
+            <LabelRow labels={game.genres} title="Genres"/>
             <MetacriticScore score={game.metacritic}/>
             <div className={styles.detail}>
                 <p>Links: </p>

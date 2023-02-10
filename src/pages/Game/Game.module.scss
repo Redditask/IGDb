@@ -22,7 +22,7 @@
 
   background: linear-gradient(180deg, transparent 0%, rgba(254, 254, 254, 1) 60%, white 100%);
 
-  padding: 12.5rem 8rem 4.5rem 10rem;
+  padding: 12.5rem 8rem 4.5rem 8rem;
 
   &__body {
     display: flex;
@@ -37,9 +37,9 @@
   &__info {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: start;
 
-    gap: 15vw;
+    gap: 13vw;
   }
 
   &__text {

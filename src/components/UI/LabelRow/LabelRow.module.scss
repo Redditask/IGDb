@@ -1,16 +1,13 @@
 .labelRow {
   display: flex;
-  align-items: center;
 
   gap: 0.25rem;
 
   &__list {
-    width: 22rem;
-
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
 
-    overflow: hidden;
+    gap: 0.25rem;
   }
 }

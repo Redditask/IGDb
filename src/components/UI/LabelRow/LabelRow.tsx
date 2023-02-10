@@ -16,10 +16,9 @@ const LabelRow: React.FC<LabelRowProps> = ({labels, title}) => {
             <p>{title}: </p>
             <div className={styles.labelRow__list}>
                 {labels.map((label, index) => {
-                    if (index === 0)
-                        return <p key={label.id}>{label.name}</p>
-                    else if (index < 3)
-                        return <p key={label.id}>, {label.name}</p>
+                    return index === labels.length - 1
+                        ? <p key={label.id}>{label.name}</p>
+                        : <p key={label.id}>{label.name}, </p>
                 })}
             </div>
         </div>
