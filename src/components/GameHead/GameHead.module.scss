@@ -5,19 +5,20 @@
 
   &__buttons {
     display: flex;
-    flex-direction: row;
 
     gap: 5rem
   }
 
   &__title {
-    width: 50rem;
+    width: 40rem;
   }
 }
 
 .gameHead {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+
+  gap: 6.6vw;
 
   align-items: center;
 }

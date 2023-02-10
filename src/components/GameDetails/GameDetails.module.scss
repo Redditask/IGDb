@@ -9,7 +9,6 @@
 
 .detail {
   display: flex;
-  flex-direction: row;
 
   font-size: 1.5rem;
 
@@ -17,7 +16,6 @@
 
   &__info {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
 

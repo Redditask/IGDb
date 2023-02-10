@@ -12,6 +12,8 @@
 }
 
 .game {
+  width: 100vw;
+
   font-size: 1.5rem;
 
   display: flex;
@@ -20,7 +22,7 @@
 
   background: linear-gradient(180deg, transparent 0%, rgba(254, 254, 254, 1) 60%, white 100%);
 
-  padding: 12.5rem 6rem 4.5rem 6rem;
+  padding: 12.5rem 8rem 4.5rem 10rem;
 
   &__body {
     display: flex;
@@ -34,8 +36,10 @@
 
   &__info {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+
+    gap: 15vw;
   }
 
   &__text {
