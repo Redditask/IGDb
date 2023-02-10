@@ -1,20 +1,20 @@
 import React from "react";
 
-import styles from "./LabelRow.module.scss";
+import styles from "./Labels.module.scss";
 
 import {ILabel} from "../../../types/types";
 
-interface LabelRowProps {
+interface LabelsProps {
     labels: ILabel [];
     title: string;
 }
 
-const LabelRow: React.FC<LabelRowProps> = ({labels, title}) => {
+const Labels: React.FC<LabelsProps> = ({labels, title}) => {
 
     return (
-        <div className={styles.labelRow}>
-            <p>{title}: </p>
-            <div className={styles.labelRow__list}>
+        <div className={styles.labels}>
+            <p>{title}:</p>
+            <div className={styles.labels__list}>
                 {labels.map((label, index) => {
                     return index === labels.length - 1
                         ? <p key={label.id}>{label.name}</p>
@@ -25,4 +25,4 @@ const LabelRow: React.FC<LabelRowProps> = ({labels, title}) => {
     );
 };
 
-export default LabelRow;
+export default Labels;

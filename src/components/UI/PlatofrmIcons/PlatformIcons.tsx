@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./PlatformsRow.module.scss";
+import styles from "./PlatformIcons.module.scss";
 
 import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
 import {SiNintendoswitch} from "react-icons/si";
@@ -10,14 +10,14 @@ import {IPlatform} from "../../../types/types";
 import {platformIconSize} from "../../../utils/consts";
 import {platformDefinition} from "../../../utils/helpers";
 
-interface PlatformsRowProps {
+interface PlatformIconsProps {
     platformsArray: IPlatform[];
 }
 
-const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
+const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
 
     return (
-        <div className={styles.row}>
+        <div className={styles.icons}>
             {platformDefinition(platformsArray, "PC")
                 &&
                 <FaWindows
@@ -50,4 +50,4 @@ const PlatformsRow: React.FC<PlatformsRowProps> = ({platformsArray}) => {
     );
 };
 
-export default PlatformsRow;
+export default PlatformIcons;

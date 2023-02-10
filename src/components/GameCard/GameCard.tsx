@@ -6,9 +6,9 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {NavLink} from "react-router-dom";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-import PlatformsRow from "../UI/PlatofrmsRow/PlatformsRow";
+import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
-import LabelRow from "../UI/LabelRow/LabelRow";
+import Labels from "../UI/Labels/Labels";
 
 import {IGame} from "../../types/types";
 
@@ -36,10 +36,10 @@ const GameCard: React.FC<GameCardProps> = memo(({game}) => {
                 <h3 className={styles.card__title}>
                     {game.name}
                 </h3>
-                <PlatformsRow platformsArray={game.parent_platforms}/>
+                <PlatformIcons platformsArray={game.parent_platforms}/>
                 <p>Release date: {dateFormatting(game.released)}</p>
                 <MetacriticScore score={game.metacritic}/>
-                <LabelRow labels={genres} title="Genres"/>
+                <Labels labels={genres} title="Genres"/>
             </div>
         </NavLink>
     );

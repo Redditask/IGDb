@@ -4,7 +4,7 @@ import styles from "./GameDetails.module.scss";
 
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Link from "../UI/Link/Link";
-import LabelRow from "../UI/LabelRow/LabelRow";
+import Labels from "../UI/Labels/Labels";
 
 import {GameQueryResult} from "../../types/types";
 
@@ -19,19 +19,18 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
     return (
         <div className={styles.details}>
             <h1>Details about game</h1>
-            <div className={styles.detail}>
-                <LabelRow
-                    labels={developersToLabels(game.developers)}
-                    title="Developers"
-                />
-            </div>
-            <div className={styles.detail}>
-               <LabelRow
-                   labels={platformsToLabels(game.platforms)}
-                   title="Platforms"
-               />
-            </div>
-            <LabelRow labels={game.genres} title="Genres"/>
+            <Labels
+                labels={developersToLabels(game.developers)}
+                title="Developers"
+            />
+            <Labels
+                labels={platformsToLabels(game.platforms)}
+                title="Platforms"
+            />
+            <Labels
+                labels={game.genres}
+                title="Genres"
+            />
             <MetacriticScore score={game.metacritic}/>
             <div className={styles.detail}>
                 <p>Links: </p>
