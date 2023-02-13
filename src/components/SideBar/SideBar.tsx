@@ -21,7 +21,7 @@ const SideBar: React.FC = () => {
                 setShowScrollUp(false);
             }
         });
-    }, [])
+    }, []);
 
     return (
         <aside className={styles.sideBar}>

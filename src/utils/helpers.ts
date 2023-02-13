@@ -10,8 +10,6 @@ import {
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
-export const scrollUpCheck = (event: any): boolean => event.target.documentElement.scrollTop > 2500;
-
 export const platformDefinition = (platformsArray: IPlatform[], platform: string): boolean => {
     let isOnPlatform = false;
 
@@ -179,3 +177,6 @@ export const developersToLabels = (developers: IDeveloper[]): ILabel[] => {
 
     return labels;
 };
+
+export const isHaveLinks = (game: GameQueryResult): boolean =>
+    !!(game.metacritic_url || game.reddit_url || game.website);

@@ -2,14 +2,20 @@ import React from "react";
 
 import styles from "./Header.module.scss";
 
+import {NavLink} from "react-router-dom";
+
 const Header: React.FC = () => {
 
     return (
         <header className={styles.container}>
             <div className={styles.header}>
-                <h1 className={styles.header__title}>
+                <NavLink
+                    className={styles.header__title}
+                    to="/games"
+                    title="Back to main page"
+                >
                     I G D b
-                </h1>
+                </NavLink>
                 <nav className={styles.header__items}>
                     <p className={styles.header__item}>
                         My library

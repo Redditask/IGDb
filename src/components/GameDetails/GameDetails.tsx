@@ -8,7 +8,7 @@ import Labels from "../UI/Labels/Labels";
 
 import {GameQueryResult} from "../../types/types";
 
-import {developersToLabels, platformsToLabels} from "../../utils/helpers";
+import {developersToLabels, isHaveLinks, platformsToLabels} from "../../utils/helpers";
 
 interface GameDetailsProps {
     game: GameQueryResult;
@@ -32,21 +32,25 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
                 title="Genres"
             />
             <MetacriticScore score={game.metacritic}/>
-            <div className={styles.detail}>
-                <p>Links: </p>
-                <Link
-                    name={"Metacritic"}
-                    link={game.metacritic_url}
-                />
-                <Link
-                    name={"Reddit"}
-                    link={game.reddit_url}
-                />
-                <Link
-                    name={"Game Website"}
-                    link={game.website}
-                />
-            </div>
+            {
+                isHaveLinks(game)
+                &&
+                <div className={styles.detail}>
+                    <p>Links: </p>
+                    <Link
+                        name={"Metacritic"}
+                        link={game.metacritic_url}
+                    />
+                    <Link
+                        name={"Reddit"}
+                        link={game.reddit_url}
+                    />
+                    <Link
+                        name={"Game Website"}
+                        link={game.website}
+                    />
+                </div>
+            }
         </div>
     );
 };
