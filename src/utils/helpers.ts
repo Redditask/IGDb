@@ -1,6 +1,6 @@
 import {
     DLCQueryResult,
-    GameQueryResult, IDeveloper,
+    GameQueryResult, GamesQueryResult, IDeveloper,
     ILabel,
     IPlatform,
     ScreenshotsQueryResult,
@@ -133,6 +133,12 @@ export const initialTrailersState: TrailersQueryResult = {
     results: [],
 };
 
+export const initialGamesState: GamesQueryResult = {
+    count: 0,
+    results: [],
+};
+
+
 export const monthsList: string[] = [
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug",
@@ -140,10 +146,12 @@ export const monthsList: string[] = [
 ];
 
 export const dateFormatting = (date: string): string => {
-    const [year, month, day]: string[] = date.split("-");
-    const monthNumber: number = Number(month) - 1;
+    if (date) {
+        const [year, month, day]: string[] = date.split("-");
+        const monthNumber: number = Number(month) - 1;
 
-    return `${day} ${monthsList[monthNumber]} ${year}`;
+        return `${day} ${monthsList[monthNumber]} ${year}`;
+    }else return "Unknown";
 };
 
 export const platformsToLabels = (platforms: IPlatform []): ILabel[] => {

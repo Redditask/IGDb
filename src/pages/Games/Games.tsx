@@ -12,7 +12,7 @@ import Message from "../../components/UI/Message/Message";
 import {IGame} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
-import {scrollCheck} from "../../utils/helpers";
+import {initialGamesState, scrollCheck} from "../../utils/helpers";
 
 interface GamesProps {
     metacritic: string;
@@ -28,7 +28,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [genres, setGenres] = useState<string>("");
     const [platforms, setPlatforms] = useState<string>("");
 
-    const {data: response, error, isSuccess} = useGetGamesQuery({page, metacritic, dates, genres, platforms});
+    const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({page, metacritic, dates, genres, platforms});
 
     useEffect(() => {
         if (isSuccess) {

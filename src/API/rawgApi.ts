@@ -32,6 +32,10 @@ export const rawgApi = createApi({
            query: ({id}) =>
                `games/${id}/movies?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
+        getSameSeriesGames: builder.query<GamesQueryResult, {id: IdQueryArg}>({
+           query: ({id}) =>
+               `games/${id}/game-series?key=${process.env["REACT_APP_API_KEY"]}`,
+        }),
     }),
 });
 
@@ -41,4 +45,5 @@ export const {
     useGetGameDLCQuery,
     useGetGameScreenshotsQuery,
     useGetGameTrailersQuery,
+    useGetSameSeriesGamesQuery
 } = rawgApi;

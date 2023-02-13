@@ -1,8 +1,8 @@
 .background {
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position-x: 50%;
-  background-position-y: -5rem;
+  background-position-y: -50rem;
 }
 
 .wrapper {
@@ -20,7 +20,7 @@
   flex-direction: column;
   align-items: start;
 
-  background: linear-gradient(180deg, transparent 0%, rgba(254, 254, 254, 1) 60%, white 100%);
+  background: linear-gradient(180deg, rgba(254, 254, 254, 0.4) 0%, rgba(254, 254, 254, 1) 40%, white 100%);
 
   padding: 12.5rem 8rem 4.5rem 8rem;
 

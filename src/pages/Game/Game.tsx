@@ -4,7 +4,8 @@ import {
     useGetGameDetailsQuery,
     useGetGameDLCQuery,
     useGetGameScreenshotsQuery,
-    useGetGameTrailersQuery
+    useGetGameTrailersQuery,
+    useGetSameSeriesGamesQuery
 } from "../../API/rawgApi";
 
 import {useParams} from "react-router-dom";
@@ -19,10 +20,12 @@ import GameHead from "../../components/GameHead/GameHead";
 
 import {
     initialDLCState,
+    initialGamesState,
     initialGameState,
     initialScreenshotsState,
     initialTrailersState
 } from "../../utils/helpers";
+import SameSeriesGameList from "../../components/SameSeriesGameList/SameSeriesGameList";
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
@@ -33,12 +36,22 @@ const Game: React.FC = () => {
     const {data: screenshots = initialScreenshotsState, error: screenshotsError} = useGetGameScreenshotsQuery({id: game.id}, {skip: !game.id});
     const {data: dlc = initialDLCState, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
     const {data: trailers = initialTrailersState, error: trailersError} = useGetGameTrailersQuery({id: game.id}, {skip: !game.id});
+    const {data: sameSeriesGames = initialGamesState, error: sameSeriesError} = useGetSameSeriesGamesQuery({id: game.id}, {skip: !game.id});
 
-    //console.log(dlc)
+    useEffect(() =>
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        }), [slug, game]);
 
-    useEffect(() => window.scrollTo(0, 0), []);
-
-    const isError = (): boolean => !!(gameError || screenshotsError || dlcError || trailersError);
+    const isError = (): boolean => !!(
+        gameError
+        || screenshotsError
+        || dlcError
+        || trailersError
+        || sameSeriesError
+    );
 
     return (
         isError()
@@ -66,6 +79,7 @@ const Game: React.FC = () => {
                                 <p className={styles.game__text}>{game.description_raw}</p>
                             </div>
                         </div>
+                       <SameSeriesGameList games={sameSeriesGames.results}/>
                     </div>
                 </div>
                 <ImageModal
