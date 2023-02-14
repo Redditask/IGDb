@@ -2,7 +2,7 @@ import React from "react";
 
 export interface GamesQueryResult {
     count: number;
-    results: IGame[];
+    results: IGameCard[];
 }
 
 export interface GameQueryResult {
@@ -21,6 +21,8 @@ export interface GameQueryResult {
 }
 
 export interface DLCQueryResult extends GamesQueryResult {}
+
+export interface SameSeriesGamesQueryResult extends GamesQueryResult {}
 
 export interface ScreenshotsQueryResult {
     count: number;
@@ -44,7 +46,7 @@ export type IdQueryArg = number | undefined;
 
 export type SlugQueryArg = string | undefined;
 
-export interface IGame {
+export interface IGameCard {
     id: number;
     slug: string;
     name: string;

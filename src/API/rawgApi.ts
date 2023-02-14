@@ -5,7 +5,10 @@ import {
     GameQueryResult,
     GamesQueryResult,
     ScreenshotsQueryResult,
-    TrailersQueryResult, DLCQueryResult, SlugQueryArg, IdQueryArg
+    TrailersQueryResult,
+    DLCQueryResult,
+    SlugQueryArg,
+    IdQueryArg, SameSeriesGamesQueryResult
 } from "../types/types";
 
 export const rawgApi = createApi({
@@ -32,7 +35,7 @@ export const rawgApi = createApi({
            query: ({id}) =>
                `games/${id}/movies?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getSameSeriesGames: builder.query<GamesQueryResult, {id: IdQueryArg}>({
+        getSameSeriesGames: builder.query<SameSeriesGamesQueryResult, {id: IdQueryArg}>({
            query: ({id}) =>
                `games/${id}/game-series?key=${process.env["REACT_APP_API_KEY"]}`,
         }),

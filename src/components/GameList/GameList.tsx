@@ -2,14 +2,14 @@ import React, {lazy, Suspense} from "react";
 
 import styles from "./GameList.module.scss";
 
-import {IGame} from "../../types/types";
+import {IGameCard} from "../../types/types";
 
 import Loader from "../UI/Loader/Loader";
 import Message from "../UI/Message/Message";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));
 
 interface BodyProps {
-    games: IGame[];
+    games: IGameCard[];
     isLimit: boolean;
     isEmpty: boolean;
 }
@@ -31,7 +31,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
                                         game.background_image
                                         &&
                                         <Suspense key={game.id} fallback={null}> {/* loader is already below */}
-                                            <GameCard game={game}/>
+                                            <GameCard gameCard={game}/>
                                         </Suspense>
                                 )
                             }

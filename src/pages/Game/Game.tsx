@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {
     useGetGameDetailsQuery,
@@ -17,7 +17,7 @@ import Screenshots from "../../components/UI/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import Message from "../../components/UI/Message/Message";
 import GameHead from "../../components/GameHead/GameHead";
-import SameSeriesGameList from "../../components/SameSeriesGameList/SameSeriesGameList";
+import SameSeriesGames from "../../components/SameSeriesGames/SameSeriesGames";
 
 import {HOME_ROUTE} from "../../utils/consts";
 import {
@@ -88,7 +88,7 @@ const Game: React.FC = () => {
                                 <p className={styles.game__text}>{game.description_raw}</p>
                             </div>
                         </div>
-                        <SameSeriesGameList games={sameSeriesGames.results}/>
+                        <SameSeriesGames games={sameSeriesGames.results}/>
                     </div>
                 </div>
                 <ImageModal
