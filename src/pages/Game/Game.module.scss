@@ -50,21 +50,3 @@
     margin-top: 2rem;
   }
 }
-
-.notFound {
-  width: 100%;
-
-  font-size: 1.5rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 5rem;
-
-  margin-top: 5rem;
-
-  &__link {
-    color: black;
-  }
-}

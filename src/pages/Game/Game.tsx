@@ -8,18 +8,17 @@ import {
     useGetSameSeriesGamesQuery
 } from "../../API/rawgApi";
 
-import {NavLink, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import styles from "./Game.module.scss";
 
 import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/UI/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
-import Message from "../../components/UI/Message/Message";
 import GameHead from "../../components/GameHead/GameHead";
 import SameSeriesGames from "../../components/SameSeriesGames/SameSeriesGames";
+import GamePageError from "../../components/UI/GamePageError/GamePageError";
 
-import {HOME_ROUTE} from "../../utils/consts";
 import {
     initialDLCState,
     initialGamesState,
@@ -57,15 +56,7 @@ const Game: React.FC = () => {
     return (
         isError()
             ?
-            <div className={styles.notFound}>
-                <Message text="Oops, something go wrong..."/>
-                <NavLink
-                    to={HOME_ROUTE}
-                    className={styles.notFound__link}
-                >
-                    Back to main page
-                </NavLink>
-            </div>
+            <GamePageError/>
             :
             <div
                 className={styles.background}
