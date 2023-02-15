@@ -1,0 +1,21 @@
+.button {
+  font-size: 1.3rem;
+  font-weight: bolder;
+
+  user-select: none;
+  cursor: pointer;
+
+  background-color: white;
+  border: 0.1rem solid lightgray;
+  border-radius: 1rem;
+
+  padding: 0.25rem 1.5rem;
+  margin: 1rem 0;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+    background-color: #f3f3f3;
+    border: 0.1rem solid lightgrey;
+  }
+}
