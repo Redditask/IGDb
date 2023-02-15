@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./GameHead.module.scss";
 
 import Trailer from "../UI/Trailer/Trailer";
+import Button from "../UI/Button/Button";
 
 import {GameQueryResult, TrailersQueryResult} from "../../types/types";
 
@@ -22,8 +23,8 @@ const GameHead: React.FC<GameHeadProps> = ({game, trailers}) => {
                 <h1 className={styles.textSide__title}>{game.name}</h1>
                 <div className={styles.textSide__buttons}>
                     {/* заглушки */}
-                    <p>Add to wishlist</p>
-                    <p>Add to my games</p>
+                    <Button title="Add to wishlist" onClick={()=>""}/>
+                    <Button title="Add to my games" onClick={()=>""}/>
                 </div>
             </div>
             <Trailer trailer={trailers.results[0]}/>

@@ -1,20 +1,24 @@
 .button {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bolder;
 
   user-select: none;
   cursor: pointer;
 
+  color: gray;
   background-color: white;
   border: 0.1rem solid lightgray;
   border-radius: 1rem;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 
   padding: 0.25rem 1.5rem;
   margin: 1rem 0;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-2px);
+    transform: translateY(-0.15rem);
+
+    color: black;
     background-color: #f3f3f3;
     border: 0.1rem solid lightgrey;
   }

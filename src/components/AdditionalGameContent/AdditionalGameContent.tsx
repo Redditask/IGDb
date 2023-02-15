@@ -3,9 +3,9 @@ import React, {useState} from "react";
 import styles from "./AdditionalGameContent.module.scss";
 
 import GameList from "../GameList/GameList";
+import Button from "../UI/Button/Button";
 
 import {IGameCard} from "../../types/types";
-import Button from "../UI/Button/Button";
 
 interface AdditionalGameContentProps {
     games: IGameCard [];
@@ -28,7 +28,7 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({games, dlc
                             ?
                                 <GameList games={games} isLimit={true} isEmpty={false}/>
                                 :
-                                <Button title="Show" onClick={()=>setShowGames(true)}/>
+                                <Button title="show" onClick={()=>setShowGames(true)}/>
                         }
                     </div>
                     :
@@ -44,7 +44,7 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({games, dlc
                             ?
                                 <GameList games={dlc} isLimit={true} isEmpty={false}/>
                                 :
-                                <Button title="Show" onClick={()=>setShowDLC(true)}/>
+                                <Button title="show" onClick={()=>setShowDLC(true)}/>
                         }
                     </div>
                     :

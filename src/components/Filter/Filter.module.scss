@@ -13,3 +13,16 @@
     user-select: none;
   }
 }
+
+.select {
+
+  &:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  }
+
+  &:focus {
+    transform: translateY(-0.25rem);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  }
+}

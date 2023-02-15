@@ -33,7 +33,7 @@
     color: black;
 
     &:hover {
-      color: lightgrey;
+      transform: translateY(-0.25rem);
     }
 
     &:active {
@@ -49,5 +49,9 @@
     text-decoration: none;
 
     user-select: none;
+
+    &:hover {
+      transform: translateY(-0.25rem);
+    }
   }
 }

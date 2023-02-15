@@ -28,7 +28,7 @@ const Filter: React.FC<FilterProps> = ({title, options, setFilter, filterString,
     return (
         <form className={styles.filter}>
             <p className={styles.filter__title}>{title}:</p>
-            <select onChange={selectHandler}>
+            <select onChange={selectHandler} className={styles.select}>
                 <option value="">{defaultValue}</option>
                 {
                     options.map(option=>

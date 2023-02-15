@@ -1,3 +1,7 @@
 .link {
   color: black;
+
+  &:hover {
+    transform: translateY(-0.2rem);
+  }
 }
