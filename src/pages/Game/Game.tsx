@@ -16,7 +16,7 @@ import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/UI/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
-import SameSeriesGames from "../../components/SameSeriesGames/SameSeriesGames";
+import AdditionalGameContent from "../../components/AdditionalGameContent/AdditionalGameContent";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
 
 import {
@@ -37,6 +37,8 @@ const Game: React.FC = () => {
     const {data: dlc = initialDLCState, error: dlcError} = useGetGameDLCQuery({id: game.id}, {skip: !game.id});
     const {data: trailers = initialTrailersState, error: trailersError} = useGetGameTrailersQuery({id: game.id}, {skip: !game.id});
     const {data: sameSeriesGames = initialGamesState, error: sameSeriesError} = useGetSameSeriesGamesQuery({id: game.id}, {skip: !game.id});
+
+    console.log(dlc)
 
     useEffect(() =>
         window.scrollTo({
@@ -73,13 +75,16 @@ const Game: React.FC = () => {
                                     screenshots={screenshots}
                                 />
                             </div>
-                            <div>
+                            <div className={styles.game__about}>
                                 {/* тут как-то вынести */}
                                 <h1>About</h1>
                                 <p className={styles.game__text}>{game.description_raw}</p>
                             </div>
                         </div>
-                        <SameSeriesGames games={sameSeriesGames.results}/>
+                        <AdditionalGameContent
+                            games={sameSeriesGames.results}
+                            dlc={dlc.results}
+                        />
                     </div>
                 </div>
                 <ImageModal

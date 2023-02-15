@@ -42,6 +42,12 @@
     gap: 13vw;
   }
 
+  &__about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   &__text {
     font-size: 1.25rem;
 
