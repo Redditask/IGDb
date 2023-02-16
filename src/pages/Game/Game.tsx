@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 
 import {useGetGameDetailsQuery,} from "../../API/rawgApi";
 
@@ -6,14 +6,14 @@ import {useParams} from "react-router-dom";
 
 import styles from "./Game.module.scss";
 
+import {initialGameState} from "../../utils/helpers";
+
 import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
-import AdditionalGameContent from "../../components/AdditionalGameContent/AdditionalGameContent";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
-
-import {initialGameState} from "../../utils/helpers";
+const AdditionalGameContent = lazy(()=>import("../../components/AdditionalGameContent/AdditionalGameContent"));
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
@@ -61,9 +61,11 @@ const Game: React.FC = () => {
                         <h2>About</h2>
                         <p className={styles.game__text}>{game.description_raw}</p>
                 </div>
-                <AdditionalGameContent
-                    gameId={game.id}
-                />
+                <Suspense fallback={null}>
+                    <AdditionalGameContent
+                        gameId={game.id}
+                    />
+                </Suspense>
                 <ImageModal
                     imageURL={imageURL}
                     setImageURL={setImageURL}

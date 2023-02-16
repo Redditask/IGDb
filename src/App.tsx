@@ -5,8 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  кнопка раскрыть закрыть список игр из той же серии (подумать как сделать грамотнее, или отказаться от идеи)
-//  lazy load additional content
 //  если трейлера нет - видео с ютуба на его место
 //  если genres нет - скрывать
 //  ошибки в store закидывать
