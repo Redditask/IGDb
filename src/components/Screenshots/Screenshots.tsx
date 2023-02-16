@@ -1,19 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
+
+import {useGetGameScreenshotsQuery} from "../../API/rawgApi";
 
 import styles from "./Screenshots.module.scss";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
-import {ScreenshotsQueryResult} from "../../../types/types";
-
-import {imageCrop} from "../../../utils/helpers";
+import {imageCrop, initialScreenshotsState} from "../../utils/helpers";
 
 interface ScreenshotsProps {
-    screenshots: ScreenshotsQueryResult;
+    gameId: number;
     setImageURL: (url: string) => void;
 }
 
-const Screenshots:React.FC<ScreenshotsProps> = ({screenshots, setImageURL}) => {
+const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL}) => {
+    const {data: screenshots = initialScreenshotsState, error: screenshotsError} = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
 
     return (
         <div className={styles.screenshots}>

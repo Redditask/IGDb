@@ -2,19 +2,18 @@ import React from "react";
 
 import styles from "./GameHead.module.scss";
 
-import Trailer from "../UI/Trailer/Trailer";
+import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 
-import {GameQueryResult, TrailersQueryResult} from "../../types/types";
+import {GameQueryResult} from "../../types/types";
 
 import {dateFormatting} from "../../utils/helpers";
 
 interface GameHeadProps {
     game: GameQueryResult;
-    trailers: TrailersQueryResult;
 }
 
-const GameHead: React.FC<GameHeadProps> = ({game, trailers}) => {
+const GameHead: React.FC<GameHeadProps> = ({game}) => {
 
     return (
         <div className={styles.gameHead}>
@@ -27,7 +26,7 @@ const GameHead: React.FC<GameHeadProps> = ({game, trailers}) => {
                     <Button title="Add to my games" onClick={()=>""}/>
                 </div>
             </div>
-            <Trailer trailer={trailers.results[0]}/>
+            <Trailer gameId={game.id}/>
         </div>
 
     );
