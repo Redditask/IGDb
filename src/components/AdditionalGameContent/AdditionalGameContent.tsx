@@ -22,13 +22,13 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({games, dlc
                 games.length
                     ?
                     <div className={styles.gameList}>
-                        <h1>Same series games</h1>
+                        <h2>Same series games</h2>
                         {
                             showGames
                             ?
                                 <GameList games={games} isLimit={true} isEmpty={false}/>
                                 :
-                                <Button title="show" onClick={()=>setShowGames(true)}/>
+                                <Button title="show all" onClick={()=>setShowGames(true)}/>
                         }
                     </div>
                     :
@@ -38,13 +38,13 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({games, dlc
                 dlc.length
                     ?
                     <div className={styles.gameList}>
-                        <h1>DLC for this game</h1>
+                        <h2>DLC for this game</h2>
                         {
                             showDLC
                             ?
                                 <GameList games={dlc} isLimit={true} isEmpty={false}/>
                                 :
-                                <Button title="show" onClick={()=>setShowDLC(true)}/>
+                                <Button title="show all" onClick={()=>setShowDLC(true)}/>
                         }
                     </div>
                     :

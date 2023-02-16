@@ -60,33 +60,35 @@ const Game: React.FC = () => {
             ?
             <GamePageError/>
             :
-            <div
-                className={styles.background}
-                style={{backgroundImage: `url(${game.background_image})`}}
-            >
-                <div className={styles.wrapper}>
-                    <div className={styles.game}>
-                        <GameHead game={game} trailers={trailers}/>
-                        <div className={styles.game__body}>
-                            <div className={styles.game__info}>
-                                <GameDetails game={game}/>
-                                <Screenshots
-                                    setImageURL={setImageURL}
-                                    screenshots={screenshots}
-                                />
-                            </div>
-                            <div className={styles.game__about}>
-                                {/* тут как-то вынести */}
-                                <h1>About</h1>
-                                <p className={styles.game__text}>{game.description_raw}</p>
+            <div className={styles.container}>
+                <div
+                    className={styles.background}
+                    style={{backgroundImage: `url(${game.background_image})`}}
+                >
+                    <div className={styles.wrapper}>
+                        <div className={styles.game}>
+                            <GameHead game={game} trailers={trailers}/>
+                            <div className={styles.game__body}>
+                                <div className={styles.game__info}>
+                                    <GameDetails game={game}/>
+                                    <Screenshots
+                                        setImageURL={setImageURL}
+                                        screenshots={screenshots}
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <AdditionalGameContent
-                            games={sameSeriesGames.results}
-                            dlc={dlc.results}
-                        />
                     </div>
                 </div>
+                <div className={styles.game__about}>
+                        {/* тут как-то вынести */}
+                        <h2>About</h2>
+                        <p className={styles.game__text}>{game.description_raw}</p>
+                </div>
+                <AdditionalGameContent
+                    games={sameSeriesGames.results}
+                    dlc={dlc.results}
+                />
                 <ImageModal
                     imageURL={imageURL}
                     setImageURL={setImageURL}

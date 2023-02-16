@@ -15,7 +15,7 @@ const SideBar: React.FC = () => {
 
     useEffect(()=>{
         window.addEventListener("scroll", ()=>{
-            if(window.scrollY > 3200) {
+            if(window.scrollY > 2600) {
                 setShowScrollUp(true);
             }else {
                 setShowScrollUp(false);

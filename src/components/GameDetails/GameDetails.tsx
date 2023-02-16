@@ -18,7 +18,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({game}) => {
 
     return (
         <div className={styles.details}>
-            <h1>Details about game</h1>
+            <h2>Details about game</h2>
             <Labels
                 labels={developersToLabels(game.developers)}
                 title="Developers"
