@@ -12,16 +12,20 @@ interface LabelsProps {
 const Labels: React.FC<LabelsProps> = ({labels, title}) => {
 
     return (
-        <div className={styles.labels}>
-            <p>{title}:</p>
-            <div className={styles.labels__list}>
-                {labels.map((label, index) => {
-                    return index === labels.length - 1
-                        ? <p key={label.id}>{label.name}</p>
-                        : <p key={label.id}>{label.name}, </p>
-                })}
+        labels.length
+            ?
+            <div className={styles.labels}>
+                <p>{title}:</p>
+                <div className={styles.labels__list}>
+                    {labels.map((label, index) => {
+                        return index === labels.length - 1
+                            ? <p key={label.id}>{label.name}</p>
+                            : <p key={label.id}>{label.name}, </p>
+                    })}
+                </div>
             </div>
-        </div>
+            :
+            <></>
     );
 };
 

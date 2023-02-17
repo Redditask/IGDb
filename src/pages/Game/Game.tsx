@@ -13,7 +13,7 @@ import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
-const AdditionalGameContent = lazy(()=>import("../../components/AdditionalGameContent/AdditionalGameContent"));
+const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
@@ -62,7 +62,7 @@ const Game: React.FC = () => {
                         <p className={styles.game__text}>{game.description_raw}</p>
                 </div>
                 <Suspense fallback={null}>
-                    <AdditionalGameContent
+                    <AdditionalContent
                         gameId={game.id}
                     />
                 </Suspense>

@@ -2,20 +2,19 @@ import React, {useEffect, useState} from "react";
 
 import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi";
 
-import styles from "./AdditionalGameContent.module.scss";
+import styles from "./AdditionalContent.module.scss";
 
-import GameList from "../GameList/GameList";
-import Button from "../UI/Button/Button";
+import AdditionalContentItem from "../AdditionalContentItem/AdditionalContentItem";
 
 import {IGameCard} from "../../types/types";
 
 import {initialDLCState, initialGamesState} from "../../utils/helpers";
 
-interface AdditionalGameContentProps {
+interface AdditionalContentProps {
     gameId: number;
 }
 
-const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({gameId}) => {
+const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     const [games, setGames] = useState<IGameCard []>([]);
     const [DLC, setDLC] = useState<IGameCard []>([]);
     const [isAllGames, setIsAllGames] = useState<boolean>(false);
@@ -46,8 +45,6 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({gameId}) =
         }
     }, [dlcResponse]);
 
-    console.log(dlcResponse.results.length)
-
     const showAllGames = () => {
         setGames([...games, ...sameSeriesGames.results.slice(3)]);
         setIsAllGames(true);
@@ -60,46 +57,20 @@ const AdditionalGameContent: React.FC<AdditionalGameContentProps> = ({gameId}) =
 
     return (
         <div className={styles.container}>
-            {
-                games.length
-                    ?
-                    <div className={styles.gameList}>
-                        <h2>Same series games</h2>
-                        <GameList games={games} isLimit={true} isEmpty={false}/>
-                        {
-                            isAllGames
-                                ?
-                                <></>
-                                :
-                                <div className={styles.showButton}>
-                                    <Button title="show all" onClick={showAllGames}/>
-                                </div>
-                        }
-                    </div>
-                    :
-                    <></>
-            }
-            {
-                DLC.length
-                    ?
-                    <div className={styles.gameList}>
-                        <h2>DLC for this game</h2>
-                        <GameList games={DLC} isLimit={true} isEmpty={false}/>
-                        {
-                            isAllDLC
-                                ?
-                                <></>
-                                :
-                                <div className={styles.showButton}>
-                                    <Button title="show all" onClick={showAllDLC}/>
-                                </div>
-                        }
-                    </div>
-                    :
-                    <></>
-            }
+            <AdditionalContentItem
+                title="Same series games"
+                content={games}
+                onClickAction={showAllGames}
+                isAll={isAllGames}
+            />
+            <AdditionalContentItem
+                title="DLC for this game"
+                content={DLC}
+                onClickAction={showAllDLC}
+                isAll={isAllDLC}
+            />
         </div>
     );
 };
 
-export default AdditionalGameContent;
+export default AdditionalContent;
