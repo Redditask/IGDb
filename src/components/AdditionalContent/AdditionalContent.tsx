@@ -24,6 +24,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     const {data: dlcResponse = initialDLCState, error: dlcError, isSuccess: dlcSuccess} = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect(() => {
+        setIsAllGames(false);
+
         if(gameSuccess) {
             if (sameSeriesGames.results.length > 3) {
                 setGames([...sameSeriesGames.results.slice(0, 3)]);
@@ -35,6 +37,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     }, [sameSeriesGames]);
 
     useEffect(() => {
+        setIsAllDLC(false);
+
         if(dlcSuccess) {
             if (dlcResponse.results.length > 3) {
                 setDLC([...dlcResponse.results.slice(0, 3)]);
