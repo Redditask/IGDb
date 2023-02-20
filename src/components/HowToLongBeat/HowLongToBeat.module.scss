@@ -1,0 +1,33 @@
+.howLongToBeat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 4rem;
+
+  gap: 2rem;
+
+  &__cells {
+    display: flex;
+
+    gap: 5rem;
+  }
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.25rem;
+  }
+
+  &__type {
+    font-size: 2.5rem;
+  }
+
+  &__value {
+    font-size: 1.4rem;
+
+    font-weight: bold;
+  }
+}

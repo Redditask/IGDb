@@ -13,6 +13,7 @@ import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
+import HowLongToBeat from "../../components/HowToLongBeat/HowLongToBeat";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -60,6 +61,9 @@ const Game: React.FC = () => {
                         {/* тут как-то вынести */}
                         <h2>About</h2>
                         <p className={styles.game__text}>{game.description_raw}</p>
+                </div>
+                <div className={styles.game__about}>
+                    <HowLongToBeat gameName={game.name}/>
                 </div>
                 <Suspense fallback={null}>
                     <AdditionalContent

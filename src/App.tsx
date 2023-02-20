@@ -13,6 +13,8 @@ import AppRouter from "./routing/AppRouter";
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header
 //  //
+//  howLongToBeat реализовать на своём сервере из-за CORS
+//  //
 //  multiply выбор фильтров
 //  авторизация (jwt)
 
