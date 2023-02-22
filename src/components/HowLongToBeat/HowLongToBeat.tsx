@@ -17,10 +17,6 @@ const HowLongToBeat: React.FC<HowLongToBeatProps> = ({gameName}) => {
                     <p className={styles.howLongToBeat__value}>* hours</p>
                 </div>
                 <div className={styles.howLongToBeat__cell}>
-                    <p className={styles.howLongToBeat__type}>Main story</p>
-                    <p className={styles.howLongToBeat__value}>* hours</p>
-                </div>
-                <div className={styles.howLongToBeat__cell}>
                     <p className={styles.howLongToBeat__type}>Main + Sides</p>
                     <p className={styles.howLongToBeat__value}>* hours</p>
                 </div>

@@ -13,7 +13,7 @@ import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
-import HowLongToBeat from "../../components/HowToLongBeat/HowLongToBeat";
+import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -30,10 +30,8 @@ const Game: React.FC = () => {
             behavior: "smooth",
         }), [slug, game]);
 
-    const isError = (): boolean => !!gameError;
-
     return (
-        isError()
+        gameError
             ?
             <GamePageError/>
             :
@@ -66,9 +64,7 @@ const Game: React.FC = () => {
                     <HowLongToBeat gameName={game.name}/>
                 </div>
                 <Suspense fallback={null}>
-                    <AdditionalContent
-                        gameId={game.id}
-                    />
+                    <AdditionalContent gameId={game.id}/>
                 </Suspense>
                 <ImageModal
                     imageURL={imageURL}

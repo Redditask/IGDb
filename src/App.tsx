@@ -5,7 +5,8 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  ошибки в store закидывать
+//  поискать сервисы с трейлерами/видео игр
+//  //
 //  заглушка при загрузке
 //  //
 //  строка поиска на главной
