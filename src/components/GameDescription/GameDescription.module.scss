@@ -1,0 +1,15 @@
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 8rem;
+}
+
+.text {
+  font-size: 1.25rem;
+
+  overflow-wrap: normal;
+
+  margin-top: 2rem;
+}

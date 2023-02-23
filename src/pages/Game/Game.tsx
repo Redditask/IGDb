@@ -14,10 +14,7 @@ import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
 import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
-import GameHeadSkeleton from "../../components/UI/GameHeadSkeleton/GameHeadSkeleton";
-import GameDetailsSkeleton from "../../components/UI/GameDetailsSkeleton/GameDetailsSkeleton";
-import AboutSkeleton from "../../components/UI/AboutSkeleton/AboutSkeleton";
-import HowLongToBeatSkeleton from "../../components/UI/HowLongToBeatSkeleton/HowLongToBeatSkeleton";
+import GameDescription from "../../components/GameDescription/GameDescription";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -46,22 +43,16 @@ const Game: React.FC = () => {
                 >
                     <div className={styles.wrapper}>
                         <div className={styles.game}>
-                            {
-                                isLoading
-                                    ?
-                                    <GameHeadSkeleton/>
-                                    :
-                                    <GameHead game={game}/>
-                            }
+                            <GameHead
+                                game={game}
+                                isLoading={isLoading}
+                            />
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
-                                    {
-                                        isLoading
-                                            ?
-                                            <GameDetailsSkeleton/>
-                                            :
-                                            <GameDetails game={game}/>
-                                    }
+                                    <GameDetails
+                                        game={game}
+                                        isLoading={isLoading}
+                                    />
                                     <Screenshots
                                         setImageURL={setImageURL}
                                         gameId={game.id}
@@ -71,24 +62,15 @@ const Game: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {
-                    isLoading
-                        ?
-                        <AboutSkeleton/>
-                        :
-                        <div className={styles.game__about}>
-                            <h2>About</h2>
-                            <p className={styles.game__text}>{game.description_raw}</p>
-                        </div>
-                }
+                <GameDescription
+                    description={game.description_raw}
+                    isLoading={isLoading}
+                />
                 <div className={styles.game__about}>
-                    {
-                        isLoading
-                            ?
-                            <HowLongToBeatSkeleton/>
-                            :
-                            <HowLongToBeat gameName={game.name}/>
-                    }
+                    <HowLongToBeat
+                        gameName={game.name}
+                        isLoading={isLoading}
+                    />
                 </div>
                 <Suspense fallback={null}>
                     <AdditionalContent gameId={game.id}/>
