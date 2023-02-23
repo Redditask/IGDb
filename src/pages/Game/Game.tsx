@@ -16,6 +16,7 @@ import GamePageError from "../../components/UI/GamePageError/GamePageError";
 import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
 import GameHeadSkeleton from "../../components/UI/GameHeadSkeleton/GameHeadSkeleton";
 import GameDetailsSkeleton from "../../components/UI/GameDetailsSkeleton/GameDetailsSkeleton";
+import AboutSkeleton from "../../components/UI/AboutSkeleton/AboutSkeleton";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -69,11 +70,16 @@ const Game: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.game__about}>
-                    {/* тут как-то вынести */}
-                    <h2>About</h2>
-                    <p className={styles.game__text}>{game.description_raw}</p>
-                </div>
+                {
+                    isLoading
+                        ?
+                        <AboutSkeleton/>
+                        :
+                        <div className={styles.game__about}>
+                            <h2>About</h2>
+                            <p className={styles.game__text}>{game.description_raw}</p>
+                        </div>
+                }
                 <div className={styles.game__about}>
                     <HowLongToBeat gameName={game.name}/>
                 </div>

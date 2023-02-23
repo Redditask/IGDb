@@ -1,0 +1,43 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 8rem;
+
+  &__heading {
+    width: 7.5rem;
+    height: 3.75rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__text {
+    width: 85rem;
+    height: 10rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    margin-top: 2rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}
