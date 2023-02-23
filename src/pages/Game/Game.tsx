@@ -17,6 +17,7 @@ import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
 import GameHeadSkeleton from "../../components/UI/GameHeadSkeleton/GameHeadSkeleton";
 import GameDetailsSkeleton from "../../components/UI/GameDetailsSkeleton/GameDetailsSkeleton";
 import AboutSkeleton from "../../components/UI/AboutSkeleton/AboutSkeleton";
+import HowLongToBeatSkeleton from "../../components/UI/HowLongToBeatSkeleton/HowLongToBeatSkeleton";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -81,7 +82,13 @@ const Game: React.FC = () => {
                         </div>
                 }
                 <div className={styles.game__about}>
-                    <HowLongToBeat gameName={game.name}/>
+                    {
+                        isLoading
+                            ?
+                            <HowLongToBeatSkeleton/>
+                            :
+                            <HowLongToBeat gameName={game.name}/>
+                    }
                 </div>
                 <Suspense fallback={null}>
                     <AdditionalContent gameId={game.id}/>
