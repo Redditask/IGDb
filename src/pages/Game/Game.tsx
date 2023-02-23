@@ -14,7 +14,8 @@ import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
 import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
-import GameHeadRender from "../../components/UI/GameHeadRender/GameHeadRender";
+import GameHeadSkeleton from "../../components/UI/GameHeadSkeleton/GameHeadSkeleton";
+import GameDetailsSkeleton from "../../components/UI/GameDetailsSkeleton/GameDetailsSkeleton";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -46,13 +47,19 @@ const Game: React.FC = () => {
                             {
                                 isLoading
                                     ?
-                                    <GameHeadRender/>
+                                    <GameHeadSkeleton/>
                                     :
                                     <GameHead game={game}/>
                             }
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
-                                    <GameDetails game={game}/>
+                                    {
+                                        isLoading
+                                            ?
+                                            <GameDetailsSkeleton/>
+                                            :
+                                            <GameDetails game={game}/>
+                                    }
                                     <Screenshots
                                         setImageURL={setImageURL}
                                         gameId={game.id}

@@ -1,0 +1,51 @@
+.skeleton {
+  width: 31rem;
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  &__heading {
+    width: 28rem;
+    height: 3rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__detail {
+    width: 30rem;
+    height: 4rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__metacritic {
+    width: 15rem;
+    height: 3rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}
