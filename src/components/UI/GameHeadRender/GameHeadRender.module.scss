@@ -1,0 +1,61 @@
+.gameHeadRender {
+  width: 40rem;
+  height: 20rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4rem;
+
+  &__buttons {
+    display: flex;
+
+    gap: 4rem
+  }
+
+  &__title {
+    width: 40rem;
+    height: 4rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__released {
+    width: 12rem;
+    height: 3rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+.button {
+  display: block;
+
+  width: 12.5rem;
+  height: 2.5rem;
+
+  background-color: darkgrey;
+  border-radius: 1rem;
+
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}

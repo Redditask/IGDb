@@ -14,6 +14,7 @@ import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
 import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
+import GameHeadRender from "../../components/UI/GameHeadRender/GameHeadRender";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -21,7 +22,7 @@ const Game: React.FC = () => {
 
     const {slug} = useParams();
 
-    const {data: game = initialGameState, error: gameError} = useGetGameDetailsQuery({slug}, {skip: !slug});
+    const {data: game = initialGameState, error: gameError, isLoading} = useGetGameDetailsQuery({slug}, {skip: !slug});
 
     useEffect(() =>
         window.scrollTo({
@@ -42,7 +43,13 @@ const Game: React.FC = () => {
                 >
                     <div className={styles.wrapper}>
                         <div className={styles.game}>
-                            <GameHead game={game}/>
+                            {
+                                isLoading
+                                    ?
+                                    <GameHeadRender/>
+                                    :
+                                    <GameHead game={game}/>
+                            }
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
                                     <GameDetails game={game}/>
@@ -56,9 +63,9 @@ const Game: React.FC = () => {
                     </div>
                 </div>
                 <div className={styles.game__about}>
-                        {/* тут как-то вынести */}
-                        <h2>About</h2>
-                        <p className={styles.game__text}>{game.description_raw}</p>
+                    {/* тут как-то вынести */}
+                    <h2>About</h2>
+                    <p className={styles.game__text}>{game.description_raw}</p>
                 </div>
                 <div className={styles.game__about}>
                     <HowLongToBeat gameName={game.name}/>
