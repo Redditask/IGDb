@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./Header.module.scss";
 
 import {NavLink} from "react-router-dom";
+import Search from "../Search/Search";
 
 const Header: React.FC = () => {
 
@@ -16,6 +17,7 @@ const Header: React.FC = () => {
                 >
                     I G D b
                 </NavLink>
+                <Search/>
                 <nav className={styles.header__items}>
                     <p className={styles.header__item}>
                         My library
