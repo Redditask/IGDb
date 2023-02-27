@@ -1,6 +1,38 @@
 .search {
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: inline-block;
 
-  gap: 0.65rem;
+  &__line{
+    display: flex;
+    align-items: center;
+
+    gap: 0.65rem;
+  }
+
+  &__content {
+    display: none;
+    position: absolute;
+
+    width: 50rem;
+    height: 25rem;
+
+    border-radius: 1rem;
+    border: 0.1rem solid lightgray;
+
+    z-index: 200;
+
+    background: white;
+    box-shadow: 0 0 20px 2.5px lightgrey;
+
+    padding: 1rem;
+    margin-left: 1.5rem;
+  }
+
+  &__active {
+    display: block;
+  }
+}
+
+.search:hover .search__content {
+  display: block;
 }
