@@ -1,6 +1,6 @@
 .searchItem {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: start;
 
   cursor: pointer;
@@ -19,5 +19,9 @@
 
     width: 48px;
     height: 59px;
+  }
+
+  &:hover {
+    transform: translateX(0.5rem);
   }
 }

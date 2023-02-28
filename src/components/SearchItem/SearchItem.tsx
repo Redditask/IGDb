@@ -5,10 +5,11 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import styles from "./SearchItem.module.scss";
 
+import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
+
 import {IGameCard} from "../../types/types";
 
 import {searchCrop} from "../../utils/helpers";
-import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 
 interface SearchItemProps {
     game: IGameCard;

@@ -5,6 +5,7 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
+//  скелетон для SearchItem (в частности для картинки, если с ней проблемы)
 //  добавить кнопку очистки поля и возможно маленький лоадер (isPending)
 //  //
 //  поискать сервисы с трейлерами/видео игр

@@ -29,6 +29,10 @@
     background: white;
 
     padding: 1rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
