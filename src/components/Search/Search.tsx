@@ -23,12 +23,15 @@ const Search: React.FC = () => {
     return (
         <div className={styles.search}>
             <div className={styles.search__line}>
-                <ImSearch size={20}/>
-                <Input
-                    value={searchText}
-                    onChange={searchHandler}
-                    placeholder="Search"
-                />
+                <div className={styles.search__wrapper}>
+                    <Input
+                        placeholder="Search"
+                        value={searchText}
+                        onChange={searchHandler}
+                    >
+                        <span className={styles.icon}><ImSearch size={15}/></span>
+                    </Input>
+                </div>
             </div>
             {
                 data

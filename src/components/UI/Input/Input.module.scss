@@ -1,21 +1,18 @@
+@import "src/components/Search/Search.module";
+
 .input {
-  width: 50rem;
+  width: 42vw;
   height: 2.5rem;
 
-  border-radius: 1rem;
-  border: 0.1rem solid lightgray;
-
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
-
-  padding: 0 0.5rem;
-
-  &:focus {
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-    transform: translateY(-0.15rem);
-  }
+  border: none;
+  background: transparent;
 
   &::placeholder {
     font-weight: bold;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
@@ -23,4 +20,16 @@ input[type="text"]
 {
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+  border-radius: 1rem;
+  border: 0.1rem solid lightgray;
+
+  padding: 0 0.5rem;
 }

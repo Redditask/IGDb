@@ -7,32 +7,34 @@
     align-items: center;
 
     gap: 0.65rem;
+
+    border-radius: 1rem;
   }
 
   &__content {
     display: none;
     position: absolute;
 
-    width: 50rem;
-    height: 25rem;
+    width: 44.6vw;
+    height: 20rem;
 
     border-radius: 1rem;
     border: 0.1rem solid lightgray;
+    border-top: none;
 
     z-index: 200;
 
     background: white;
-    box-shadow: 0 0 20px 2.5px lightgrey;
 
     padding: 1rem;
-    margin-left: 1.5rem;
   }
+}
 
-  &__active {
-    display: block;
-  }
+.icon {
+  margin: 0 0.5rem;
 }
 
 .search:hover .search__content {
   display: block;
+  background-color: white;
 }
