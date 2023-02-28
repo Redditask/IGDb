@@ -20,10 +20,16 @@ export const platformDefinition = (platformsArray: IPlatform[], platform: string
     return isOnPlatform;
 };
 
-export const imageCrop = (imageSrc: string): string => {
+export const regularCrop = (imageSrc: string): string => {
     const imageUrl = String(imageSrc).split("media/")[1];
 
     return `https://media.rawg.io/media/crop/600/400/${imageUrl}`;
+};
+
+export const searchCrop = (imageSrc: string): string => {
+    const imageUrl = String(imageSrc).split("media/")[1];
+
+    return `https://media.rawg.io/media/resize/420/-/${imageUrl}`;
 };
 
 const getStringZero = (value: number): string => value < 10 ? "0" : "";

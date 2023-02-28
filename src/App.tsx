@@ -5,7 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  добавить переход на игры из выпадающего списка при поиске
 //  добавить кнопку очистки поля и возможно маленький лоадер (isPending)
 //  //
 //  поискать сервисы с трейлерами/видео игр

@@ -12,7 +12,7 @@ import Labels from "../UI/Labels/Labels";
 
 import {IGameCard} from "../../types/types";
 
-import {dateFormatting, imageCrop} from "../../utils/helpers";
+import {dateFormatting, regularCrop} from "../../utils/helpers";
 
 interface GameCardProps {
     gameCard: IGameCard;
@@ -28,7 +28,7 @@ const GameCard: React.FC<GameCardProps> = memo(({gameCard}) => {
         >
             <LazyLoadImage
                 className={styles.card__image}
-                src={imageCrop(gameCard.background_image)}
+                src={regularCrop(gameCard.background_image)}
                 effect="blur"
                 alt="Background"
             />

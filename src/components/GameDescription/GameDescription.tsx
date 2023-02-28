@@ -17,7 +17,7 @@ const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoading
             <GameDescriptionSkeleton/>
             :
             <div className={styles.description}>
-                <h2>About</h2>
+                {description ? <h2>About</h2> : <></>}
                 <p className={styles.text}>{description}</p>
             </div>
     );

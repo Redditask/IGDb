@@ -1,4 +1,4 @@
-import React, {useTransition, useState} from "react";
+import React, {useTransition, useState, useEffect} from "react";
 
 import {useGetSearchResultsQuery} from "../../API/rawgApi";
 
@@ -7,17 +7,22 @@ import {ImSearch} from "react-icons/im";
 import styles from "./Search.module.scss";
 
 import Input from "../UI/Input/Input";
+import SearchItem from "../SearchItem/SearchItem";
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
     const [searchText, setSearchText] = useState<string>("");
 
-    const {data, isLoading} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
+    const {data} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
-    const searchHandler = (event: any) => {
+    const searchHandler = (event: any): void => {
         startTransition(()=>{
             setSearchText(event.target.value);
         });
+    };
+
+    const cleanSearch = (): void => {
+      setSearchText("");
     };
 
     return (
@@ -37,7 +42,15 @@ const Search: React.FC = () => {
                 data
                     ?
                     <div className={styles.search__content}>
-                        {data.results[0].name}
+                        {data.results.map((game)=>
+                            game.background_image
+                            &&
+                            <SearchItem
+                                game={game}
+                                clean={cleanSearch}
+                                key={game.slug}
+                            />
+                        )}
                     </div>
                     :
                     <></>

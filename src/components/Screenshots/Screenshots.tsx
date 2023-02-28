@@ -6,7 +6,7 @@ import styles from "./Screenshots.module.scss";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
-import {imageCrop, initialScreenshotsState} from "../../utils/helpers";
+import {regularCrop, initialScreenshotsState} from "../../utils/helpers";
 
 interface ScreenshotsProps {
     gameId: number;
@@ -22,7 +22,7 @@ const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL}) => {
                 screenshots.results.map((screenshot) =>
                     <LazyLoadImage
                         className={styles.screenshot}
-                        src={imageCrop(screenshot.image)}
+                        src={regularCrop(screenshot.image)}
                         key={screenshot.id}
                         onClick={() => setImageURL(screenshot.image)}
                         title="Open screenshot"
