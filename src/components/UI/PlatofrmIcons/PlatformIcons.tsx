@@ -2,9 +2,11 @@ import React from "react";
 
 import styles from "./PlatformIcons.module.scss";
 
-import {FaPlaystation, FaWindows, FaXbox} from "react-icons/fa";
+import {FaPlaystation, FaWindows, FaXbox, FaLinux} from "react-icons/fa";
 import {DiAndroid, DiApple} from "react-icons/di";
 import {SiNintendoswitch} from "react-icons/si";
+import {TbWorld} from "react-icons/tb";
+import {RiMacLine} from "react-icons/ri";
 
 import {IPlatform} from "../../../types/types";
 
@@ -18,7 +20,7 @@ interface PlatformIconsProps {
 const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
 
     return (
-        platformsArray.length
+        platformsArray
             ?
             <div className={styles.icons}>
                 {platformDefinition(platformsArray, "PC")
@@ -56,11 +58,32 @@ const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
                         title="Android"
                     />
                 }
-                {platformDefinition(platformsArray, "Android")
+                {platformDefinition(platformsArray, "iOS")
                     &&
                     <DiApple
                         size={platformIconSize}
-                        title="iOS"
+                        title="iPhone"
+                    />
+                }
+                {platformDefinition(platformsArray, "Apple Macintosh")
+                    &&
+                    <RiMacLine
+                        size={platformIconSize}
+                        title="macOS"
+                    />
+                }
+                {platformDefinition(platformsArray, "Linux")
+                    &&
+                    <FaLinux
+                        size={platformIconSize}
+                        title="Linux"
+                    />
+                }
+                {platformDefinition(platformsArray, "Web")
+                    &&
+                    <TbWorld
+                        size={platformIconSize}
+                        title="Web"
                     />
                 }
             </div>

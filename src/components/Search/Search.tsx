@@ -16,13 +16,13 @@ const Search: React.FC = () => {
     const {data} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
-        startTransition(()=>{
+        startTransition(() => {
             setSearchText(event.target.value);
         });
     };
 
     const cleanSearch = (): void => {
-      setSearchText("");
+        setSearchText("");
     };
 
     return (
@@ -42,15 +42,23 @@ const Search: React.FC = () => {
                 data
                     ?
                     <div className={styles.search__content}>
-                        {data.results.map((game)=>
-                            game.background_image
-                            &&
-                            <SearchItem
-                                game={game}
-                                clean={cleanSearch}
-                                key={game.slug}
-                            />
-                        )}
+                        {
+                            data.results.length
+                                ?
+                                data.results.map((game) =>
+                                    game.background_image
+                                    &&
+                                    <SearchItem
+                                        game={game}
+                                        clean={cleanSearch}
+                                        key={game.slug}
+                                    />
+                                )
+                                :
+                                <h2 className={styles.notFounded}>
+                                    No results
+                                </h2>
+                        }
                     </div>
                     :
                     <></>
