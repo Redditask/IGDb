@@ -5,11 +5,10 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  поправить проблему с долгой сериализацией(?)
-//  скелетон для SearchItem (в частности для картинки, если с ней проблемы)
-//  //
 //  поискать сервисы с трейлерами/видео игр
 //  фильтры улучшить (выбор диапазона оценок metacritic например)
+//  //
+//  Перенести скелетоны в Suspense (?)
 //  //
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header

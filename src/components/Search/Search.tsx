@@ -1,4 +1,4 @@
-import React, {useTransition, useState, useEffect} from "react";
+import React, {useTransition, useState, lazy, Suspense} from "react";
 
 import {useGetSearchResultsQuery} from "../../API/rawgApi";
 
@@ -7,7 +7,7 @@ import {ImSearch} from "react-icons/im";
 import styles from "./Search.module.scss";
 
 import Input from "../UI/Input/Input";
-import SearchItem from "../SearchItem/SearchItem";
+const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
@@ -48,11 +48,15 @@ const Search: React.FC = () => {
                                 data.results.map((game) =>
                                     game.background_image
                                     &&
-                                    <SearchItem
-                                        game={game}
-                                        clean={cleanSearch}
+                                    <Suspense
+                                        fallback={null}
                                         key={game.slug}
-                                    />
+                                    >
+                                        <SearchItem
+                                            game={game}
+                                            clean={cleanSearch}
+                                        />
+                                    </Suspense>
                                 )
                                 :
                                 <h2 className={styles.notFounded}>

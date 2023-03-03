@@ -6,5 +6,8 @@ export const store = configureStore({
     reducer: {
         [rawgApi.reducerPath]: rawgApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rawgApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false,
+    }).concat(rawgApi.middleware),
 });
