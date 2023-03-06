@@ -39,7 +39,7 @@ const GameCard: React.FC<GameCardProps> = memo(({gameCard}) => {
                 <PlatformIcons platformsArray={gameCard.parent_platforms}/>
                 <p>Release date: {dateFormatting(gameCard.released)}</p>
                 <MetacriticScore score={gameCard.metacritic}/>
-                <Labels labels={genres} title="Genres"/>
+                <Labels labels={genres.slice(0,3)} title="Genres"/>
             </div>
         </NavLink>
     );

@@ -5,11 +5,9 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  поискать сервисы с трейлерами/видео игр
-//  фильтры улучшить (выбор диапазона оценок metacritic например)
-//  //
-//  Перенести скелетоны в Suspense (?)
-//  //
+// platforms заполнить в filter
+// range slider
+//
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header
 //  //
