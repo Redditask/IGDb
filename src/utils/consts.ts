@@ -135,8 +135,28 @@ export const platformsList: ICustomOption[] = [
         value: 3,
     },
     {
+        name: "iOS",
+        value: 4,
+    },
+    {
+        name: "Macintosh",
+        value: 5,
+    },
+    {
+        name: "Linux",
+        value: 6,
+    },
+    {
         name: "Nintendo",
         value: 7,
+    },
+    {
+        name: "Android",
+        value: 8,
+    },
+    {
+        name: "Web",
+        value: 14,
     },
 ];
 

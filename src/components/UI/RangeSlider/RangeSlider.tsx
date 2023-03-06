@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useTransition} from "react";
 
 import styles from "./RangeSlider.module.scss";
 
@@ -7,8 +7,9 @@ interface RangeSliderProps {
     max: number;
     firstValue: number;
     secondValue: number;
-    firstHandler: (event: any) => void;
-    secondHandler: (event: any) => void;
+    firstHandler: (value: number) => void;
+    secondHandler: (value: number) => void;
+    title: string;
 }
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
@@ -17,30 +18,52 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         firstValue,
         firstHandler,
         secondValue,
-        secondHandler
+        secondHandler,
+        title
     }) => {
+    const [isPending, startTransition] = useTransition();
+    const [left, setLeft] = useState<number>(min);
+    const [right, setRight] = useState<number>(max);
+
+    const leftProgressHandler = (event: any): void => {
+        startTransition(()=>{
+            firstHandler(event.target.value);
+        });
+        setLeft(event.target.value);
+    };
+
+    const rightProgressHandler = (event: any): void => {
+        startTransition(()=>{
+            secondHandler(event.target.value);
+        });
+        setRight(event.target.value);
+    };
 
     return (
-        <div className={styles.container}>
+        <div
+            className={styles.container}
+            title={title}
+        >
             <p className={styles.value}>{firstValue}</p>
             <div className={styles.rangeSlider}>
-                <div className={styles.rangeSlider__progress}/>
+                <div
+                    className={styles.rangeSlider__progress}
+                    style={{left: `${left}%`, right: `${max - right}%`}}
+                />
                 <div className={styles.inputs}>
                     <input
-                        className={styles.rangeMin}
                         type="range"
                         min={min}
                         max={max}
                         value={firstValue}
-                        onChange={firstHandler}
+                        onChange={leftProgressHandler}
                     />
                     <input
-                        className={styles.rangeMax}
                         type="range"
                         min={min}
                         max={max}
                         value={secondValue}
-                        onChange={secondHandler}
+                        onChange={rightProgressHandler}
                     />
                 </div>
             </div>

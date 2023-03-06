@@ -5,8 +5,7 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-// platforms заполнить в filter
-// range slider
+//  связать metacritic string с значениями из range slider
 //
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header

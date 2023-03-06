@@ -8,12 +8,12 @@ import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import Message from "../../components/UI/Message/Message";
+import RangeSlider from "../../components/UI/RangeSlider/RangeSlider";
 
 import {IGameCard} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 import {initialGamesState, scrollCheck} from "../../utils/helpers";
-import RangeSlider from "../../components/UI/RangeSlider/RangeSlider";
 
 interface GamesProps {
     metacritic: string;
@@ -30,8 +30,8 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [genres, setGenres] = useState<string>("");
     const [platforms, setPlatforms] = useState<string>("");
 
-    const [firstMetacriticScore, setFirstMetacriticScore] = useState<number>(5);
-    const [secondMetacriticScore, setSecondMetacriticScore] = useState<number>(50);
+    const [firstMetacriticScore, setFirstMetacriticScore] = useState<number>(0);
+    const [secondMetacriticScore, setSecondMetacriticScore] = useState<number>(100);
 
     const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({page, metacritic, dates, genres, platforms});
 
@@ -70,14 +70,6 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
         setIsLimit(false);
     };
 
-    const firstMetacriticScoreHandler = (event: any): void => {
-        setFirstMetacriticScore(event.target.value);
-    };
-
-    const secondMetacriticScoreHandler = (event: any): void => {
-        setSecondMetacriticScore(event.target.value);
-    };
-
     return (
         <div className={styles.games}>
             <SideBar/>
@@ -88,8 +80,9 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                         max={100}
                         firstValue={firstMetacriticScore}
                         secondValue={secondMetacriticScore}
-                        firstHandler={firstMetacriticScoreHandler}
-                        secondHandler={secondMetacriticScoreHandler}
+                        firstHandler={setFirstMetacriticScore}
+                        secondHandler={setSecondMetacriticScore}
+                        title="Metacritic score"
                     />
                     <Filter
                         title="Genre"
