@@ -74,16 +74,18 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
         <div className={styles.games}>
             <SideBar/>
             <div className={styles.games__body}>
-                <div className={styles.games__filters}>
+                <div className={styles.games__options}>
                     <RangeSlider
                         min={0}
                         max={100}
                         firstValue={firstMetacriticScore}
                         secondValue={secondMetacriticScore}
-                        firstHandler={setFirstMetacriticScore}
-                        secondHandler={setSecondMetacriticScore}
-                        title="Metacritic score"
+                        setFirstValue={setFirstMetacriticScore}
+                        setSecondValue={setSecondMetacriticScore}
+                        title="Metacritic"
+                        minRange={15}
                     />
+                    <div className={styles.games__filters}>
                     <Filter
                         title="Genre"
                         defaultValue="All"
@@ -100,6 +102,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                         options={platformsList}
                         resetState={resetState}
                     />
+                    </div>
                 </div>
                 {
                     error

@@ -12,7 +12,7 @@
     margin-top: 5rem;
   }
 
-  &__filters {
+  &__options {
     width: 68vw;
 
     display: flex;
@@ -21,6 +21,15 @@
     align-items: center;
 
     margin-top: 1.5rem;
+
+    gap: 5rem;
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
     gap: 5rem;
   }
