@@ -5,7 +5,7 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  связать metacritic string с значениями из range slider
+//  пофиксить баг с ползунком в "LYT" и "ALT"
 //
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header

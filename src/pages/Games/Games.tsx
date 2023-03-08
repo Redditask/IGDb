@@ -8,12 +8,19 @@ import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import Message from "../../components/UI/Message/Message";
-import RangeSlider from "../../components/UI/RangeSlider/RangeSlider";
+import RangeSlider from "../../components/RangeSlider/RangeSlider";
 
 import {IGameCard} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
-import {initialGamesState, scrollCheck} from "../../utils/helpers";
+import {
+    createMetacriticString,
+    getMaxRangeValue,
+    getMinRangeValue,
+    getValuesFromMetacriticString,
+    initialGamesState,
+    scrollCheck
+} from "../../utils/helpers";
 
 interface GamesProps {
     metacritic: string;
@@ -30,10 +37,16 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [genres, setGenres] = useState<string>("");
     const [platforms, setPlatforms] = useState<string>("");
 
-    const [firstMetacriticScore, setFirstMetacriticScore] = useState<number>(0);
-    const [secondMetacriticScore, setSecondMetacriticScore] = useState<number>(100);
+    const [minMetacriticScore, setMinMetacriticScore] = useState<number>(0);
+    const [maxMetacriticScore, setMaxMetacriticScore] = useState<number>(100);
 
-    const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({page, metacritic, dates, genres, platforms});
+    const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({
+        page,
+        metacritic: createMetacriticString(minMetacriticScore, maxMetacriticScore),
+        dates,
+        genres,
+        platforms
+    });
 
     useEffect(() => {
         if (isSuccess) {
@@ -49,6 +62,15 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
             document.removeEventListener("scroll", scrollListener);
         };
     }, [response]);
+
+    useEffect(()=>{
+        if (metacritic) {
+            const [firstValue, secondValue]: number[] = getValuesFromMetacriticString(metacritic);
+            resetState();
+            setMinMetacriticScore(firstValue);
+            setMaxMetacriticScore(secondValue);
+        }
+    }, []);
 
     const scrollListener = (event: Event): void => {
         scrollHandler(event, setPage);
@@ -76,14 +98,15 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
             <div className={styles.games__body}>
                 <div className={styles.games__options}>
                     <RangeSlider
-                        min={0}
-                        max={100}
-                        firstValue={firstMetacriticScore}
-                        secondValue={secondMetacriticScore}
-                        setFirstValue={setFirstMetacriticScore}
-                        setSecondValue={setSecondMetacriticScore}
+                        min={getMinRangeValue(metacritic)}
+                        max={getMaxRangeValue(metacritic)}
+                        firstValue={minMetacriticScore}
+                        secondValue={maxMetacriticScore}
+                        setFirstValue={setMinMetacriticScore}
+                        setSecondValue={setMaxMetacriticScore}
                         title="Metacritic"
                         minRange={15}
+                        resetState={resetState}
                     />
                     <div className={styles.games__filters}>
                     <Filter

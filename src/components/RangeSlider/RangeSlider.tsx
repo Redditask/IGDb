@@ -11,6 +11,7 @@ interface RangeSliderProps {
     setSecondValue: (value: number) => void;
     title: string;
     minRange: number;
+    resetState: () => void;
 }
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
@@ -22,6 +23,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
          setSecondValue,
          title,
          minRange,
+        resetState
     }) => {
 
     const [isPending, startTransition] = useTransition();
@@ -30,6 +32,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
 
     const leftProgressHandler = (event: any): void => {
         if(secondValue - event.target.value >= minRange) {
+            resetState();
             startTransition(() => {
                 setFirstValue(event.target.value);
             });
@@ -39,6 +42,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
 
     const rightProgressHandler = (event: any): void => {
         if (event.target.value - firstValue >= minRange) {
+            resetState();
             startTransition(() => {
                 setSecondValue(event.target.value);
             });
