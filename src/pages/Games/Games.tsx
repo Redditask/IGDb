@@ -39,6 +39,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
 
     const [minMetacriticScore, setMinMetacriticScore] = useState<number>(0);
     const [maxMetacriticScore, setMaxMetacriticScore] = useState<number>(100);
+    const [isHaveDefaultRange, setIsHaveDefaultRange] = useState<boolean>(false);
 
     const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({
         page,
@@ -69,6 +70,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
             resetState();
             setMinMetacriticScore(firstValue);
             setMaxMetacriticScore(secondValue);
+            setIsHaveDefaultRange(true);
         }
     }, []);
 
@@ -107,6 +109,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                         title="Metacritic"
                         minRange={15}
                         resetState={resetState}
+                        isHaveDefaultRange={isHaveDefaultRange}
                     />
                     <div className={styles.games__filters}>
                     <Filter

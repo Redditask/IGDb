@@ -12,6 +12,7 @@ interface RangeSliderProps {
     title: string;
     minRange: number;
     resetState: () => void;
+    isHaveDefaultRange: boolean;
 }
 
 const RangeSlider: React.FC<RangeSliderProps> = ({
@@ -23,7 +24,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
          setSecondValue,
          title,
          minRange,
-        resetState
+         resetState, isHaveDefaultRange
     }) => {
 
     const [isPending, startTransition] = useTransition();
@@ -34,7 +35,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         if(secondValue - event.target.value >= minRange) {
             resetState();
             startTransition(() => {
-                setFirstValue(event.target.value);
+                setFirstValue(Number(event.target.value));
             });
             setLeft(event.target.value);
         }
@@ -44,11 +45,13 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         if (event.target.value - firstValue >= minRange) {
             resetState();
             startTransition(() => {
-                setSecondValue(event.target.value);
+                setSecondValue(Number(event.target.value));
             });
             setRight(event.target.value);
         }
     };
+
+    const lowerBoundDetermining = (): number => isHaveDefaultRange ? 0 : min;
 
     return (
         <div
@@ -64,10 +67,11 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
                 <div className={styles.inputs}>
                     <input
                         type="range"
-                        min={min}
+                        min={lowerBoundDetermining()}
                         max={max}
                         value={firstValue}
                         onChange={leftProgressHandler}
+                        disabled={isHaveDefaultRange}
                     />
                     <input
                         type="range"
