@@ -5,8 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  пофиксить подергивание вёртски при движении ползунка range-slider'а
-//  //
 //  wishlist, my library - добавить страницы
 //  аналогично SideBar сделать Header
 //  //

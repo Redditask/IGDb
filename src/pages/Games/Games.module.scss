@@ -5,24 +5,20 @@
   &__body {
     width: 100vw;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
     margin-top: 5rem;
   }
 
   &__options {
-    width: 68vw;
+    width: 80vw;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 
     margin-top: 1.5rem;
 
-    gap: 5rem;
+    gap: 23vw;
   }
 
   &__filters {
@@ -31,6 +27,6 @@
     justify-content: space-between;
     align-items: center;
 
-    gap: 5rem;
+    gap: 5.5rem;
   }
 }
