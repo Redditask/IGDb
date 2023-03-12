@@ -30,6 +30,10 @@
   &__item {
     cursor: pointer;
 
+    text-decoration: none;
+
+    user-select: none;
+
     color: black;
 
     &:hover {

@@ -18,6 +18,8 @@ export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
 export const GAME_ROUTE: string = "/game/:slug";
 
+export const LIBRARY_ROUTE: string = "/library";
+
 export const SideBarLinks: ICustomLink [] = [
     {
         path: HOME_ROUTE,

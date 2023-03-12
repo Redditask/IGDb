@@ -5,13 +5,13 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  wishlist, my library - добавить страницы
-//  аналогично SideBar сделать Header
+//  темная тема внизу sidebar'a
 //  //
-//  howLongToBeat реализовать на своём сервере из-за CORS
-//  //
-//  multiply выбор фильтров
+//  свой бекенд
 //  авторизация (jwt)
+//  добавить в библиотеку аватарку и кол-во игр в списках
+//  выводить в библиотеке дату добавления игры и полоской вот так игры отделять
+//  (потом добавить какие-то фильтры, поиск (?))
 
 const App: React.FC = () => {
 

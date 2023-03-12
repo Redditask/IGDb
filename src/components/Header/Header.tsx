@@ -20,9 +20,13 @@ const Header: React.FC = () => {
                 </NavLink>
                 <Search/>
                 <nav className={styles.header__items}>
-                    <p className={styles.header__item}>
-                        My library
-                    </p>
+                    <NavLink
+                        className={styles.header__item}
+                        to="/library"
+                        title="Your games library"
+                    >
+                        Library
+                    </NavLink>
                     <p className={styles.header__item}>
                         Log out
                     </p>
