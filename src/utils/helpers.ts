@@ -1,6 +1,6 @@
 import {
     DLCQueryResult,
-    GameQueryResult, GamesQueryResult, IDeveloper,
+    GameQueryResult, GamesQueryResult, HowLongToBeatResult, IDeveloper,
     ILabel,
     IPlatform,
     ScreenshotsQueryResult,
@@ -143,6 +143,12 @@ export const initialGamesState: GamesQueryResult = {
 };
 
 
+export const initialHowLongToBeatState: HowLongToBeatResult = {
+    gameplayMain: 0,
+    gameplayMainExtra: 0,
+    gameplayCompletionist: 0,
+};
+
 export const monthsList: string[] = [
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug",
@@ -205,3 +211,6 @@ export const getMinRangeValue = (metacritic: string): number =>
 
 export const getMaxRangeValue = (metacritic: string): number =>
     metacritic.length ? getValuesFromMetacriticString(metacritic)[1] : 100;
+
+export const isHasHowLongToBeat = (apiResult: HowLongToBeatResult): boolean =>
+    !!(apiResult?.gameplayMain || apiResult?.gameplayMainExtra || apiResult?.gameplayCompletionist);

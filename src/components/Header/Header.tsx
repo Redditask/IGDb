@@ -10,7 +10,7 @@ const Header: React.FC = () => {
 
     return (
         <header className={styles.container}>
-            <div className={styles.header}>
+            <nav className={styles.header}>
                 <NavLink
                     className={styles.header__title}
                     to="/games"
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
                         Log out
                     </p>
                 </nav>
-            </div>
+            </nav>
         </header>
     );
 };

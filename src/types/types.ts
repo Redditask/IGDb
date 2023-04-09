@@ -34,6 +34,12 @@ export interface TrailersQueryResult {
     results: ITrailer [];
 }
 
+export interface HowLongToBeatResult {
+    gameplayMain: number;
+    gameplayMainExtra: number;
+    gameplayCompletionist: number;
+}
+
 export interface GamesQueryArgs {
     page: number;
     metacritic: string;

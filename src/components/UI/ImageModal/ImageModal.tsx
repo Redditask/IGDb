@@ -19,7 +19,8 @@ const ImageModal:React.FC<ImageModalProps> = ({imageURL, setImageURL}) => {
     return (
         <>
             {
-                imageURL &&
+                imageURL
+                &&
                 <div className={root.join(" ")} onClick={closeModal}>
                     <div className={styles.modal__content} onClick={stopPropagation}>
                         <LazyLoadImage
