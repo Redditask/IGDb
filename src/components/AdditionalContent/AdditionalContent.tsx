@@ -12,9 +12,10 @@ import {initialDLCState, initialGamesState} from "../../utils/helpers";
 
 interface AdditionalContentProps {
     gameId: number;
+    setIsError: (isError: boolean) => void;
 }
 
-const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
+const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError}) => {
     const [games, setGames] = useState<IGameCard []>([]);
     const [DLC, setDLC] = useState<IGameCard []>([]);
     const [isAllGames, setIsAllGames] = useState<boolean>(false);
@@ -25,6 +26,7 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
         error: sameSeriesError,
         isSuccess: gameSuccess
     } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
+
     const {
         data: dlcResponse = initialDLCState,
         error: dlcError,
@@ -42,6 +44,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
                 setIsAllGames(true);
             }
         }
+
+        if (sameSeriesError) setIsError(true);
     }, [sameSeriesGames]);
 
     useEffect(() => {
@@ -55,6 +59,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
                 setIsAllDLC(true);
             }
         }
+
+        if (dlcError) setIsError(true);
     }, [dlcResponse]);
 
     const showAllGames = () => {

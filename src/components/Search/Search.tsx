@@ -1,4 +1,4 @@
-import React, {useTransition, useState, lazy, Suspense} from "react";
+import React, {useTransition, useState, lazy, Suspense, useEffect} from "react";
 
 import {useGetSearchResultsQuery} from "../../API/rawgApi";
 
@@ -13,7 +13,7 @@ const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
     const [searchText, setSearchText] = useState<string>("");
 
-    const {data} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
+    const {data, error: searchError} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
         startTransition(() => {

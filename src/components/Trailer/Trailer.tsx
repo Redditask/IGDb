@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {useGetGameTrailersQuery} from "../../API/rawgApi";
 
@@ -8,10 +8,19 @@ import {initialTrailersState} from "../../utils/helpers";
 
 interface TrailerProps {
     gameId: number;
+    setIsError: (isError: boolean) => void;
 }
 
-const Trailer: React.FC<TrailerProps> = ({gameId}) => {
-    const {data: trailers = initialTrailersState, error: trailersError} = useGetGameTrailersQuery({id: gameId}, {skip: !gameId});
+const Trailer: React.FC<TrailerProps> = ({gameId, setIsError}) => {
+
+    const {
+        data: trailers = initialTrailersState,
+        error: trailerError
+    } = useGetGameTrailersQuery({id: gameId}, {skip: !gameId});
+
+    useEffect(() => {
+        if (trailerError) setIsError(true);
+    }, [trailerError]);
 
     return (
         <>

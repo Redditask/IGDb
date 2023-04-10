@@ -19,10 +19,14 @@ const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/Ad
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
+    const [isError, setIsError] = useState<boolean>(false);
 
     const {slug} = useParams();
 
-    const {data: game = initialGameState, error: gameError, isLoading} = useGetGameDetailsQuery({slug}, {skip: !slug});
+    const {
+        data: game = initialGameState,
+        error: gameError, isLoading
+    } = useGetGameDetailsQuery({slug}, {skip: !slug});
 
     useEffect(() =>
         window.scrollTo({
@@ -31,8 +35,12 @@ const Game: React.FC = () => {
             behavior: "smooth",
         }), [slug, game]);
 
+    useEffect(() => {
+        if (gameError) setIsError(true);
+    }, [gameError]);
+
     return (
-        gameError
+        isError
             ?
             <GamePageError/>
             :
@@ -46,6 +54,7 @@ const Game: React.FC = () => {
                             <GameHead
                                 game={game}
                                 isLoading={isLoading}
+                                setIsError={setIsError}
                             />
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
@@ -56,6 +65,7 @@ const Game: React.FC = () => {
                                     <Screenshots
                                         setImageURL={setImageURL}
                                         gameId={game.id}
+                                        setIsError={setIsError}
                                     />
                                 </div>
                             </div>
@@ -63,17 +73,21 @@ const Game: React.FC = () => {
                     </div>
                 </div>
                 <GameDescription
-                        description={game.description_raw}
-                        isLoading={isLoading}
+                    description={game.description_raw}
+                    isLoading={isLoading}
                 />
                 <div className={styles.game__about}>
                     <HowLongToBeat
                         gameName={game.name}
                         isLoading={isLoading}
+                        setIsError={setIsError}
                     />
                 </div>
                 <Suspense fallback={null}>
-                    <AdditionalContent gameId={game.id}/>
+                    <AdditionalContent
+                        gameId={game.id}
+                        setIsError={setIsError}
+                    />
                 </Suspense>
                 <ImageModal
                     imageURL={imageURL}

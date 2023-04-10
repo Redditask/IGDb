@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {useGetHowLongToBeatQuery} from "../../API/igdbAPI";
 
@@ -12,14 +12,19 @@ import {initialHowLongToBeatState, isHasHowLongToBeat} from "../../utils/helpers
 interface HowLongToBeatProps {
     gameName: string;
     isLoading: boolean;
+    setIsError: (isError: boolean) => void;
 }
 
-const HowLongToBeat: React.FC<HowLongToBeatProps> = ({gameName, isLoading}) => {
+const HowLongToBeat: React.FC<HowLongToBeatProps> = ({gameName, isLoading, setIsError}) => {
 
     const {
         data: howLongToBeat = initialHowLongToBeatState,
         error: howLongToBeatError
     } = useGetHowLongToBeatQuery({gameName}, {skip: !gameName});
+
+    useEffect(() => {
+        if (howLongToBeatError) setIsError(true);
+    }, [howLongToBeatError]);
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {useGetGameScreenshotsQuery} from "../../API/rawgApi";
 
@@ -11,10 +11,18 @@ import {regularCrop, initialScreenshotsState} from "../../utils/helpers";
 interface ScreenshotsProps {
     gameId: number;
     setImageURL: (url: string) => void;
+    setIsError: (isError: boolean) => void;
 }
 
-const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL}) => {
-    const {data: screenshots = initialScreenshotsState, error: screenshotsError} = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
+const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError}) => {
+    const {
+        data: screenshots = initialScreenshotsState,
+        error: screenshotsError
+    } = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
+
+    useEffect(() => {
+        if (screenshotsError) setIsError(true);
+    }, [screenshotsError]);
 
     return (
         <div className={styles.screenshots}>

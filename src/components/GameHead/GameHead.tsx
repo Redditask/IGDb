@@ -13,9 +13,10 @@ import {dateFormatting} from "../../utils/helpers";
 interface GameHeadProps {
     game: GameQueryResult;
     isLoading: boolean;
+    setIsError: (isError: boolean) => void;
 }
 
-const GameHead: React.FC<GameHeadProps> = ({game, isLoading}) => {
+const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
 
     return (
         isLoading
@@ -32,7 +33,10 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading}) => {
                         <Button title="Add to my games" onClick={() => ""}/>
                     </div>
                 </div>
-                <Trailer gameId={game.id}/>
+                <Trailer
+                    gameId={game.id}
+                    setIsError={setIsError}
+                />
             </div>
     );
 };
