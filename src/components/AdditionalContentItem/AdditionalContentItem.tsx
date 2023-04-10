@@ -17,26 +17,26 @@ interface AdditionalContentItemProps {
 const AdditionalContentItem:React.FC<AdditionalContentItemProps> = ({title, content, onClickAction, isAll}) => {
 
     return (
-        content.length
-            ?
-            <div className={styles.gameList}>
-                <h2>{title}</h2>
-                <GameList games={content} isLimit={true} isEmpty={false}/>
-                {
-                    isAll
-                        ?
-                        <></>
-                        :
+        <>
+            {
+                content.length
+                &&
+                <div className={styles.gameList}>
+                    <h2>{title}</h2>
+                    <GameList games={content} isLimit={true} isEmpty={false}/>
+                    {
+                        !isAll
+                        &&
                         <div className={styles.showButton}>
                             <Button
                                 title="show all"
                                 onClick={onClickAction}
                             />
                         </div>
-                }
-            </div>
-            :
-            <></>
+                    }
+                </div>
+            }
+        </>
     );
 };
 

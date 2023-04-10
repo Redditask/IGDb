@@ -12,14 +12,22 @@ interface GameDescriptionProps {
 const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoading}) => {
 
     return (
-        isLoading
-            ?
-            <GameDescriptionSkeleton/>
-            :
-            <div className={styles.description}>
-                {description ? <h2>About</h2> : <></>}
-                <p className={styles.text}>{description}</p>
-            </div>
+        <>
+            {
+                description
+                &&
+                (
+                    isLoading
+                        ?
+                        <GameDescriptionSkeleton/>
+                        :
+                        <div className={styles.description}>
+                            <h2>About</h2>
+                            <p className={styles.text}>{description}</p>
+                        </div>
+                )
+            }
+        </>
     );
 };
 

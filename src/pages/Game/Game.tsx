@@ -63,8 +63,8 @@ const Game: React.FC = () => {
                     </div>
                 </div>
                 <GameDescription
-                    description={game.description_raw}
-                    isLoading={isLoading}
+                        description={game.description_raw}
+                        isLoading={isLoading}
                 />
                 <div className={styles.game__about}>
                     <HowLongToBeat

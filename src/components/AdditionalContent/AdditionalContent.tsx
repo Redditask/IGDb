@@ -20,13 +20,21 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     const [isAllGames, setIsAllGames] = useState<boolean>(false);
     const [isAllDLC, setIsAllDLC] = useState<boolean>(false);
 
-    const {data: sameSeriesGames = initialGamesState, error: sameSeriesError, isSuccess: gameSuccess} = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
-    const {data: dlcResponse = initialDLCState, error: dlcError, isSuccess: dlcSuccess} = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
+    const {
+        data: sameSeriesGames = initialGamesState,
+        error: sameSeriesError,
+        isSuccess: gameSuccess
+    } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
+    const {
+        data: dlcResponse = initialDLCState,
+        error: dlcError,
+        isSuccess: dlcSuccess
+    } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect(() => {
         setIsAllGames(false);
 
-        if(gameSuccess) {
+        if (gameSuccess) {
             if (sameSeriesGames.results.length > 3) {
                 setGames([...sameSeriesGames.results.slice(0, 3)]);
             } else {
@@ -39,7 +47,7 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     useEffect(() => {
         setIsAllDLC(false);
 
-        if(dlcSuccess) {
+        if (dlcSuccess) {
             if (dlcResponse.results.length > 3) {
                 setDLC([...dlcResponse.results.slice(0, 3)]);
             } else {
@@ -60,20 +68,27 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId}) => {
     };
 
     return (
-        <div className={styles.container}>
-            <AdditionalContentItem
-                title="Same series games"
-                content={games}
-                onClickAction={showAllGames}
-                isAll={isAllGames}
-            />
-            <AdditionalContentItem
-                title="DLC for this game"
-                content={DLC}
-                onClickAction={showAllDLC}
-                isAll={isAllDLC}
-            />
-        </div>
+        <>
+            {
+                (games.length || DLC.length)
+                &&
+                <div className={styles.container}>
+                    <AdditionalContentItem
+                        title="Same series games"
+                        content={games}
+                        onClickAction={showAllGames}
+                        isAll={isAllGames}
+                    />
+                    <AdditionalContentItem
+                        title="DLC for this game"
+                        content={DLC}
+                        onClickAction={showAllDLC}
+                        isAll={isAllDLC}
+                    />
+
+                </div>
+            }
+        </>
     );
 };
 

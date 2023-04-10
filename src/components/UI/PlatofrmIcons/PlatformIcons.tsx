@@ -20,75 +20,77 @@ interface PlatformIconsProps {
 const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
 
     return (
-        platformsArray
-            ?
-            <div className={styles.icons}>
-                {platformDefinition(platformsArray, "PC")
-                    &&
-                    <FaWindows
-                        size={platformIconSize}
-                        title="Personal computer"
-                    />
-                }
-                {platformDefinition(platformsArray, "Xbox")
-                    &&
-                    <FaXbox
-                        size={platformIconSize}
-                        title="Xbox"
-                    />
-                }
-                {platformDefinition(platformsArray, "PlayStation")
-                    &&
-                    <FaPlaystation
-                        size={platformIconSize}
-                        title="PlayStation"
-                    />
-                }
-                {platformDefinition(platformsArray, "Nintendo")
-                    &&
-                    <SiNintendoswitch
-                        size={platformIconSize}
-                        title="Nintendo"
-                    />
-                }
-                {platformDefinition(platformsArray, "Android")
-                    &&
-                    <DiAndroid
-                        size={platformIconSize}
-                        title="Android"
-                    />
-                }
-                {platformDefinition(platformsArray, "iOS")
-                    &&
-                    <DiApple
-                        size={platformIconSize}
-                        title="iPhone"
-                    />
-                }
-                {platformDefinition(platformsArray, "Apple Macintosh")
-                    &&
-                    <RiMacLine
-                        size={platformIconSize}
-                        title="macOS"
-                    />
-                }
-                {platformDefinition(platformsArray, "Linux")
-                    &&
-                    <FaLinux
-                        size={platformIconSize}
-                        title="Linux"
-                    />
-                }
-                {platformDefinition(platformsArray, "Web")
-                    &&
-                    <TbWorld
-                        size={platformIconSize}
-                        title="Web"
-                    />
-                }
-            </div>
-            :
-            <></>
+        <>
+            {
+                platformsArray
+                &&
+                <div className={styles.icons}>
+                    {platformDefinition(platformsArray, "PC")
+                        &&
+                        <FaWindows
+                            size={platformIconSize}
+                            title="Personal computer"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Xbox")
+                        &&
+                        <FaXbox
+                            size={platformIconSize}
+                            title="Xbox"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "PlayStation")
+                        &&
+                        <FaPlaystation
+                            size={platformIconSize}
+                            title="PlayStation"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Nintendo")
+                        &&
+                        <SiNintendoswitch
+                            size={platformIconSize}
+                            title="Nintendo"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Android")
+                        &&
+                        <DiAndroid
+                            size={platformIconSize}
+                            title="Android"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "iOS")
+                        &&
+                        <DiApple
+                            size={platformIconSize}
+                            title="iPhone"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Apple Macintosh")
+                        &&
+                        <RiMacLine
+                            size={platformIconSize}
+                            title="macOS"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Linux")
+                        &&
+                        <FaLinux
+                            size={platformIconSize}
+                            title="Linux"
+                        />
+                    }
+                    {platformDefinition(platformsArray, "Web")
+                        &&
+                        <TbWorld
+                            size={platformIconSize}
+                            title="Web"
+                        />
+                    }
+                </div>
+            }
+        </>
     );
 };
 

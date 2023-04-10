@@ -16,27 +16,32 @@ interface HowLongToBeatProps {
 
 const HowLongToBeat: React.FC<HowLongToBeatProps> = ({gameName, isLoading}) => {
 
-    const {data: howLongToBeat = initialHowLongToBeatState, error: howLongToBeatError} = useGetHowLongToBeatQuery({gameName}, {skip: !gameName});
+    const {
+        data: howLongToBeat = initialHowLongToBeatState,
+        error: howLongToBeatError
+    } = useGetHowLongToBeatQuery({gameName}, {skip: !gameName});
 
     return (
-        isLoading
-            ?
-            <HowLongToBeatSkeleton/>
-            :
-            <div className={styles.howLongToBeat}>
-                {
-                    isHasHowLongToBeat(howLongToBeat)
-                    &&
-                    <>
-                        <h2>How long to beat</h2>
-                        <div className={styles.howLongToBeat__items}>
-                            <HowLongToBeatItem title="Main story" value={howLongToBeat?.gameplayMain}/>
-                            <HowLongToBeatItem title="Main + Sides" value={howLongToBeat?.gameplayMainExtra}/>
-                            <HowLongToBeatItem title="Completionist" value={howLongToBeat?.gameplayCompletionist}/>
+        <>
+            {
+                isHasHowLongToBeat(howLongToBeat)
+                &&
+                (
+                    isLoading
+                        ?
+                        <HowLongToBeatSkeleton/>
+                        :
+                        <div className={styles.howLongToBeat}>
+                            <h2>How long to beat</h2>
+                            <div className={styles.howLongToBeat__items}>
+                                <HowLongToBeatItem title="Main story" value={howLongToBeat?.gameplayMain}/>
+                                <HowLongToBeatItem title="Main + Sides" value={howLongToBeat?.gameplayMainExtra}/>
+                                <HowLongToBeatItem title="Completionist" value={howLongToBeat?.gameplayCompletionist}/>
+                            </div>
                         </div>
-                    </>
-                }
-            </div>
+                )
+            }
+        </>
     );
 };
 
