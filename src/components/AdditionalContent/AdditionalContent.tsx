@@ -2,9 +2,12 @@ import React, {useEffect, useState} from "react";
 
 import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi";
 
+import {useNavigate} from "react-router-dom";
+
 import styles from "./AdditionalContent.module.scss";
 
 import AdditionalContentItem from "../AdditionalContentItem/AdditionalContentItem";
+import Button from "../UI/Button/Button";
 
 import {IGameCard} from "../../types/types";
 
@@ -20,6 +23,10 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     const [DLC, setDLC] = useState<IGameCard []>([]);
     const [isAllGames, setIsAllGames] = useState<boolean>(false);
     const [isAllDLC, setIsAllDLC] = useState<boolean>(false);
+
+    const nav = useNavigate();
+
+    const backToMainGame = () => nav(-1);
 
     const {
         data: sameSeriesGames = initialGamesState,
@@ -73,6 +80,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         setIsAllDLC(true);
     };
 
+    console.log(games, DLC)
+
     return (
         <>
             {
@@ -91,7 +100,13 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
                         onClickAction={showAllDLC}
                         isAll={isAllDLC}
                     />
-
+                </div>
+            }
+            {
+                (games.length === 0 && DLC.length === 0)
+                &&
+                <div className={styles.backButton}>
+                    <Button title="Back to main game" onClick={backToMainGame}/>
                 </div>
             }
         </>

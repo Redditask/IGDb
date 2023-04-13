@@ -14,7 +14,7 @@ const Labels: React.FC<LabelsProps> = ({labels, title}) => {
     return (
         <>
             {
-                labels.length
+                (labels.length !== 0)
                 &&
                 <div className={styles.labels}>
                     <p>{title}:</p>

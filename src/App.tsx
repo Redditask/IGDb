@@ -5,14 +5,11 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  обработать GameDetails, если нет данных (http://localhost:3000/game/doom-eternal-year-one-pass)
-//  добавить внизу кнопку обратно, если щёлкаем dlс какое-нибудь (потому что там ничего нет, как-то это отслеживать)
-//  //
+//  переработать additionalContent на ? : под одним общим div (и расположить после этого кнопку back по центру)
 //  посмотреть, где можно провести декомпозицию, ? : зарефакторить
+//  searchItem скелетон (?)
 //  //
 //  темная тема внизу sidebar'a
-//  //
-//  searchItem скелетон (?)
 //  //
 //  добавить страницу для активации
 //  //
