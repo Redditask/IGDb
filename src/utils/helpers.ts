@@ -149,6 +149,11 @@ export const initialHowLongToBeatState: HowLongToBeatResult = {
     gameplayCompletionist: 0,
 };
 
+export const initialSearchState: GamesQueryResult = {
+    count: 0,
+    results: [],
+};
+
 export const monthsList: string[] = [
     "Jan", "Feb", "Mar", "Apr",
     "May", "Jun", "Jul", "Aug",

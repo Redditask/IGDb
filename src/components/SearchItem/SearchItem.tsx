@@ -9,7 +9,7 @@ import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 
 import {IGameCard} from "../../types/types";
 
-import {searchCrop} from "../../utils/helpers";
+import {dateFormatting, searchCrop} from "../../utils/helpers";
 
 interface SearchItemProps {
     game: IGameCard;
@@ -32,7 +32,10 @@ const SearchItem: React.FC<SearchItemProps> = ({game, clean}) => {
             />
             <div>
                 <PlatformIcons platformsArray={game.parent_platforms}/>
-                <h3>{game.name}</h3>
+                <div className={styles.searchItem__about}>
+                    <h3>{game.name}</h3>
+                    <p className={styles.searchItem__date}>({dateFormatting(game.released)})</p>
+                </div>
             </div>
         </NavLink>
     );

@@ -6,14 +6,21 @@ import {ImSearch} from "react-icons/im";
 
 import styles from "./Search.module.scss";
 
+import {initialSearchState} from "../../utils/helpers";
+
 import Input from "../UI/Input/Input";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
     const [searchText, setSearchText] = useState<string>("");
 
-    const {data, error: searchError} = useGetSearchResultsQuery({searchText}, {skip: !searchText});
+    const {
+        data: searchResults = initialSearchState,
+        error: searchError
+    } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
         startTransition(() => {
@@ -38,35 +45,35 @@ const Search: React.FC = () => {
                     </Input>
                 </div>
             </div>
-            {
-                data
-                    ?
-                    <div className={styles.search__content}>
-                        {
-                            data.results.length
-                                ?
-                                data.results.map((game) =>
-                                    game.background_image
-                                    &&
-                                    <Suspense
-                                        fallback={null}
-                                        key={game.slug}
-                                    >
-                                        <SearchItem
-                                            game={game}
-                                            clean={cleanSearch}
-                                        />
-                                    </Suspense>
-                                )
-                                :
-                                <h2 className={styles.notFounded}>
-                                    No results
-                                </h2>
-                        }
-                    </div>
-                    :
-                    <></>
-            }
+            <div className={styles.search__content}>
+                {
+                    searchError
+                        ?
+                        <h2 className={styles.notFounded}>
+                            Oops, something go wrong...
+                        </h2>
+                        :
+                        searchResults.count
+                            ?
+                            searchResults.results.map((game) =>
+                                game.background_image
+                                &&
+                                <Suspense
+                                    fallback={null}
+                                    key={game.slug}
+                                >
+                                    <SearchItem
+                                        game={game}
+                                        clean={cleanSearch}
+                                    />
+                                </Suspense>
+                            )
+                            :
+                            <h2 className={styles.notFounded}>
+                                No results
+                            </h2>
+                }
+            </div>
         </div>
     );
 };
