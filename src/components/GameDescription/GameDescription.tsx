@@ -14,7 +14,7 @@ const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoading
     return (
         <>
             {
-                description
+                (description.length > 0)
                 &&
                 (
                     isLoading

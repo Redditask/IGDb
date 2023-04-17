@@ -5,11 +5,10 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  переработать additionalContent на ? : под одним общим div (и расположить после этого кнопку back по центру)
-//  посмотреть, где можно провести декомпозицию, ? : зарефакторить
 //  searchItem скелетон (?)
+//  search декомпозировать
 //  //
-//  темная тема внизу sidebar'a
+//  темная тема в header где-нибудь
 //  //
 //  добавить страницу для активации
 //  //

@@ -83,9 +83,9 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     console.log(games, DLC)
 
     return (
-        <>
+        <div className={styles.additionalContent}>
             {
-                (games.length || DLC.length)
+                (games.length>0 || DLC.length>0)
                 &&
                 <div className={styles.container}>
                     <AdditionalContentItem
@@ -106,10 +106,10 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
                 (games.length === 0 && DLC.length === 0)
                 &&
                 <div className={styles.backButton}>
-                    <Button title="Back to main game" onClick={backToMainGame}/>
+                    <Button title="Return" onClick={backToMainGame}/>
                 </div>
             }
-        </>
+        </div>
     );
 };
 
