@@ -6,6 +6,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import styles from "./SearchItem.module.scss";
 
 import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
+import SearchItemSkeleton from "../UI/SearchItemSkeleton/SearchItemSkeleton";
 
 import {IGameCard} from "../../types/types";
 
@@ -14,30 +15,35 @@ import {dateFormatting, searchCrop} from "../../utils/helpers";
 interface SearchItemProps {
     game: IGameCard;
     clean: () => void;
+    isLoading: boolean;
 }
 
-const SearchItem: React.FC<SearchItemProps> = ({game, clean}) => {
+const SearchItem: React.FC<SearchItemProps> = ({game, clean, isLoading}) => {
 
     return (
-        <NavLink
-            className={styles.searchItem}
-            to={`/game/${game.slug}`}
-            onClick={clean}
-        >
-            <LazyLoadImage
-                className={styles.searchItem__image}
-                src={searchCrop(game.background_image)}
-                effect="blur"
-                alt="Background"
-            />
-            <div>
-                <PlatformIcons platformsArray={game.parent_platforms}/>
-                <div className={styles.searchItem__about}>
-                    <h3>{game.name}</h3>
-                    <p className={styles.searchItem__date}>({dateFormatting(game.released)})</p>
+        isLoading
+            ?
+            <SearchItemSkeleton/>
+            :
+            <NavLink
+                className={styles.searchItem}
+                to={`/game/${game.slug}`}
+                onClick={clean}
+            >
+                <LazyLoadImage
+                    className={styles.searchItem__image}
+                    src={searchCrop(game.background_image)}
+                    effect="blur"
+                    alt="Background"
+                />
+                <div>
+                    <PlatformIcons platformsArray={game.parent_platforms}/>
+                    <div className={styles.searchItem__about}>
+                        <h3>{game.name}</h3>
+                        <p className={styles.searchItem__date}>({dateFormatting(game.released)})</p>
+                    </div>
                 </div>
-            </div>
-        </NavLink>
+            </NavLink>
     );
 };
 

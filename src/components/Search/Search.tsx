@@ -1,4 +1,4 @@
-import React, {useTransition, useState, lazy, Suspense, useEffect} from "react";
+import React, {useTransition, useState} from "react";
 
 import {useGetSearchResultsQuery} from "../../API/rawgApi";
 
@@ -6,12 +6,10 @@ import {ImSearch} from "react-icons/im";
 
 import styles from "./Search.module.scss";
 
-import {initialSearchState} from "../../utils/helpers";
-
 import Input from "../UI/Input/Input";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
-const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
+import SearchResults from "../SearchResults/SearchResults";
+
+import {initialSearchState} from "../../utils/helpers";
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
@@ -19,7 +17,8 @@ const Search: React.FC = () => {
 
     const {
         data: searchResults = initialSearchState,
-        error: searchError
+        error: searchError,
+        isLoading
     } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
@@ -53,25 +52,11 @@ const Search: React.FC = () => {
                             Oops, something go wrong...
                         </h2>
                         :
-                        searchResults.count
-                            ?
-                            searchResults.results.map((game) =>
-                                game.background_image
-                                &&
-                                <Suspense
-                                    fallback={null}
-                                    key={game.slug}
-                                >
-                                    <SearchItem
-                                        game={game}
-                                        clean={cleanSearch}
-                                    />
-                                </Suspense>
-                            )
-                            :
-                            <h2 className={styles.notFounded}>
-                                No results
-                            </h2>
+                        <SearchResults
+                            list={searchResults}
+                            clean={cleanSearch}
+                            isLoading={isLoading}
+                        />
                 }
             </div>
         </div>

@@ -5,8 +5,7 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  searchItem скелетон (?)
-//  search декомпозировать
+//  rangeSlider при сжимании страницы пофиксить
 //  //
 //  темная тема в header где-нибудь
 //  //

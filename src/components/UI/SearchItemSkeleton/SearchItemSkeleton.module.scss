@@ -1,0 +1,69 @@
+.skeleton {
+  width: 33rem;
+  height: 3.4rem;
+
+  display: flex;
+  align-items: start;
+  justify-content: start;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  gap: 0.5rem;
+
+  margin: 0.5rem 0;
+
+  &__image {
+    width: 48px;
+    height: 59px;
+
+    background-color: darkgrey;
+    border-radius: 0.35rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+
+    gap: 0.25rem;
+
+    margin-top: 1.2rem;
+  }
+
+  &__name {
+    height: 1.2rem;
+    width: 15rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__date {
+    height: 1.2rem;
+    width: 5rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}
