@@ -5,8 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  rangeSlider при сжимании страницы пофиксить
-//  //
 //  темная тема в header где-нибудь
 //  //
 //  добавить страницу для активации
