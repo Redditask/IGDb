@@ -107,3 +107,20 @@ export interface ICustomOption {
     name: string;
     value: string | number;
 }
+
+export interface ILibraryGame {
+    slug: string;
+}
+
+export interface IUserQueryArgs {
+    email: string;
+    password: string;
+}
+
+export interface IUserQueryResult {
+    user: IUserQueryArgs;
+    //string ?
+    accessToken: any;
+    refreshToken: any;
+    //
+}

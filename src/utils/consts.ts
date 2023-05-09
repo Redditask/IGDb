@@ -20,6 +20,8 @@ export const GAME_ROUTE: string = "/game/:slug";
 
 export const LIBRARY_ROUTE: string = "/library";
 
+export const LOGIN_ROUTE: string = "/login";
+
 export const SideBarLinks: ICustomLink [] = [
     {
         path: HOME_ROUTE,

@@ -5,6 +5,10 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
+//  ссылка на покупку в steam и т.п. (если есть в rawgAPI)
+//  baseurl-ы закинуть в .env
+//  //
+//  отзывы, индивидуальные оценки для игр (свой рейтинг типо)
 //  темная тема в header где-нибудь
 //  //
 //  добавить страницу для активации
