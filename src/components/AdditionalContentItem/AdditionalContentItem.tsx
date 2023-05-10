@@ -29,7 +29,7 @@ const AdditionalContentItem:React.FC<AdditionalContentItemProps> = ({title, cont
                         &&
                         <div className={styles.showButton}>
                             <Button
-                                title="Show"
+                                title="Show more"
                                 onClick={onClickAction}
                             />
                         </div>

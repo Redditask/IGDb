@@ -1,3 +1,66 @@
-.login {
-  margin-top: 100px;
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 28rem;
+  height: 41rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  background-color: white;
+
+  box-shadow: 0 0 10px 5px lightgrey;
+  border-radius: 1rem;
+
+  padding-top: 3rem;
+
+  gap: 3.5rem;
+}
+
+.inputs {
+  width: 17.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+
+  margin-bottom: 5rem;
+}
+
+.link {
+  height: 6.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+
+  gap: 0.25rem;
+
+  &__button {
+    font-size: 1.15rem;
+
+    color: black;
+
+    text-decoration: none;
+
+    &:hover {
+      transform: translateY(-0.15rem);
+    }
+  }
+
+  &__info {
+      color: gray;
+  }
 }
