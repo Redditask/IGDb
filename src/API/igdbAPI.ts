@@ -5,7 +5,7 @@ import {HowLongToBeatResult, IUserQueryArgs, IUserQueryResult} from "../types/ty
 export const igdbAPI = createApi({
     reducerPath: "idbgAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: `http://localhost:5000/api/`,
+        baseUrl: `${process.env["REACT_APP_IGDB_API_URL"]}`,
         prepareHeaders: (headers) => {
             headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
         },

@@ -33,7 +33,10 @@ const Login: React.FC = () => {
     return (
         <div
             className={styles.wrapper}
-            style={{backgroundImage: "url(https://media.istockphoto.com/id/1243194025/vector/gamepad-joypad-linear-icon-set-gamepads-video-game-controller-line-with-editable-stroke.jpg?s=612x612&w=0&k=20&c=IP-vPk-cVjWHZRmIJOqHn8giO_aAEtG4XkgYX6_Kees=)"}}
+            style={{
+                backgroundImage:
+                    `linear-gradient(rgba(254, 254, 254, 0.5),rgba(254, 254, 254, 0.5)), url(${process.env["REACT_APP_BACKEND_URL"]}/images/background.jpg)`
+            }}
         >
             <div className={styles.card}>
                 <h2>Login</h2>
