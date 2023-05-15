@@ -112,15 +112,25 @@ export interface ILibraryGame {
     slug: string;
 }
 
-export interface IUserQueryArgs {
+export interface IUserData {
+    email: string;
+    id: number;
+    username: string;
+}
+
+export interface LoginQueryArgs {
     email: string;
     password: string;
 }
 
-export interface IUserQueryResult {
-    user: IUserQueryArgs;
-    //string ?
-    accessToken: any;
-    refreshToken: any;
-    //
+export interface LoginQueryResult {
+    user: IUserData;
+    accessToken: string;
+    refreshToken: string;
 }
+
+export interface RegistrationQueryArgs extends LoginQueryArgs{
+    username: string;
+}
+
+export interface RegistrationQueryResult extends LoginQueryResult {}

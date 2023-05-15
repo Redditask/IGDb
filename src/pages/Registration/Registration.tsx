@@ -2,6 +2,8 @@ import React, {useState} from "react";
 
 import styles from "./Registration.module.scss";
 
+import {useRegistrationMutation} from "../../API/igdbAPI";
+
 import {NavLink} from "react-router-dom";
 
 import Input from "../../components/UI/Input/Input";
@@ -14,7 +16,14 @@ const Registration: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    //запрос из api
+    const [registration, {isError}] = useRegistrationMutation();
+
+    const registrationHandler = async (): Promise<void> => {
+        if(username && email && password){
+            const response = await registration({email, password, username}).unwrap();
+            console.log(response);
+        }
+    };
 
     const usernameHandler = (event: any): void => {
         setUsername(event.target.value);
@@ -58,7 +67,7 @@ const Registration: React.FC = () => {
                         children={<></>}
                     />
                 </div>
-                <Button title="Create your account" onClick={()=>{/*запрос из api*/}}/>
+                <Button title="Create your account" onClick={registrationHandler}/>
                 <div className={styles.link}>
                     <p className={styles.link__info}>Already have an account?</p>
                     <NavLink

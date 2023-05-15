@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
     const [login, {isError}] = useLoginMutation();
 
-    const loginHandler = async () => {
+    const loginHandler = async (): Promise<void> => {
         if (email && password) {
             const response = await login({email, password}).unwrap();
             console.log(response);

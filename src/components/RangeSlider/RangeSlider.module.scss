@@ -1,5 +1,5 @@
 .container {
-  width: 20vw;
+  width: 24.5vw;
 
   display: flex;
   align-items: center;
@@ -59,4 +59,6 @@ input[type=range]::-webkit-slider-thumb {
   user-select: none;
 
   width: 1rem;
+
+  margin: 0 1.5rem;
 }
