@@ -7,6 +7,8 @@ import {
     TrailersQueryResult
 } from "../types/types";
 
+import * as Yup from "yup";
+
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
@@ -219,3 +221,13 @@ export const getMaxRangeValue = (metacritic: string): number =>
 
 export const isHasHowLongToBeat = (apiResult: HowLongToBeatResult): boolean =>
     !!(apiResult?.gameplayMain || apiResult?.gameplayMainExtra || apiResult?.gameplayCompletionist);
+
+export const loginValidationSchema = Yup.object().shape({
+    email: Yup.string()
+        .required('Email is required')
+        .email('Email is invalid'),
+    password: Yup.string()
+        .required('Password is required')
+        .min(4, 'Password must be at least 4 characters')
+        .max(32, 'Password must not exceed 32 characters'),
+});

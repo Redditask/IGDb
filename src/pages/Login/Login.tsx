@@ -1,35 +1,34 @@
-import React, {useState} from "react";
+import React from "react";
 
 import styles from "./Login.module.scss";
 
 import {useLoginMutation} from "../../API/igdbAPI";
 
 import {NavLink} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {yupResolver} from '@hookform/resolvers/yup';
 
-import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 
+import {LoginQueryArgs} from "../../types/types";
+
 import {REGISTRATION_ROUTE} from "../../utils/consts";
+import {loginValidationSchema} from "../../utils/helpers";
 
 const Login: React.FC = () => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-
     const [login, {isError}] = useLoginMutation();
 
-    const loginHandler = async (): Promise<void> => {
-        if (email && password) {
-            const response = await login({email, password}).unwrap();
-            console.log(response);
-        }
-    };
+    const {
+        register,
+        formState: {errors},
+        handleSubmit,
+    } = useForm<LoginQueryArgs>({
+        resolver: yupResolver(loginValidationSchema),
+    });
 
-    const emailHandler = (event: any): void => {
-        setEmail(event.target.value);
-    };
-
-    const passwordHandler = (event: any): void => {
-        setPassword(event.target.value);
+    const loginHandler = async (data: LoginQueryArgs): Promise<void> => {
+        const response = await login({email: data.email, password: data.password}).unwrap();
+        console.log(response);
     };
 
     return (
@@ -40,23 +39,44 @@ const Login: React.FC = () => {
                     `linear-gradient(rgba(254, 254, 254, 0.5),rgba(254, 254, 254, 0.5)), url(${process.env["REACT_APP_BACKEND_URL"]}/images/background.jpg)`
             }}
         >
-            <div className={styles.card}>
+            <form className={styles.card} onSubmit={handleSubmit(loginHandler)}>
                 <h2>Login</h2>
                 <div className={styles.inputs}>
-                    <Input
-                        value={email}
-                        onChange={emailHandler}
-                        placeholder="Email"
-                        children={<></>}
-                    />
-                    <Input
-                        value={password}
-                        onChange={passwordHandler}
-                        placeholder="Password"
-                        children={<></>}
-                    />
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Email"
+                            {...register("email")}
+                        />
+                    </div>
+                    {
+                        errors?.email?.message
+                        &&
+                        <h5 className={styles.errorMessage}>
+                            {String(errors?.email?.message)}
+                        </h5>
+                    }
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Password"
+                            {...register("password")}
+                        />
+                    </div>
+                    {
+                        errors?.password?.message
+                        &&
+                        <h5 className={styles.errorMessage}>
+                            {String(errors?.password?.message)}
+                        </h5>
+                    }
                 </div>
-                <Button title="Login to your account" onClick={loginHandler}/>
+                <Button
+                    title="Login to your account"
+                    type="submit"
+                />
                 <div className={styles.link}>
                     <p className={styles.link__info}>Don't have account?</p>
                     <NavLink
@@ -66,7 +86,7 @@ const Login: React.FC = () => {
                         Create now!
                     </NavLink>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };
