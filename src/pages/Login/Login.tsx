@@ -39,7 +39,10 @@ const Login: React.FC = () => {
                     `linear-gradient(rgba(254, 254, 254, 0.5),rgba(254, 254, 254, 0.5)), url(${process.env["REACT_APP_BACKEND_URL"]}/images/background.jpg)`
             }}
         >
-            <form className={styles.card} onSubmit={handleSubmit(loginHandler)}>
+            <form
+                className={styles.card}
+                onSubmit={handleSubmit(loginHandler)}
+            >
                 <h2>Login</h2>
                 <div className={styles.inputs}>
                     <div className={styles.inputWrapper}>

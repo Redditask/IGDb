@@ -1,40 +1,34 @@
-import React, {useState} from "react";
+import React from "react";
 
 import styles from "./Registration.module.scss";
 
 import {useRegistrationMutation} from "../../API/igdbAPI";
 
 import {NavLink} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
 
-import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 
+import {RegistrationQueryArgs} from "../../types/types";
+
 import {LOGIN_ROUTE} from "../../utils/consts";
+import {registrationValidationSchema} from "../../utils/helpers";
 
 const Registration: React.FC = () => {
-    const [username, setUsername] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-
     const [registration, {isError}] = useRegistrationMutation();
 
-    const registrationHandler = async (): Promise<void> => {
-        if(username && email && password){
-            const response = await registration({email, password, username}).unwrap();
-            console.log(response);
-        }
-    };
+    const {
+        register,
+        formState: {errors},
+        handleSubmit,
+    } = useForm<RegistrationQueryArgs>({
+        resolver: yupResolver(registrationValidationSchema),
+    });
 
-    const usernameHandler = (event: any): void => {
-        setUsername(event.target.value);
-    };
-
-    const emailHandler = (event: any): void => {
-        setEmail(event.target.value);
-    };
-
-    const passwordHandler = (event: any): void => {
-        setPassword(event.target.value);
+    const registrationHandler = async (data: RegistrationQueryArgs): Promise<void> => {
+        const response = await registration({email: data.email, password: data.password, username: data.username}).unwrap();
+        console.log(response);
     };
 
     return (
@@ -45,29 +39,62 @@ const Registration: React.FC = () => {
                     `linear-gradient(rgba(254, 254, 254, 0.5),rgba(254, 254, 254, 0.5)), url(${process.env["REACT_APP_BACKEND_URL"]}/images/background.jpg)`
             }}
         >
-            <div className={styles.card}>
+            <form
+                className={styles.card}
+                onSubmit={handleSubmit(registrationHandler)}
+            >
                 <h2>Registration</h2>
                 <div className={styles.inputs}>
-                    <Input
-                        value={username}
-                        onChange={usernameHandler}
-                        placeholder="Username"
-                        children={<></>}
-                    />
-                    <Input
-                        value={email}
-                        onChange={emailHandler}
-                        placeholder="Email"
-                        children={<></>}
-                    />
-                    <Input
-                        value={password}
-                        onChange={passwordHandler}
-                        placeholder="Password"
-                        children={<></>}
-                    />
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Username"
+                            {...register("username")}
+                        />
+                    </div>
+                    {
+                        errors?.username?.message
+                        &&
+                        <h5 className={styles.errorMessage}>
+                            {String(errors?.username?.message)}
+                        </h5>
+                    }
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Email"
+                            {...register("email")}
+                        />
+                    </div>
+                    {
+                        errors?.email?.message
+                        &&
+                        <h5 className={styles.errorMessage}>
+                            {String(errors?.email?.message)}
+                        </h5>
+                    }
+                    <div className={styles.inputWrapper}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            placeholder="Password"
+                            {...register("password")}
+                        />
+                    </div>
+                    {
+                        errors?.password?.message
+                        &&
+                        <h5 className={styles.errorMessage}>
+                            {String(errors?.password?.message)}
+                        </h5>
+                    }
                 </div>
-                <Button title="Create your account" onClick={registrationHandler}/>
+                <Button
+                    title="Create your account"
+                    type="submit"
+                />
                 <div className={styles.link}>
                     <p className={styles.link__info}>Already have an account?</p>
                     <NavLink
@@ -77,7 +104,7 @@ const Registration: React.FC = () => {
                         Login now!
                     </NavLink>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

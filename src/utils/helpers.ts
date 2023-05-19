@@ -224,10 +224,24 @@ export const isHasHowLongToBeat = (apiResult: HowLongToBeatResult): boolean =>
 
 export const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
-        .required('Email is required')
-        .email('Email is invalid'),
+        .required("Email is required")
+        .email("Email is invalid"),
     password: Yup.string()
-        .required('Password is required')
-        .min(4, 'Password must be at least 4 characters')
-        .max(32, 'Password must not exceed 32 characters'),
+        .required("Password is required")
+        .min(4, "Password must be at least 4 characters")
+        .max(32, "Password must not exceed 32 characters"),
+});
+
+export const registrationValidationSchema = Yup.object().shape({
+    username: Yup.string()
+        .required("Username is required")
+        .min(5, "Username must be at least 5 characters")
+        .max(32, "Username must not exceed 32 characters"),
+    email: Yup.string()
+        .required("Email is required")
+        .email("Email is invalid"),
+    password: Yup.string()
+        .required("Password is required")
+        .min(4, "Password must be at least 4 characters")
+        .max(32, "Password must not exceed 32 characters"),
 });
