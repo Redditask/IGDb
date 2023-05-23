@@ -9,6 +9,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
 import Button from "../../components/UI/Button/Button";
+import FormInput from "../../components/UI/FormInput/FormInput";
 
 import {RegistrationQueryArgs} from "../../types/types";
 
@@ -42,54 +43,25 @@ const Registration: React.FC = () => {
             <form
                 className={styles.card}
                 onSubmit={handleSubmit(registrationHandler)}
+                autoComplete="off"
             >
                 <h2>Registration</h2>
                 <div className={styles.inputs}>
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            placeholder="Username"
-                            {...register("username")}
-                        />
-                    </div>
-                    {
-                        errors?.username?.message
-                        &&
-                        <h5 className={styles.errorMessage}>
-                            {String(errors?.username?.message)}
-                        </h5>
-                    }
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            placeholder="Email"
-                            {...register("email")}
-                        />
-                    </div>
-                    {
-                        errors?.email?.message
-                        &&
-                        <h5 className={styles.errorMessage}>
-                            {String(errors?.email?.message)}
-                        </h5>
-                    }
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            placeholder="Password"
-                            {...register("password")}
-                        />
-                    </div>
-                    {
-                        errors?.password?.message
-                        &&
-                        <h5 className={styles.errorMessage}>
-                            {String(errors?.password?.message)}
-                        </h5>
-                    }
+                    <FormInput
+                        placeholderText="Username"
+                        errorMessage={errors?.username?.message}
+                        register={{...register("username")}}
+                    />
+                    <FormInput
+                        placeholderText="Email"
+                        errorMessage={errors?.email?.message}
+                        register={{...register("email")}}
+                    />
+                    <FormInput
+                        placeholderText="Password"
+                        errorMessage={errors?.password?.message}
+                        register={{...register("password")}}
+                    />
                 </div>
                 <Button
                     title="Create your account"

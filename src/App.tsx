@@ -5,9 +5,6 @@ import styles from "./App.module.scss";
 import AppRouter from "./routing/AppRouter";
 
 // ToDo:
-//  auto-fill styles поправить
-//  как-то декомпозировать input для hook form-ы (?)
-//  //
 //  модальное окно при клике регистрации с сообщением проверить почту для подтверждения регистрации (для isError и т.п.)
 //  связать всё это с бекендом и сделать отдельный store для данных юзера
 //  //

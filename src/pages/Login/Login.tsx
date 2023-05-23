@@ -9,6 +9,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 
 import Button from "../../components/UI/Button/Button";
+import FormInput from "../../components/UI/FormInput/FormInput";
 
 import {LoginQueryArgs} from "../../types/types";
 
@@ -42,39 +43,20 @@ const Login: React.FC = () => {
             <form
                 className={styles.card}
                 onSubmit={handleSubmit(loginHandler)}
+                autoComplete="off"
             >
                 <h2>Login</h2>
                 <div className={styles.inputs}>
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            placeholder="Email"
-                            {...register("email")}
-                        />
-                    </div>
-                    {
-                        errors?.email?.message
-                        &&
-                        <h5 className={styles.errorMessage}>
-                            {String(errors?.email?.message)}
-                        </h5>
-                    }
-                    <div className={styles.inputWrapper}>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            placeholder="Password"
-                            {...register("password")}
-                        />
-                    </div>
-                    {
-                        errors?.password?.message
-                        &&
-                        <h5 className={styles.errorMessage}>
-                            {String(errors?.password?.message)}
-                        </h5>
-                    }
+                    <FormInput
+                        placeholderText="Email"
+                        errorMessage={errors?.email?.message}
+                        register={{...register("email")}}
+                    />
+                    <FormInput
+                        placeholderText="Password"
+                        errorMessage={errors?.password?.message}
+                        register={{...register("password")}}
+                    />
                 </div>
                 <Button
                     title="Login to your account"
