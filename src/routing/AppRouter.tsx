@@ -5,6 +5,7 @@ import CustomRoutes from "./CustomRoutes/CustomRoutes";
 import {privateRoutes, publicRoutes} from "./routes";
 
 import {HOME_ROUTE} from "../utils/consts";
+
 import {useAppSelector} from "../hooks";
 import {selectIsAuth} from "../store/selectors";
 

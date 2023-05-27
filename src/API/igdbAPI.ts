@@ -45,12 +45,19 @@ export const igdbAPI = createApi({
                     password
                 },
             }),
-        })
+        }),
+        logout: builder.mutation<any ,void>({
+           query: () => ({
+               url: "logout",
+               method: "POST"
+           })
+        }),
     }),
 });
 
 export const {
     useGetHowLongToBeatQuery,
     useLoginMutation,
-    useRegistrationMutation
+    useRegistrationMutation,
+    useLogoutMutation
 } = igdbAPI;

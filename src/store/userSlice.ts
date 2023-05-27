@@ -13,13 +13,13 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUser(state, action: PayloadAction<IUserData>){
+        setUser: (state, action: PayloadAction<IUserData>): void => {
             state.id = action.payload.id;
             state.email = action.payload.email;
             state.username = action.payload.username;
             state.isAuth = true;
         },
-        clearUser: () => {
+        clearUser: (): IUserStore => {
             localStorage.removeItem("token");
             return initialState;
         },
