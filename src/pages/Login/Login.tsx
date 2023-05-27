@@ -4,7 +4,7 @@ import styles from "./Login.module.scss";
 
 import {useLoginMutation} from "../../API/igdbAPI";
 
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 
@@ -15,9 +15,14 @@ import {LoginQueryArgs} from "../../types/types";
 
 import {REGISTRATION_ROUTE} from "../../utils/consts";
 import {loginValidationSchema} from "../../utils/helpers";
+import {useAppDispatch} from "../../hooks";
+import {setUser} from "../../store/userSlice";
 
 const Login: React.FC = () => {
     const [login, {isError}] = useLoginMutation();
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -29,6 +34,12 @@ const Login: React.FC = () => {
 
     const loginHandler = async (data: LoginQueryArgs): Promise<void> => {
         const response = await login({email: data.email, password: data.password}).unwrap();
+        if (response.user.username.length) {
+            dispatch(setUser(response.user));
+            navigate("/");
+        }
+        //окошко (вы успешно авторизовались)
+        //и обработать, если ошибка будет
         console.log(response);
     };
 

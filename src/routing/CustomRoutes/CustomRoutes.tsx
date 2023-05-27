@@ -6,12 +6,12 @@ import Layout from "./Layout/Layout";
 
 import {ICustomRoute} from "../../types/types";
 
-interface PublicRoutesProps {
+interface CustomRoutesProps {
     routes: ICustomRoute [];
     redirectRoute: string;
 }
 
-const PublicRoutes: React.FC<PublicRoutesProps> = ({routes, redirectRoute}) => {
+const CustomRoutes: React.FC<CustomRoutesProps> = ({routes, redirectRoute}) => {
 
     return (
         <Routes>
@@ -25,4 +25,4 @@ const PublicRoutes: React.FC<PublicRoutesProps> = ({routes, redirectRoute}) => {
     );
 };
 
-export default PublicRoutes;
+export default CustomRoutes;

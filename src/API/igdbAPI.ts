@@ -13,7 +13,10 @@ export const igdbAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${process.env["REACT_APP_IGDB_API_URL"]}`,
         prepareHeaders: (headers) => {
-            headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
+            const token = localStorage.getItem("token");
+            if (token) {
+                headers.set("Authorization", `Bearer ${token}`);
+            }
         },
         credentials: "include",
     }),

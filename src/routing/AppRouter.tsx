@@ -1,15 +1,20 @@
 import React from "react";
 
-import PublicRoutes from "./CustomRoutes/PublicRoutes";
+import CustomRoutes from "./CustomRoutes/CustomRoutes";
 
-import {publicRoutes} from "./routes";
+import {privateRoutes, publicRoutes} from "./routes";
 
 import {HOME_ROUTE} from "../utils/consts";
+import {useAppSelector} from "../hooks";
+import {selectIsAuth} from "../store/selectors";
 
 const AppRouter: React.FC = () => {
+    const isAuth: boolean = useAppSelector(selectIsAuth);
 
     return (
-        <PublicRoutes routes={publicRoutes} redirectRoute={HOME_ROUTE}/>
+        isAuth
+            ? <CustomRoutes routes={privateRoutes} redirectRoute={HOME_ROUTE}/>
+            : <CustomRoutes routes={publicRoutes} redirectRoute={HOME_ROUTE}/>
     );
 };
 

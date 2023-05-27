@@ -6,7 +6,16 @@ import styles from "./Header.module.scss";
 
 import Search from "../Search/Search";
 
+import {clearUser} from "../../store/userSlice";
+
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {selectIsAuth} from "../../store/selectors";
+
 const Header: React.FC = () => {
+    const isAuth: boolean = useAppSelector(selectIsAuth);
+    const dispatch = useAppDispatch();
+
+    const logoutHandler = () => dispatch(clearUser());
 
     return (
         <header className={styles.container}>
@@ -19,18 +28,41 @@ const Header: React.FC = () => {
                     I G D b
                 </NavLink>
                 <Search/>
-                <nav className={styles.header__items}>
-                    <NavLink
-                        className={styles.header__item}
-                        to="/library"
-                        title="Your games library"
-                    >
-                        Library
-                    </NavLink>
-                    <p className={styles.header__item}>
-                        Log out
-                    </p>
-                </nav>
+                {
+                    isAuth
+                        ?
+                        <>
+                            <nav className={styles.header__items}>
+                                <NavLink
+                                    className={styles.header__item}
+                                    to="/library"
+                                    title="Your games library"
+                                >
+                                    Library
+                                </NavLink>
+                                <NavLink
+                                    className={styles.header__item}
+                                    title="Log out"
+                                    to="/"
+                                    onClick={logoutHandler}
+                                >
+                                    Log out
+                                </NavLink>
+                            </nav>
+                        </>
+                        :
+                        <>
+                            <nav className={styles.header__items}>
+                                <NavLink
+                                    className={styles.header__item}
+                                    to="/login"
+                                    title="Login"
+                                >
+                                    Login
+                                </NavLink>
+                            </nav>
+                        </>
+                }
             </nav>
         </header>
     );

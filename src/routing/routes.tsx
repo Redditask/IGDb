@@ -58,11 +58,6 @@ export const publicRoutes: ICustomRoute [] = [
         component: () => <Game/>
     },
     {
-        //пока будет тут (до разработки своего сервера и создания privateRoutes)
-        path: LIBRARY_ROUTE,
-        component: () => <Library/>
-    },
-    {
         path: LOGIN_ROUTE,
         component: () => <Login/>
     },
@@ -72,5 +67,48 @@ export const publicRoutes: ICustomRoute [] = [
     }
 ];
 
-
-//privateRoutes in future
+export const privateRoutes: ICustomRoute[] = [
+    {
+        path: HOME_ROUTE,
+        component: () => <Games
+            metacritic={queryParams.allGames.metacritic}
+            dates={queryParams.allGames.dates}
+        />,
+    },
+    {
+        path: RECENT_RELEASES_ROUTE,
+        component: () => <Games
+            metacritic={queryParams.recentReleases.metacritic}
+            dates={queryParams.recentReleases.dates}
+        />,
+    },
+    {
+        path: UPCOMING_RELEASES_ROUTE,
+        component: () => <Games
+            metacritic={queryParams.upcomingReleases.metacritic}
+            dates={queryParams.upcomingReleases.dates}
+        />,
+    },
+    {
+        path: LAST_YEAR_TOP_ROUTE,
+        component: () => <Games
+            metacritic={queryParams.lastYearTopGames.metacritic}
+            dates={queryParams.lastYearTopGames.dates}
+        />,
+    },
+    {
+        path: ALL_TIME_TOP_ROUTE,
+        component: () => <Games
+            metacritic={queryParams.allTimeTopGames.metacritic}
+            dates={queryParams.allTimeTopGames.dates}
+        />,
+    },
+    {
+        path: GAME_ROUTE,
+        component: () => <Game/>
+    },
+    {
+        path: LIBRARY_ROUTE,
+        component: () => <Library/>
+    }
+];

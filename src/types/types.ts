@@ -134,3 +134,7 @@ export interface RegistrationQueryArgs extends LoginQueryArgs{
 }
 
 export interface RegistrationQueryResult extends LoginQueryResult {}
+
+export interface IUserStore extends IUserData {
+    isAuth: boolean;
+}
