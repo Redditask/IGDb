@@ -2,7 +2,7 @@ import {
     DLCQueryResult,
     GameQueryResult, GamesQueryResult, HowLongToBeatResult, IDeveloper,
     ILabel,
-    IPlatform,
+    IPlatform, LoginQueryResult,
     ScreenshotsQueryResult,
     TrailersQueryResult
 } from "../types/types";
@@ -15,7 +15,7 @@ export const scrollCheck = (event: any): boolean =>
 export const platformDefinition = (platformsArray: IPlatform[], platform: string): boolean => {
     let isOnPlatform = false;
 
-    platformsArray.map((item)=>{
+    platformsArray.map((item)=> {
         if (item.platform.name.includes(platform)) isOnPlatform = true;
     });
 
@@ -154,6 +154,16 @@ export const initialHowLongToBeatState: HowLongToBeatResult = {
 export const initialSearchState: GamesQueryResult = {
     count: 0,
     results: [],
+};
+
+export const initialUserDataState: LoginQueryResult = {
+    accessToken: "",
+    refreshToken: "",
+    user: {
+        id: 0,
+        email: "",
+        username: "",
+    }
 };
 
 export const monthsList: string[] = [

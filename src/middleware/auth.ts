@@ -13,3 +13,14 @@ listenerMiddleware.startListening({
         }
     },
 });
+
+listenerMiddleware.startListening({
+    matcher: igdbAPI.endpoints.checkAuth.matchFulfilled,
+    effect: async (action, listenerApi) => {
+        listenerApi.cancelActiveListeners();
+
+        if (action.payload.accessToken) {
+            localStorage.setItem("token", action.payload.accessToken);
+        }
+    },
+});

@@ -25,7 +25,8 @@ const Game: React.FC = () => {
 
     const {
         data: game = initialGameState,
-        error: gameError, isLoading
+        error: gameError,
+        isLoading
     } = useGetGameDetailsQuery({slug}, {skip: !slug});
 
     useEffect(() =>

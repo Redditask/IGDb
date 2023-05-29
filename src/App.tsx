@@ -1,14 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import styles from "./App.module.scss";
 
 import {Provider} from "react-redux";
 
+import {useCheckAuthQuery} from "./API/igdbAPI";
 import store from "./store";
+
+import {useAppDispatch} from "./hooks";
+import {setUser} from "./store/userSlice";
 
 import AppRouter from "./routing/AppRouter";
 
+import {initialUserDataState} from "./utils/helpers";
+
 // ToDo:
+//  какой-то скелетон в Header (момент checkAuth запроса)
 //  модальное окно при клике регистрации с сообщением проверить почту для подтверждения регистрации (для isError и т.п.)
 //  связать всё это с бекендом
 //  //
@@ -27,6 +34,21 @@ import AppRouter from "./routing/AppRouter";
 //  (потом добавить какие-то фильтры, поиск (?))
 
 const App: React.FC = () => {
+    const dispatch = useAppDispatch();
+
+    const {
+        data: response = initialUserDataState,
+        error: checkAuthError
+    } = useCheckAuthQuery({}, {
+        skip: !localStorage.getItem("token"),
+        refetchOnMountOrArgChange: true
+    });
+
+    useEffect(()=>{
+        if (response.user.username.length){
+            dispatch(setUser(response.user))
+        }
+    }, [response]);
 
     return (
         <div className={styles}>

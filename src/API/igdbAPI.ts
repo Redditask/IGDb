@@ -46,12 +46,16 @@ export const igdbAPI = createApi({
                 },
             }),
         }),
-        logout: builder.mutation<any ,void>({
+        logout: builder.mutation<void, {}>({
            query: () => ({
                url: "logout",
                method: "POST"
            })
         }),
+        checkAuth: builder.query<LoginQueryResult, {}>({
+            query: ()=>
+                "refresh"
+        })
     }),
 });
 
@@ -59,5 +63,6 @@ export const {
     useGetHowLongToBeatQuery,
     useLoginMutation,
     useRegistrationMutation,
-    useLogoutMutation
+    useLogoutMutation,
+    useCheckAuthQuery
 } = igdbAPI;

@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const logoutHandler = async () => {
-        await logout();
+        await logout({});
         dispatch(clearUser());
     };
 
