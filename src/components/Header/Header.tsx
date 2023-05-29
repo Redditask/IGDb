@@ -48,8 +48,8 @@ const Header: React.FC = () => {
                                 </NavLink>
                                 <NavLink
                                     className={styles.header__item}
-                                    title="Log out"
                                     to="/"
+                                    title="Log out"
                                     onClick={logoutHandler}
                                 >
                                     Log out

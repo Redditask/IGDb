@@ -6,7 +6,6 @@ import {ImSearch} from "react-icons/im";
 
 import styles from "./Search.module.scss";
 
-import Input from "../UI/Input/Input";
 import SearchResults from "../SearchResults/SearchResults";
 
 import {initialSearchState} from "../../utils/helpers";
@@ -35,13 +34,14 @@ const Search: React.FC = () => {
         <div className={styles.search}>
             <div className={styles.search__line}>
                 <div className={styles.search__wrapper}>
-                    <Input
+                    <input
+                        className={styles.search__input}
+                        type="text"
                         placeholder="Search"
                         value={searchText}
                         onChange={searchHandler}
-                    >
-                        <span className={styles.icon}><ImSearch size={15}/></span>
-                    </Input>
+                    />
+                    <span className={styles.icon}><ImSearch size={15}/></span>
                 </div>
             </div>
             <div className={styles.search__content}>
