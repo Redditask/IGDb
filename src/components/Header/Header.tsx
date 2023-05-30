@@ -7,16 +7,18 @@ import styles from "./Header.module.scss";
 import {useLogoutMutation} from "../../API/igdbAPI";
 
 import Search from "../Search/Search";
+import HeaderItems from "../UI/HeaderItems/HeaderItems";
 
 import {clearUser} from "../../store/userSlice";
-import {selectIsAuth} from "../../store/selectors";
+import {selectIsAuth, selectIsChecked} from "../../store/selectors";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 
 const Header: React.FC = () => {
     const [logout, {isError}] = useLogoutMutation();
 
-    const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
+    const isAuth: boolean = useAppSelector(selectIsAuth);
+    const isChecked = useAppSelector(selectIsChecked);
 
     const logoutHandler = async () => {
         await logout({});
@@ -35,39 +37,14 @@ const Header: React.FC = () => {
                 </NavLink>
                 <Search/>
                 {
-                    isAuth
+                    !isChecked
                         ?
-                        <>
-                            <nav className={styles.header__items}>
-                                <NavLink
-                                    className={styles.header__item}
-                                    to="/library"
-                                    title="Your games library"
-                                >
-                                    Library
-                                </NavLink>
-                                <NavLink
-                                    className={styles.header__item}
-                                    to="/"
-                                    title="Log out"
-                                    onClick={logoutHandler}
-                                >
-                                    Log out
-                                </NavLink>
-                            </nav>
-                        </>
+                        <HeaderItems
+                            isAuth={isAuth}
+                            logoutHandler={logoutHandler}
+                        />
                         :
-                        <>
-                            <nav className={styles.header__items}>
-                                <NavLink
-                                    className={styles.header__item}
-                                    to="/login"
-                                    title="Login"
-                                >
-                                    Login
-                                </NavLink>
-                            </nav>
-                        </>
+                        <></>
                 }
             </nav>
         </header>

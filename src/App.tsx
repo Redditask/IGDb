@@ -8,29 +8,27 @@ import {useCheckAuthQuery} from "./API/igdbAPI";
 import store from "./store";
 
 import {useAppDispatch} from "./hooks";
-import {setUser} from "./store/userSlice";
+import {setIsChecked, setUser} from "./store/userSlice";
 
 import AppRouter from "./routing/AppRouter";
 
 import {initialUserDataState} from "./utils/helpers";
 
 // ToDo:
-//  какой-то скелетон в Header (момент checkAuth запроса)
 //  модальное окно при клике регистрации с сообщением проверить почту для подтверждения регистрации (для isError и т.п.)
-//  связать всё это с бекендом
+//  сделать короче юзернеймы, вместо Library будет ник (с аватаркой?)
+//  скрыть ввод пароля звёздочками
+//  remember me при логине
 //  //
-//  переработать поиск
 //  отзывы, индивидуальные оценки для игр (свой рейтинг типо)
 //  ссылка на покупку в steam и т.п. (если есть в rawgAPI)
 //  рейтинг игры (esrb ?)
-//  темная тема в header где-нибудь
+//  добавить в библиотеку аватарку и кол-во игр в списках
+//  выводить в библиотеке дату добавления игры и полосой на основе этого отделять игры
 //  //
 //  добавить страницу для активации
 //  //
-//  свой бекенд
-//  авторизация (jwt)
-//  добавить в библиотеку аватарку и кол-во игр в списках
-//  выводить в библиотеке дату добавления игры и полоской вот так игры отделять
+//  темная тема в header где-нибудь
 //  (потом добавить какие-то фильтры, поиск (?))
 
 const App: React.FC = () => {
@@ -38,7 +36,8 @@ const App: React.FC = () => {
 
     const {
         data: response = initialUserDataState,
-        error: checkAuthError
+        error: checkAuthError,
+        isLoading
     } = useCheckAuthQuery({}, {
         skip: !localStorage.getItem("token"),
         refetchOnMountOrArgChange: true
@@ -49,6 +48,10 @@ const App: React.FC = () => {
             dispatch(setUser(response.user))
         }
     }, [response]);
+
+    useEffect(()=>{
+        dispatch(setIsChecked(isLoading));
+    }, [isLoading]);
 
     return (
         <div className={styles}>

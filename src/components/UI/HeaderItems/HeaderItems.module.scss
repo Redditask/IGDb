@@ -1,0 +1,26 @@
+.items {
+  display: flex;
+  justify-content: space-around;
+
+  font-size: 1.3rem;
+
+  gap: 5rem;
+}
+
+.item {
+  cursor: pointer;
+
+  text-decoration: none;
+
+  user-select: none;
+
+  color: black;
+
+  &:hover {
+    transform: translateY(-0.25rem);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

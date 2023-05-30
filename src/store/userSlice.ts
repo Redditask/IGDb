@@ -7,6 +7,7 @@ const initialState: IUserStore = {
     email: "",
     username: "",
     isAuth: false,
+    isChecked: false
 };
 
 const userSlice = createSlice({
@@ -23,12 +24,16 @@ const userSlice = createSlice({
             localStorage.removeItem("token");
             return initialState;
         },
+        setIsChecked: (state, action: PayloadAction<boolean>): void => {
+            state.isChecked = action.payload;
+        }
     }
 });
 
 export const {
     setUser,
-    clearUser
+    clearUser,
+    setIsChecked
 } = userSlice.actions;
 
 export default userSlice.reducer;
