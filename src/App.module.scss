@@ -43,12 +43,7 @@ select {
   }
 }
 
-input:-webkit-autofill {
-  -webkit-box-shadow:0 0 0 50px white inset;
-}
-
-input[type="text"]
-{
+input {
   font-size: 1.3rem;
   font-weight: bold;
 }

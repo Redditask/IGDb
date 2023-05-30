@@ -43,22 +43,24 @@ const Registration: React.FC = () => {
             <form
                 className={styles.card}
                 onSubmit={handleSubmit(registrationHandler)}
-                autoComplete="off"
             >
                 <h2>Registration</h2>
                 <div className={styles.inputs}>
                     <FormInput
                         placeholderText="Username"
+                        type="text"
                         errorMessage={errors?.username?.message}
                         register={{...register("username")}}
                     />
                     <FormInput
                         placeholderText="Email"
+                        type="text"
                         errorMessage={errors?.email?.message}
                         register={{...register("email")}}
                     />
                     <FormInput
                         placeholderText="Password"
+                        type="password"
                         errorMessage={errors?.password?.message}
                         register={{...register("password")}}
                     />

@@ -15,9 +15,10 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers";
 
 // ToDo:
+//  стили input при автозаполнении поправить
 //  модальное окно при клике регистрации с сообщением проверить почту для подтверждения регистрации (для isError и т.п.)
+//  модальное окно "вы точно хотите выйти?"
 //  сделать короче юзернеймы, вместо Library будет ник (с аватаркой?)
-//  скрыть ввод пароля звёздочками
 //  remember me при логине
 //  //
 //  отзывы, индивидуальные оценки для игр (свой рейтинг типо)
@@ -45,13 +46,11 @@ const App: React.FC = () => {
 
     useEffect(()=>{
         if (response.user.username.length){
-            dispatch(setUser(response.user))
+            dispatch(setUser(response.user));
         }
-    }, [response]);
 
-    useEffect(()=>{
         dispatch(setIsChecked(isLoading));
-    }, [isLoading]);
+    }, [response]);
 
     return (
         <div className={styles}>
