@@ -12,6 +12,7 @@ import HeaderItems from "../UI/HeaderItems/HeaderItems";
 import {clearUser} from "../../store/userSlice";
 import {selectIsAuth, selectIsChecked} from "../../store/selectors";
 import {useAppDispatch, useAppSelector} from "../../hooks";
+import HeaderItemsSkeleton from "../UI/HeaderItemsSkeleton/HeaderItemsSkeleton";
 
 const Header: React.FC = () => {
     const [logout, {isError}] = useLogoutMutation();
@@ -44,7 +45,7 @@ const Header: React.FC = () => {
                             logoutHandler={logoutHandler}
                         />
                         :
-                        <></>
+                        <HeaderItemsSkeleton />
                 }
             </nav>
         </header>
