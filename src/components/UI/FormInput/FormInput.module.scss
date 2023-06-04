@@ -11,6 +11,12 @@
     padding: 0 0.5rem;
   }
 
+  &__errorWrapper {
+    border: 0.15rem solid #de3c3c;
+
+    transition: 2ms ease;
+  }
+
   &__item {
     width: 42vw;
     height: 2.5rem;
@@ -28,7 +34,7 @@
   }
 
   &__error {
-    color: #965c5c;
+    color: #de3c3c;
 
     padding: 0 0.2rem;
 

@@ -13,9 +13,12 @@ interface FormInputProps {
 
 const FormInput: React.FC<FormInputProps> = ({placeholderText, errorMessage, register, type}) => {
 
+    const wrapperStyles = [styles.formInput__wrapper];
+    if (errorMessage) wrapperStyles.push(styles.formInput__errorWrapper);
+
     return (
         <>
-            <div className={styles.formInput__wrapper}>
+            <div className={wrapperStyles.join(" ")}>
                 <input
                     className={styles.formInput__item}
                     type={type}
