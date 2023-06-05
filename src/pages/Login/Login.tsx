@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styles from "./Login.module.scss";
 
@@ -14,34 +14,39 @@ import FormInput from "../../components/UI/FormInput/FormInput";
 import {LoginQueryArgs} from "../../types/types";
 
 import {REGISTRATION_ROUTE} from "../../utils/consts";
-import {loginValidationSchema} from "../../utils/helpers";
+import {loginValidationSchema, serverErrorHandler, serverErrorIdentification} from "../../utils/helpers";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser} from "../../store/userSlice";
 
 const Login: React.FC = () => {
-    const [login, {isError}] = useLoginMutation();
+    const [login] = useLoginMutation();
+    const [serverError, setServerError] = useState<string>("");
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const {
         register,
-        formState: {errors},
+        formState: {errors, isValid},
         handleSubmit,
     } = useForm<LoginQueryArgs>({
+        mode: "onChange",
         resolver: yupResolver(loginValidationSchema),
     });
 
     const loginHandler = async (data: LoginQueryArgs): Promise<void> => {
-        const response = await login({email: data.email, password: data.password}).unwrap();
-        if (response.user.username.length) {
+        const response = await login({
+            email: data.email,
+            password: data.password
+        }).unwrap().catch((err) => err);
+
+        if (response?.user?.username?.length) {
             dispatch(setUser(response.user));
             navigate("/");
+        } else if (response?.data?.message) {
+            setServerError(response.data.message);
         }
-        //окошко (вы успешно авторизовались)
-        //и обработать, если ошибка будет
-        console.log(response);
     };
 
     return (
@@ -61,19 +66,32 @@ const Login: React.FC = () => {
                     <FormInput
                         placeholderText="Email"
                         type="text"
-                        errorMessage={errors?.email?.message}
-                        register={{...register("email")}}
+                        formErrorMessage={errors?.email?.message}
+                        serverErrorMessage={serverErrorIdentification(serverError, "email")}
+                        register={{
+                            ...register("email", {
+                                onChange:
+                                    () => serverErrorHandler(serverError, "email", setServerError)
+                            })
+                        }}
                     />
                     <FormInput
                         placeholderText="Password"
                         type="password"
-                        errorMessage={errors?.password?.message}
-                        register={{...register("password")}}
+                        formErrorMessage={errors?.password?.message}
+                        serverErrorMessage={serverErrorIdentification(serverError, "password")}
+                        register={{
+                            ...register("password", {
+                                onChange:
+                                    () => serverErrorHandler(serverError, "password", setServerError)
+                            })
+                        }}
                     />
                 </div>
                 <Button
                     title="Login to your account"
                     type="submit"
+                    disabled={!isValid}
                 />
                 <div className={styles.link}>
                     <p className={styles.link__info}>Don't have account?</p>

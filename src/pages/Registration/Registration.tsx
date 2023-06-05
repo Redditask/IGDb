@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styles from "./Registration.module.scss";
 
@@ -14,22 +14,35 @@ import FormInput from "../../components/UI/FormInput/FormInput";
 import {RegistrationQueryArgs} from "../../types/types";
 
 import {LOGIN_ROUTE} from "../../utils/consts";
-import {registrationValidationSchema} from "../../utils/helpers";
+import {registrationValidationSchema, serverErrorHandler, serverErrorIdentification} from "../../utils/helpers";
 
 const Registration: React.FC = () => {
-    const [registration, {isError}] = useRegistrationMutation();
+    const [registration] = useRegistrationMutation();
+    const [serverError, setServerError] = useState<string>("");
 
     const {
         register,
-        formState: {errors},
+        formState: {errors, isValid},
         handleSubmit,
+        reset
     } = useForm<RegistrationQueryArgs>({
+        mode: "onChange",
         resolver: yupResolver(registrationValidationSchema),
     });
 
     const registrationHandler = async (data: RegistrationQueryArgs): Promise<void> => {
-        const response = await registration({email: data.email, password: data.password, username: data.username}).unwrap();
-        console.log(response);
+        const response = await registration({
+            email: data.email,
+            password: data.password,
+            username: data.username
+        }).unwrap().catch((err) => err);
+
+        if (response?.user?.username?.length) {
+            //окошко "вы успешно зарегистрировались, теперь активируйте аккаунт через письмо на почте"
+            reset();
+        } else if (response?.data?.message) {
+            setServerError(response.data.message);
+        }
     };
 
     return (
@@ -49,25 +62,44 @@ const Registration: React.FC = () => {
                     <FormInput
                         placeholderText="Username"
                         type="text"
-                        errorMessage={errors?.username?.message}
-                        register={{...register("username")}}
+                        formErrorMessage={errors?.username?.message}
+                        serverErrorMessage={serverErrorIdentification(serverError, "username")}
+                        register={{
+                            ...register("username", {
+                                onChange:
+                                    () => serverErrorHandler(serverError, "username", setServerError)
+                            })
+                        }}
                     />
                     <FormInput
                         placeholderText="Email"
                         type="text"
-                        errorMessage={errors?.email?.message}
-                        register={{...register("email")}}
+                        formErrorMessage={errors?.email?.message}
+                        serverErrorMessage={serverErrorIdentification(serverError, "email")}
+                        register={{
+                            ...register("email", {
+                                onChange:
+                                    () => serverErrorHandler(serverError, "email", setServerError)
+                            })
+                        }}
                     />
                     <FormInput
                         placeholderText="Password"
                         type="password"
-                        errorMessage={errors?.password?.message}
-                        register={{...register("password")}}
+                        formErrorMessage={errors?.password?.message}
+                        serverErrorMessage={serverErrorIdentification(serverError, "password")}
+                        register={{
+                            ...register("password", {
+                                onChange:
+                                    () => serverErrorHandler(serverError, "password", setServerError)
+                            })
+                        }}
                     />
                 </div>
                 <Button
                     title="Create your account"
                     type="submit"
+                    disabled={!isValid}
                 />
                 <div className={styles.link}>
                     <p className={styles.link__info}>Already have an account?</p>

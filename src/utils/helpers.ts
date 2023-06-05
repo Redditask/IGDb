@@ -255,3 +255,9 @@ export const registrationValidationSchema = Yup.object().shape({
         .min(4, "Password must be at least 4 characters")
         .max(32, "Password must not exceed 32 characters"),
 });
+
+export const serverErrorIdentification = (error: string, errorType: string): string | null => error.toLowerCase().includes(errorType) ? error : null;
+
+export const serverErrorHandler = (error: string, errorType: string, setError: (error: string) => void): void => {
+    serverErrorIdentification(error, errorType) && setError("");
+};

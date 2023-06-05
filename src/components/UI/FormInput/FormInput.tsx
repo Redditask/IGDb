@@ -6,15 +6,16 @@ import {UseFormRegisterReturn} from "react-hook-form";
 
 interface FormInputProps {
     placeholderText: string;
-    errorMessage: any;
+    formErrorMessage: string | undefined;
+    serverErrorMessage: string | null;
     type: "text" | "password";
     register: UseFormRegisterReturn<any>;
 }
 
-const FormInput: React.FC<FormInputProps> = ({placeholderText, errorMessage, register, type}) => {
+const FormInput: React.FC<FormInputProps> = ({placeholderText, formErrorMessage, register, type, serverErrorMessage}) => {
 
     const wrapperStyles = [styles.formInput__wrapper];
-    if (errorMessage) wrapperStyles.push(styles.formInput__errorWrapper);
+    if (formErrorMessage || serverErrorMessage) wrapperStyles.push(styles.formInput__errorWrapper);
 
     return (
         <>
@@ -27,10 +28,10 @@ const FormInput: React.FC<FormInputProps> = ({placeholderText, errorMessage, reg
                 />
             </div>
             {
-                errorMessage
+                (formErrorMessage || serverErrorMessage)
                 &&
                 <h5 className={styles.formInput__error}>
-                    {String(errorMessage)}
+                    {formErrorMessage ?? serverErrorMessage}
                 </h5>
             }
         </>
