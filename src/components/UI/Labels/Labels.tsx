@@ -19,7 +19,7 @@ const Labels: React.FC<LabelsProps> = ({labels, title}) => {
                 <div className={styles.labels}>
                     <p>{title}:</p>
                     <div className={styles.labels__list}>
-                        {labels.map((label, index) => {
+                        {labels.map((label: ILabel, index: number) => {
                             return index === labels.length - 1
                                 ? <p key={label.id}>{label.name}</p>
                                 : <p key={label.id}>{label.name}, </p>

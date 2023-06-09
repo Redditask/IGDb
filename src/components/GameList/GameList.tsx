@@ -5,7 +5,6 @@ import styles from "./GameList.module.scss";
 import {IGameCard} from "../../types/types";
 
 import Loader from "../UI/Loader/Loader";
-import Message from "../UI/Message/Message";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));
 
 interface BodyProps {
@@ -21,13 +20,12 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
             {
                 isEmpty
                     ?
-                    <Message text="No games"/>
+                    <h1 className={styles.errorMessage}>No games</h1>
                     :
                     <>
                         <div className={styles.gameList}>
                             {
-                                games.map(
-                                    (game) =>
+                                games.map((game: IGameCard) =>
                                         game.background_image
                                         &&
                                         <Suspense key={game.id} fallback={null}> {/* loader is already below */}

@@ -14,7 +14,7 @@ interface FormInputProps {
 
 const FormInput: React.FC<FormInputProps> = ({placeholderText, formErrorMessage, register, type, serverErrorMessage}) => {
 
-    const wrapperStyles = [styles.formInput__wrapper];
+    const wrapperStyles: string[] = [styles.formInput__wrapper];
     if (formErrorMessage || serverErrorMessage) wrapperStyles.push(styles.formInput__errorWrapper);
 
     return (

@@ -13,6 +13,7 @@ import {clearUser} from "../../store/userSlice";
 import {selectIsAuth, selectIsChecked} from "../../store/selectors";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import HeaderItemsSkeleton from "../UI/HeaderItemsSkeleton/HeaderItemsSkeleton";
+import {HOME_ROUTE} from "../../utils/consts";
 
 const Header: React.FC = () => {
     const [logout] = useLogoutMutation();
@@ -31,7 +32,7 @@ const Header: React.FC = () => {
             <nav className={styles.header}>
                 <NavLink
                     className={styles.header__title}
-                    to="/games"
+                    to={HOME_ROUTE}
                     title="Back to main page"
                 >
                     I G D b

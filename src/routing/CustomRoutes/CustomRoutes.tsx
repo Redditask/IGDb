@@ -16,7 +16,7 @@ const CustomRoutes: React.FC<CustomRoutesProps> = ({routes, redirectRoute}) => {
     return (
         <Routes>
             <Route element={<Layout/>}>
-                {routes.map((route) =>
+                {routes.map((route: ICustomRoute) =>
                     <Route key={route.path} path={route.path} element={<route.component/>}/>
                 )}
                 <Route path="*" element={<Navigate to={redirectRoute} replace/>}/>

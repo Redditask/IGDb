@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi";
 
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction, useNavigate} from "react-router-dom";
 
 import styles from "./AdditionalContent.module.scss";
 
@@ -24,9 +24,9 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     const [isAllGames, setIsAllGames] = useState<boolean>(false);
     const [isAllDLC, setIsAllDLC] = useState<boolean>(false);
 
-    const nav = useNavigate();
+    const nav: NavigateFunction = useNavigate();
 
-    const backToMainGame = () => nav(-1);
+    const backToMainGame = (): void => nav(-1);
 
     const {
         data: sameSeriesGames = initialGamesState,
@@ -40,7 +40,7 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         isSuccess: dlcSuccess
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
-    useEffect(() => {
+    useEffect((): void => {
         setIsAllGames(false);
 
         if (gameSuccess) {
@@ -55,7 +55,7 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         if (sameSeriesError) setIsError(true);
     }, [sameSeriesGames]);
 
-    useEffect(() => {
+    useEffect((): void => {
         setIsAllDLC(false);
 
         if (dlcSuccess) {
@@ -70,12 +70,12 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         if (dlcError) setIsError(true);
     }, [dlcResponse]);
 
-    const showAllGames = () => {
+    const showAllGames = (): void => {
         setGames([...games, ...sameSeriesGames.results.slice(3)]);
         setIsAllGames(true);
     };
 
-    const showAllDLC = () => {
+    const showAllDLC = (): void => {
         setDLC([...DLC, ...dlcResponse.results.slice(3)]);
         setIsAllDLC(true);
     };

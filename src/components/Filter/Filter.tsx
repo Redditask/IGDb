@@ -35,7 +35,7 @@ const Filter: React.FC<FilterProps> = ({title, options, setFilter, filterString,
             >
                 <option value="">{defaultValue}</option>
                 {
-                    options.map(option=>
+                    options.map((option: ICustomOption)=>
                         <option
                             className={styles.filter__option}
                             key={option.name}

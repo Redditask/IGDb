@@ -12,7 +12,7 @@ import GameDetails from "../../components/GameDetails/GameDetails";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
-import GamePageError from "../../components/UI/GamePageError/GamePageError";
+import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import GameDescription from "../../components/GameDescription/GameDescription";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
@@ -28,21 +28,22 @@ const Game: React.FC = () => {
         isLoading
     } = useGetGameDetailsQuery({slug}, {skip: !slug});
 
-    useEffect(() =>
+    useEffect((): void => {
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
-        }), [slug, game]);
+        })
+    }, [slug, game]);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (gameError) setIsError(true);
     }, [gameError]);
 
     return (
         isError
             ?
-            <GamePageError/>
+            <ErrorPage/>
             :
             <div className={styles.container}>
                 <div

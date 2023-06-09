@@ -8,7 +8,7 @@ import {useCheckAuthQuery} from "./API/igdbAPI";
 import store from "./store";
 
 import {useAppDispatch} from "./hooks";
-import {setIsChecked, setUser} from "./store/userSlice";
+import {clearUser, setIsChecked, setUser} from "./store/userSlice";
 
 import AppRouter from "./routing/AppRouter";
 
@@ -16,15 +16,9 @@ import {initialUserDataState} from "./utils/helpers";
 
 // ToDo:
 //  добавить что-то вместо howlongtobeat
-//  провести инспекцию и рефакторинг кода (пройтись по всему коду и исправить/зарефакторить)
-//  где надо, расставить типы (: void) и т.п.
 //  useEffect, memo и useCallback !!!
-//  checkAuthError в App, libary/wishlistError в Library (если надо, то в store закинуть и вывести something go wrong)
-//  ^ что-то с этим сделать ^
-//  listenerMiddleware как-то объединить
 //  //
 //  модальное окно при клике регистрации с сообщением проверить почту для подтверждения регистрации
-//  модальное окно "вы точно хотите выйти?"
 //  вместо Library будет ник (с аватаркой?), (переименовать Library в Account и роуты поменять (?))
 //  функционал add to wishlist/to library,
 //  ^ а если пользователь не авторизован (по stor-у наверное определять, кнопки будут disabled и написано маленьким текстом - "(!) вам необходимо авторизоваться"
@@ -47,20 +41,22 @@ const App: React.FC = () => {
 
     const {
         data: response = initialUserDataState,
-        error: checkAuthError,
+        isError,
         isLoading
     } = useCheckAuthQuery({}, {
         skip: !localStorage.getItem("token"),
         refetchOnMountOrArgChange: true
     });
 
-    useEffect(()=>{
+    useEffect((): void=>{
         if (response.user.username.length){
             dispatch(setUser(response.user));
+        } else if (isError) {
+            dispatch(clearUser());
         }
 
         dispatch(setIsChecked(isLoading));
-    }, [response]);
+    }, [response, isError]);
 
     return (
         <div className={styles}>

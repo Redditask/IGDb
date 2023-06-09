@@ -18,7 +18,7 @@ const Trailer: React.FC<TrailerProps> = ({gameId, setIsError}) => {
         error: trailerError
     } = useGetGameTrailersQuery({id: gameId}, {skip: !gameId});
 
-    useEffect(() => {
+    useEffect((): void => {
         if (trailerError) setIsError(true);
     }, [trailerError]);
 

@@ -10,21 +10,22 @@ import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Labels from "../UI/Labels/Labels";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard, ILabel} from "../../types/types";
 
 import {dateFormatting, regularCrop} from "../../utils/helpers";
+import {GAME_ROUTE} from "../../utils/consts";
 
 interface GameCardProps {
     gameCard: IGameCard;
 }
 
 const GameCard: React.FC<GameCardProps> = memo(({gameCard}) => {
-    const genres = gameCard.genres.filter(genre => genre.id !== 59);
+    const genres: ILabel [] = gameCard.genres.filter(genre => genre.id !== 59);
 
     return (
         <NavLink
             className={styles.card}
-            to={`/game/${gameCard.slug}`}
+            to={GAME_ROUTE.replace(":slug", `${gameCard.slug}`)}
         >
             <LazyLoadImage
                 className={styles.card__image}

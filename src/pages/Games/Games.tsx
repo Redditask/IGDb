@@ -7,7 +7,6 @@ import {useGetGamesQuery} from "../../API/rawgApi";
 import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
-import Message from "../../components/UI/Message/Message";
 import RangeSlider from "../../components/RangeSlider/RangeSlider";
 
 import {IGameCard} from "../../types/types";
@@ -41,7 +40,11 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [maxMetacriticScore, setMaxMetacriticScore] = useState<number>(100);
     const [isHaveDefaultRange, setIsHaveDefaultRange] = useState<boolean>(false);
 
-    const {data: response = initialGamesState, error, isSuccess} = useGetGamesQuery({
+    const {
+        data: response = initialGamesState,
+        error,
+        isSuccess
+    } = useGetGamesQuery({
         page,
         metacritic: createMetacriticString(minMetacriticScore, maxMetacriticScore),
         dates,
@@ -59,12 +62,12 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                 : document.addEventListener("scroll", scrollListener);
         }
 
-        return function () {
+        return function (): void {
             document.removeEventListener("scroll", scrollListener);
         };
     }, [response]);
 
-    useEffect(()=>{
+    useEffect((): void=>{
         if (metacritic) {
             const [firstValue, secondValue]: number[] = getValuesFromMetacriticString(metacritic);
             resetState();
@@ -132,7 +135,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                 </div>
                 {
                     error
-                        ? <Message text="Oops, something go wrong..."/>
+                        ? <h1 className={styles.errorMessage}>Oops, something go wrong...</h1>
                         : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
                 }
             </div>

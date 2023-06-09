@@ -2,7 +2,7 @@ import React, {lazy, Suspense} from "react";
 
 import styles from "./SearchResults.module.scss";
 
-import {GamesQueryResult} from "../../types/types";
+import {GamesQueryResult, IGameCard} from "../../types/types";
 
 const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 
@@ -19,7 +19,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({list, clean, isLoading}) =
             {
                 list.count
                     ?
-                    list.results.map((game) =>
+                    list.results.map((game: IGameCard) =>
                         game.background_image
                         &&
                         <Suspense

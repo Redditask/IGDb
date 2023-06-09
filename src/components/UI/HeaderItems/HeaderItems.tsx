@@ -4,6 +4,8 @@ import styles from "./HeaderItems.module.scss";
 
 import {NavLink} from "react-router-dom";
 
+import {HOME_ROUTE, LIBRARY_ROUTE, LOGIN_ROUTE} from "../../../utils/consts";
+
 interface HeaderItemsProps {
     isAuth: boolean;
     logoutHandler: () => void;
@@ -18,14 +20,14 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler}) => {
                 <nav className={styles.items}>
                     <NavLink
                         className={styles.item}
-                        to="/library"
+                        to={LIBRARY_ROUTE}
                         title="Your games library"
                     >
                         Library
                     </NavLink>
                     <NavLink
                         className={styles.item}
-                        to="/"
+                        to={HOME_ROUTE}
                         title="Log out"
                         onClick={logoutHandler}
                     >
@@ -38,7 +40,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler}) => {
                 <nav className={styles.items}>
                     <NavLink
                         className={styles.item}
-                        to="/login"
+                        to={LOGIN_ROUTE}
                         title="Login"
                     >
                         Login

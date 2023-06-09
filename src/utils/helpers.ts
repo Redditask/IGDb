@@ -13,9 +13,9 @@ export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
 
 export const platformDefinition = (platformsArray: IPlatform[], platform: string): boolean => {
-    let isOnPlatform = false;
+    let isOnPlatform: boolean = false;
 
-    platformsArray.forEach((item)=> {
+    platformsArray.forEach((item: IPlatform): void=> {
         if (item.platform.name.includes(platform)) isOnPlatform = true;
     });
 
@@ -23,13 +23,13 @@ export const platformDefinition = (platformsArray: IPlatform[], platform: string
 };
 
 export const regularCrop = (imageSrc: string): string => {
-    const imageUrl = String(imageSrc).split("media/")[1];
+    const imageUrl: string = String(imageSrc).split("media/")[1];
 
     return `https://media.rawg.io/media/crop/600/400/${imageUrl}`;
 };
 
 export const searchCrop = (imageSrc: string): string => {
-    const imageUrl = String(imageSrc).split("media/")[1];
+    const imageUrl: string = String(imageSrc).split("media/")[1];
 
     return `https://media.rawg.io/media/resize/420/-/${imageUrl}`;
 };
@@ -62,7 +62,7 @@ export const getRecentDates = ():string => {
     return `${previous},${current}`;
 };
 
-export const getUpcomingDates = ():string => {
+export const getUpcomingDates = (): string => {
     const date: Date = new Date();
 
     const currentYear: number = date.getFullYear();
@@ -144,13 +144,6 @@ export const initialGamesState: GamesQueryResult = {
     results: [],
 };
 
-
-export const initialHowLongToBeatState: HowLongToBeatResult = {
-    gameplayMain: 0,
-    gameplayMainExtra: 0,
-    gameplayCompletionist: 0,
-};
-
 export const initialSearchState: GamesQueryResult = {
     count: 0,
     results: [],
@@ -184,7 +177,7 @@ export const dateFormatting = (date: string): string => {
 export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];
 
-    platforms.forEach((item): void=>{
+    platforms.forEach((item: IPlatform): void=>{
         labels.push({
             id: item.platform.id,
             name: item.platform.name,
@@ -197,7 +190,7 @@ export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
 export const developersToLabelsConvert = (developers: IDeveloper[]): ILabel[] => {
     const labels: ILabel[] = [];
 
-    developers.forEach((item, index): void=>{
+    developers.forEach((item: IDeveloper, index: number): void=>{
         labels.push({
            id: index,
            name: item.name,
@@ -228,9 +221,6 @@ export const getMinRangeValue = (metacritic: string): number =>
 
 export const getMaxRangeValue = (metacritic: string): number =>
     metacritic.length ? getValuesFromMetacriticString(metacritic)[1] : 100;
-
-export const isHasHowLongToBeat = (apiResult: HowLongToBeatResult): boolean =>
-    !!(apiResult?.gameplayMain || apiResult?.gameplayMainExtra || apiResult?.gameplayCompletionist);
 
 export const loginValidationSchema = Yup.object().shape({
     email: Yup.string()

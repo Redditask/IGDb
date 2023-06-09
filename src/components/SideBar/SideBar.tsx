@@ -7,13 +7,14 @@ import ScrollUpButton from "../UI/ScrollUpButton/ScrollUpButton";
 import {NavLink} from "react-router-dom";
 
 import {SideBarLinks} from "../../utils/consts";
+import {ICustomLink} from "../../types/types";
 
 const isActive = ({isActive}: any) => isActive ? styles.sideBar__active : styles.sideBar__default;
 
 const SideBar: React.FC = () => {
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
 
-    useEffect(()=>{
+    useEffect((): void => {
         window.addEventListener("scroll", ()=>{
             if(window.scrollY > 2600) {
                 setShowScrollUp(true);
@@ -27,7 +28,7 @@ const SideBar: React.FC = () => {
         <aside className={styles.sideBar}>
             <nav className={styles.sideBar__items}>
                 {
-                    SideBarLinks.map((link) =>
+                    SideBarLinks.map((link: ICustomLink) =>
                         <NavLink
                             className={isActive}
                             to={link.path}

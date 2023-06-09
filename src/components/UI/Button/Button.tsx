@@ -11,7 +11,7 @@ interface ButtonProps {
 
 const Button:React.FC<ButtonProps> = ({title, onClick, type, disabled}) => {
 
-    const stylesHandler = () => disabled ? styles.disabledButton : styles.activeButton;
+    const stylesHandler = (): string => disabled ? styles.disabledButton : styles.activeButton;
 
     return (
         <button

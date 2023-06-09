@@ -48,9 +48,7 @@ const Search: React.FC = () => {
                 {
                     searchError
                         ?
-                        <h2 className={styles.notFounded}>
-                            Oops, something go wrong...
-                        </h2>
+                        <h2 className={styles.errorMessage}>Oops, something go wrong...</h2>
                         :
                         <SearchResults
                             list={searchResults}
