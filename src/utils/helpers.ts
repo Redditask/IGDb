@@ -15,7 +15,7 @@ export const scrollCheck = (event: any): boolean =>
 export const platformDefinition = (platformsArray: IPlatform[], platform: string): boolean => {
     let isOnPlatform = false;
 
-    platformsArray.map((item)=> {
+    platformsArray.forEach((item)=> {
         if (item.platform.name.includes(platform)) isOnPlatform = true;
     });
 
@@ -181,26 +181,26 @@ export const dateFormatting = (date: string): string => {
     }else return "Unknown";
 };
 
-export const platformsToLabels = (platforms: IPlatform []): ILabel[] => {
+export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];
 
-    platforms.map(platforms => {
-       labels.push({
-           id: platforms.platform.id,
-           name: platforms.platform.name,
-       })
+    platforms.forEach((item): void=>{
+        labels.push({
+            id: item.platform.id,
+            name: item.platform.name,
+        })
     });
 
     return labels;
 };
 
-export const developersToLabels = (developers: IDeveloper[]): ILabel[] => {
+export const developersToLabelsConvert = (developers: IDeveloper[]): ILabel[] => {
     const labels: ILabel[] = [];
 
-    developers.map((developers, index)=>{
+    developers.forEach((item, index): void=>{
         labels.push({
            id: index,
-           name: developers.name,
+           name: item.name,
         });
     });
 
@@ -211,7 +211,7 @@ export const isHaveLinks = (game: GameQueryResult): boolean =>
     !!(game.metacritic_url || game.reddit_url || game.website);
 
 export const getValuesFromMetacriticString = (metacritic: string): [number, number] => {
-    const [word, values]: string[] = metacritic.split("=");
+    const [, values]: string[] = metacritic.split("=");
     const [left, right]: string[] = values.split(",");
 
     return [Number(left), Number(right)];
@@ -256,8 +256,8 @@ export const registrationValidationSchema = Yup.object().shape({
         .max(32, "Password must not exceed 32 characters"),
 });
 
-export const serverErrorIdentification = (error: string, errorType: string): string | null => error.toLowerCase().includes(errorType) ? error : null;
+export const serverErrorDetection = (error: string, errorType: string): string | null => error.toLowerCase().includes(errorType) ? error : null;
 
 export const serverErrorHandler = (error: string, errorType: string, setError: (error: string) => void): void => {
-    serverErrorIdentification(error, errorType) && setError("");
+    serverErrorDetection(error, errorType) && setError("");
 };

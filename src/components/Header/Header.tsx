@@ -15,7 +15,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import HeaderItemsSkeleton from "../UI/HeaderItemsSkeleton/HeaderItemsSkeleton";
 
 const Header: React.FC = () => {
-    const [logout, {isError}] = useLogoutMutation();
+    const [logout] = useLogoutMutation();
 
     const dispatch = useAppDispatch();
     const isAuth: boolean = useAppSelector(selectIsAuth);

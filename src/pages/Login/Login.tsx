@@ -14,7 +14,7 @@ import FormInput from "../../components/UI/FormInput/FormInput";
 import {LoginQueryArgs} from "../../types/types";
 
 import {REGISTRATION_ROUTE} from "../../utils/consts";
-import {loginValidationSchema, serverErrorHandler, serverErrorIdentification} from "../../utils/helpers";
+import {loginValidationSchema, serverErrorHandler, serverErrorDetection} from "../../utils/helpers";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser} from "../../store/userSlice";
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
                         placeholderText="Email"
                         type="text"
                         formErrorMessage={errors?.email?.message}
-                        serverErrorMessage={serverErrorIdentification(serverError, "email")}
+                        serverErrorMessage={serverErrorDetection(serverError, "email")}
                         register={{
                             ...register("email", {
                                 onChange:
@@ -79,7 +79,7 @@ const Login: React.FC = () => {
                         placeholderText="Password"
                         type="password"
                         formErrorMessage={errors?.password?.message}
-                        serverErrorMessage={serverErrorIdentification(serverError, "password")}
+                        serverErrorMessage={serverErrorDetection(serverError, "password")}
                         register={{
                             ...register("password", {
                                 onChange:

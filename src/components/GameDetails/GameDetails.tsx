@@ -9,7 +9,7 @@ import GameDetailsSkeleton from "../UI/GameDetailsSkeleton/GameDetailsSkeleton";
 
 import {GameQueryResult} from "../../types/types";
 
-import {developersToLabels, isHaveLinks, platformsToLabels} from "../../utils/helpers";
+import {developersToLabelsConvert, isHaveLinks, platformsToLabelsConvert} from "../../utils/helpers";
 
 interface GameDetailsProps {
     game: GameQueryResult;
@@ -26,11 +26,11 @@ const GameDetails: React.FC<GameDetailsProps> = ({game, isLoading}) => {
             <div className={styles.details}>
                 <h2>Details about game</h2>
                 <Labels
-                    labels={developersToLabels(game.developers)}
+                    labels={developersToLabelsConvert(game.developers)}
                     title="Developers"
                 />
                 <Labels
-                    labels={platformsToLabels(game.platforms)}
+                    labels={platformsToLabelsConvert(game.platforms)}
                     title="Platforms"
                 />
                 <Labels

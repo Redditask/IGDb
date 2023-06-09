@@ -60,7 +60,6 @@ export const igdbAPI = createApi({
 });
 
 export const {
-    useGetHowLongToBeatQuery,
     useLoginMutation,
     useRegistrationMutation,
     useLogoutMutation,

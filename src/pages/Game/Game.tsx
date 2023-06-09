@@ -13,7 +13,6 @@ import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHead from "../../components/GameHead/GameHead";
 import GamePageError from "../../components/UI/GamePageError/GamePageError";
-import HowLongToBeat from "../../components/HowLongToBeat/HowLongToBeat";
 import GameDescription from "../../components/GameDescription/GameDescription";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
@@ -77,13 +76,6 @@ const Game: React.FC = () => {
                     description={game.description_raw}
                     isLoading={isLoading}
                 />
-                <div className={styles.game__about}>
-                    <HowLongToBeat
-                        gameName={game.name}
-                        isLoading={isLoading}
-                        setIsError={setIsError}
-                    />
-                </div>
                 <Suspense fallback={null}>
                     <AdditionalContent
                         gameId={game.id}

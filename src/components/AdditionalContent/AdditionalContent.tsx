@@ -80,8 +80,6 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         setIsAllDLC(true);
     };
 
-    console.log(games, DLC)
-
     return (
         <div className={styles.additionalContent}>
             {

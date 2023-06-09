@@ -14,7 +14,7 @@ import FormInput from "../../components/UI/FormInput/FormInput";
 import {RegistrationQueryArgs} from "../../types/types";
 
 import {LOGIN_ROUTE} from "../../utils/consts";
-import {registrationValidationSchema, serverErrorHandler, serverErrorIdentification} from "../../utils/helpers";
+import {registrationValidationSchema, serverErrorHandler, serverErrorDetection} from "../../utils/helpers";
 
 const Registration: React.FC = () => {
     const [registration] = useRegistrationMutation();
@@ -63,7 +63,7 @@ const Registration: React.FC = () => {
                         placeholderText="Username"
                         type="text"
                         formErrorMessage={errors?.username?.message}
-                        serverErrorMessage={serverErrorIdentification(serverError, "username")}
+                        serverErrorMessage={serverErrorDetection(serverError, "username")}
                         register={{
                             ...register("username", {
                                 onChange:
@@ -75,7 +75,7 @@ const Registration: React.FC = () => {
                         placeholderText="Email"
                         type="text"
                         formErrorMessage={errors?.email?.message}
-                        serverErrorMessage={serverErrorIdentification(serverError, "email")}
+                        serverErrorMessage={serverErrorDetection(serverError, "email")}
                         register={{
                             ...register("email", {
                                 onChange:
@@ -87,7 +87,7 @@ const Registration: React.FC = () => {
                         placeholderText="Password"
                         type="password"
                         formErrorMessage={errors?.password?.message}
-                        serverErrorMessage={serverErrorIdentification(serverError, "password")}
+                        serverErrorMessage={serverErrorDetection(serverError, "password")}
                         register={{
                             ...register("password", {
                                 onChange:
