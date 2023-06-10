@@ -10,6 +10,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 
 import Button from "../../components/UI/Button/Button";
 import FormInput from "../../components/UI/FormInput/FormInput";
+import Loader from "../../components/UI/Loader/Loader";
 
 import {LoginQueryArgs} from "../../types/types";
 
@@ -20,7 +21,7 @@ import {useAppDispatch} from "../../hooks";
 import {setUser} from "../../store/userSlice";
 
 const Login: React.FC = () => {
-    const [login] = useLoginMutation();
+    const [login, {isLoading}] = useLoginMutation();
     const [serverError, setServerError] = useState<string>("");
 
     const dispatch = useAppDispatch();
@@ -88,11 +89,17 @@ const Login: React.FC = () => {
                         }}
                     />
                 </div>
-                <Button
-                    title="Login to your account"
-                    type="submit"
-                    disabled={!isValid}
-                />
+                {
+                    !isLoading
+                        ?
+                        <Button
+                            title="Login to your account"
+                            type="submit"
+                            disabled={!isValid}
+                        />
+                        :
+                        <Loader/>
+                }
                 <div className={styles.link}>
                     <p className={styles.link__info}>Don't have account?</p>
                     <NavLink
