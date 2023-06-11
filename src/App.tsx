@@ -18,14 +18,11 @@ import {initialUserDataState} from "./utils/helpers";
 //  добавить что-то вместо howlongtobeat
 //  useEffect, memo и useCallback !!!
 //  wishlist и library одним запросом доставать (?)
-//  isLoading/isPending добавить в компоненты (Loader)
 //  //
 //  вместо Library будет ник (с аватаркой?), (переименовать Library в Account и роуты поменять (?))
-//  wishlist -> want to play
 //  функционал add to wishlist/to library,
 //  ^ а если пользователь не авторизован (по stor-у наверное определять, кнопки будут disabled и написано маленьким текстом - "(!) вам необходимо авторизоваться"
 //  ^^^ и также с отзывами и своими оценкам на игры ^^^
-//  размер картинок в search, active стили на фильтры, на слайдер
 //  //
 //  отзывы, индивидуальные оценки для игр (свой рейтинг типо)
 //  ссылка на покупку в steam и т.п. (если есть в rawgAPI)

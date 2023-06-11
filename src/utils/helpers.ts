@@ -31,7 +31,7 @@ export const regularCrop = (imageSrc: string): string => {
 export const searchCrop = (imageSrc: string): string => {
     const imageUrl: string = String(imageSrc).split("media/")[1];
 
-    return `https://media.rawg.io/media/resize/420/-/${imageUrl}`;
+    return `https://media.rawg.io/media/resize/200/-/${imageUrl}`;
 };
 
 const getStringZero = (value: number): string => value < 10 ? "0" : "";

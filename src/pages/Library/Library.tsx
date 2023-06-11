@@ -10,6 +10,7 @@ import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import {IGameCard} from "../../types/types";
 
 import {initialGamesState} from "../../utils/helpers";
+import Loader from "../../components/UI/Loader/Loader";
 
 const Library: React.FC = () => {
     const [isLibrary, setIsLibrary] = useState<boolean>(true);
@@ -17,7 +18,8 @@ const Library: React.FC = () => {
     //заглушка (будет новый запрос на свой бекенд)
     const {
         data: libraryResponse = initialGamesState,
-        error: libraryError
+        error: libraryError,
+        isLoading: isLibraryLoading
     } = useGetGamesQuery({
         page: 1,
         metacritic: "",
@@ -29,7 +31,8 @@ const Library: React.FC = () => {
     //заглушка (будет новый запрос на свой бекенд)
     const {
         data: wishlistResponse = initialGamesState,
-        error: wishlistError
+        error: wishlistError,
+        isLoading: isWishlistLoading
     } = useGetGamesQuery({
         page: 2,
         metacritic: "",
@@ -65,11 +68,19 @@ const Library: React.FC = () => {
                         Wishlist
                     </h3>
                 </div>
-                <GameList
-                    games={gameListDefinition()}
-                    isLimit={true}
-                    isEmpty={false}
-                />
+                {
+                    (isLibraryLoading || isWishlistLoading)
+                        ?
+                        <div className={styles.loaderArea}>
+                            <Loader/>
+                        </div>
+                        :
+                        <GameList
+                            games={gameListDefinition()}
+                            isLimit={true}
+                            isEmpty={false}
+                        />
+                }
             </div>
     );
 };
