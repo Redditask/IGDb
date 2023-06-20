@@ -15,10 +15,10 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers";
 
 // ToDo:
-//  добавить что-то вместо howlongtobeat
+//  добавить что-то вместо howlongtobeat (и в самом конце Return тоже)
 //  вынести скелетоны (?)
 //  //
-//  функционал add to wishlist/to library,
+//  функционал remove from wishlist/library, вывод ошибки под кнопки
 //  ^ а если пользователь не авторизован (по stor-у наверное определять, кнопки будут disabled и написано маленьким текстом - "(!) вам необходимо авторизоваться"
 //  ^^^ и также с отзывами и своими оценкам на игры ^^^
 //  //

@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    AccountGamesQueryResult,
+    AccountGamesQueryResult, IGameCard,
     LoginQueryArgs,
     LoginQueryResult,
     RegistrationQueryArgs,
@@ -55,6 +55,24 @@ export const igdbAPI = createApi({
         getAccountGames: builder.query<AccountGamesQueryResult, {}>({
             query: () =>
                 "account/games"
+        }),
+        addGameToWishlist: builder.mutation<void, IGameCard>({
+            query: (gameInfo) => ({
+                url: "games/wishlist",
+                method: "POST",
+                body: {
+                    gameInfo
+                },
+            })
+        }),
+        addGameToLibrary: builder.mutation<void, IGameCard>({
+            query: (gameInfo) => ({
+                url: "games/library",
+                method: "POST",
+                body: {
+                    gameInfo
+                },
+            })
         })
     }),
 });
@@ -64,5 +82,7 @@ export const {
     useRegistrationMutation,
     useLogoutMutation,
     useCheckAuthQuery,
-    useGetAccountGamesQuery
+    useGetAccountGamesQuery,
+    useAddGameToLibraryMutation,
+    useAddGameToWishlistMutation
 } = igdbAPI;

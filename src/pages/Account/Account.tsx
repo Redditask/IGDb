@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {useGetAccountGamesQuery} from "../../API/igdbAPI";
 
@@ -8,6 +8,8 @@ import GameList from "../../components/GameList/GameList";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import Loader from "../../components/UI/Loader/Loader";
 
+import {IGameCard} from "../../types/types";
+
 import {initialAccountGamesState} from "../../utils/helpers";
 
 const Account: React.FC = () => {
@@ -16,16 +18,24 @@ const Account: React.FC = () => {
     const {
         data: games = initialAccountGamesState,
         error: isError,
-        isLoading: isLoading
-    } = useGetAccountGamesQuery({});
+        isLoading: isLoading,
+        refetch,
+    } = useGetAccountGamesQuery({
+        refetchOnMountOrArgChange: true,
+    });
 
-    //здесь пофиксить типы
-    const gameListDefinition = (): any[] => isLibrary ? games.library : games.wishlist;
+    const gameListDefinition = (): IGameCard[] => isLibrary ? games.library : games.wishlist;
 
-    const libraryHandler = (): void => setIsLibrary(!isLibrary);
+    const libraryHandler = (): void => setIsLibrary(true);
+
+    const wishlistHandler = ():void => setIsLibrary(false);
 
     const buttonStylesDefinition = (isActive: boolean): string =>
         isActive ? styles.account__activeButton : styles.account__defaultButton;
+
+    useEffect((): void=>{
+        refetch();
+    }, []);
 
     return (
         (isError)
@@ -34,32 +44,42 @@ const Account: React.FC = () => {
             :
             <div className={styles.account}>
                 <div className={styles.account__buttons}>
-                    <h3
-                        className={buttonStylesDefinition(isLibrary)}
-                        onClick={libraryHandler}
-                    >
-                        My games
-                    </h3>
-                    <h3
-                        className={buttonStylesDefinition(!isLibrary)}
-                        onClick={libraryHandler}
-                    >
-                        Wishlist
-                    </h3>
+                    {
+                        (games.library.length > 0)
+                        &&
+                        <h3
+                            className={buttonStylesDefinition(isLibrary)}
+                            onClick={libraryHandler}
+                        >
+                            My games
+                        </h3>
+                    }
+                    {
+                        (games.wishlist.length > 0)
+                        &&
+                        <h3
+                            className={buttonStylesDefinition(!isLibrary)}
+                            onClick={wishlistHandler}
+                        >
+                            Wishlist
+                        </h3>
+                    }
                 </div>
-                {
-                    isLoading
-                        ?
-                        <div className={styles.loaderArea}>
-                            <Loader/>
-                        </div>
-                        :
-                        <GameList
-                            games={gameListDefinition()}
-                            isLimit={true}
-                            isEmpty={false}
-                        />
-                }
+                <div className={styles.account__games}>
+                    {
+                        isLoading
+                            ?
+                            <div className={styles.loaderArea}>
+                                <Loader/>
+                            </div>
+                            :
+                            <GameList
+                                games={gameListDefinition()}
+                                isLimit={true}
+                                isEmpty={false}
+                            />
+                    }
+                </div>
             </div>
     );
 };

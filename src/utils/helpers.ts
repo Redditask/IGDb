@@ -112,6 +112,7 @@ export const scrollUp = (): void => {
 
 export const initialGameState: GameQueryResult = {
     id: 0,
+    slug: "",
     background_image: "",
     description_raw: "",
     developers: [],

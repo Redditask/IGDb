@@ -7,6 +7,7 @@ export interface GamesQueryResult {
 
 export interface GameQueryResult {
     id: number;
+    slug: string;
     name: string;
     description_raw: string;
     metacritic: number;
@@ -126,8 +127,8 @@ export interface RegistrationQueryArgs extends LoginQueryArgs{
 export interface RegistrationQueryResult extends LoginQueryResult {}
 
 export interface AccountGamesQueryResult {
-    library: string[];
-    wishlist: string[];
+    library: IGameCard[];
+    wishlist: IGameCard[];
 }
 
 export interface IUserStore extends IUserData {
