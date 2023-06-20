@@ -1,60 +1,39 @@
 import React, {useState} from "react";
 
-import {useGetGamesQuery} from "../../API/rawgApi";
+import {useGetAccountGamesQuery} from "../../API/igdbAPI";
 
-import styles from "./Library.module.scss";
+import styles from "./Account.module.scss";
 
 import GameList from "../../components/GameList/GameList";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
-
-import {IGameCard} from "../../types/types";
-
-import {initialGamesState} from "../../utils/helpers";
 import Loader from "../../components/UI/Loader/Loader";
 
-const Library: React.FC = () => {
+import {initialAccountGamesState} from "../../utils/helpers";
+
+const Account: React.FC = () => {
     const [isLibrary, setIsLibrary] = useState<boolean>(true);
 
-    //заглушка (будет новый запрос на свой бекенд)
     const {
-        data: libraryResponse = initialGamesState,
-        error: libraryError,
-        isLoading: isLibraryLoading
-    } = useGetGamesQuery({
-        page: 1,
-        metacritic: "",
-        dates: "",
-        genres: "",
-        platforms: ""
-    });
+        data: games = initialAccountGamesState,
+        error: isError,
+        isLoading: isLoading
+    } = useGetAccountGamesQuery({});
 
-    //заглушка (будет новый запрос на свой бекенд)
-    const {
-        data: wishlistResponse = initialGamesState,
-        error: wishlistError,
-        isLoading: isWishlistLoading
-    } = useGetGamesQuery({
-        page: 2,
-        metacritic: "",
-        dates: "",
-        genres: "",
-        platforms: ""
-    });
-
-    const gameListDefinition = (): IGameCard[] => isLibrary ? libraryResponse.results : wishlistResponse.results;
+    //здесь пофиксить типы
+    const gameListDefinition = (): any[] => isLibrary ? games.library : games.wishlist;
 
     const libraryHandler = (): void => setIsLibrary(!isLibrary);
 
     const buttonStylesDefinition = (isActive: boolean): string =>
-        isActive ? styles.library__activeButton : styles.library__defaultButton;
+        isActive ? styles.account__activeButton : styles.account__defaultButton;
 
     return (
-        (libraryError || wishlistError)
+        (isError)
             ?
             <ErrorPage/>
             :
-            <div className={styles.library}>
-                <div className={styles.library__buttons}>
+            <div className={styles.account}>
+                <div className={styles.account__buttons}>
                     <h3
                         className={buttonStylesDefinition(isLibrary)}
                         onClick={libraryHandler}
@@ -69,7 +48,7 @@ const Library: React.FC = () => {
                     </h3>
                 </div>
                 {
-                    (isLibraryLoading || isWishlistLoading)
+                    isLoading
                         ?
                         <div className={styles.loaderArea}>
                             <Loader/>
@@ -85,4 +64,4 @@ const Library: React.FC = () => {
     );
 };
 
-export default Library;
+export default Account;

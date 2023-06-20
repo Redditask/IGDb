@@ -21,7 +21,7 @@ const Search: React.FC = () => {
     } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
-        startTransition(() => {
+        startTransition((): void => {
             setSearchText(event.target.value);
         });
     };

@@ -1,6 +1,6 @@
 import Games from "../pages/Games/Games";
 import Game from "../pages/Game/Game";
-import Library from "../pages/Library/Library";
+import Account from "../pages/Account/Account";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 
@@ -13,7 +13,7 @@ import {
     LAST_YEAR_TOP_ROUTE,
     UPCOMING_RELEASES_ROUTE,
     queryParams, GAME_ROUTE,
-    LIBRARY_ROUTE, LOGIN_ROUTE,
+    ACCOUNT_ROUTE, LOGIN_ROUTE,
     REGISTRATION_ROUTE,
 } from "../utils/consts";
 
@@ -108,7 +108,7 @@ export const privateRoutes: ICustomRoute[] = [
         component: () => <Game/>
     },
     {
-        path: LIBRARY_ROUTE,
-        component: () => <Library/>
+        path: ACCOUNT_ROUTE,
+        component: () => <Account/>
     }
 ];

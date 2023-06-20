@@ -18,7 +18,7 @@ export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
 export const GAME_ROUTE: string = "/game/:slug";
 
-export const LIBRARY_ROUTE: string = "/library";
+export const ACCOUNT_ROUTE: string = "/account";
 
 export const LOGIN_ROUTE: string = "/login";
 

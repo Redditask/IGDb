@@ -10,7 +10,7 @@ import Search from "../Search/Search";
 import HeaderItems from "../UI/HeaderItems/HeaderItems";
 
 import {clearUser} from "../../store/userSlice";
-import {selectIsAuth, selectIsChecked} from "../../store/selectors";
+import {selectIsAuth, selectIsChecked, selectUsername} from "../../store/selectors";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import HeaderItemsSkeleton from "../UI/HeaderItemsSkeleton/HeaderItemsSkeleton";
 import {HOME_ROUTE} from "../../utils/consts";
@@ -20,7 +20,8 @@ const Header: React.FC = () => {
 
     const dispatch = useAppDispatch();
     const isAuth: boolean = useAppSelector(selectIsAuth);
-    const isChecked = useAppSelector(selectIsChecked);
+    const isChecked: boolean = useAppSelector(selectIsChecked);
+    const username: string = useAppSelector(selectUsername);
 
     const logoutHandler = async () => {
         await logout({});
@@ -44,6 +45,7 @@ const Header: React.FC = () => {
                         <HeaderItems
                             isAuth={isAuth}
                             logoutHandler={logoutHandler}
+                            username={username}
                         />
                         :
                         <HeaderItemsSkeleton />

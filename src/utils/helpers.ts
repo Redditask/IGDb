@@ -1,6 +1,7 @@
 import {
+    AccountGamesQueryResult,
     DLCQueryResult,
-    GameQueryResult, GamesQueryResult, HowLongToBeatResult, IDeveloper,
+    GameQueryResult, GamesQueryResult, IDeveloper,
     ILabel,
     IPlatform, LoginQueryResult,
     ScreenshotsQueryResult,
@@ -157,6 +158,11 @@ export const initialUserDataState: LoginQueryResult = {
         email: "",
         username: "",
     }
+};
+
+export const initialAccountGamesState: AccountGamesQueryResult = {
+    library: [],
+    wishlist: [],
 };
 
 export const monthsList: string[] = [

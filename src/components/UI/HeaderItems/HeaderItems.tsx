@@ -4,14 +4,15 @@ import styles from "./HeaderItems.module.scss";
 
 import {NavLink} from "react-router-dom";
 
-import {HOME_ROUTE, LIBRARY_ROUTE, LOGIN_ROUTE} from "../../../utils/consts";
+import {HOME_ROUTE, ACCOUNT_ROUTE, LOGIN_ROUTE} from "../../../utils/consts";
 
 interface HeaderItemsProps {
     isAuth: boolean;
     logoutHandler: () => void;
+    username: string;
 }
 
-const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler}) => {
+const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, username}) => {
 
     return (
         isAuth
@@ -20,10 +21,10 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler}) => {
                 <nav className={styles.items}>
                     <NavLink
                         className={styles.item}
-                        to={LIBRARY_ROUTE}
+                        to={ACCOUNT_ROUTE}
                         title="Your games library"
                     >
-                        Library
+                        {username}
                     </NavLink>
                     <NavLink
                         className={styles.item}

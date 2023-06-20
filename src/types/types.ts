@@ -34,12 +34,6 @@ export interface TrailersQueryResult {
     results: ITrailer [];
 }
 
-export interface HowLongToBeatResult {
-    gameplayMain: number;
-    gameplayMainExtra: number;
-    gameplayCompletionist: number;
-}
-
 export interface GamesQueryArgs {
     page: number;
     metacritic: string;
@@ -108,10 +102,6 @@ export interface ICustomOption {
     value: string | number;
 }
 
-export interface ILibraryGame {
-    slug: string;
-}
-
 export interface IUserData {
     email: string;
     id: number;
@@ -134,6 +124,11 @@ export interface RegistrationQueryArgs extends LoginQueryArgs{
 }
 
 export interface RegistrationQueryResult extends LoginQueryResult {}
+
+export interface AccountGamesQueryResult {
+    library: string[];
+    wishlist: string[];
+}
 
 export interface IUserStore extends IUserData {
     isAuth: boolean;

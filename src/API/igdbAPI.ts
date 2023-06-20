@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    HowLongToBeatResult,
+    AccountGamesQueryResult,
     LoginQueryArgs,
     LoginQueryResult,
     RegistrationQueryArgs,
@@ -21,10 +21,6 @@ export const igdbAPI = createApi({
         credentials: "include",
     }),
     endpoints: (builder) => ({
-        getHowLongToBeat: builder.query<HowLongToBeatResult, {gameName: string}>({
-            query: ({gameName}) =>
-                `howLongToBeat?game=${gameName}`,
-        }),
         login: builder.mutation<LoginQueryResult, LoginQueryArgs>({
             query: ({email, password}) => ({
                 url: "login",
@@ -55,6 +51,10 @@ export const igdbAPI = createApi({
         checkAuth: builder.query<LoginQueryResult, {}>({
             query: ()=>
                 "refresh"
+        }),
+        getAccountGames: builder.query<AccountGamesQueryResult, {}>({
+            query: () =>
+                "account/games"
         })
     }),
 });
@@ -63,5 +63,6 @@ export const {
     useLoginMutation,
     useRegistrationMutation,
     useLogoutMutation,
-    useCheckAuthQuery
+    useCheckAuthQuery,
+    useGetAccountGamesQuery
 } = igdbAPI;
