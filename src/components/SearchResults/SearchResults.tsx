@@ -17,7 +17,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({list, clean, isLoading}) =
     return (
         <>
             {
-                list.count
+                !!list.count
                     ?
                     list.results.map((game: IGameCard) =>
                         game.background_image

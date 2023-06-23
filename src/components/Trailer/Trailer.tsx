@@ -25,7 +25,7 @@ const Trailer: React.FC<TrailerProps> = ({gameId, setIsError}) => {
     return (
         <>
             {
-                trailers.results[0]
+                !!trailers.results[0]
                 &&
                 <video
                     title="Game Trailer"

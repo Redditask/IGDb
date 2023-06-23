@@ -38,7 +38,7 @@ const Account: React.FC = () => {
     }, []);
 
     return (
-        (isError)
+        isError
             ?
             <ErrorPage/>
             :

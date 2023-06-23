@@ -12,7 +12,7 @@ const Link:React.FC<LinkProps> = ({name, link}) => {
     return (
         <>
             {
-                link
+                !!link
                 &&
                 <a
                     href={link}

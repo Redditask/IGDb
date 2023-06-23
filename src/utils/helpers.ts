@@ -9,6 +9,7 @@ import {
 } from "../types/types";
 
 import * as Yup from "yup";
+import games from "../pages/Games/Games";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;

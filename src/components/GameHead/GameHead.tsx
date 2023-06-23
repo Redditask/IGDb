@@ -2,6 +2,11 @@ import React, {useState} from "react";
 
 import styles from "./GameHead.module.scss";
 
+import {useAddGameToLibraryMutation, useAddGameToWishlistMutation} from "../../API/igdbAPI";
+
+import {useAppSelector} from "../../hooks";
+import {selectIsAuth} from "../../store/selectors";
+
 import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
@@ -9,7 +14,6 @@ import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
 import {GameQueryResult} from "../../types/types";
 
 import {dateFormatting} from "../../utils/helpers";
-import {useAddGameToLibraryMutation, useAddGameToWishlistMutation} from "../../API/igdbAPI";
 
 interface GameHeadProps {
     game: GameQueryResult;
@@ -22,24 +26,26 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
     const [addToWishlist, {isLoading: isAddToWishlistLoading}] = useAddGameToWishlistMutation();
     const [serverError, setServerError] = useState<string>("");
 
-    const addToLibraryHandler = async () => {
-      const response = await addToLibrary({
-          id: game.id,
-          slug: game.slug,
-          name: game.name,
-          released: game.released,
-          background_image: game.background_image,
-          metacritic: game.metacritic,
-          genres: game.genres,
-          parent_platforms: game.platforms,
-      }).unwrap().catch((err)=>err);
+    const isAuth = useAppSelector(selectIsAuth);
 
-      if (response?.data?.message) {
-          setServerError(response.data.message);
-      }
+    const addToLibraryHandler = async (): Promise<void> => {
+        const response = await addToLibrary({
+            id: game.id,
+            slug: game.slug,
+            name: game.name,
+            released: game.released,
+            background_image: game.background_image,
+            metacritic: game.metacritic,
+            genres: game.genres,
+            parent_platforms: game.platforms,
+        }).unwrap().catch((err) => err);
+
+        if (response?.data?.message) {
+            setServerError(response.data.message);
+        }
     };
 
-    const addToWishlistHandler = async () => {
+    const addToWishlistHandler = async (): Promise<void> => {
         const response = await addToWishlist({
             id: game.id,
             slug: game.slug,
@@ -49,7 +55,7 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
             metacritic: game.metacritic,
             genres: game.genres,
             parent_platforms: game.platforms,
-        }).unwrap().catch((err)=>err);
+        }).unwrap().catch((err) => err);
 
         if (response?.data?.message) {
             setServerError(response.data.message);
@@ -66,11 +72,16 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
                     <h2>{dateFormatting(game.released)}</h2>
                     <h1 className={styles.textSide__title}>{game.name}</h1>
                     <div className={styles.textSide__buttons}>
-                        <Button title="Add to library" onClick={addToLibraryHandler}/>
-                        <Button title="Add to wishlist" onClick={addToWishlistHandler}/>
+                        <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
+                        <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
                     </div>
-                    {/*где-то тут ошибку впихнуть*/}
-                    {/*если игра уже добавлена - кнопки удаления*/}
+                    {
+                        !isAuth
+                            ?
+                            <p className={styles.errorMessage}>You must be logged in</p>
+                            :
+                            <p className={styles.errorMessage}>{serverError}</p>
+                    }
                 </div>
                 <Trailer
                     gameId={game.id}

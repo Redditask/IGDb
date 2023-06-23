@@ -22,7 +22,7 @@ const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
     return (
         <>
             {
-                platformsArray
+                !!platformsArray.length
                 &&
                 <div className={styles.icons}>
                     {platformDefinition(platformsArray, "PC")

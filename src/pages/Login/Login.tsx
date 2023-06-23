@@ -44,7 +44,7 @@ const Login: React.FC = () => {
 
         if (response?.user?.username?.length) {
             dispatch(setUser(response.user));
-            navigate("/");
+            navigate(-1);
         } else if (response?.data?.message) {
             setServerError(response.data.message);
         }

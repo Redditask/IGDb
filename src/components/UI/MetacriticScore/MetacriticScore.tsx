@@ -16,7 +16,7 @@ const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
         <div className={styles.metacriticScore}>
             <p>Metacritic: </p>
             {
-                score
+                !!score
                     ?
                     <div
                         className={className}

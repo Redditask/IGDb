@@ -19,7 +19,7 @@ const AdditionalContentItem:React.FC<AdditionalContentItemProps> = ({title, cont
     return (
         <>
             {
-                (content.length !== 0)
+                !!content.length
                 &&
                 <div className={styles.gameList}>
                     <h2>{title}</h2>
