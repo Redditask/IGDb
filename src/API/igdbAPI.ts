@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    AccountGamesQueryResult,
+    AccountGamesQueryResult, CheckIsAddedResult,
     IGameCard,
     LoginQueryArgs,
     LoginQueryResult,
@@ -59,7 +59,7 @@ export const igdbAPI = createApi({
         }),
         addGameToWishlist: builder.mutation<void, IGameCard>({
             query: (gameInfo) => ({
-                url: "games/wishlist",
+                url: "wishlist",
                 method: "POST",
                 body: {
                     gameInfo
@@ -68,13 +68,29 @@ export const igdbAPI = createApi({
         }),
         addGameToLibrary: builder.mutation<void, IGameCard>({
             query: (gameInfo) => ({
-                url: "games/library",
+                url: "library",
                 method: "POST",
                 body: {
                     gameInfo
                 },
             })
-        })
+        }),
+        removeFromWishlist: builder.mutation<void, {slug: string}>({
+           query: ({slug}) => ({
+               url: `wishlist/${slug}`,
+               method: "DELETE",
+           })
+        }),
+        removeFromLibrary: builder.mutation<void, {slug: string}>({
+            query: ({slug}) => ({
+                url: `library/${slug}`,
+                method: "DELETE",
+            })
+        }),
+        checkIsAdded: builder.query<CheckIsAddedResult, {slug: string}>({
+           query: ({slug}) =>
+               `check/${slug}`,
+        }),
     }),
 });
 
@@ -85,5 +101,8 @@ export const {
     useCheckAuthQuery,
     useGetAccountGamesQuery,
     useAddGameToLibraryMutation,
-    useAddGameToWishlistMutation
+    useAddGameToWishlistMutation,
+    useRemoveFromLibraryMutation,
+    useRemoveFromWishlistMutation,
+    useCheckIsAddedQuery
 } = igdbAPI;

@@ -1,5 +1,5 @@
 import {
-    AccountGamesQueryResult,
+    AccountGamesQueryResult, CheckIsAddedResult,
     DLCQueryResult,
     GameQueryResult, GamesQueryResult, IDeveloper,
     ILabel,
@@ -9,7 +9,6 @@ import {
 } from "../types/types";
 
 import * as Yup from "yup";
-import games from "../pages/Games/Games";
 
 export const scrollCheck = (event: any): boolean =>
     event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight) < 1;
@@ -165,6 +164,11 @@ export const initialUserDataState: LoginQueryResult = {
 export const initialAccountGamesState: AccountGamesQueryResult = {
     library: [],
     wishlist: [],
+};
+
+export const initialIsAddedState: CheckIsAddedResult = {
+    library: false,
+    wishlist: false,
 };
 
 export const monthsList: string[] = [

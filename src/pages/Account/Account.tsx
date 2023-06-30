@@ -19,7 +19,7 @@ const Account: React.FC = () => {
         data: games = initialAccountGamesState,
         error: isError,
         isLoading: isLoading,
-        refetch,
+        refetch
     } = useGetAccountGamesQuery({
         refetchOnMountOrArgChange: true,
     });

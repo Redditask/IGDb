@@ -131,6 +131,11 @@ export interface AccountGamesQueryResult {
     wishlist: IGameCard[];
 }
 
+export interface CheckIsAddedResult {
+    library: boolean;
+    wishlist: boolean;
+}
+
 export interface IUserStore extends IUserData {
     isAuth: boolean;
     isChecked: boolean;
