@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./GameDetails.module.scss";
+import styles from "./GameLabels.module.scss";
 
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Link from "../UI/Link/Link";
@@ -11,19 +11,19 @@ import {GameQueryResult} from "../../types/types";
 
 import {developersToLabelsConvert, isHaveLinks, platformsToLabelsConvert} from "../../utils/helpers";
 
-interface GameDetailsProps {
+interface GameLabelsProps {
     game: GameQueryResult;
     isLoading: boolean;
 }
 
-const GameDetails: React.FC<GameDetailsProps> = ({game, isLoading}) => {
+const GameLabels: React.FC<GameLabelsProps> = ({game, isLoading}) => {
 
     return (
         isLoading
             ?
             <GameDetailsSkeleton/>
             :
-            <div className={styles.details}>
+            <div className={styles.labels}>
                 <h2>Details about game</h2>
                 <Labels
                     labels={developersToLabelsConvert(game.developers)}
@@ -41,7 +41,7 @@ const GameDetails: React.FC<GameDetailsProps> = ({game, isLoading}) => {
                 {
                     isHaveLinks(game)
                     &&
-                    <div className={styles.detail}>
+                    <div className={styles.label}>
                         <p>Links: </p>
                         <Link
                             name={"Metacritic"}
@@ -61,4 +61,4 @@ const GameDetails: React.FC<GameDetailsProps> = ({game, isLoading}) => {
     );
 };
 
-export default GameDetails;
+export default GameLabels;

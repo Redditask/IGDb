@@ -6,7 +6,7 @@ import {
     LoginQueryArgs,
     LoginQueryResult,
     RegistrationQueryArgs,
-    RegistrationQueryResult
+    RegistrationQueryResult, SlugQueryArg
 } from "../types/types";
 
 export const igdbAPI = createApi({
@@ -75,19 +75,19 @@ export const igdbAPI = createApi({
                 },
             })
         }),
-        removeFromWishlist: builder.mutation<void, {slug: string}>({
+        removeFromWishlist: builder.mutation<void, {slug: SlugQueryArg}>({
            query: ({slug}) => ({
                url: `wishlist/${slug}`,
                method: "DELETE",
            })
         }),
-        removeFromLibrary: builder.mutation<void, {slug: string}>({
+        removeFromLibrary: builder.mutation<void, {slug: SlugQueryArg}>({
             query: ({slug}) => ({
                 url: `library/${slug}`,
                 method: "DELETE",
             })
         }),
-        checkIsAdded: builder.query<CheckIsAddedResult, {slug: string}>({
+        checkIsAdded: builder.query<CheckIsAddedResult, {slug: SlugQueryArg}>({
            query: ({slug}) =>
                `check/${slug}`,
         }),

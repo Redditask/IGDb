@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 
-import styles from "./GameHead.module.scss";
+import styles from "./GamePageHead.module.scss";
 
 import {
     useAddGameToLibraryMutation,
     useAddGameToWishlistMutation,
-    useCheckIsAddedQuery,
     useRemoveFromLibraryMutation,
     useRemoveFromWishlistMutation
 } from "../../API/igdbAPI";
@@ -17,30 +16,26 @@ import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
 
-import {GameQueryResult} from "../../types/types";
+import {CheckIsAddedResult, GameQueryResult} from "../../types/types";
 
-import {dateFormatting, initialIsAddedState} from "../../utils/helpers";
+import {dateFormatting} from "../../utils/helpers";
 
-interface GameHeadProps {
+interface GamePageHeadProps {
     game: GameQueryResult;
     isLoading: boolean;
     setIsError: (isError: boolean) => void;
+    addedStatus: CheckIsAddedResult;
+    refetch: () => void;
 }
 
-const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
-    const [addToLibrary, {isLoading: isAddToLibraryLoading}] = useAddGameToLibraryMutation();
-    const [addToWishlist, {isLoading: isAddToWishlistLoading}] = useAddGameToWishlistMutation();
-    const [removeFromLibrary, {isLoading: isRemoveFromLibraryLoading}] = useRemoveFromLibraryMutation();
-    const [removeFromWishlist, {isLoading: isRemoveFromWishlistLoading}] = useRemoveFromWishlistMutation();
+const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError, addedStatus, refetch}) => {
+    const [addToLibrary] = useAddGameToLibraryMutation();
+    const [addToWishlist] = useAddGameToWishlistMutation();
+    const [removeFromLibrary] = useRemoveFromLibraryMutation();
+    const [removeFromWishlist] = useRemoveFromWishlistMutation();
     const [serverError, setServerError] = useState<string>("");
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
-
-    const {
-        data: isAdded = initialIsAddedState,
-        isLoading: isChecked,
-        refetch
-    } = useCheckIsAddedQuery({slug: game.slug}, {skip: !game.slug});
 
     const addToLibraryHandler = async (): Promise<void> => {
         const response = await addToLibrary({
@@ -109,20 +104,20 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
             ?
             <GameHeadSkeleton/>
             :
-            <div className={styles.gameHead}>
+            <div className={styles.gamePageHead}>
                 <div className={styles.textSide}>
                     <h2>{dateFormatting(game.released)}</h2>
                     <h1 className={styles.textSide__title}>{game.name}</h1>
                     <div className={styles.textSide__buttons}>
                         {
-                            isAdded.library
+                            addedStatus.library
                                 ?
                                 <Button title="Remove from library" onClick={removeFromLibraryHandler} disabled={!isAuth}/>
                                 :
                                 <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
                         }
                         {
-                            isAdded.wishlist
+                            addedStatus.wishlist
                                 ?
                                 <Button title="Remove from wishlist" onClick={removeFromWishlistHandler} disabled={!isAuth}/>
                                 :
@@ -145,4 +140,4 @@ const GameHead: React.FC<GameHeadProps> = ({game, isLoading, setIsError}) => {
     );
 };
 
-export default GameHead;
+export default GamePageHead;

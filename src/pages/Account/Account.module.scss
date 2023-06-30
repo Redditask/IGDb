@@ -3,7 +3,13 @@
 
   cursor: pointer;
 
+  text-decoration: none;
+
   user-select: none;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
 
   &:active {
     transform: scale(0.8);
@@ -48,10 +54,6 @@
 
   &__defaultButton {
     @include button();
-
-    &:hover {
-      transform: translateY(-0.5rem);
-    }
   }
 
   &__games {

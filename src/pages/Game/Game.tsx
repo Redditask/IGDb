@@ -1,17 +1,18 @@
 import React, {lazy, Suspense, useEffect, useState} from "react";
 
 import {useGetGameDetailsQuery,} from "../../API/rawgApi";
+import {useCheckIsAddedQuery} from "../../API/igdbAPI";
 
 import {useParams} from "react-router-dom";
 
 import styles from "./Game.module.scss";
 
-import {initialGameState} from "../../utils/helpers";
+import {initialGameState, initialIsAddedState} from "../../utils/helpers";
 
-import GameDetails from "../../components/GameDetails/GameDetails";
+import GameLabels from "../../components/GameLabels/GameLabels";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
-import GameHead from "../../components/GameHead/GameHead";
+import GamePageHead from "../../components/GamePageHead/GamePageHead";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import GameDescription from "../../components/GameDescription/GameDescription";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
@@ -27,6 +28,12 @@ const Game: React.FC = () => {
         error: gameError,
         isLoading
     } = useGetGameDetailsQuery({slug}, {skip: !slug});
+
+    const {
+        data: addedStatus = initialIsAddedState,
+        isLoading: isChecked,
+        refetch
+    } = useCheckIsAddedQuery({slug}, {skip: !slug});
 
     useEffect((): void => {
         window.scrollTo({
@@ -52,16 +59,18 @@ const Game: React.FC = () => {
                 >
                     <div className={styles.wrapper}>
                         <div className={styles.game}>
-                            <GameHead
+                            <GamePageHead
                                 game={game}
                                 isLoading={isLoading}
                                 setIsError={setIsError}
+                                addedStatus={addedStatus}
+                                refetch={refetch}
                             />
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
-                                    <GameDetails
+                                    <GameLabels
                                         game={game}
-                                        isLoading={isLoading}
+                                        isLoading={isLoading || isChecked}
                                     />
                                     <Screenshots
                                         setImageURL={setImageURL}
