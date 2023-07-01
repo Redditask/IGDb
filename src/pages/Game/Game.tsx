@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from "react";
+import React, {lazy, Suspense, useEffect, useRef, useState} from "react";
 
 import {useGetGameDetailsQuery,} from "../../API/rawgApi";
 import {useCheckIsAddedQuery} from "../../API/igdbAPI";
@@ -9,19 +9,24 @@ import styles from "./Game.module.scss";
 
 import {initialGameState, initialIsAddedState} from "../../utils/helpers";
 
+import {SnackbarRef} from "../../types/types";
+
 import GameLabels from "../../components/GameLabels/GameLabels";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GamePageHead from "../../components/GamePageHead/GamePageHead";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import GameDescription from "../../components/GameDescription/GameDescription";
+import Snackbar from "../../components/UI/Snackbar/Snackbar";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
     const [isError, setIsError] = useState<boolean>(false);
+    const [actionResponse, setActionResponse] = useState<string>("");
 
     const {slug} = useParams();
+    const snackbarRef = useRef<SnackbarRef>(null);
 
     const {
         data: game = initialGameState,
@@ -65,6 +70,8 @@ const Game: React.FC = () => {
                                 setIsError={setIsError}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
+                                setActionResponse={setActionResponse}
+                                ref={snackbarRef}
                             />
                             <div className={styles.game__body}>
                                 <div className={styles.game__info}>
@@ -95,6 +102,10 @@ const Game: React.FC = () => {
                 <ImageModal
                     imageURL={imageURL}
                     setImageURL={setImageURL}
+                />
+                <Snackbar
+                    ref={snackbarRef}
+                    message={actionResponse}
                 />
             </div>
     );

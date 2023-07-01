@@ -140,3 +140,7 @@ export interface IUserStore extends IUserData {
     isAuth: boolean;
     isChecked: boolean;
 }
+
+export interface SnackbarRef {
+    show: () => void;
+}

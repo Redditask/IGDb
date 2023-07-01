@@ -1,0 +1,52 @@
+.container {
+  position: fixed;
+
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.snackbar {
+  width: 22rem;
+  height: 5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: black;
+  font-size: 1.2rem;
+
+  background: white;
+  border-radius: 1rem;
+  border: 0.1rem solid lightgray;
+
+  box-shadow: 0 0 10px 2.5px lightgray;
+}
+
+#show {
+  visibility: visible;
+  animation: fadeIn 0.5s, fadeOut 0.5s 3.5s;
+}
+
+#hide {
+  display: none;
+  visibility: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

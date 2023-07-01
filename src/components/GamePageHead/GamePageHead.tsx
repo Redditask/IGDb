@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {forwardRef, useState} from "react";
 
 import styles from "./GamePageHead.module.scss";
 
@@ -16,7 +16,7 @@ import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
 
-import {CheckIsAddedResult, GameQueryResult} from "../../types/types";
+import {CheckIsAddedResult, GameQueryResult, SnackbarRef} from "../../types/types";
 
 import {dateFormatting} from "../../utils/helpers";
 
@@ -26,9 +26,10 @@ interface GamePageHeadProps {
     setIsError: (isError: boolean) => void;
     addedStatus: CheckIsAddedResult;
     refetch: () => void;
+    setActionResponse: (actionResponse: string) => void;
 }
 
-const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError, addedStatus, refetch}) => {
+const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
     const [addToLibrary] = useAddGameToLibraryMutation();
     const [addToWishlist] = useAddGameToWishlistMutation();
     const [removeFromLibrary] = useRemoveFromLibraryMutation();
@@ -51,8 +52,11 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
 
         if (response?.data?.message) {
             setServerError(response.data.message);
-        }else {
+        } else {
             refetch();
+            setActionResponse("Game was added to library");
+            // @ts-ignore
+            ref.current.show();
         }
     };
 
@@ -70,8 +74,11 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
 
         if (response?.data?.message) {
             setServerError(response.data.message);
-        }else {
+        } else {
             refetch();
+            setActionResponse("Game was added to wishlist");
+            // @ts-ignore
+            ref.current.show();
         }
     };
 
@@ -82,8 +89,11 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
 
         if (response?.data?.message) {
             setServerError(response.data.message);
-        }else {
+        } else {
             refetch();
+            setActionResponse("Game was removed from library");
+            // @ts-ignore
+            ref.current.show();
         }
     };
 
@@ -94,8 +104,11 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
 
         if (response?.data?.message) {
             setServerError(response.data.message);
-        }else {
+        } else {
             refetch();
+            setActionResponse("Game was removed from wishlist");
+            // @ts-ignore
+            ref.current.show();
         }
     };
 
@@ -112,14 +125,16 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
                         {
                             addedStatus.library
                                 ?
-                                <Button title="Remove from library" onClick={removeFromLibraryHandler} disabled={!isAuth}/>
+                                <Button title="Remove from library" onClick={removeFromLibraryHandler}
+                                        disabled={!isAuth}/>
                                 :
                                 <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
                         }
                         {
                             addedStatus.wishlist
                                 ?
-                                <Button title="Remove from wishlist" onClick={removeFromWishlistHandler} disabled={!isAuth}/>
+                                <Button title="Remove from wishlist" onClick={removeFromWishlistHandler}
+                                        disabled={!isAuth}/>
                                 :
                                 <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
                         }
@@ -138,6 +153,6 @@ const GamePageHead: React.FC<GamePageHeadProps> = ({game, isLoading, setIsError,
                 />
             </div>
     );
-};
+});
 
 export default GamePageHead;
