@@ -141,6 +141,6 @@ export interface IUserStore extends IUserData {
     isChecked: boolean;
 }
 
-export interface SnackbarRef {
+export interface NotificationRef {
     show: () => void;
 }

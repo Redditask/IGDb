@@ -16,7 +16,7 @@ import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
 
-import {CheckIsAddedResult, GameQueryResult, SnackbarRef} from "../../types/types";
+import {CheckIsAddedResult, GameQueryResult, NotificationRef} from "../../types/types";
 
 import {dateFormatting} from "../../utils/helpers";
 
@@ -29,7 +29,7 @@ interface GamePageHeadProps {
     setActionResponse: (actionResponse: string) => void;
 }
 
-const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
+const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
     const [addToLibrary] = useAddGameToLibraryMutation();
     const [addToWishlist] = useAddGameToWishlistMutation();
     const [removeFromLibrary] = useRemoveFromLibraryMutation();
@@ -37,6 +37,10 @@ const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoadin
     const [serverError, setServerError] = useState<string>("");
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
+
+    const showNotification = (): void => {
+        if (ref && "current" in ref && ref.current) ref.current.show();
+    };
 
     const addToLibraryHandler = async (): Promise<void> => {
         const response = await addToLibrary({
@@ -55,8 +59,7 @@ const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoadin
         } else {
             refetch();
             setActionResponse("Game was added to library");
-            // @ts-ignore
-            ref.current.show();
+            showNotification();
         }
     };
 
@@ -77,8 +80,7 @@ const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoadin
         } else {
             refetch();
             setActionResponse("Game was added to wishlist");
-            // @ts-ignore
-            ref.current.show();
+            showNotification();
         }
     };
 
@@ -92,8 +94,7 @@ const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoadin
         } else {
             refetch();
             setActionResponse("Game was removed from library");
-            // @ts-ignore
-            ref.current.show();
+            showNotification();
         }
     };
 
@@ -107,8 +108,7 @@ const GamePageHead = forwardRef<SnackbarRef, GamePageHeadProps>(({game, isLoadin
         } else {
             refetch();
             setActionResponse("Game was removed from wishlist");
-            // @ts-ignore
-            ref.current.show();
+            showNotification();
         }
     };
 
