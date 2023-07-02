@@ -14,10 +14,10 @@ import {NotificationRef} from "../../types/types";
 import GameLabels from "../../components/GameLabels/GameLabels";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
-import GamePageHead from "../../components/GamePageHead/GamePageHead";
+import GameHeader from "../../components/GameHeader/GameHeader";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import GameDescription from "../../components/GameDescription/GameDescription";
-import Notification from "../../components/UI/Snackbar/Notification";
+import Notification from "../../components/UI/Notification/Notification";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -64,7 +64,7 @@ const Game: React.FC = () => {
                 >
                     <div className={styles.wrapper}>
                         <div className={styles.game}>
-                            <GamePageHead
+                            <GameHeader
                                 game={game}
                                 isLoading={isLoading}
                                 setIsError={setIsError}

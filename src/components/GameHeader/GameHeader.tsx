@@ -1,6 +1,6 @@
 import React, {forwardRef, useState} from "react";
 
-import styles from "./GamePageHead.module.scss";
+import styles from "./GameHeader.module.scss";
 
 import {
     useAddGameToLibraryMutation,
@@ -20,7 +20,7 @@ import {CheckIsAddedResult, GameQueryResult, NotificationRef} from "../../types/
 
 import {dateFormatting} from "../../utils/helpers";
 
-interface GamePageHeadProps {
+interface GameHeaderProps {
     game: GameQueryResult;
     isLoading: boolean;
     setIsError: (isError: boolean) => void;
@@ -29,7 +29,7 @@ interface GamePageHeadProps {
     setActionResponse: (actionResponse: string) => void;
 }
 
-const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
+const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
     const [addToLibrary] = useAddGameToLibraryMutation();
     const [addToWishlist] = useAddGameToWishlistMutation();
     const [removeFromLibrary] = useRemoveFromLibraryMutation();
@@ -38,7 +38,9 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
 
-    const showNotification = (): void => {
+    const showNotification = (message: string): void => {
+        refetch();
+        setActionResponse(message);
         if (ref && "current" in ref && ref.current) ref.current.show();
     };
 
@@ -54,13 +56,9 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
             parent_platforms: game.platforms,
         }).unwrap().catch((err) => err);
 
-        if (response?.data?.message) {
-            setServerError(response.data.message);
-        } else {
-            refetch();
-            setActionResponse("Game was added to library");
-            showNotification();
-        }
+        !!response?.data?.message
+            ? setServerError(response.data.message)
+            : showNotification("Game was added to library");
     };
 
     const addToWishlistHandler = async (): Promise<void> => {
@@ -75,13 +73,9 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
             parent_platforms: game.platforms,
         }).unwrap().catch((err) => err);
 
-        if (response?.data?.message) {
-            setServerError(response.data.message);
-        } else {
-            refetch();
-            setActionResponse("Game was added to wishlist");
-            showNotification();
-        }
+        !!response?.data?.message
+            ? setServerError(response.data.message)
+            : showNotification("Game was added to wishlist");
     };
 
     const removeFromLibraryHandler = async (): Promise<void> => {
@@ -89,13 +83,9 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
             slug: game.slug
         }).unwrap().catch((err) => err);
 
-        if (response?.data?.message) {
-            setServerError(response.data.message);
-        } else {
-            refetch();
-            setActionResponse("Game was removed from library");
-            showNotification();
-        }
+        !!response?.data?.message
+            ? setServerError(response.data.message)
+            : showNotification("Game was removed from library");
     };
 
     const removeFromWishlistHandler = async (): Promise<void> => {
@@ -103,13 +93,9 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
             slug: game.slug
         }).unwrap().catch((err) => err);
 
-        if (response?.data?.message) {
-            setServerError(response.data.message);
-        } else {
-            refetch();
-            setActionResponse("Game was removed from wishlist");
-            showNotification();
-        }
+        !!response?.data?.message
+            ? setServerError(response.data.message)
+            : showNotification("Game was removed from wishlist");
     };
 
     return (
@@ -117,34 +103,26 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
             ?
             <GameHeadSkeleton/>
             :
-            <div className={styles.gamePageHead}>
+            <div className={styles.gameHeader}>
                 <div className={styles.textSide}>
                     <h2>{dateFormatting(game.released)}</h2>
                     <h1 className={styles.textSide__title}>{game.name}</h1>
                     <div className={styles.textSide__buttons}>
                         {
                             addedStatus.library
-                                ?
-                                <Button title="Remove from library" onClick={removeFromLibraryHandler}
-                                        disabled={!isAuth}/>
-                                :
-                                <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
+                                ? <Button title="Remove from library" onClick={removeFromLibraryHandler} disabled={!isAuth}/>
+                                : <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
                         }
                         {
                             addedStatus.wishlist
-                                ?
-                                <Button title="Remove from wishlist" onClick={removeFromWishlistHandler}
-                                        disabled={!isAuth}/>
-                                :
-                                <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
+                                ? <Button title="Remove from wishlist" onClick={removeFromWishlistHandler} disabled={!isAuth}/>
+                                : <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
                         }
                     </div>
                     {
                         !isAuth
-                            ?
-                            <p className={styles.errorMessage}>You must be logged in</p>
-                            :
-                            <p className={styles.errorMessage}>{serverError}</p>
+                            ? <p className={styles.errorMessage}>You must be logged in</p>
+                            : <p className={styles.errorMessage}>{serverError}</p>
                     }
                 </div>
                 <Trailer
@@ -155,4 +133,4 @@ const GamePageHead = forwardRef<NotificationRef, GamePageHeadProps>(({game, isLo
     );
 });
 
-export default GamePageHead;
+export default GameHeader;

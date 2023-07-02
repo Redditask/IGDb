@@ -13,6 +13,7 @@ import {initialSearchState} from "../../utils/helpers";
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
     const [searchText, setSearchText] = useState<string>("");
+    const [searchFocus, setSearchFocus] = useState<boolean>(false);
 
     const {
         data: searchResults = initialSearchState,
@@ -30,6 +31,19 @@ const Search: React.FC = () => {
         setSearchText("");
     };
 
+    const focusSearch = (): void => {
+        setSearchFocus(true);
+    };
+
+    const blurSearch = (): void => {
+        setSearchFocus(false);
+    };
+
+    const idDefinition = (): string => {
+        if (searchText.length && searchFocus) return styles.show
+        else return  styles.hidden;
+    };
+
     return (
         <div className={styles.search}>
             <div className={styles.search__line}>
@@ -40,11 +54,16 @@ const Search: React.FC = () => {
                         placeholder="Search"
                         value={searchText}
                         onChange={searchHandler}
+                        onFocus={focusSearch}
+                        onBlur={blurSearch}
                     />
                     <span className={styles.icon}><ImSearch size={15}/></span>
                 </div>
             </div>
-            <div className={styles.search__content}>
+            <div
+                className={styles.search__content}
+                id={idDefinition()}
+            >
                 {
                     searchError
                         ?

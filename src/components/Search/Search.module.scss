@@ -68,12 +68,15 @@
   margin: 0 0.5rem;
 }
 
-.search:hover .search__content {
-  display: block;
-  background-color: white;
-}
-
 .errorMessage {
   margin: 6rem 8rem;
 }
 
+#show {
+  display: block;
+  background-color: white;
+}
+
+#hidden {
+  display: none;
+}

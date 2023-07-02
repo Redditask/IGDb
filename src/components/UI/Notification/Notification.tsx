@@ -2,8 +2,6 @@ import React, {forwardRef, useImperativeHandle, useState} from "react";
 
 import styles from "./Notification.module.scss";
 
-import {GrClose} from "react-icons/gr";
-
 import {NotificationRef} from "../../../types/types";
 
 interface NotificationProps {
@@ -11,17 +9,24 @@ interface NotificationProps {
 }
 
 const Notification= forwardRef<NotificationRef, NotificationProps>(({message}, ref) => {
-    const [showNotification, setShowNotification] = useState<boolean>(false);
+    const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
+    const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
 
     useImperativeHandle(ref, (): NotificationRef => ({
         show(): void {
-            setShowNotification(true);
+            if (timeoutId) clearTimeout(timeoutId);
+
+            setIsShowNotification(true);
+
+            let newTimeout: NodeJS.Timeout = setTimeout((): void => {
+                setIsShowNotification(false);
+            }, 3000);
+
+            setTimeoutId(newTimeout);
         }
     }));
 
-    const closeNotification = (): void => setShowNotification(false);
-
-    const idStylesDefinition = (): string => showNotification ? styles.show : styles.hide;
+    const idStylesDefinition = (): string => isShowNotification ? styles.show : styles.hide;
 
     return (
         <div className={styles.container}>
@@ -30,12 +35,6 @@ const Notification= forwardRef<NotificationRef, NotificationProps>(({message}, r
                 id={idStylesDefinition()}
             >
                 <p>{message}</p>
-                <GrClose
-                    className={styles.closeButton}
-                    title="Close notification"
-                    onClick={closeNotification}
-                    size={13}
-                />
             </div>
         </div>
     );
