@@ -12,14 +12,14 @@ import RangeSlider from "../../components/RangeSlider/RangeSlider";
 import {IGameCard} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
+import {initialGamesState} from "../../utils/helpers/initialStates";
 import {
     createMetacriticString,
     getMaxRangeValue,
     getMinRangeValue,
-    getValuesFromMetacriticString,
-    initialGamesState,
-    scrollCheck
-} from "../../utils/helpers";
+    getValuesFromMetacriticString
+} from "../../utils/helpers/dataProcessing";
+import {scrollCheck} from "../../utils/helpers/systemActions";
 
 interface GamesProps {
     metacritic: string;
@@ -134,7 +134,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                     </div>
                 </div>
                 {
-                    error
+                    !!error
                         ? <h1 className={styles.errorMessage}>Oops, something go wrong...</h1>
                         : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
                 }

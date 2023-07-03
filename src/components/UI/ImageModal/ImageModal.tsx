@@ -19,7 +19,7 @@ const ImageModal:React.FC<ImageModalProps> = ({imageURL, setImageURL}) => {
     return (
         <>
             {
-                (imageURL.length > 0)
+                !!imageURL.length
                 &&
                 <div className={root.join(" ")} onClick={closeModal}>
                     <div className={styles.modal__content} onClick={stopPropagation}>

@@ -10,7 +10,7 @@ import Loader from "../../components/UI/Loader/Loader";
 
 import {IGameCard} from "../../types/types";
 
-import {initialAccountGamesState} from "../../utils/helpers";
+import {initialAccountGamesState} from "../../utils/helpers/initialStates";
 
 const Account: React.FC = () => {
     const [isLibrary, setIsLibrary] = useState<boolean>(true);
@@ -45,17 +45,17 @@ const Account: React.FC = () => {
             <div className={styles.account}>
                 <div className={styles.account__buttons}>
                     {
-                        (games.library.length > 0)
+                        !!games.library.length
                         &&
                         <h3
                             className={buttonStylesDefinition(isLibrary)}
                             onClick={libraryHandler}
                         >
-                            My games
+                            Library
                         </h3>
                     }
                     {
-                        (games.wishlist.length > 0)
+                        !!games.wishlist.length
                         &&
                         <h3
                             className={buttonStylesDefinition(!isLibrary)}

@@ -6,8 +6,10 @@ import styles from "./Screenshots.module.scss";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
-import {regularCrop, initialScreenshotsState} from "../../utils/helpers";
 import {IScreenshot} from "../../types/types";
+
+import {initialScreenshotsState} from "../../utils/helpers/initialStates";
+import {regularCrop} from "../../utils/helpers/systemActions";
 
 interface ScreenshotsProps {
     gameId: number;

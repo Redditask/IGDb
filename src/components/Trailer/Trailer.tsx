@@ -4,7 +4,7 @@ import {useGetGameTrailersQuery} from "../../API/rawgApi";
 
 import styles from "./Trailer.module.scss";
 
-import {initialTrailersState} from "../../utils/helpers";
+import {initialTrailersState} from "../../utils/helpers/initialStates";
 
 interface TrailerProps {
     gameId: number;

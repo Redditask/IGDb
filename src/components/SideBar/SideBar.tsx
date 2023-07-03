@@ -6,8 +6,9 @@ import ScrollUpButton from "../UI/ScrollUpButton/ScrollUpButton";
 
 import {NavLink} from "react-router-dom";
 
-import {SideBarLinks} from "../../utils/consts";
 import {ICustomLink} from "../../types/types";
+
+import {SideBarLinks} from "../../utils/consts";
 
 const isActive = ({isActive}: any) => isActive ? styles.sideBar__active : styles.sideBar__default;
 

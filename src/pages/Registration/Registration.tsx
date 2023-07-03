@@ -15,7 +15,8 @@ import Loader from "../../components/UI/Loader/Loader";
 import {RegistrationQueryArgs} from "../../types/types";
 
 import {LOGIN_ROUTE} from "../../utils/consts";
-import {registrationValidationSchema, serverErrorHandler, serverErrorDetection} from "../../utils/helpers";
+import {registrationValidationSchema, serverErrorValidation} from "../../utils/helpers/validation";
+import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 const Registration: React.FC = () => {
     const [registration, {isLoading}] = useRegistrationMutation();
@@ -68,7 +69,7 @@ const Registration: React.FC = () => {
                                 placeholderText="Username"
                                 type="text"
                                 formErrorMessage={errors?.username?.message}
-                                serverErrorMessage={serverErrorDetection(serverError, "username")}
+                                serverErrorMessage={serverErrorValidation(serverError, "username")}
                                 register={{
                                     ...register("username", {
                                         onChange:
@@ -80,7 +81,7 @@ const Registration: React.FC = () => {
                                 placeholderText="Email"
                                 type="text"
                                 formErrorMessage={errors?.email?.message}
-                                serverErrorMessage={serverErrorDetection(serverError, "email")}
+                                serverErrorMessage={serverErrorValidation(serverError, "email")}
                                 register={{
                                     ...register("email", {
                                         onChange:
@@ -92,7 +93,7 @@ const Registration: React.FC = () => {
                                 placeholderText="Password"
                                 type="password"
                                 formErrorMessage={errors?.password?.message}
-                                serverErrorMessage={serverErrorDetection(serverError, "password")}
+                                serverErrorMessage={serverErrorValidation(serverError, "password")}
                                 register={{
                                     ...register("password", {
                                         onChange:

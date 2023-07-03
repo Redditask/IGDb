@@ -11,7 +11,7 @@ import Button from "../UI/Button/Button";
 
 import {IGameCard} from "../../types/types";
 
-import {initialDLCState, initialGamesState} from "../../utils/helpers";
+import {initialDLCState, initialGamesState} from "../../utils/helpers/initialStates";
 
 interface AdditionalContentProps {
     gameId: number;
@@ -19,9 +19,10 @@ interface AdditionalContentProps {
 }
 
 const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError}) => {
-    const [games, setGames] = useState<IGameCard []>([]);
+    const [sameSeriesGames, setSameSeriesGames] = useState<IGameCard []>([]);
     const [DLC, setDLC] = useState<IGameCard []>([]);
-    const [isAllGames, setIsAllGames] = useState<boolean>(false);
+
+    const [isAllSameSeries, setIsAllSameSeries] = useState<boolean>(false);
     const [isAllDLC, setIsAllDLC] = useState<boolean>(false);
 
     const nav: NavigateFunction = useNavigate();
@@ -29,9 +30,9 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     const backToMainGame = (): void => nav(-1);
 
     const {
-        data: sameSeriesGames = initialGamesState,
+        data: sameSeriesResponse = initialGamesState,
         error: sameSeriesError,
-        isSuccess: gameSuccess
+        isSuccess: sameSeriesSuccess
     } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
 
     const {
@@ -41,19 +42,19 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
-        setIsAllGames(false);
+        setIsAllSameSeries(false);
 
-        if (gameSuccess) {
-            if (sameSeriesGames.results.length > 3) {
-                setGames([...sameSeriesGames.results.slice(0, 3)]);
+        if (sameSeriesSuccess) {
+            if (sameSeriesResponse.results.length > 3) {
+                setSameSeriesGames([...sameSeriesResponse.results.slice(0, 3)]);
             } else {
-                setGames([...sameSeriesGames.results]);
-                setIsAllGames(true);
+                setSameSeriesGames([...sameSeriesResponse.results]);
+                setIsAllSameSeries(true);
             }
         }
 
         if (sameSeriesError) setIsError(true);
-    }, [sameSeriesGames]);
+    }, [sameSeriesResponse]);
 
     useEffect((): void => {
         setIsAllDLC(false);
@@ -70,9 +71,9 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         if (dlcError) setIsError(true);
     }, [dlcResponse]);
 
-    const showAllGames = (): void => {
-        setGames([...games, ...sameSeriesGames.results.slice(3)]);
-        setIsAllGames(true);
+    const showAllSameSeries = (): void => {
+        setSameSeriesGames([...sameSeriesGames, ...sameSeriesResponse.results.slice(3)]);
+        setIsAllSameSeries(true);
     };
 
     const showAllDLC = (): void => {
@@ -83,20 +84,20 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     return (
         <div className={styles.additionalContent}>
             {
-                (!!games.length || !!DLC.length)
+                (!!sameSeriesGames.length || !!DLC.length)
                 &&
                 <div className={styles.container}>
                     <AdditionalContentItem
-                        title="Same series games"
-                        content={games}
-                        onClickAction={showAllGames}
-                        isAll={isAllGames}
-                    />
-                    <AdditionalContentItem
-                        title="DLC for this game"
+                        title="DLC"
                         content={DLC}
                         onClickAction={showAllDLC}
                         isAll={isAllDLC}
+                    />
+                    <AdditionalContentItem
+                        title="You may be interested"
+                        content={sameSeriesGames}
+                        onClickAction={showAllSameSeries}
+                        isAll={isAllSameSeries}
                     />
                 </div>
             }

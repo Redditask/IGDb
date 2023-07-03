@@ -15,7 +15,8 @@ import Loader from "../../components/UI/Loader/Loader";
 import {LoginQueryArgs} from "../../types/types";
 
 import {REGISTRATION_ROUTE} from "../../utils/consts";
-import {loginValidationSchema, serverErrorHandler, serverErrorDetection} from "../../utils/helpers";
+import {loginValidationSchema, serverErrorValidation} from "../../utils/helpers/validation";
+import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser} from "../../store/userSlice";
@@ -68,7 +69,7 @@ const Login: React.FC = () => {
                         placeholderText="Email"
                         type="text"
                         formErrorMessage={errors?.email?.message}
-                        serverErrorMessage={serverErrorDetection(serverError, "email")}
+                        serverErrorMessage={serverErrorValidation(serverError, "email")}
                         register={{
                             ...register("email", {
                                 onChange:
@@ -80,7 +81,7 @@ const Login: React.FC = () => {
                         placeholderText="Password"
                         type="password"
                         formErrorMessage={errors?.password?.message}
-                        serverErrorMessage={serverErrorDetection(serverError, "password")}
+                        serverErrorMessage={serverErrorValidation(serverError, "password")}
                         register={{
                             ...register("password", {
                                 onChange:

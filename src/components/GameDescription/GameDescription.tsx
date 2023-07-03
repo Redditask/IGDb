@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./GameDescription.module.scss";
 
-import GameDescriptionSkeleton from "../UI/GameDescriptionSkeleton/GameDescriptionSkeleton";
+import GameDescriptionSkeleton from "../Skeletons/GameDescriptionSkeleton/GameDescriptionSkeleton";
 
 interface GameDescriptionProps {
     description: string;

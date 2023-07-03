@@ -8,12 +8,13 @@ import styles from "./Search.module.scss";
 
 import SearchResults from "../SearchResults/SearchResults";
 
-import {initialSearchState} from "../../utils/helpers";
+import {initialSearchState} from "../../utils/helpers/initialStates";
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
     const [searchText, setSearchText] = useState<string>("");
     const [searchFocus, setSearchFocus] = useState<boolean>(false);
+    const [isShowResults, setIsShowResults] = useState<boolean>(false);
 
     const {
         data: searchResults = initialSearchState,
@@ -29,6 +30,7 @@ const Search: React.FC = () => {
 
     const cleanSearch = (): void => {
         setSearchText("");
+        hideResults();
     };
 
     const focusSearch = (): void => {
@@ -39,9 +41,17 @@ const Search: React.FC = () => {
         setSearchFocus(false);
     };
 
+    const displayResults = (): void => {
+        setIsShowResults(true);
+    };
+
+    const hideResults = (): void => {
+        setIsShowResults(false);
+    };
+
     const idDefinition = (): string => {
-        if (searchText.length && searchFocus) return styles.show
-        else return  styles.hidden;
+        if ((searchText.length && searchFocus) || isShowResults) return styles.show
+        else return styles.hide;
     };
 
     return (
@@ -63,9 +73,11 @@ const Search: React.FC = () => {
             <div
                 className={styles.search__content}
                 id={idDefinition()}
+                onMouseOver={displayResults}
+                onMouseOut={hideResults}
             >
                 {
-                    searchError
+                    !!searchError
                         ?
                         <h2 className={styles.errorMessage}>Oops, something go wrong...</h2>
                         :

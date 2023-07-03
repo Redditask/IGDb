@@ -4,7 +4,7 @@ import styles from "./HeaderItems.module.scss";
 
 import {NavLink} from "react-router-dom";
 
-import {HOME_ROUTE, ACCOUNT_ROUTE, LOGIN_ROUTE} from "../../../utils/consts";
+import {HOME_ROUTE, ACCOUNT_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
 
 interface HeaderItemsProps {
     isAuth: boolean;

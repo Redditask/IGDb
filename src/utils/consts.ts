@@ -1,6 +1,6 @@
 import {ICustomLink, ICustomOption} from "../types/types";
 
-import {getLastYearDates, getRecentDates, getUpcomingDates} from "./helpers";
+import {getLastYearDates, getRecentDates, getUpcomingDates} from "./helpers/dates";
 
 export const gamesLimit: number = 20;
 

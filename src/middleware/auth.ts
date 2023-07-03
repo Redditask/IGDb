@@ -8,7 +8,7 @@ listenerMiddleware.startListening({
     effect: async (action, listenerApi): Promise<void> => {
         listenerApi.cancelActiveListeners();
 
-        if (action.payload.accessToken) {
+        if (!!action.payload.accessToken) {
             localStorage.setItem("token", action.payload.accessToken);
         }
     },

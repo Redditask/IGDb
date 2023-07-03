@@ -7,9 +7,9 @@ import {useParams} from "react-router-dom";
 
 import styles from "./Game.module.scss";
 
-import {initialGameState, initialIsAddedState} from "../../utils/helpers";
-
 import {NotificationRef} from "../../types/types";
+
+import {initialGameState, initialIsAddedState} from "../../utils/helpers/initialStates";
 
 import GameLabels from "../../components/GameLabels/GameLabels";
 import Screenshots from "../../components/Screenshots/Screenshots";

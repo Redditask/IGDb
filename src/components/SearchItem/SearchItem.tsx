@@ -6,11 +6,12 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import styles from "./SearchItem.module.scss";
 
 import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
-import SearchItemSkeleton from "../UI/SearchItemSkeleton/SearchItemSkeleton";
+import SearchItemSkeleton from "../Skeletons/SearchItemSkeleton/SearchItemSkeleton";
 
 import {IGameCard} from "../../types/types";
 
-import {dateFormatting, searchCrop} from "../../utils/helpers";
+import {dateFormatting} from "../../utils/helpers/dates";
+import {searchCrop} from "../../utils/helpers/systemActions";
 
 interface SearchItemProps {
     game: IGameCard;

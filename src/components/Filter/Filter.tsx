@@ -15,7 +15,7 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({title, options, setFilter, filterString, resetState, defaultValue}) => {
 
-    const selectHandler = (event: any) => {
+    const selectHandler = (event: any): void => {
         if (event.target.value) {
             resetState();
             setFilter(`${filterString}=${event.target.value}`);

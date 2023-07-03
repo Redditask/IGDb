@@ -11,7 +11,8 @@ import {RiMacLine} from "react-icons/ri";
 import {IPlatform} from "../../../types/types";
 
 import {platformIconSize} from "../../../utils/consts";
-import {platformDefinition} from "../../../utils/helpers";
+
+import {platformValidation} from "../../../utils/helpers/validation";
 
 interface PlatformIconsProps {
     platformsArray: IPlatform[];
@@ -22,66 +23,66 @@ const PlatformIcons: React.FC<PlatformIconsProps> = ({platformsArray}) => {
     return (
         <>
             {
-                !!platformsArray.length
+                (platformsArray && !!platformsArray.length)
                 &&
                 <div className={styles.icons}>
-                    {platformDefinition(platformsArray, "PC")
+                    {platformValidation(platformsArray, "PC")
                         &&
                         <FaWindows
                             size={platformIconSize}
                             title="Personal computer"
                         />
                     }
-                    {platformDefinition(platformsArray, "Xbox")
+                    {platformValidation(platformsArray, "Xbox")
                         &&
                         <FaXbox
                             size={platformIconSize}
                             title="Xbox"
                         />
                     }
-                    {platformDefinition(platformsArray, "PlayStation")
+                    {platformValidation(platformsArray, "PlayStation")
                         &&
                         <FaPlaystation
                             size={platformIconSize}
                             title="PlayStation"
                         />
                     }
-                    {platformDefinition(platformsArray, "Nintendo")
+                    {platformValidation(platformsArray, "Nintendo")
                         &&
                         <SiNintendoswitch
                             size={platformIconSize}
                             title="Nintendo"
                         />
                     }
-                    {platformDefinition(platformsArray, "Android")
+                    {platformValidation(platformsArray, "Android")
                         &&
                         <DiAndroid
                             size={platformIconSize}
                             title="Android"
                         />
                     }
-                    {platformDefinition(platformsArray, "iOS")
+                    {platformValidation(platformsArray, "iOS")
                         &&
                         <DiApple
                             size={platformIconSize}
                             title="iPhone"
                         />
                     }
-                    {platformDefinition(platformsArray, "Apple Macintosh")
+                    {platformValidation(platformsArray, "Apple Macintosh")
                         &&
                         <RiMacLine
                             size={platformIconSize}
                             title="macOS"
                         />
                     }
-                    {platformDefinition(platformsArray, "Linux")
+                    {platformValidation(platformsArray, "Linux")
                         &&
                         <FaLinux
                             size={platformIconSize}
                             title="Linux"
                         />
                     }
-                    {platformDefinition(platformsArray, "Web")
+                    {platformValidation(platformsArray, "Web")
                         &&
                         <TbWorld
                             size={platformIconSize}

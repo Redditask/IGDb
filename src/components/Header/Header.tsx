@@ -9,8 +9,8 @@ import {useLogoutMutation} from "../../API/igdbAPI";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 
 import Search from "../Search/Search";
-import HeaderItems from "../UI/HeaderItems/HeaderItems";
-import HeaderItemsSkeleton from "../UI/HeaderItemsSkeleton/HeaderItemsSkeleton";
+import HeaderItems from "../HeaderItems/HeaderItems";
+import HeaderItemsSkeleton from "../Skeletons/HeaderItemsSkeleton/HeaderItemsSkeleton";
 
 import {clearUser} from "../../store/userSlice";
 import {selectIsAuth, selectIsChecked, selectUsername} from "../../store/selectors";

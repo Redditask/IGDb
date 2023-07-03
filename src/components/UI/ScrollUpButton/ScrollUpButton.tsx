@@ -4,7 +4,7 @@ import styles from "./ScrollUpButton.module.scss";
 
 import {AiOutlineArrowUp} from "react-icons/ai";
 
-import {scrollUp} from "../../../utils/helpers";
+import {scrollUp} from "../../../utils/helpers/systemActions";
 
 interface ScrollUpButtonProps {
     showScrollUp: boolean;

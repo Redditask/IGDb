@@ -12,8 +12,9 @@ import Labels from "../UI/Labels/Labels";
 
 import {IGameCard, ILabel} from "../../types/types";
 
-import {dateFormatting, regularCrop} from "../../utils/helpers";
 import {GAME_ROUTE} from "../../utils/consts";
+import {dateFormatting} from "../../utils/helpers/dates";
+import {regularCrop} from "../../utils/helpers/systemActions";
 
 interface GameCardProps {
     gameCard: IGameCard;

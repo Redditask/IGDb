@@ -14,11 +14,11 @@ import {selectIsAuth} from "../../store/selectors";
 
 import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
-import GameHeadSkeleton from "../UI/GameHeadSkeleton/GameHeadSkeleton";
+import GameHeadSkeleton from "../Skeletons/GameHeadSkeleton/GameHeadSkeleton";
 
 import {CheckIsAddedResult, GameQueryResult, NotificationRef} from "../../types/types";
 
-import {dateFormatting} from "../../utils/helpers";
+import {dateFormatting} from "../../utils/helpers/dates";
 
 interface GameHeaderProps {
     game: GameQueryResult;

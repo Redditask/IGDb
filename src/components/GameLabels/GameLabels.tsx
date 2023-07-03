@@ -5,11 +5,12 @@ import styles from "./GameLabels.module.scss";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Link from "../UI/Link/Link";
 import Labels from "../UI/Labels/Labels";
-import GameDetailsSkeleton from "../UI/GameDetailsSkeleton/GameDetailsSkeleton";
+import GameDetailsSkeleton from "../Skeletons/GameDetailsSkeleton/GameDetailsSkeleton";
 
 import {GameQueryResult} from "../../types/types";
 
-import {developersToLabelsConvert, isHaveLinks, platformsToLabelsConvert} from "../../utils/helpers";
+import {developersToLabelsConvert, platformsToLabelsConvert} from "../../utils/helpers/converters";
+import {isHaveLinks} from "../../utils/helpers/dataProcessing";
 
 interface GameLabelsProps {
     game: GameQueryResult;
