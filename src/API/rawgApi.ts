@@ -6,9 +6,8 @@ import {
     GamesQueryResult,
     ScreenshotsQueryResult,
     TrailersQueryResult,
-    DLCQueryResult,
     SlugQueryArg,
-    IdQueryArg, SameSeriesGamesQueryResult
+    IdQueryArg
 } from "../types/types";
 
 export const rawgApi = createApi({
@@ -25,7 +24,7 @@ export const rawgApi = createApi({
             query: ({slug}) =>
                 `games/${slug}?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getGameDLC: builder.query<DLCQueryResult, { id: IdQueryArg }>({
+        getGameDLC: builder.query<GamesQueryResult, { id: IdQueryArg }>({
             query: ({id}) =>
                 `games/${id}/additions?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
@@ -37,7 +36,7 @@ export const rawgApi = createApi({
             query: ({id}) =>
                 `games/${id}/movies?key=${process.env["REACT_APP_API_KEY"]}`,
         }),
-        getSameSeriesGames: builder.query<SameSeriesGamesQueryResult, { id: IdQueryArg }>({
+        getSameSeriesGames: builder.query<GamesQueryResult, { id: IdQueryArg }>({
             query: ({id}) =>
                 `games/${id}/game-series?key=${process.env["REACT_APP_API_KEY"]}`,
         }),

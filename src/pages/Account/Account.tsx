@@ -6,7 +6,10 @@ import styles from "./Account.module.scss";
 
 import GameList from "../../components/GameList/GameList";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
-import Loader from "../../components/UI/Loader/Loader";
+import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
+
+import {setIsLoading} from "../../store/userSlice";
+import {useAppDispatch} from "../../hooks";
 
 import {IGameCard} from "../../types/types";
 
@@ -15,10 +18,12 @@ import {initialAccountGamesState} from "../../utils/helpers/initialStates";
 const Account: React.FC = () => {
     const [isLibrary, setIsLibrary] = useState<boolean>(true);
 
+    const dispatch = useAppDispatch();
+
     const {
         data: games = initialAccountGamesState,
         error: isError,
-        isLoading: isLoading,
+        isLoading,
         refetch
     } = useGetAccountGamesQuery({
         refetchOnMountOrArgChange: true,
@@ -36,6 +41,10 @@ const Account: React.FC = () => {
     useEffect((): void=>{
         refetch();
     }, []);
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         isError
@@ -70,7 +79,7 @@ const Account: React.FC = () => {
                         isLoading
                             ?
                             <div className={styles.loaderArea}>
-                                <Loader/>
+                                <RegularLoader/>
                             </div>
                             :
                             <GameList

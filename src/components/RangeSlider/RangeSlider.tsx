@@ -32,7 +32,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     const [right, setRight] = useState<number>(max);
 
     const leftProgressHandler = (event: any): void => {
-        if(secondValue - event.target.value >= minRange) {
+        if (secondValue - event.target.value >= minRange) {
             resetState();
             startTransition(() => {
                 setFirstValue(Number(event.target.value));

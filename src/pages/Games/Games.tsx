@@ -9,6 +9,9 @@ import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import RangeSlider from "../../components/RangeSlider/RangeSlider";
 
+import {useAppDispatch} from "../../hooks";
+import {setIsLoading} from "../../store/userSlice";
+
 import {IGameCard} from "../../types/types";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
@@ -40,9 +43,12 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const [maxMetacriticScore, setMaxMetacriticScore] = useState<number>(100);
     const [isHaveDefaultRange, setIsHaveDefaultRange] = useState<boolean>(false);
 
+    const dispatch = useAppDispatch();
+
     const {
         data: response = initialGamesState,
         error,
+        isLoading,
         isSuccess
     } = useGetGamesQuery({
         page,
@@ -96,6 +102,10 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
         setIsEmpty(false);
         setIsLimit(false);
     };
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <div className={styles.games}>

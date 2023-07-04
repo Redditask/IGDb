@@ -15,14 +15,20 @@ const isActive = ({isActive}: any) => isActive ? styles.sideBar__active : styles
 const SideBar: React.FC = () => {
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
 
-    useEffect((): void => {
-        window.addEventListener("scroll", ()=>{
-            if(window.scrollY > 2600) {
-                setShowScrollUp(true);
-            }else {
-                setShowScrollUp(false);
-            }
-        });
+    const scrollHandler = (): void => {
+        if(window.scrollY > 2600) {
+            setShowScrollUp(true);
+        }else {
+            setShowScrollUp(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", scrollHandler);
+
+        return function (): void {
+            window.removeEventListener("scroll", scrollHandler);
+        }
     }, []);
 
     return (
@@ -39,7 +45,9 @@ const SideBar: React.FC = () => {
                         </NavLink>
                     )
                 }
-                <ScrollUpButton showScrollUp={showScrollUp}/>
+                <div className={styles.scrollUp}>
+                    <ScrollUpButton showScrollUp={showScrollUp}/>
+                </div>
             </nav>
         </aside>
     );

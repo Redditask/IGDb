@@ -1,7 +1,6 @@
 import {
     AccountGamesQueryResult,
     CheckIsAddedResult,
-    DLCQueryResult,
     GameQueryResult,
     GamesQueryResult,
     LoginQueryResult,
@@ -30,22 +29,12 @@ export const initialScreenshotsState: ScreenshotsQueryResult = {
     results: [],
 };
 
-export const initialDLCState: DLCQueryResult = {
-    count: 0,
-    results: [],
-};
-
 export const initialTrailersState: TrailersQueryResult = {
     count: 0,
     results: [],
 };
 
 export const initialGamesState: GamesQueryResult = {
-    count: 0,
-    results: [],
-};
-
-export const initialSearchState: GamesQueryResult = {
     count: 0,
     results: [],
 };

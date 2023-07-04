@@ -4,6 +4,9 @@ import {useGetGameTrailersQuery} from "../../API/rawgApi";
 
 import styles from "./Trailer.module.scss";
 
+import {setIsLoading} from "../../store/userSlice";
+import {useAppDispatch} from "../../hooks";
+
 import {initialTrailersState} from "../../utils/helpers/initialStates";
 
 interface TrailerProps {
@@ -12,15 +15,21 @@ interface TrailerProps {
 }
 
 const Trailer: React.FC<TrailerProps> = ({gameId, setIsError}) => {
+    const dispatch = useAppDispatch();
 
     const {
         data: trailers = initialTrailersState,
-        error: trailerError
+        error: trailerError,
+        isLoading
     } = useGetGameTrailersQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
         if (trailerError) setIsError(true);
     }, [trailerError]);
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <>

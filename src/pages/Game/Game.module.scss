@@ -49,3 +49,53 @@
     padding: 0 8rem;
   }
 }
+
+.scrollUp {
+  width: 100%;
+
+  position: fixed;
+  bottom: 1rem;
+
+  display: flex;
+  justify-content: center;
+
+  z-index: 100;
+
+  &__button {
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: gray;
+
+    background-color: white;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+    border-radius: 50%;
+    border: 0.1rem solid lightgray;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+
+      transform: translateY(-0.15rem);
+
+      color: black;
+      background-color: #f3f3f3;
+    }
+  }
+}
+
+#show {
+  opacity: 1;
+
+  transition: opacity 0.1s ease-in;
+}
+
+#hide {
+  opacity: 0;
+
+  transition: opacity 0.1s ease-in;
+}

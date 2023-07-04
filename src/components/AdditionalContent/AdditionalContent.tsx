@@ -2,16 +2,16 @@ import React, {useEffect, useState} from "react";
 
 import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi";
 
-import {NavigateFunction, useNavigate} from "react-router-dom";
-
 import styles from "./AdditionalContent.module.scss";
 
+import {useAppDispatch} from "../../hooks";
+import {setIsLoading} from "../../store/userSlice";
+
 import AdditionalContentItem from "../AdditionalContentItem/AdditionalContentItem";
-import Button from "../UI/Button/Button";
 
 import {IGameCard} from "../../types/types";
 
-import {initialDLCState, initialGamesState} from "../../utils/helpers/initialStates";
+import {initialGamesState} from "../../utils/helpers/initialStates";
 
 interface AdditionalContentProps {
     gameId: number;
@@ -25,39 +25,25 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     const [isAllSameSeries, setIsAllSameSeries] = useState<boolean>(false);
     const [isAllDLC, setIsAllDLC] = useState<boolean>(false);
 
-    const nav: NavigateFunction = useNavigate();
-
-    const backToMainGame = (): void => nav(-1);
+    const dispatch = useAppDispatch();
 
     const {
         data: sameSeriesResponse = initialGamesState,
         error: sameSeriesError,
+        isLoading: isLoadingSameSeries,
         isSuccess: sameSeriesSuccess
     } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
 
     const {
-        data: dlcResponse = initialDLCState,
+        data: dlcResponse = initialGamesState,
         error: dlcError,
+        isLoading: isLoadingDLC,
         isSuccess: dlcSuccess
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
-        setIsAllSameSeries(false);
-
-        if (sameSeriesSuccess) {
-            if (sameSeriesResponse.results.length > 3) {
-                setSameSeriesGames([...sameSeriesResponse.results.slice(0, 3)]);
-            } else {
-                setSameSeriesGames([...sameSeriesResponse.results]);
-                setIsAllSameSeries(true);
-            }
-        }
-
-        if (sameSeriesError) setIsError(true);
-    }, [sameSeriesResponse]);
-
-    useEffect((): void => {
         setIsAllDLC(false);
+        setIsAllSameSeries(false);
 
         if (dlcSuccess) {
             if (dlcResponse.results.length > 3) {
@@ -68,8 +54,17 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
             }
         }
 
-        if (dlcError) setIsError(true);
-    }, [dlcResponse]);
+        if (sameSeriesSuccess) {
+            if (sameSeriesResponse.results.length > 3) {
+                setSameSeriesGames([...sameSeriesResponse.results.slice(0, 3)]);
+            } else {
+                setSameSeriesGames([...sameSeriesResponse.results]);
+                setIsAllSameSeries(true);
+            }
+        }
+
+        if (dlcError || sameSeriesError) setIsError(true);
+    }, [dlcResponse, sameSeriesResponse]);
 
     const showAllSameSeries = (): void => {
         setSameSeriesGames([...sameSeriesGames, ...sameSeriesResponse.results.slice(3)]);
@@ -80,6 +75,10 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
         setDLC([...DLC, ...dlcResponse.results.slice(3)]);
         setIsAllDLC(true);
     };
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoadingSameSeries || isLoadingDLC));
+    }, [isLoadingSameSeries, isLoadingDLC]);
 
     return (
         <div className={styles.additionalContent}>
@@ -101,9 +100,6 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
                     />
                 </div>
             }
-            <div className={styles.backButton}>
-                <Button title="Go back" onClick={backToMainGame}/>
-            </div>
         </div>
     );
 };

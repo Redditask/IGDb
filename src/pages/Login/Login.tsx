@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from "./Login.module.scss";
 
@@ -10,7 +10,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 
 import Button from "../../components/UI/Button/Button";
 import FormInput from "../../components/UI/FormInput/FormInput";
-import Loader from "../../components/UI/Loader/Loader";
+import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 
 import {LoginQueryArgs} from "../../types/types";
 
@@ -19,7 +19,7 @@ import {loginValidationSchema, serverErrorValidation} from "../../utils/helpers/
 import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
-import {setUser} from "../../store/userSlice";
+import {setUser, setIsLoading} from "../../store/userSlice";
 
 const Login: React.FC = () => {
     const [login, {isLoading}] = useLoginMutation();
@@ -50,6 +50,10 @@ const Login: React.FC = () => {
             setServerError(response.data.message);
         }
     };
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <div
@@ -99,7 +103,7 @@ const Login: React.FC = () => {
                             disabled={!isValid}
                         />
                         :
-                        <Loader/>
+                        <RegularLoader/>
                 }
                 <div className={styles.link}>
                     <p className={styles.link__info}>Don't have account?</p>

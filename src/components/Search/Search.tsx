@@ -1,4 +1,4 @@
-import React, {useTransition, useState} from "react";
+import React, {useTransition, useState, useEffect} from "react";
 
 import {useGetSearchResultsQuery} from "../../API/rawgApi";
 
@@ -6,9 +6,12 @@ import {ImSearch} from "react-icons/im";
 
 import styles from "./Search.module.scss";
 
+import {setIsLoading} from "../../store/userSlice";
+import {useAppDispatch} from "../../hooks";
+
 import SearchResults from "../SearchResults/SearchResults";
 
-import {initialSearchState} from "../../utils/helpers/initialStates";
+import {initialGamesState} from "../../utils/helpers/initialStates";
 
 const Search: React.FC = () => {
     const [isPending, startTransition] = useTransition();
@@ -16,8 +19,10 @@ const Search: React.FC = () => {
     const [searchFocus, setSearchFocus] = useState<boolean>(false);
     const [isShowResults, setIsShowResults] = useState<boolean>(false);
 
+    const dispatch = useAppDispatch();
+
     const {
-        data: searchResults = initialSearchState,
+        data: searchResults = initialGamesState,
         error: searchError,
         isLoading
     } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
@@ -53,6 +58,10 @@ const Search: React.FC = () => {
         if ((searchText.length && searchFocus) || isShowResults) return styles.show
         else return styles.hide;
     };
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <div className={styles.search}>

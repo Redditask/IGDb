@@ -9,7 +9,7 @@ import Header from "../../../components/Header/Header";
 const Layout:React.FC = () => {
 
     return (
-        <div className={styles.Layout}>
+        <div className={styles.layout}>
             <Header/>
             <Outlet/>
         </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from "./Registration.module.scss";
 
@@ -10,7 +10,10 @@ import {yupResolver} from "@hookform/resolvers/yup";
 
 import Button from "../../components/UI/Button/Button";
 import FormInput from "../../components/UI/FormInput/FormInput";
-import Loader from "../../components/UI/Loader/Loader";
+import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
+
+import {setIsLoading} from "../../store/userSlice";
+import {useAppDispatch} from "../../hooks";
 
 import {RegistrationQueryArgs} from "../../types/types";
 
@@ -22,6 +25,8 @@ const Registration: React.FC = () => {
     const [registration, {isLoading}] = useRegistrationMutation();
     const [serverError, setServerError] = useState<string>("");
     const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
+
+    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -47,6 +52,10 @@ const Registration: React.FC = () => {
             setServerError(response.data.message);
         }
     };
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <div
@@ -111,7 +120,7 @@ const Registration: React.FC = () => {
                                     disabled={!isValid}
                                 />
                                 :
-                                <Loader/>
+                                <RegularLoader/>
                         }
                         <div className={styles.link}>
                             <p className={styles.link__info}>Already have an account?</p>

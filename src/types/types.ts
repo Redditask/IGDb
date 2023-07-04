@@ -21,10 +21,6 @@ export interface GameQueryResult {
     platforms: IPlatform[];
 }
 
-export interface DLCQueryResult extends GamesQueryResult {}
-
-export interface SameSeriesGamesQueryResult extends GamesQueryResult {}
-
 export interface ScreenshotsQueryResult {
     count: number;
     results: IScreenshot [];
@@ -139,6 +135,7 @@ export interface CheckIsAddedResult {
 export interface IUserStore extends IUserData {
     isAuth: boolean;
     isChecked: boolean;
+    isLoading: boolean;
 }
 
 export interface NotificationRef {

@@ -4,7 +4,7 @@ import styles from "./GameList.module.scss";
 
 import {IGameCard} from "../../types/types";
 
-import Loader from "../UI/Loader/Loader";
+import RegularLoader from "../UI/RegularLoader/RegularLoader";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));
 
 interface BodyProps {
@@ -28,14 +28,14 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
                                 games.map((game: IGameCard) =>
                                         game.background_image
                                         &&
-                                        <Suspense key={game.id} fallback={null}> {/* loader is already below */}
+                                        <Suspense key={game.id} fallback={null}>
                                             <GameCard gameCard={game}/>
                                         </Suspense>
                                 )
                             }
                         </div>
                         <div className={styles.loader}>
-                            {!isLimit && <Loader/>}
+                            {!isLimit && <RegularLoader/>}
                         </div>
                     </>
             }

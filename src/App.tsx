@@ -8,18 +8,14 @@ import {useCheckAuthQuery} from "./API/igdbAPI";
 import store from "./store";
 
 import {useAppDispatch} from "./hooks";
-import {clearUser, setIsChecked, setUser} from "./store/userSlice";
+import {clearUser, setIsChecked, setIsLoading, setUser} from "./store/userSlice";
 
 import AppRouter from "./routing/AppRouter";
-
 
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
 //  добавить что-то вместо howlongtobeat
-//  //
-//  dlc и sameSeries убрать из useState, сделать кастомный хук из useEffect (?) или вынести всё в AdditionalItem
-//  кружочек загрузки на странице Game при нажатии на кнопки
 //  //
 //  улучшить дизайн (при клике какое-то выезжающее окошко сделать), карусель со списком игр в Game Page (?)
 //  //
@@ -54,6 +50,7 @@ const App: React.FC = () => {
         }
 
         dispatch(setIsChecked(isLoading));
+        dispatch(setIsLoading(isLoading));
     }, [response, isError]);
 
     return (

@@ -4,6 +4,9 @@ import {useGetGameScreenshotsQuery} from "../../API/rawgApi";
 
 import styles from "./Screenshots.module.scss";
 
+import {useAppDispatch} from "../../hooks";
+import {setIsLoading} from "../../store/userSlice";
+
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
 import {IScreenshot} from "../../types/types";
@@ -18,14 +21,21 @@ interface ScreenshotsProps {
 }
 
 const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError}) => {
+    const dispatch = useAppDispatch();
+
     const {
         data: screenshots = initialScreenshotsState,
-        error: screenshotsError
+        error: screenshotsError,
+        isLoading
     } = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
         if (screenshotsError) setIsError(true);
     }, [screenshotsError]);
+
+    useEffect((): void => {
+        dispatch(setIsLoading(isLoading));
+    }, [isLoading]);
 
     return (
         <div className={styles.screenshots}>

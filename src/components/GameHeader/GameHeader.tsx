@@ -1,4 +1,4 @@
-import React, {forwardRef, useState} from "react";
+import React, {forwardRef, useEffect, useState} from "react";
 
 import styles from "./GameHeader.module.scss";
 
@@ -9,7 +9,8 @@ import {
     useRemoveFromWishlistMutation
 } from "../../API/igdbAPI";
 
-import {useAppSelector} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {setIsLoading} from "../../store/userSlice";
 import {selectIsAuth} from "../../store/selectors";
 
 import Trailer from "../Trailer/Trailer";
@@ -30,12 +31,13 @@ interface GameHeaderProps {
 }
 
 const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
-    const [addToLibrary] = useAddGameToLibraryMutation();
-    const [addToWishlist] = useAddGameToWishlistMutation();
-    const [removeFromLibrary] = useRemoveFromLibraryMutation();
-    const [removeFromWishlist] = useRemoveFromWishlistMutation();
+    const [addToLibrary,{isLoading: isLoadingAddToLibrary}] = useAddGameToLibraryMutation();
+    const [addToWishlist,{isLoading: isLoadingAddToWishlist}] = useAddGameToWishlistMutation();
+    const [removeFromLibrary,{isLoading: isLoadingRemoveFromLibrary}] = useRemoveFromLibraryMutation();
+    const [removeFromWishlist,{isLoading: isLoadingRemoveFromWishlist}] = useRemoveFromWishlistMutation();
     const [serverError, setServerError] = useState<string>("");
 
+    const dispatch = useAppDispatch();
     const isAuth: boolean = useAppSelector(selectIsAuth);
 
     const showNotification = (message: string): void => {
@@ -98,6 +100,20 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoadin
             : showNotification("Game was removed from wishlist");
     };
 
+    useEffect((): void => {
+        dispatch(setIsLoading(
+            isLoadingAddToLibrary
+            || isLoadingRemoveFromLibrary
+            || isLoadingAddToWishlist
+            || isLoadingRemoveFromWishlist
+        ));
+    }, [
+        isLoadingAddToLibrary,
+        isLoadingRemoveFromLibrary,
+        isLoadingAddToWishlist,
+        isLoadingRemoveFromWishlist
+    ]);
+
     return (
         isLoading
             ?
@@ -118,6 +134,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoadin
                                 ? <Button title="Remove from wishlist" onClick={removeFromWishlistHandler} disabled={!isAuth}/>
                                 : <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
                         }
+
                     </div>
                     {
                         !isAuth

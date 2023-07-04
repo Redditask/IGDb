@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  width: 100%;
 
   background: white;
 
@@ -7,7 +7,7 @@
 
   z-index: 100;
 
-  box-shadow: 0 0 10px 4px lightgrey;
+  box-shadow: 0 0 10px 1px lightgrey;
 }
 
 .header {
