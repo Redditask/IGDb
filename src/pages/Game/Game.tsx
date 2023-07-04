@@ -8,7 +8,7 @@ import {useParams} from "react-router-dom";
 import styles from "./Game.module.scss";
 
 import {useAppDispatch} from "../../hooks";
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 
 import {NotificationRef} from "../../types/types";
 
@@ -37,12 +37,12 @@ const Game: React.FC = () => {
     const {
         data: game = initialGameState,
         error: gameError,
-        isLoading
+        isFetching
     } = useGetGameDetailsQuery({slug}, {skip: !slug});
 
     const {
         data: addedStatus = initialIsAddedState,
-        isLoading: isUpdate,
+        isLoading: isUpdating,
         refetch
     } = useCheckIsAddedQuery({slug}, {skip: !slug});
 
@@ -77,8 +77,8 @@ const Game: React.FC = () => {
     }, [gameError]);
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading || isUpdate));
-    }, [isLoading, isUpdate]);
+        dispatch(setIsFetching(isFetching || isUpdating));
+    }, [isFetching, isUpdating]);
 
     return (
         isError
@@ -94,7 +94,7 @@ const Game: React.FC = () => {
                         <div className={styles.game}>
                             <GameHeader
                                 game={game}
-                                isLoading={isLoading}
+                                isLoading={isFetching}
                                 setIsError={setIsError}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
@@ -105,7 +105,7 @@ const Game: React.FC = () => {
                                 <div className={styles.game__info}>
                                     <GameLabels
                                         game={game}
-                                        isLoading={isLoading || isUpdate}
+                                        isLoading={isFetching || isUpdating}
                                     />
                                     <Screenshots
                                         setImageURL={setImageURL}
@@ -119,7 +119,7 @@ const Game: React.FC = () => {
                 </div>
                 <GameDescription
                     description={game.description_raw}
-                    isLoading={isLoading}
+                    isLoading={isFetching}
                 />
                 <Suspense fallback={null}>
                     <AdditionalContent

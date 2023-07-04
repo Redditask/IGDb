@@ -8,7 +8,7 @@ import GameList from "../../components/GameList/GameList";
 import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
 import {IGameCard} from "../../types/types";
@@ -23,7 +23,7 @@ const Account: React.FC = () => {
     const {
         data: games = initialAccountGamesState,
         error: isError,
-        isLoading,
+        isFetching,
         refetch
     } = useGetAccountGamesQuery({
         refetchOnMountOrArgChange: true,
@@ -43,8 +43,8 @@ const Account: React.FC = () => {
     }, []);
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
-    }, [isLoading]);
+        dispatch(setIsFetching(isFetching));
+    }, [isFetching]);
 
     return (
         isError
@@ -76,7 +76,7 @@ const Account: React.FC = () => {
                 </div>
                 <div className={styles.account__games}>
                     {
-                        isLoading
+                        isFetching
                             ?
                             <div className={styles.loaderArea}>
                                 <RegularLoader/>

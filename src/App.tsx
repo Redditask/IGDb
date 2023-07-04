@@ -8,7 +8,7 @@ import {useCheckAuthQuery} from "./API/igdbAPI";
 import store from "./store";
 
 import {useAppDispatch} from "./hooks";
-import {clearUser, setIsChecked, setIsLoading, setUser} from "./store/userSlice";
+import {clearUser, setIsChecked, setIsFetching, setUser} from "./store/userSlice";
 
 import AppRouter from "./routing/AppRouter";
 
@@ -36,21 +36,21 @@ const App: React.FC = () => {
     const {
         data: response = initialUserDataState,
         isError,
-        isLoading
+        isFetching
     } = useCheckAuthQuery({}, {
         skip: !localStorage.getItem("token"),
         refetchOnMountOrArgChange: true
     });
 
-    useEffect((): void=>{
+    useEffect((): void => {
         if (response.user.username.length){
             dispatch(setUser(response.user));
         } else if (isError) {
             dispatch(clearUser());
         }
 
-        dispatch(setIsChecked(isLoading));
-        dispatch(setIsLoading(isLoading));
+        dispatch(setIsChecked(isFetching));
+        dispatch(setIsFetching(isFetching));
     }, [response, isError]);
 
     return (

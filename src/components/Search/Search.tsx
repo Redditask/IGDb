@@ -6,7 +6,7 @@ import {ImSearch} from "react-icons/im";
 
 import styles from "./Search.module.scss";
 
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
 import SearchResults from "../SearchResults/SearchResults";
@@ -24,7 +24,7 @@ const Search: React.FC = () => {
     const {
         data: searchResults = initialGamesState,
         error: searchError,
-        isLoading
+        isFetching
     } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
     const searchHandler = (event: any): void => {
@@ -60,8 +60,8 @@ const Search: React.FC = () => {
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
-    }, [isLoading]);
+        dispatch(setIsFetching(isFetching));
+    }, [isFetching]);
 
     return (
         <div className={styles.search}>
@@ -93,7 +93,7 @@ const Search: React.FC = () => {
                         <SearchResults
                             list={searchResults}
                             clean={cleanSearch}
-                            isLoading={isLoading}
+                            isLoading={isFetching}
                         />
                 }
             </div>

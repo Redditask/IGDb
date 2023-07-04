@@ -12,7 +12,7 @@ import Button from "../../components/UI/Button/Button";
 import FormInput from "../../components/UI/FormInput/FormInput";
 import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
 import {RegistrationQueryArgs} from "../../types/types";
@@ -54,7 +54,7 @@ const Registration: React.FC = () => {
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
+        dispatch(setIsFetching(isLoading));
     }, [isLoading]);
 
     return (

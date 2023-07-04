@@ -19,7 +19,7 @@ import {loginValidationSchema, serverErrorValidation} from "../../utils/helpers/
 import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
-import {setUser, setIsLoading} from "../../store/userSlice";
+import {setUser, setIsFetching} from "../../store/userSlice";
 
 const Login: React.FC = () => {
     const [login, {isLoading}] = useLoginMutation();
@@ -52,7 +52,7 @@ const Login: React.FC = () => {
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
+        dispatch(setIsFetching(isLoading));
     }, [isLoading]);
 
     return (

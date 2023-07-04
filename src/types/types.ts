@@ -135,7 +135,7 @@ export interface CheckIsAddedResult {
 export interface IUserStore extends IUserData {
     isAuth: boolean;
     isChecked: boolean;
-    isLoading: boolean;
+    isFetching: boolean;
 }
 
 export interface NotificationRef {

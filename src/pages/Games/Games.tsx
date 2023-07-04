@@ -10,7 +10,7 @@ import Filter from "../../components/Filter/Filter";
 import RangeSlider from "../../components/RangeSlider/RangeSlider";
 
 import {useAppDispatch} from "../../hooks";
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 
 import {IGameCard} from "../../types/types";
 
@@ -48,7 +48,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     const {
         data: response = initialGamesState,
         error,
-        isLoading,
+        isFetching,
         isSuccess
     } = useGetGamesQuery({
         page,
@@ -104,8 +104,8 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
-    }, [isLoading]);
+        dispatch(setIsFetching(isFetching));
+    }, [isFetching]);
 
     return (
         <div className={styles.games}>

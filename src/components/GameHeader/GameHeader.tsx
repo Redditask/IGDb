@@ -10,7 +10,7 @@ import {
 } from "../../API/igdbAPI";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 import {selectIsAuth} from "../../store/selectors";
 
 import Trailer from "../Trailer/Trailer";
@@ -101,7 +101,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoadin
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(
+        dispatch(setIsFetching(
             isLoadingAddToLibrary
             || isLoadingRemoveFromLibrary
             || isLoadingAddToWishlist

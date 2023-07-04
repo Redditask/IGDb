@@ -5,7 +5,7 @@ import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi"
 import styles from "./AdditionalContent.module.scss";
 
 import {useAppDispatch} from "../../hooks";
-import {setIsLoading} from "../../store/userSlice";
+import {setIsFetching} from "../../store/userSlice";
 
 import AdditionalContentItem from "../AdditionalContentItem/AdditionalContentItem";
 
@@ -30,14 +30,14 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     const {
         data: sameSeriesResponse = initialGamesState,
         error: sameSeriesError,
-        isLoading: isLoadingSameSeries,
+        isFetching: isFetchingSameSeries,
         isSuccess: sameSeriesSuccess
     } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
 
     const {
         data: dlcResponse = initialGamesState,
         error: dlcError,
-        isLoading: isLoadingDLC,
+        isFetching: isFetchingDLC,
         isSuccess: dlcSuccess
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
@@ -77,8 +77,8 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoadingSameSeries || isLoadingDLC));
-    }, [isLoadingSameSeries, isLoadingDLC]);
+        dispatch(setIsFetching(isFetchingSameSeries || isFetchingDLC));
+    }, [isFetchingSameSeries, isFetchingDLC]);
 
     return (
         <div className={styles.additionalContent}>

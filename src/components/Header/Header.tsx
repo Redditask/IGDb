@@ -13,7 +13,7 @@ import HeaderLoader from "../UI/HeaderLoader/HeaderLoader";
 import HeaderItems from "../HeaderItems/HeaderItems";
 import HeaderItemsSkeleton from "../Skeletons/HeaderItemsSkeleton/HeaderItemsSkeleton";
 
-import {clearUser, setIsLoading} from "../../store/userSlice";
+import {clearUser, setIsFetching} from "../../store/userSlice";
 import {selectIsAuth, selectIsChecked, selectUsername} from "../../store/selectors";
 
 import {HOME_ROUTE} from "../../utils/consts";
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
     };
 
     useEffect((): void => {
-        dispatch(setIsLoading(isLoading));
+        dispatch(setIsFetching(isLoading));
     }, [isLoading]);
 
     return (
