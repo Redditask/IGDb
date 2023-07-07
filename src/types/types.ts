@@ -43,6 +43,8 @@ export type IdQueryArg = number | undefined;
 
 export type SlugQueryArg = string | undefined;
 
+export type LinkQueryArg = string | undefined;
+
 export interface IGameCard {
     id: number;
     slug: string;
@@ -127,9 +129,13 @@ export interface AccountGamesQueryResult {
     wishlist: IGameCard[];
 }
 
-export interface CheckIsAddedResult {
+export interface CheckIsAddedQueryResult {
     library: boolean;
     wishlist: boolean;
+}
+
+export interface ActivateQueryResult {
+    username: string;
 }
 
 export interface IUserStore extends IUserData {

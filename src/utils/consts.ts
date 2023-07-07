@@ -24,6 +24,8 @@ export const LOGIN_ROUTE: string = "/login";
 
 export const REGISTRATION_ROUTE: string = "/registration";
 
+export const ACTIVATION_ROUTE: string = "/activate/:link";
+
 export const SideBarLinks: ICustomLink [] = [
     {
         path: HOME_ROUTE,

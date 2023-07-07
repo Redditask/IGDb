@@ -1,12 +1,13 @@
 import {
-    AccountGamesQueryResult,
-    CheckIsAddedResult,
+    AccountGamesQueryResult, ActivateQueryResult,
+    CheckIsAddedQueryResult,
     GameQueryResult,
     GamesQueryResult,
     LoginQueryResult,
     ScreenshotsQueryResult,
     TrailersQueryResult
 } from "../../types/types";
+import {string} from "yup";
 
 export const initialGameState: GameQueryResult = {
     id: 0,
@@ -54,7 +55,11 @@ export const initialAccountGamesState: AccountGamesQueryResult = {
     wishlist: [],
 };
 
-export const initialIsAddedState: CheckIsAddedResult = {
+export const initialIsAddedState: CheckIsAddedQueryResult = {
     library: false,
     wishlist: false,
+};
+
+export const initialActivateState: ActivateQueryResult = {
+    username: "",
 };

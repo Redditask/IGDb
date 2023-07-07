@@ -14,8 +14,9 @@ import {
     UPCOMING_RELEASES_ROUTE,
     queryParams, GAME_ROUTE,
     ACCOUNT_ROUTE, LOGIN_ROUTE,
-    REGISTRATION_ROUTE,
+    REGISTRATION_ROUTE, ACTIVATION_ROUTE,
 } from "../utils/consts";
+import Activate from "../pages/Activate/Activate";
 
 export const publicRoutes: ICustomRoute [] = [
     {
@@ -64,6 +65,10 @@ export const publicRoutes: ICustomRoute [] = [
     {
         path: REGISTRATION_ROUTE,
         component: () => <Registration/>
+    },
+    {
+        path: ACTIVATION_ROUTE,
+        component: () => <Activate/>
     }
 ];
 

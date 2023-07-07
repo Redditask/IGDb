@@ -1,8 +1,8 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    AccountGamesQueryResult, CheckIsAddedResult,
-    IGameCard,
+    AccountGamesQueryResult, ActivateQueryResult, CheckIsAddedQueryResult,
+    IGameCard, LinkQueryArg,
     LoginQueryArgs,
     LoginQueryResult,
     RegistrationQueryArgs,
@@ -87,10 +87,14 @@ export const igdbAPI = createApi({
                 method: "DELETE",
             })
         }),
-        checkIsAdded: builder.query<CheckIsAddedResult, {slug: SlugQueryArg}>({
+        checkIsAdded: builder.query<CheckIsAddedQueryResult, {slug: SlugQueryArg}>({
            query: ({slug}) =>
                `check/${slug}`,
         }),
+        activateAccount: builder.query<ActivateQueryResult, {link: LinkQueryArg}>({
+            query: ({link}) =>
+                `activate/${link}`
+        })
     }),
 });
 
@@ -104,5 +108,6 @@ export const {
     useAddGameToWishlistMutation,
     useRemoveFromLibraryMutation,
     useRemoveFromWishlistMutation,
-    useCheckIsAddedQuery
+    useCheckIsAddedQuery,
+    useActivateAccountQuery
 } = igdbAPI;

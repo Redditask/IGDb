@@ -17,7 +17,7 @@ import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../Skeletons/GameHeadSkeleton/GameHeadSkeleton";
 
-import {CheckIsAddedResult, GameQueryResult, NotificationRef} from "../../types/types";
+import {CheckIsAddedQueryResult, GameQueryResult, NotificationRef} from "../../types/types";
 
 import {dateFormatting} from "../../utils/helpers/dates";
 
@@ -25,7 +25,7 @@ interface GameHeaderProps {
     game: GameQueryResult;
     isLoading: boolean;
     setIsError: (isError: boolean) => void;
-    addedStatus: CheckIsAddedResult;
+    addedStatus: CheckIsAddedQueryResult;
     refetch: () => void;
     setActionResponse: (actionResponse: string) => void;
 }
