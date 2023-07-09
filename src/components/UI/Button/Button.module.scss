@@ -5,9 +5,9 @@
   user-select: none;
   cursor: pointer;
 
-  color: gray;
-  background-color: white;
-  border: 0.1rem solid lightgray;
+  color: #b9b9b9;
+  background-color: black;
+  border: 0.1rem solid black;
   border-radius: 1rem;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 
@@ -19,22 +19,17 @@
   @include button;
 
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
 
     transform: translateY(-0.15rem);
 
-    color: black;
-    background-color: #f3f3f3;
-    border: 0.1rem solid lightgrey;
+    color: white;
   }
 
   &:active {
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 
     transform: scale(0.95);
-
-    background-color: #f3f3f3;
-    border: 0.1rem solid lightgrey;
   }
 }
 
@@ -45,8 +40,5 @@
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 
     transform: scale(0.95);
-
-    background-color: #f3f3f3;
-    border: 0.1rem solid lightgrey;
   }
 }

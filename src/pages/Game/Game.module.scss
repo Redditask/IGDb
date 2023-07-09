@@ -69,21 +69,20 @@
     justify-content: center;
     align-items: center;
 
-    color: gray;
+    color: #b9b9b9;
 
-    background-color: white;
+    background-color: black;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 
     border-radius: 50%;
-    border: 0.1rem solid lightgray;
+    border: 0.1rem solid black;
 
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
 
       transform: translateY(-0.15rem);
 
-      color: black;
-      background-color: #f3f3f3;
+      color: white;
     }
   }
 }

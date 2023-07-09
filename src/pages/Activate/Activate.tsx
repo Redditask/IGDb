@@ -20,7 +20,7 @@ const Activate = () => {
     const dispatch = useAppDispatch();
 
     const {
-        data: activateResponse = initialActivateState,
+        data = initialActivateState,
         error,
         isFetching
     } = useActivateAccountQuery({link}, {skip: !link});
@@ -35,7 +35,7 @@ const Activate = () => {
             <ErrorPage/>
             :
             <div className={styles.activate}>
-                <h2>{activateResponse.username}, your account is activated!</h2>
+                <h2>{data.activationMessage}</h2>
                 <NavLink
                     className={styles.link}
                     to={LOGIN_ROUTE}

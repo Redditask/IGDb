@@ -7,7 +7,6 @@ import {
     ScreenshotsQueryResult,
     TrailersQueryResult
 } from "../../types/types";
-import {string} from "yup";
 
 export const initialGameState: GameQueryResult = {
     id: 0,
@@ -61,5 +60,5 @@ export const initialIsAddedState: CheckIsAddedQueryResult = {
 };
 
 export const initialActivateState: ActivateQueryResult = {
-    username: "",
+    activationMessage: "",
 };

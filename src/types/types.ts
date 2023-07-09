@@ -135,7 +135,7 @@ export interface CheckIsAddedQueryResult {
 }
 
 export interface ActivateQueryResult {
-    username: string;
+    activationMessage: string;
 }
 
 export interface IUserStore extends IUserData {
