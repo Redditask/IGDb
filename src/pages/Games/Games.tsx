@@ -12,7 +12,7 @@ import RangeSlider from "../../components/RangeSlider/RangeSlider";
 import {useAppDispatch} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 import {gamesLimit, genresList, platformsList} from "../../utils/consts";
 import {initialGamesState} from "../../utils/helpers/initialStates";
@@ -52,6 +52,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
         isSuccess
     } = useGetGamesQuery({
         page,
+        pageSize: gamesLimit,
         metacritic: createMetacriticString(minMetacriticScore, maxMetacriticScore),
         dates,
         genres,

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Labels.module.scss";
 
-import {ILabel} from "../../../types/types";
+import {ILabel} from "../../../types/data";
 
 interface LabelsProps {
     labels: ILabel [];

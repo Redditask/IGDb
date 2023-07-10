@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {IUserData, IUserStore} from "../types/types";
+import {IUserData, IUserStore} from "../types/data";
 
 const initialState: IUserStore = {
     id: 0,

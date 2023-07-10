@@ -4,7 +4,7 @@ import Account from "../pages/Account/Account";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
 
-import {ICustomRoute} from "../types/types";
+import {ICustomRoute} from "../types/data";
 
 import {
     HOME_ROUTE,

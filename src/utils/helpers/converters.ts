@@ -1,4 +1,4 @@
-import {IDeveloper, ILabel, IPlatform} from "../../types/types";
+import {IDeveloper, ILabel, IPlatform} from "../../types/data";
 
 export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];

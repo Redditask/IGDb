@@ -4,7 +4,7 @@ import {Routes, Route, Navigate} from "react-router-dom";
 
 import Layout from "./Layout/Layout";
 
-import {ICustomRoute} from "../../types/types";
+import {ICustomRoute} from "../../types/data";
 
 interface CustomRoutesProps {
     routes: ICustomRoute [];

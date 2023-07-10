@@ -9,7 +9,7 @@ import {setIsFetching} from "../../store/userSlice";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
-import {IScreenshot} from "../../types/types";
+import {IScreenshot} from "../../types/data";
 
 import {initialScreenshotsState} from "../../utils/helpers/initialStates";
 import {regularCrop} from "../../utils/helpers/systemActions";

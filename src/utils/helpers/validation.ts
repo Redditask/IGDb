@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-import {IPlatform} from "../../types/types";
+import {IPlatform} from "../../types/data";
 
 export const platformValidation = (platformsArray: IPlatform[], platform: string): boolean => {
     let isOnPlatform: boolean = false;

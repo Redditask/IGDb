@@ -2,7 +2,7 @@ import React, {lazy, Suspense} from "react";
 
 import styles from "./GameList.module.scss";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
 const GameCard = lazy(()=> import("../GameCard/GameCard"));

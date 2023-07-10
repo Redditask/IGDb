@@ -10,7 +10,7 @@ import styles from "./Game.module.scss";
 import {useAppDispatch} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
 
-import {NotificationRef} from "../../types/types";
+import {NotificationRef} from "../../types/data";
 
 import {initialGameState, initialIsAddedState} from "../../utils/helpers/initialStates";
 

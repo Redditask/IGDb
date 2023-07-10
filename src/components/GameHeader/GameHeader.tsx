@@ -17,9 +17,10 @@ import Trailer from "../Trailer/Trailer";
 import Button from "../UI/Button/Button";
 import GameHeadSkeleton from "../Skeletons/GameHeadSkeleton/GameHeadSkeleton";
 
-import {CheckIsAddedQueryResult, GameQueryResult, NotificationRef} from "../../types/types";
+import {NotificationRef} from "../../types/data";
 
 import {dateFormatting} from "../../utils/helpers/dates";
+import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries";
 
 interface GameHeaderProps {
     game: GameQueryResult;

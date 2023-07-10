@@ -12,14 +12,13 @@ import Button from "../../components/UI/Button/Button";
 import FormInput from "../../components/UI/FormInput/FormInput";
 import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 
-import {LoginQueryArgs} from "../../types/types";
-
 import {REGISTRATION_ROUTE} from "../../utils/consts";
 import {loginValidationSchema, serverErrorValidation} from "../../utils/helpers/validation";
 import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser, setIsFetching} from "../../store/userSlice";
+import {LoginQueryArgs} from "../../types/queries";
 
 const Login: React.FC = () => {
     const [login, {isLoading}] = useLoginMutation();

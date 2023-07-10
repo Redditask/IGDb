@@ -2,6 +2,7 @@
   cursor: pointer;
 
   text-decoration: none;
+  user-select: none;
 
   color: black;
 
@@ -10,7 +11,7 @@
   }
 
   &:active {
-    transform: scale(0.8);
+    transform: scale(0.95);
   }
 }
 

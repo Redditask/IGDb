@@ -2,7 +2,7 @@ import React, {forwardRef, useImperativeHandle, useState} from "react";
 
 import styles from "./Notification.module.scss";
 
-import {NotificationRef} from "../../../types/types";
+import {NotificationRef} from "../../../types/data";
 
 interface NotificationProps {
     message: string;

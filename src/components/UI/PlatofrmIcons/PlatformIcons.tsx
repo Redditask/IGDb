@@ -8,7 +8,7 @@ import {SiNintendoswitch} from "react-icons/si";
 import {TbWorld} from "react-icons/tb";
 import {RiMacLine} from "react-icons/ri";
 
-import {IPlatform} from "../../../types/types";
+import {IPlatform} from "../../../types/data";
 
 import {platformIconSize} from "../../../utils/consts";
 

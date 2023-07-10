@@ -15,11 +15,10 @@ import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
-import {RegistrationQueryArgs} from "../../types/types";
-
 import {LOGIN_ROUTE} from "../../utils/consts";
 import {registrationValidationSchema, serverErrorValidation} from "../../utils/helpers/validation";
 import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
+import {RegistrationQueryArgs} from "../../types/queries";
 
 const Registration: React.FC = () => {
     const [registration, {isLoading}] = useRegistrationMutation();

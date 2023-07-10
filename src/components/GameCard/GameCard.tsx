@@ -10,7 +10,7 @@ import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Labels from "../UI/Labels/Labels";
 
-import {IGameCard, ILabel} from "../../types/types";
+import {IGameCard, ILabel} from "../../types/data";
 
 import {GAME_ROUTE} from "../../utils/consts";
 import {dateFormatting} from "../../utils/helpers/dates";

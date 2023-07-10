@@ -6,7 +6,7 @@ import ScrollUpButton from "../UI/ScrollUpButton/ScrollUpButton";
 
 import {NavLink} from "react-router-dom";
 
-import {ICustomLink} from "../../types/types";
+import {ICustomLink} from "../../types/data";
 
 import {SideBarLinks} from "../../utils/consts";
 

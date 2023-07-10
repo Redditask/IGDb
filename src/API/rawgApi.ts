@@ -1,14 +1,14 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
+
 import {
-    GamesQueryArgs,
     GameQueryResult,
-    GamesQueryResult,
+    GamesQueryArgs, GamesQueryResult,
+    IdQueryArg,
     ScreenshotsQueryResult,
-    TrailersQueryResult,
     SlugQueryArg,
-    IdQueryArg
-} from "../types/types";
+    TrailersQueryResult
+} from "../types/queries";
 
 export const rawgApi = createApi({
     reducerPath: "rawgApi",
@@ -17,8 +17,8 @@ export const rawgApi = createApi({
     }),
     endpoints: (builder) => ({
         getGames: builder.query<GamesQueryResult, GamesQueryArgs>({
-            query: ({page, metacritic, dates, genres, platforms}) =>
-                `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}${metacritic}${dates}${genres}${platforms}`,
+            query: ({page, pageSize, metacritic, dates, genres, platforms}) =>
+                `games?key=${process.env["REACT_APP_API_KEY"]}&page=${page}&page_size=${pageSize}${metacritic}${dates}${genres}${platforms}`,
         }),
         getGameDetails: builder.query<GameQueryResult, { slug: SlugQueryArg }>({
             query: ({slug}) =>

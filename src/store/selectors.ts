@@ -1,4 +1,4 @@
-import {IUserStore} from "../types/types";
+import {IUserStore} from "../types/data";
 
 export const selectUserId = (state: {user: IUserStore}): number => state.user.id;
 export const selectUsername = (state: {user: IUserStore}): string => state.user.username;

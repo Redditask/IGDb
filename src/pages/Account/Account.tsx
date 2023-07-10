@@ -11,7 +11,7 @@ import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 import {initialAccountGamesState} from "../../utils/helpers/initialStates";
 

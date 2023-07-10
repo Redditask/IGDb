@@ -1,8 +1,8 @@
-import {ICustomLink, ICustomOption} from "../types/types";
+import {ICustomLink, ICustomOption} from "../types/data";
 
 import {getLastYearDates, getRecentDates, getUpcomingDates} from "./helpers/dates";
 
-export const gamesLimit: number = 20;
+export const gamesLimit: number = 21;
 
 export const platformIconSize: number = 15;
 

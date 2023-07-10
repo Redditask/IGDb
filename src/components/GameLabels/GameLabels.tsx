@@ -7,10 +7,9 @@ import Link from "../UI/Link/Link";
 import Labels from "../UI/Labels/Labels";
 import GameDetailsSkeleton from "../Skeletons/GameDetailsSkeleton/GameDetailsSkeleton";
 
-import {GameQueryResult} from "../../types/types";
-
 import {developersToLabelsConvert, platformsToLabelsConvert} from "../../utils/helpers/converters";
 import {isHaveLinks} from "../../utils/helpers/dataProcessing";
+import {GameQueryResult} from "../../types/queries";
 
 interface GameLabelsProps {
     game: GameQueryResult;

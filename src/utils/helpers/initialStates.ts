@@ -1,12 +1,9 @@
 import {
-    AccountGamesQueryResult, ActivateQueryResult,
-    CheckIsAddedQueryResult,
-    GameQueryResult,
-    GamesQueryResult,
-    LoginQueryResult,
-    ScreenshotsQueryResult,
-    TrailersQueryResult
-} from "../../types/types";
+    AccountGamesQueryResult,
+    ActivateQueryResult,
+    CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult,
+    LoginQueryResult, ScreenshotsQueryResult, TrailersQueryResult
+} from "../../types/queries";
 
 export const initialGameState: GameQueryResult = {
     id: 0,

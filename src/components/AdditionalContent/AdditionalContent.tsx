@@ -9,7 +9,7 @@ import {setIsFetching} from "../../store/userSlice";
 
 import AdditionalContentItem from "../AdditionalContentItem/AdditionalContentItem";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 import {initialGamesState} from "../../utils/helpers/initialStates";
 

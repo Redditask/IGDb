@@ -5,7 +5,7 @@ import styles from "./AdditionalContentItem.module.scss";
 import GameList from "../GameList/GameList";
 import Button from "../UI/Button/Button";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 interface AdditionalContentItemProps {
     title: string;

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Filter.module.scss";
 
-import {ICustomOption} from "../../types/types";
+import {ICustomOption} from "../../types/data";
 
 interface FilterProps {
     title: string;

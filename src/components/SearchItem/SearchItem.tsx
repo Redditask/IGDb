@@ -8,7 +8,7 @@ import styles from "./SearchItem.module.scss";
 import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 import SearchItemSkeleton from "../Skeletons/SearchItemSkeleton/SearchItemSkeleton";
 
-import {IGameCard} from "../../types/types";
+import {IGameCard} from "../../types/data";
 
 import {dateFormatting} from "../../utils/helpers/dates";
 import {searchCrop} from "../../utils/helpers/systemActions";

@@ -1,13 +1,14 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    AccountGamesQueryResult, ActivateQueryResult, CheckIsAddedQueryResult,
-    IGameCard, LinkQueryArg,
-    LoginQueryArgs,
-    LoginQueryResult,
-    RegistrationQueryArgs,
+    IGameCard
+} from "../types/data";
+import {
+    AccountGamesQueryResult,
+    ActivateQueryResult,
+    CheckIsAddedQueryResult, LinkQueryArg, LoginQueryArgs, LoginQueryResult, RegistrationQueryArgs,
     RegistrationQueryResult, SlugQueryArg
-} from "../types/types";
+} from "../types/queries";
 
 export const igdbAPI = createApi({
     reducerPath: "idbgAPI",
