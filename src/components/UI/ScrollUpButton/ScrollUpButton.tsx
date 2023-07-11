@@ -20,7 +20,7 @@ const ScrollUpButton: React.FC<ScrollUpButtonProps> = ({showScrollUp}) => {
                 <AiOutlineArrowUp
                     title="Scroll up"
                     className={styles.scrollUpButton}
-                    size={40}
+                    size={45}
                     onClick={scrollUp}
                 />
             }

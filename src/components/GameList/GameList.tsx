@@ -26,7 +26,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
                         <div className={styles.gameList}>
                             {
                                 games.map((game: IGameCard) =>
-                                        game.background_image
+                                        !!game.background_image
                                         &&
                                         <Suspense key={game.id} fallback={null}>
                                             <GameCard gameCard={game}/>

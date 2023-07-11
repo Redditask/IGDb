@@ -2,4 +2,18 @@
   cursor: pointer;
 
   opacity: 1;
+
+  color: #b9b9b9;
+
+  &:hover {
+    transform: translateY(-0.15rem);
+
+    color: black;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  transition: 0.1s ease-in;
 }

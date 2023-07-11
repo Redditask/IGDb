@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 6rem 4rem 6rem;
+
+  gap: 2rem;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 4rem;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 34rem;
+}
+
+.button {
+  cursor: pointer;
+
+  color: #b9b9b9;
+
+  &:hover {
+    transform: translateY(-0.15rem);
+
+    color: black;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+#show {
+  opacity: 1;
+
+  visibility: initial;
+
+  transition: opacity 0.1s ease-in;
+}
+
+#hide {
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition: opacity 0.1s ease-in;
+}
