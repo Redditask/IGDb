@@ -49,27 +49,29 @@ const GamesCarousel:React.FC<GameCarouselProps> = ({title, games}) => {
                 !!games.length
                 &&
                 <div className={styles.container}>
-                    <h2>{title}</h2>
-                    <div className={styles.carousel}>
-                        <MdArrowBackIos
-                            className={styles.button}
-                            id={leftButtonIdDefinition()}
-                            size={40}
-                            onClick={prevIndexHandler}
-                        />
-                        <div className={styles.track}>
-                            <GameList
-                                games={displayedGames}
-                                isLimit={true}
-                                isEmpty={false}
+                    <h2 className={styles.title}>{title}</h2>
+                    <div>
+                        <div className={styles.carousel}>
+                            <MdArrowBackIos
+                                className={styles.button}
+                                id={leftButtonIdDefinition()}
+                                size={40}
+                                onClick={prevIndexHandler}
+                            />
+                            <div className={styles.track}>
+                                <GameList
+                                    games={displayedGames}
+                                    isLimit={true}
+                                    isEmpty={false}
+                                />
+                            </div>
+                            <MdArrowForwardIos
+                                className={styles.button}
+                                id={rightButtonIdDefinition()}
+                                size={40}
+                                onClick={nextIndexHandler}
                             />
                         </div>
-                        <MdArrowForwardIos
-                            className={styles.button}
-                            id={rightButtonIdDefinition()}
-                            size={40}
-                            onClick={nextIndexHandler}
-                        />
                     </div>
                 </div>
             }

@@ -12,18 +12,17 @@ interface ScrollUpButtonProps {
 
 const ScrollUpButton: React.FC<ScrollUpButtonProps> = ({showScrollUp}) => {
 
+    const idDefinition = (): string => showScrollUp ? styles.show : styles.hide;
+
     return (
         <>
-            {
-                showScrollUp
-                &&
-                <AiOutlineArrowUp
-                    title="Scroll up"
-                    className={styles.scrollUpButton}
-                    size={45}
-                    onClick={scrollUp}
-                />
-            }
+            <AiOutlineArrowUp
+                title="Scroll up"
+                className={styles.scrollUpButton}
+                id={idDefinition()}
+                size={45}
+                onClick={scrollUp}
+            />
         </>
     );
 };

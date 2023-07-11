@@ -15,8 +15,6 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  пофиксить баг с выделением при клике на next/prev в Game Page
-//  //
 //  добавить что-то вместо howlongtobeat
 //  //
 //  отзывы, индивидуальные оценки для игр (свой рейтинг типо)
