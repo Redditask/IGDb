@@ -1,7 +1,7 @@
 import {
     AccountGamesQueryResult,
     ActivateQueryResult,
-    CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult,
+    CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
     LoginQueryResult, ScreenshotsQueryResult, TrailersQueryResult
 } from "../../types/queries";
 
@@ -57,5 +57,9 @@ export const initialIsAddedState: CheckIsAddedQueryResult = {
 };
 
 export const initialActivateState: ActivateQueryResult = {
-    activationMessage: "",
+    message: "",
+};
+
+export const initialReviewsState: GetReviewsQueryResult = {
+    reviews: [],
 };

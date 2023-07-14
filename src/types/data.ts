@@ -71,3 +71,8 @@ export interface IUserStore extends IUserData {
 export interface NotificationRef {
     show: () => void;
 }
+
+export interface IGameReview {
+    username: string;
+    text: string;
+}

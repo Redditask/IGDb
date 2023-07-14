@@ -1,13 +1,21 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {
-    IGameCard
+    IGameCard, IGameReview
 } from "../types/data";
 import {
     AccountGamesQueryResult,
     ActivateQueryResult,
-    CheckIsAddedQueryResult, LinkQueryArg, LoginQueryArgs, LoginQueryResult, RegistrationQueryArgs,
-    RegistrationQueryResult, SlugQueryArg
+    AddReviewQueryArgs,
+    AddReviewQueryResult,
+    CheckIsAddedQueryResult,
+    GetReviewsQueryResult,
+    LinkQueryArg,
+    LoginQueryArgs,
+    LoginQueryResult,
+    RegistrationQueryArgs,
+    RegistrationQueryResult,
+    SlugQueryArg
 } from "../types/queries";
 
 export const igdbAPI = createApi({
@@ -45,13 +53,13 @@ export const igdbAPI = createApi({
             }),
         }),
         logout: builder.mutation<void, {}>({
-           query: () => ({
-               url: "logout",
-               method: "POST"
-           })
+            query: () => ({
+                url: "logout",
+                method: "POST"
+            })
         }),
         checkAuth: builder.query<LoginQueryResult, {}>({
-            query: ()=>
+            query: () =>
                 "refresh"
         }),
         getAccountGames: builder.query<AccountGamesQueryResult, {}>({
@@ -76,25 +84,38 @@ export const igdbAPI = createApi({
                 },
             })
         }),
-        removeFromWishlist: builder.mutation<void, {slug: SlugQueryArg}>({
-           query: ({slug}) => ({
-               url: `wishlist/${slug}`,
-               method: "DELETE",
-           })
+        removeFromWishlist: builder.mutation<void, { slug: SlugQueryArg }>({
+            query: ({slug}) => ({
+                url: `wishlist/${slug}`,
+                method: "DELETE",
+            })
         }),
-        removeFromLibrary: builder.mutation<void, {slug: SlugQueryArg}>({
+        removeFromLibrary: builder.mutation<void, { slug: SlugQueryArg }>({
             query: ({slug}) => ({
                 url: `library/${slug}`,
                 method: "DELETE",
             })
         }),
-        checkIsAdded: builder.query<CheckIsAddedQueryResult, {slug: SlugQueryArg}>({
-           query: ({slug}) =>
-               `check/${slug}`,
+        checkIsAdded: builder.query<CheckIsAddedQueryResult, { slug: SlugQueryArg }>({
+            query: ({slug}) =>
+                `check/${slug}`,
         }),
-        activateAccount: builder.query<ActivateQueryResult, {link: LinkQueryArg}>({
+        activateAccount: builder.query<ActivateQueryResult, { link: LinkQueryArg }>({
             query: ({link}) =>
-                `activate/${link}`
+                `activate/${link}`,
+        }),
+        addReview: builder.mutation<AddReviewQueryResult, AddReviewQueryArgs>({
+            query: ({slug, text}) => ({
+                url: `review/${slug}`,
+                method: "POST",
+                body: {
+                    text
+                },
+            })
+        }),
+        getReviews: builder.query<GetReviewsQueryResult, {slug: SlugQueryArg}>({
+            query: ({slug}) =>
+                `reviews/${slug}`,
         })
     }),
 });
@@ -110,5 +131,7 @@ export const {
     useRemoveFromLibraryMutation,
     useRemoveFromWishlistMutation,
     useCheckIsAddedQuery,
-    useActivateAccountQuery
+    useActivateAccountQuery,
+    useAddReviewMutation,
+    useGetReviewsQuery
 } = igdbAPI;

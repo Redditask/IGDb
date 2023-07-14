@@ -35,7 +35,7 @@ const Activate = () => {
             <ErrorPage/>
             :
             <div className={styles.activate}>
-                <h2>{data.activationMessage}</h2>
+                <h2>{data.message}</h2>
                 <NavLink
                     className={styles.link}
                     to={LOGIN_ROUTE}

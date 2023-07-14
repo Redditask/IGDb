@@ -39,14 +39,9 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
+        setDLC([...dlcResponse.results]);
 
-        if (dlcSuccess) {
-            setDLC([...dlcResponse.results]);
-        }
-
-        if (sameSeriesSuccess) {
-            setSameSeriesGames([...sameSeriesResponse.results]);
-        }
+        setSameSeriesGames([...sameSeriesResponse.results]);
 
         if (dlcError || sameSeriesError) setIsError(true);
     }, [dlcResponse, sameSeriesResponse]);

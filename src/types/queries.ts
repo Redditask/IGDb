@@ -1,4 +1,4 @@
-import {IDeveloper, IGameCard, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "./data";
+import {IDeveloper, IGameCard, IGameReview, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "./data";
 
 export interface GamesQueryResult {
     count: number;
@@ -45,14 +45,19 @@ export interface LoginQueryArgs {
     password: string;
 }
 
+export interface RegistrationQueryArgs extends LoginQueryArgs {
+    username: string;
+}
+
+export interface AddReviewQueryArgs {
+    slug: string;
+    text: string;
+}
+
 export interface LoginQueryResult {
     user: IUserData;
     accessToken: string;
     refreshToken: string;
-}
-
-export interface RegistrationQueryArgs extends LoginQueryArgs {
-    username: string;
 }
 
 export interface RegistrationQueryResult extends LoginQueryResult {
@@ -69,7 +74,15 @@ export interface CheckIsAddedQueryResult {
 }
 
 export interface ActivateQueryResult {
-    activationMessage: string;
+    message: string;
+}
+
+export interface AddReviewQueryResult {
+    message: string;
+}
+
+export interface GetReviewsQueryResult {
+    reviews: IGameReview [];
 }
 
 export type IdQueryArg = number | undefined;

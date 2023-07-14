@@ -22,6 +22,7 @@ import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
 import GameDescription from "../../components/GameDescription/GameDescription";
 import Notification from "../../components/UI/Notification/Notification";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
+import Reviews from "../../components/Reviews/Reviews";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -124,6 +125,12 @@ const Game: React.FC = () => {
                 <Suspense fallback={null}>
                     <AdditionalContent
                         gameId={game.id}
+                        setIsError={setIsError}
+                    />
+                </Suspense>
+                <Suspense fallback={null}>
+                    <Reviews
+                        slug={slug}
                         setIsError={setIsError}
                     />
                 </Suspense>
