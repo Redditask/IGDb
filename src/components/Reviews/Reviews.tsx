@@ -1,25 +1,26 @@
 import React, {useEffect, useState} from "react";
 
-import styles from "./Reviews.module.scss";
-
 import {useGetReviewsQuery} from "../../API/igdbAPI";
+
+import styles from "./Reviews.module.scss";
 
 import Button from "../UI/Button/Button";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
+import {setIsFetching} from "../../store/userSlice";
 import {selectIsAuth} from "../../store/selectors";
 
 import {IGameReview} from "../../types/data";
 import {initialReviewsState} from "../../utils/helpers/initialStates";
-import {setIsFetching} from "../../store/userSlice";
 
 interface ReviewsProps {
     slug: string | undefined;
     setIsError: (isError: boolean) => void;
+    modalHandler: () => void;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({slug, setIsError}) => {
+const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, modalHandler}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
@@ -46,20 +47,30 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError}) => {
     return (
         <div className={styles.container}>
             <h2>Reviews</h2>
-            <Button title="Write a review" disabled={!isAuth}/>
+            <Button
+                title="Write a review"
+                onClick={modalHandler}
+                disabled={!isAuth}
+            />
+            {!isAuth
+                &&
+                <p className={styles.errorMessage}>You must be logged in</p>
+            }
+            <div className={styles.reviews}>
             {
                 !!displayedReviews.length
                     ?
                     displayedReviews.map((review) =>
                         <ReviewItem
-                            key={review.username}
+                            key={review.id}
                             username={review.username}
                             text={review.text}
                         />
                     )
                     :
-                    <h3>No reviews</h3>
+                    <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
             }
+            </div>
         </div>
     );
 };

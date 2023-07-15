@@ -22,7 +22,7 @@ const ImageModal:React.FC<ImageModalProps> = ({imageURL, setImageURL}) => {
                 !!imageURL
                 &&
                 <div className={root.join(" ")} onClick={closeModal}>
-                    <div className={styles.modal__content} onClick={stopPropagation}>
+                    <div onClick={stopPropagation}>
                         <LazyLoadImage
                             className={styles.modal__image}
                             src={imageURL}

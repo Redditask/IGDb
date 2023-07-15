@@ -1,0 +1,37 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 2.6rem;
+
+  padding: 2rem;
+}
+
+.successfulForm {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3rem;
+
+  &__button {
+    font-size: 1.25rem;
+    font-weight: bolder;
+
+    cursor: pointer;
+    text-decoration: underline black;
+
+    &:hover {
+      transform: translateY(-0.15rem);
+    }
+  }
+}
+
+.loader {
+  padding-top: 1rem;
+}

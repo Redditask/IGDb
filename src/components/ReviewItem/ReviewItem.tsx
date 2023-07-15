@@ -4,7 +4,7 @@ import styles from "./ReviewItem.module.scss";
 
 import {IGameReview} from "../../types/data";
 
-interface ReviewItemProps extends IGameReview {}
+interface ReviewItemProps extends Omit<IGameReview, "id"> {}
 
 const ReviewItem: React.FC<ReviewItemProps> = ({username, text}) => {
 

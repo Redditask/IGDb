@@ -68,11 +68,18 @@ export interface IUserStore extends IUserData {
     isFetching: boolean;
 }
 
+export interface IGameReview {
+    id: number;
+    username: string;
+    text: string;
+}
+
 export interface NotificationRef {
     show: () => void;
 }
 
-export interface IGameReview {
-    username: string;
-    text: string;
-}
+export type StringChangeEvent = {
+    target: {
+        value: string
+    }
+};
