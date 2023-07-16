@@ -72,7 +72,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
         return function (): void {
             document.removeEventListener("scroll", scrollListener);
         };
-    }, [response]);
+    }, [response, isFetching]);
 
     useEffect((): void=>{
         if (metacritic) {

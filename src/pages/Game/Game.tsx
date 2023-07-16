@@ -52,8 +52,6 @@ const Game: React.FC = () => {
 
     const idDefinition = (): string => showScrollUp ? styles.show : styles.hide;
 
-    const modalHandler = (): void => setIsShowModal(true);
-
     const pageReload = (): void => window.location.reload();
 
     const scrollHandler = (): void => {
@@ -139,7 +137,7 @@ const Game: React.FC = () => {
                     <Reviews
                         slug={slug}
                         setIsError={setIsError}
-                        modalHandler={modalHandler}
+                        setIsShowModal={setIsShowModal}
                     />
                 </Suspense>
                 <Modal

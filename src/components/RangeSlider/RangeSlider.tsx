@@ -34,7 +34,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     const leftProgressHandler = (event: any): void => {
         if (secondValue - event.target.value >= minRange) {
             resetState();
-            startTransition(() => {
+            startTransition((): void => {
                 setFirstValue(Number(event.target.value));
             });
             setLeft(event.target.value);
@@ -44,7 +44,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
     const rightProgressHandler = (event: any): void => {
         if (event.target.value - firstValue >= minRange) {
             resetState();
-            startTransition(() => {
+            startTransition((): void => {
                 setSecondValue(Number(event.target.value));
             });
             setRight(event.target.value);

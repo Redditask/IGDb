@@ -17,10 +17,10 @@ import {initialReviewsState} from "../../utils/helpers/initialStates";
 interface ReviewsProps {
     slug: string | undefined;
     setIsError: (isError: boolean) => void;
-    modalHandler: () => void;
+    setIsShowModal: (isShowModal: boolean) => void;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, modalHandler}) => {
+const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
@@ -31,6 +31,8 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, modalHandler}) => {
         error,
         isFetching,
     } = useGetReviewsQuery({slug}, {skip: !slug});
+
+    const modalHandler = (): void => setIsShowModal(true);
 
     useEffect((): void => {
         if (reviewsResponse.reviews.length > 5) {

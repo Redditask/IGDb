@@ -12,14 +12,14 @@ interface TextareaProps {
 
 const Textarea: React.FC<TextareaProps> = ({value, setValue, placeholder}) => {
 
-    const handler = (event: StringChangeEvent): void => setValue(event.target.value);
+    const textareaHandler = (event: StringChangeEvent): void => setValue(event.target.value);
 
     return (
         <textarea
             title="Textarea"
             className={styles.textarea}
             value={value}
-            onChange={handler}
+            onChange={textareaHandler}
             placeholder={placeholder}
         />
     );

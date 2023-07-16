@@ -9,9 +9,9 @@ interface ReviewItemProps extends Omit<IGameReview, "id"> {}
 const ReviewItem: React.FC<ReviewItemProps> = ({username, text}) => {
 
     return (
-        <div className={styles.container}>
+        <div className={styles.review}>
             <h3>{username}</h3>
-            <p>{text}</p>
+            <p className={styles.review__text}>{text}</p>
         </div>
     );
 };
