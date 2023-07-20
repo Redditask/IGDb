@@ -22,6 +22,7 @@ interface ReviewsProps {
 
 const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
+    const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(true);
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
@@ -37,10 +38,16 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => 
     useEffect((): void => {
         if (reviewsResponse.reviews.length > 5) {
             setDisplayedReviews([...reviewsResponse.reviews.slice(0, 5)]);
+            setIsAllDisplayed(false);
         } else setDisplayedReviews([...reviewsResponse.reviews]);
 
         if (error) setIsError(true);
     }, [reviewsResponse]);
+
+    const showAllReviews = (): void => {
+        setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
+        setIsAllDisplayed(true);
+    }
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
@@ -59,20 +66,28 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => 
                 <p className={styles.errorMessage}>You must be logged in</p>
             }
             <div className={styles.reviews}>
-            {
-                !!displayedReviews.length
-                    ?
-                    displayedReviews.map((review) =>
-                        <ReviewItem
-                            key={review.id}
-                            username={review.username}
-                            text={review.text}
-                        />
-                    )
-                    :
-                    <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
-            }
+                {
+                    !!displayedReviews.length
+                        ?
+                        displayedReviews.map((review) =>
+                            <ReviewItem
+                                key={review.id}
+                                username={review.username}
+                                text={review.text}
+                            />
+                        )
+                        :
+                        <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
+                }
             </div>
+            {
+                !isAllDisplayed
+                &&
+                <Button
+                    title="Show all reviews"
+                    onClick={showAllReviews}
+                />
+            }
         </div>
     );
 };
