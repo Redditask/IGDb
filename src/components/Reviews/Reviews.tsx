@@ -39,7 +39,10 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => 
         if (reviewsResponse.reviews.length > 5) {
             setDisplayedReviews([...reviewsResponse.reviews.slice(0, 5)]);
             setIsAllDisplayed(false);
-        } else setDisplayedReviews([...reviewsResponse.reviews]);
+        } else {
+            setDisplayedReviews([...reviewsResponse.reviews]);
+            setIsAllDisplayed(true);
+        }
 
         if (error) setIsError(true);
     }, [reviewsResponse]);

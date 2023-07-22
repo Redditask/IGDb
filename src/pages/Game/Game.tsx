@@ -55,9 +55,9 @@ const Game: React.FC = () => {
     const pageReload = (): void => window.location.reload();
 
     const scrollHandler = (): void => {
-        if(window.scrollY > 1300) {
+        if (window.scrollY > 1300) {
             setShowScrollUp(true);
-        }else {
+        } else {
             setShowScrollUp(false);
         }
     };
@@ -93,10 +93,10 @@ const Game: React.FC = () => {
             :
             <div className={styles.container}>
                 <div
-                    className={styles.background}
+                    className={styles.background__header}
                     style={{backgroundImage: `url(${game.background_image})`}}
                 >
-                    <div className={styles.wrapper}>
+                    <div className={styles.wrapper__header}>
                         <div className={styles.game}>
                             <GameHeader
                                 game={game}
@@ -127,12 +127,19 @@ const Game: React.FC = () => {
                     description={game.description_raw}
                     isLoading={isFetching}
                 />
-                <Suspense fallback={null}>
-                    <AdditionalContent
-                        gameId={game.id}
-                        setIsError={setIsError}
-                    />
-                </Suspense>
+                <div
+                    className={styles.background__footer}
+                    style={{backgroundImage: `url(${game.background_image_additional})`}}
+                >
+                    <div className={styles.wrapper__footer}>
+                        <Suspense fallback={null}>
+                            <AdditionalContent
+                                gameId={game.id}
+                                setIsError={setIsError}
+                            />
+                        </Suspense>
+                    </div>
+                </div>
                 <Suspense fallback={null}>
                     <Reviews
                         slug={slug}

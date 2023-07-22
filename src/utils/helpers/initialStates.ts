@@ -9,6 +9,7 @@ export const initialGameState: GameQueryResult = {
     id: 0,
     slug: "",
     background_image: "",
+    background_image_additional: "",
     description_raw: "",
     developers: [],
     metacritic: 0,

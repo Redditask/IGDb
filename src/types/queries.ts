@@ -22,6 +22,7 @@ export interface GameQueryResult {
     metacritic: number;
     released: string;
     background_image: string;
+    background_image_additional: string;
     developers: IDeveloper[];
     website: string;
     reddit_url: string;
