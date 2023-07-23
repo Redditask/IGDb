@@ -15,8 +15,7 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  скелетоны для reviews
-//  проверить сбрасывание состояний в useEffect
+//  в Suspense скелетоны запихнуть (?)
 //  //
 //  если уже добавил отзыв к игре - то больше нельзя, вместо этого добавить кнопки редактировать (?) и удалить отзыв
 //  дата добавления отзыва, лайки дизлайки к отзыву

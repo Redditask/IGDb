@@ -100,7 +100,7 @@ const Game: React.FC = () => {
                         <div className={styles.game}>
                             <GameHeader
                                 game={game}
-                                isLoading={isFetching}
+                                isLoading={isFetching || isUpdating}
                                 setIsError={setIsError}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
@@ -117,6 +117,7 @@ const Game: React.FC = () => {
                                         setImageURL={setImageURL}
                                         gameId={game.id}
                                         setIsError={setIsError}
+                                        isLoading={isFetching || isUpdating}
                                     />
                                 </div>
                             </div>
@@ -125,7 +126,7 @@ const Game: React.FC = () => {
                 </div>
                 <GameDescription
                     description={game.description_raw}
-                    isLoading={isFetching}
+                    isLoading={isFetching || isUpdating}
                 />
                 <div
                     className={styles.background__footer}
@@ -136,6 +137,7 @@ const Game: React.FC = () => {
                             <AdditionalContent
                                 gameId={game.id}
                                 setIsError={setIsError}
+                                isLoading={isFetching || isUpdating}
                             />
                         </Suspense>
                     </div>
@@ -145,6 +147,7 @@ const Game: React.FC = () => {
                         slug={slug}
                         setIsError={setIsError}
                         setIsShowModal={setIsShowModal}
+                        isLoading={isFetching || isUpdating}
                     />
                 </Suspense>
                 <Modal

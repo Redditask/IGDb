@@ -1,0 +1,23 @@
+.skeleton {
+  width: 27.5rem;
+  height: 29rem;
+
+  background-color: darkgrey;
+  border-radius: 1rem;
+
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}

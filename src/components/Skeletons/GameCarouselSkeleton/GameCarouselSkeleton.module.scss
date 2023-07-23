@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 2rem 6rem 0 6rem;
+
+  gap: 2rem;
+}
+
+.skeleton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4rem;
+
+  &__header {
+    width: 12rem;
+    height: 3.5rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}

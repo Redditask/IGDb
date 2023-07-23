@@ -6,6 +6,7 @@ import styles from "./Reviews.module.scss";
 
 import Button from "../UI/Button/Button";
 import ReviewItem from "../ReviewItem/ReviewItem";
+import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
@@ -18,9 +19,10 @@ interface ReviewsProps {
     slug: string | undefined;
     setIsError: (isError: boolean) => void;
     setIsShowModal: (isShowModal: boolean) => void;
+    isLoading: boolean;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => {
+const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal, isLoading}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(true);
 
@@ -57,41 +59,45 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal}) => 
     }, [isFetching]);
 
     return (
-        <div className={styles.container}>
-            <h2>Reviews</h2>
-            <Button
-                title="Write a review"
-                onClick={modalHandler}
-                disabled={!isAuth}
-            />
-            {!isAuth
-                &&
-                <p className={styles.errorMessage}>You must be logged in</p>
-            }
-            <div className={styles.reviews}>
+        isLoading
+            ?
+            <ReviewsSkeleton/>
+            :
+            <div className={styles.container}>
+                <h2>Reviews</h2>
+                <Button
+                    title="Write a review"
+                    onClick={modalHandler}
+                    disabled={!isAuth}
+                />
+                {!isAuth
+                    &&
+                    <p className={styles.errorMessage}>You must be logged in</p>
+                }
+                <div className={styles.reviews}>
+                    {
+                        !!displayedReviews.length
+                            ?
+                            displayedReviews.map((review) =>
+                                <ReviewItem
+                                    key={review.id}
+                                    username={review.username}
+                                    text={review.text}
+                                />
+                            )
+                            :
+                            <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
+                    }
+                </div>
                 {
-                    !!displayedReviews.length
-                        ?
-                        displayedReviews.map((review) =>
-                            <ReviewItem
-                                key={review.id}
-                                username={review.username}
-                                text={review.text}
-                            />
-                        )
-                        :
-                        <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
+                    !isAllDisplayed
+                    &&
+                    <Button
+                        title="Show all reviews"
+                        onClick={showAllReviews}
+                    />
                 }
             </div>
-            {
-                !isAllDisplayed
-                &&
-                <Button
-                    title="Show all reviews"
-                    onClick={showAllReviews}
-                />
-            }
-        </div>
     );
 };
 

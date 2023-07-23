@@ -4,6 +4,8 @@ import {useGetGameScreenshotsQuery} from "../../API/rawgApi";
 
 import styles from "./Screenshots.module.scss";
 
+import ScreenshotsSkeleton from "../Skeletons/ScreenshotsSkeleton/ScreenshotsSkeleton";
+
 import {useAppDispatch} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
 
@@ -18,15 +20,16 @@ interface ScreenshotsProps {
     gameId: number;
     setImageURL: (url: string) => void;
     setIsError: (isError: boolean) => void;
+    isLoading: boolean;
 }
 
-const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError}) => {
+const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError, isLoading}) => {
     const dispatch = useAppDispatch();
 
     const {
         data: screenshots = initialScreenshotsState,
         error: screenshotsError,
-        isLoading
+        isFetching
     } = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
@@ -34,25 +37,29 @@ const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError
     }, [screenshotsError]);
 
     useEffect((): void => {
-        dispatch(setIsFetching(isLoading));
-    }, [isLoading]);
+        dispatch(setIsFetching(isFetching));
+    }, [isFetching]);
 
     return (
-        <div className={styles.screenshots}>
-            {
-                screenshots.results.map((screenshot: IScreenshot) =>
-                    <LazyLoadImage
-                        className={styles.screenshot}
-                        src={regularCrop(screenshot.image)}
-                        key={screenshot.id}
-                        onClick={() => setImageURL(screenshot.image)}
-                        title="Open screenshot"
-                        effect="blur"
-                        alt="Game screenshot"
-                    />
-                )
-            }
-        </div>
+        isLoading
+            ?
+            <ScreenshotsSkeleton/>
+            :
+            <div className={styles.screenshots}>
+                {
+                    screenshots.results.map((screenshot: IScreenshot) =>
+                        <LazyLoadImage
+                            className={styles.screenshot}
+                            src={regularCrop(screenshot.image)}
+                            key={screenshot.id}
+                            onClick={() => setImageURL(screenshot.image)}
+                            title="Open screenshot"
+                            effect="blur"
+                            alt="Game screenshot"
+                        />
+                    )
+                }
+            </div>
     );
 };
 

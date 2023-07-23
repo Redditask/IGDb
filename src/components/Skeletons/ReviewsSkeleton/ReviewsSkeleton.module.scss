@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 3rem;
+  padding: 0 8rem 5rem 8rem;
+
+  gap: 2.5rem;
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+
+  margin: 1rem 0;
+
+  &__item {
+    width: 50rem;
+    height: 5.8rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__header {
+    width: 10rem;
+    height: 3.5rem;
+
+    background-color: darkgrey;
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}

@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./GameDetailsSkeleton.module.scss";
+import styles from "./GameLabelsSkeleton.module.scss";
 
-const GameDetailsSkeleton: React.FC = () => {
+const GameLabelsSkeleton: React.FC = () => {
 
     return (
         <div className={styles.skeleton}>
@@ -16,4 +16,4 @@ const GameDetailsSkeleton: React.FC = () => {
     );
 };
 
-export default GameDetailsSkeleton;
+export default GameLabelsSkeleton;

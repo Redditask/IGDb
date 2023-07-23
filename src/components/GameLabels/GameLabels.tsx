@@ -5,7 +5,7 @@ import styles from "./GameLabels.module.scss";
 import MetacriticScore from "../UI/MetacriticScore/MetacriticScore";
 import Link from "../UI/Link/Link";
 import Labels from "../UI/Labels/Labels";
-import GameDetailsSkeleton from "../Skeletons/GameDetailsSkeleton/GameDetailsSkeleton";
+import GameLabelsSkeleton from "../Skeletons/GameLabelsSkeleton/GameLabelsSkeleton";
 
 import {developersToLabelsConvert, platformsToLabelsConvert} from "../../utils/helpers/converters";
 import {isHaveLinks} from "../../utils/helpers/dataProcessing";
@@ -21,7 +21,7 @@ const GameLabels: React.FC<GameLabelsProps> = ({game, isLoading}) => {
     return (
         isLoading
             ?
-            <GameDetailsSkeleton/>
+            <GameLabelsSkeleton/>
             :
             <div className={styles.labels}>
                 <h2>Details about game</h2>
