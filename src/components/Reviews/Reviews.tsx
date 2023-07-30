@@ -24,7 +24,7 @@ interface ReviewsProps {
 
 const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
-    const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(true);
+    const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [isShowReviewForm, setIsShowReviewForm] = useState<boolean>(false);
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
@@ -37,19 +37,9 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
         refetch
     } = useGetReviewsQuery({slug}, {skip: !slug});
 
-    const reviewFormHandler = (): void => setIsShowReviewForm(true);
-
-    useEffect((): void => {
-        if (reviewsResponse.reviews.length > 5) {
-            setDisplayedReviews([...reviewsResponse.reviews.slice(0, 5)]);
-            setIsAllDisplayed(false);
-        } else {
-            setDisplayedReviews([...reviewsResponse.reviews]);
-            setIsAllDisplayed(true);
-        }
-
-        if (error) setIsError(true);
-    }, [reviewsResponse]);
+    const reviewFormHandler = (): void => {
+        setIsShowReviewForm(true);
+    };
 
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
@@ -59,6 +49,34 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
     }, [isFetching]);
+
+    useEffect((): void => {
+        setIsAllDisplayed(false);
+        setIsShowReviewForm(false);
+    }, [slug]);
+
+    useEffect((): void => {
+        if (isAllDisplayed) {
+            setDisplayedReviews([...reviewsResponse.reviews]);
+        } else if (reviewsResponse.reviews.length > 5) {
+            setDisplayedReviews([...reviewsResponse.reviews.slice(0, 5)]);
+            setIsAllDisplayed(false);
+        } else {
+            setDisplayedReviews([...reviewsResponse.reviews]);
+            setIsAllDisplayed(true);
+        }
+
+        if (error) setIsError(true);
+    }, [reviewsResponse, isAllDisplayed]);
+
+    useEffect((): void => {
+        if (displayedReviews.length < 5) {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+    }, [isShowReviewForm]);
 
     return (
         isLoading

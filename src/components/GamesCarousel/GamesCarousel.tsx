@@ -22,11 +22,10 @@ const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) =
 
     useEffect((): void => {
         setDisplayedGames([...games.slice(startIndex, finalIndex)]);
-    }, [finalIndex]);
+    }, [games, finalIndex]);
 
     useEffect((): void => {
         setStartIndex(0);
-
         games.length > 3 ? setFinalIndex(3) : setFinalIndex(games.length);
     }, [games]);
 
