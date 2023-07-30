@@ -7,6 +7,7 @@ import styles from "./Reviews.module.scss";
 import Button from "../UI/Button/Button";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
+import ReviewForm from "../ReviewForm/ReviewForm";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
@@ -18,13 +19,13 @@ import {initialReviewsState} from "../../utils/helpers/initialStates";
 interface ReviewsProps {
     slug: string | undefined;
     setIsError: (isError: boolean) => void;
-    setIsShowModal: (isShowModal: boolean) => void;
     isLoading: boolean;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal, isLoading}) => {
+const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(true);
+    const [isShowReviewForm, setIsShowReviewForm] = useState<boolean>(false);
 
     const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
@@ -33,9 +34,10 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal, isLo
         data: reviewsResponse = initialReviewsState,
         error,
         isFetching,
+        refetch
     } = useGetReviewsQuery({slug}, {skip: !slug});
 
-    const modalHandler = (): void => setIsShowModal(true);
+    const reviewFormHandler = (): void => setIsShowReviewForm(true);
 
     useEffect((): void => {
         if (reviewsResponse.reviews.length > 5) {
@@ -65,14 +67,27 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, setIsShowModal, isLo
             :
             <div className={styles.container}>
                 <h2>Reviews</h2>
-                <Button
-                    title="Write a review"
-                    onClick={modalHandler}
-                    disabled={!isAuth}
-                />
-                {!isAuth
-                    &&
-                    <p className={styles.errorMessage}>You must be logged in</p>
+                {
+                    isShowReviewForm
+                        ?
+                        <ReviewForm
+                            setIsError={setIsError}
+                            setIsShowReviewForm={setIsShowReviewForm}
+                            gameSlug={slug}
+                            refetchReview={refetch}
+                        />
+                        :
+                        <>
+                            <Button
+                                title="Write a review"
+                                onClick={reviewFormHandler}
+                                disabled={!isAuth}
+                            />
+                            {!isAuth
+                                &&
+                                <p className={styles.errorMessage}>You must be logged in</p>
+                            }
+                        </>
                 }
                 <div className={styles.reviews}>
                     {

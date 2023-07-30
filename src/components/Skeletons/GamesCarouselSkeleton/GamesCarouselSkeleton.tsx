@@ -1,10 +1,10 @@
 import React from "react";
 
-import styles from "./GameCarouselSkeleton.module.scss";
+import styles from "./GamesCarouselSkeleton.module.scss";
 
 import GameCardSkeleton from "../GameCardSkeleton/GameCardSkeleton";
 
-const GameCarouselSkeleton = () => {
+const GamesCarouselSkeleton = () => {
 
     return (
         <div className={styles.container}>
@@ -18,4 +18,4 @@ const GameCarouselSkeleton = () => {
     );
 };
 
-export default GameCarouselSkeleton;
+export default GamesCarouselSkeleton;

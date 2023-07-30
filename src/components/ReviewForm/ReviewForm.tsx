@@ -13,17 +13,16 @@ import RegularLoader from "../UI/RegularLoader/RegularLoader";
 
 interface ReviewFormProps {
    setIsError: (isError: boolean) => void;
-   setIsShowModal: (isShowModal: boolean) => void;
-   pageReload: () => void;
+   setIsShowReviewForm: (isShowReviewForm: boolean) => void;
    gameSlug: string | undefined;
+   refetchReview: () => void;
 }
 
-const ReviewForm: React.FC<ReviewFormProps> = ({setIsError, setIsShowModal, gameSlug, pageReload}) => {
+const ReviewForm: React.FC<ReviewFormProps> = ({setIsError, setIsShowReviewForm, gameSlug, refetchReview}) => {
     const [addReview, {isLoading}] = useAddReviewMutation();
     const dispatch = useAppDispatch();
 
     const [reviewText, setReviewText] = useState<string>("");
-    const [isSuccessfulAdded, setIsSuccessfulAdded] = useState<boolean>(false);
 
     const buttonDisabledHandler = (): boolean => !(reviewText.length && gameSlug);
 
@@ -35,17 +34,17 @@ const ReviewForm: React.FC<ReviewFormProps> = ({setIsError, setIsShowModal, game
             }).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
-                setIsSuccessfulAdded(true);
+                setIsShowReviewForm(false);
+                refetchReview();
             } else if (response?.data?.message) {
                 setIsError(true);
-                setIsShowModal(false);
+                setIsShowReviewForm(false);
             }
         }
     };
 
-    const closeForm = (): void => {
-        setIsShowModal(false);
-        pageReload();
+    const closeFormHandler = (): void => {
+        setIsShowReviewForm(false);
     };
 
     useEffect((): void => {
@@ -53,39 +52,32 @@ const ReviewForm: React.FC<ReviewFormProps> = ({setIsError, setIsShowModal, game
     }, [isLoading])
 
     return (
-        !isSuccessfulAdded
-            ?
-            <div className={styles.form}>
-                <h1>Write your impression about game!</h1>
-                <Textarea
-                    value={reviewText}
-                    setValue={setReviewText}
-                    placeholder="Write something!"
-                />
-                {
-                    isLoading
-                        ?
-                        <div className={styles.loader}>
-                            <RegularLoader/>
-                        </div>
-                        :
+        <div className={styles.form}>
+            <Textarea
+                value={reviewText}
+                setValue={setReviewText}
+                placeholder="Write something!"
+            />
+            {
+                isLoading
+                    ?
+                    <div className={styles.loader}>
+                        <RegularLoader/>
+                    </div>
+                    :
+                    <div className={styles.buttons}>
+                        <Button
+                            title="Close"
+                            onClick={closeFormHandler}
+                        />
                         <Button
                             title="Send"
                             onClick={addReviewHandler}
                             disabled={buttonDisabledHandler()}
                         />
-                }
-            </div>
-            :
-            <div className={styles.successfulForm}>
-                <h1>Your review has been successfully added!</h1>
-                <span
-                    className={styles.successfulForm__button}
-                    onClick={closeForm}
-                >
-                    Close
-                </span>
-            </div>
+                    </div>
+            }
+        </div>
     );
 };
 

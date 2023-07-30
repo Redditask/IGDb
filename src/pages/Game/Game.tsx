@@ -23,8 +23,6 @@ import GameDescription from "../../components/GameDescription/GameDescription";
 import Notification from "../../components/UI/Notification/Notification";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
 import Reviews from "../../components/Reviews/Reviews";
-import ReviewForm from "../../components/ReviewForm/ReviewForm";
-import Modal from "../../components/UI/Modal/Modal";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -32,7 +30,6 @@ const Game: React.FC = () => {
     const [isError, setIsError] = useState<boolean>(false);
     const [actionResponse, setActionResponse] = useState<string>("");
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
-    const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
     const {slug} = useParams();
     const notificationRef = useRef<NotificationRef>(null);
@@ -51,8 +48,6 @@ const Game: React.FC = () => {
     } = useCheckIsAddedQuery({slug}, {skip: !slug});
 
     const idDefinition = (): string => showScrollUp ? styles.show : styles.hide;
-
-    const pageReload = (): void => window.location.reload();
 
     const scrollHandler = (): void => {
         if (window.scrollY > 1300) {
@@ -146,23 +141,9 @@ const Game: React.FC = () => {
                     <Reviews
                         slug={slug}
                         setIsError={setIsError}
-                        setIsShowModal={setIsShowModal}
                         isLoading={isFetching || isUpdating}
                     />
                 </Suspense>
-                <Modal
-                    isShow={isShowModal}
-                    setIsShow={setIsShowModal}
-                    pageReload={pageReload}
-                    modalContainerStyles={styles.modal}
-                >
-                    <ReviewForm
-                        setIsError={setIsError}
-                        setIsShowModal={setIsShowModal}
-                        pageReload={pageReload}
-                        gameSlug={slug}
-                    />
-                </Modal>
                 <ImageModal
                     imageURL={imageURL}
                     setImageURL={setImageURL}

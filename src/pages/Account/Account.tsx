@@ -16,7 +16,7 @@ import {IGameCard} from "../../types/data";
 import {initialAccountGamesState} from "../../utils/helpers/initialStates";
 
 const Account: React.FC = () => {
-    const [isLibrary, setIsLibrary] = useState<boolean>(true);
+    const [isLibrary, setIsLibrary] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
 
@@ -31,18 +31,19 @@ const Account: React.FC = () => {
 
     const gameListDefinition = (): IGameCard[] => isLibrary ? games.library : games.wishlist;
 
+    const buttonStylesDefinition = (isActive: boolean): string =>
+        isActive ? styles.account__activeButton : styles.account__defaultButton;
+
     const libraryHandler = (): void => setIsLibrary(true);
 
     const wishlistHandler = ():void => setIsLibrary(false);
 
-    const buttonStylesDefinition = (isActive: boolean): string =>
-        isActive ? styles.account__activeButton : styles.account__defaultButton;
-
-    useEffect((): void=>{
+    useEffect((): void=> {
         refetch();
     }, []);
 
     useEffect((): void => {
+        setIsLibrary(!!games.library.length);
         dispatch(setIsFetching(isFetching));
     }, [isFetching]);
 

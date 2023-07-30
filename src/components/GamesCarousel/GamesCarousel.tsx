@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from "react";
 
-import styles from "./GameCarousel.module.scss";
+import styles from "./GamesCarousel.module.scss";
 
 import {MdArrowForwardIos, MdArrowBackIos} from "react-icons/md";
 
 import GameList from "../GameList/GameList";
-import GameCarouselSkeleton from "../Skeletons/GameCarouselSkeleton/GameCarouselSkeleton";
+import GamesCarouselSkeleton from "../Skeletons/GamesCarouselSkeleton/GamesCarouselSkeleton";
 
 import {IGameCard} from "../../types/data";
 
-interface GameCarouselProps {
+interface GamesCarouselProps {
     title: string;
     games: IGameCard[];
     isLoading: boolean;
 }
 
-const GamesCarousel:React.FC<GameCarouselProps> = ({title, games, isLoading}) => {
+const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) => {
     const [displayedGames, setDisplayedGames] = useState<IGameCard []>([]);
     const [startIndex, setStartIndex] = useState<number>(0);
     const [finalIndex, setFinalIndex] = useState<number>(0);
@@ -51,7 +51,7 @@ const GamesCarousel:React.FC<GameCarouselProps> = ({title, games, isLoading}) =>
     return (
         isLoading
             ?
-            <GameCarouselSkeleton/>
+            <GamesCarouselSkeleton/>
             :
             <>
                 {

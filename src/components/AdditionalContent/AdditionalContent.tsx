@@ -7,7 +7,7 @@ import styles from "./AdditionalContent.module.scss";
 import {useAppDispatch} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
 
-import GamesCarousel from "../GamesCarousel/GameCarousel";
+import GamesCarousel from "../GamesCarousel/GamesCarousel";
 
 import {IGameCard} from "../../types/data";
 

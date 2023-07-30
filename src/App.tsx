@@ -15,10 +15,8 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  в Suspense скелетоны запихнуть (?)
-//  //
 //  если уже добавил отзыв к игре - то больше нельзя, вместо этого добавить кнопки редактировать (?) и удалить отзыв
-//  дата добавления отзыва, лайки дизлайки к отзыву
+//  дата добавления отзыва (использовать dateFormatting), лайки дизлайки к отзыву
 //  //
 //  внедрить теги в rtk-query (?)
 //  //
