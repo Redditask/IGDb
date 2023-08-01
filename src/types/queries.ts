@@ -55,6 +55,11 @@ export interface AddReviewQueryArgs {
     text: string;
 }
 
+export interface GetReviewsQueryArgs {
+    slug: SlugQueryArg;
+    username: string;
+}
+
 export interface LoginQueryResult {
     user: IUserData;
     accessToken: string;
@@ -82,8 +87,13 @@ export interface AddReviewQueryResult {
     message: string;
 }
 
+export interface RemoveReviewQueryResult {
+    message: string;
+}
+
 export interface GetReviewsQueryResult {
     reviews: IGameReview [];
+    isUserReviewThere: boolean;
 }
 
 export type IdQueryArg = number | undefined;

@@ -11,7 +11,7 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
-import {selectIsAuth} from "../../store/selectors";
+import {selectUsername} from "../../store/selectors";
 
 import {IGameReview} from "../../types/data";
 import {initialReviewsState} from "../../utils/helpers/initialStates";
@@ -26,8 +26,9 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [isShowReviewForm, setIsShowReviewForm] = useState<boolean>(false);
+    const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
 
-    const isAuth: boolean = useAppSelector(selectIsAuth);
+    const username: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
 
     const {
@@ -35,11 +36,7 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
         error,
         isFetching,
         refetch
-    } = useGetReviewsQuery({slug}, {skip: !slug});
-
-    const reviewFormHandler = (): void => {
-        setIsShowReviewForm(true);
-    };
+    } = useGetReviewsQuery({slug, username}, {skip: !slug});
 
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
@@ -51,6 +48,7 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
     }, [isFetching]);
 
     useEffect((): void => {
+        setReviewsRerender((prevState: boolean) => !prevState);
         setIsAllDisplayed(false);
         setIsShowReviewForm(false);
     }, [slug]);
@@ -67,7 +65,7 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
         }
 
         if (error) setIsError(true);
-    }, [reviewsResponse, isAllDisplayed]);
+    }, [reviewsResponse, reviewsRerender]);
 
     useEffect((): void => {
         if (displayedReviews.length < 5) {
@@ -84,29 +82,15 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
             <ReviewsSkeleton/>
             :
             <div className={styles.container}>
-                <h2>Reviews</h2>
-                {
-                    isShowReviewForm
-                        ?
-                        <ReviewForm
-                            setIsError={setIsError}
-                            setIsShowReviewForm={setIsShowReviewForm}
-                            gameSlug={slug}
-                            refetchReview={refetch}
-                        />
-                        :
-                        <>
-                            <Button
-                                title="Write a review"
-                                onClick={reviewFormHandler}
-                                disabled={!isAuth}
-                            />
-                            {!isAuth
-                                &&
-                                <p className={styles.errorMessage}>You must be logged in</p>
-                            }
-                        </>
-                }
+                <h2 className={styles.title}>Reviews</h2>
+                <ReviewForm
+                    setIsError={setIsError}
+                    isUserReviewWritten={reviewsResponse.isUserReviewThere}
+                    isShowForm={isShowReviewForm}
+                    setIsShowForm={setIsShowReviewForm}
+                    gameSlug={slug}
+                    refetchReviews={refetch}
+                />
                 <div className={styles.reviews}>
                     {
                         !!displayedReviews.length
@@ -114,8 +98,11 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
                             displayedReviews.map((review) =>
                                 <ReviewItem
                                     key={review.id}
+                                    id={review.id}
                                     username={review.username}
                                     text={review.text}
+                                    refetchReviews={refetch}
+                                    setIsError={setIsError}
                                 />
                             )
                             :

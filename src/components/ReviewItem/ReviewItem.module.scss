@@ -29,4 +29,22 @@
 
     overflow-wrap: break-word;
   }
+
+  &__header {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+  }
+
+  &__deleteButton {
+    cursor: pointer;
+
+    color: gray;
+
+    &:hover {
+      color: black;
+    }
+  }
 }

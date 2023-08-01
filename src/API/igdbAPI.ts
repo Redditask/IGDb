@@ -8,13 +8,13 @@ import {
     ActivateQueryResult,
     AddReviewQueryArgs,
     AddReviewQueryResult,
-    CheckIsAddedQueryResult,
-    GetReviewsQueryResult,
+    CheckIsAddedQueryResult, GetReviewsQueryArgs,
+    GetReviewsQueryResult, IdQueryArg,
     LinkQueryArg,
     LoginQueryArgs,
     LoginQueryResult,
     RegistrationQueryArgs,
-    RegistrationQueryResult,
+    RegistrationQueryResult, RemoveReviewQueryResult,
     SlugQueryArg
 } from "../types/queries";
 
@@ -113,9 +113,15 @@ export const igdbAPI = createApi({
                 },
             })
         }),
-        getReviews: builder.query<GetReviewsQueryResult, {slug: SlugQueryArg}>({
-            query: ({slug}) =>
-                `reviews/${slug}`,
+        getReviews: builder.query<GetReviewsQueryResult, GetReviewsQueryArgs>({
+            query: ({slug, username}) =>
+                `reviews/${slug}?username=${username}`,
+        }),
+        deleteReview: builder.mutation<RemoveReviewQueryResult, {id: IdQueryArg}>({
+            query: ({id}) => ({
+                url: `review/${id}`,
+                method: "DELETE",
+            })
         })
     }),
 });
@@ -133,5 +139,6 @@ export const {
     useCheckIsAddedQuery,
     useActivateAccountQuery,
     useAddReviewMutation,
-    useGetReviewsQuery
+    useGetReviewsQuery,
+    useDeleteReviewMutation
 } = igdbAPI;

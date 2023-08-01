@@ -63,4 +63,5 @@ export const initialActivateState: ActivateQueryResult = {
 
 export const initialReviewsState: GetReviewsQueryResult = {
     reviews: [],
+    isUserReviewThere: false,
 };
