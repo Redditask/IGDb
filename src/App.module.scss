@@ -55,3 +55,19 @@ input:-webkit-autofill:active{
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   border-radius: 1rem;
 }
+
+::-webkit-scrollbar {
+  width: 0.35rem;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+
+textarea::-webkit-scrollbar-track {
+  margin: 1rem;
+}

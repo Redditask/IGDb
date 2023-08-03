@@ -58,8 +58,8 @@
 
     padding: 1rem;
 
-    &::-webkit-scrollbar {
-      display: none;
+    &::-webkit-scrollbar-track {
+      margin: 1rem;
     }
   }
 }

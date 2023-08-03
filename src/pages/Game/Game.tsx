@@ -18,7 +18,7 @@ import GameLabels from "../../components/GameLabels/GameLabels";
 import Screenshots from "../../components/Screenshots/Screenshots";
 import ImageModal from "../../components/UI/ImageModal/ImageModal";
 import GameHeader from "../../components/GameHeader/GameHeader";
-import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
+import Error from "../Error/Error";
 import GameDescription from "../../components/GameDescription/GameDescription";
 import Notification from "../../components/UI/Notification/Notification";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
@@ -84,7 +84,7 @@ const Game: React.FC = () => {
     return (
         isError
             ?
-            <ErrorPage/>
+            <Error/>
             :
             <div className={styles.container}>
                 <div

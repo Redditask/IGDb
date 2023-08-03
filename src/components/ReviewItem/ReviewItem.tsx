@@ -23,9 +23,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({id, username, text, refetchRevie
     const isThisUserReview = (): boolean => username === user;
 
     const deleteReviewHandler = async (): Promise<void> => {
-        const response = await deleteReview({
-            id
-        }).unwrap().catch((err) => err);
+        const response = await deleteReview({id}).unwrap().catch((err) => err);
 
         if (response?.status === 200) {
             refetchReviews();

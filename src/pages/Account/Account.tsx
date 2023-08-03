@@ -5,7 +5,7 @@ import {useGetAccountGamesQuery} from "../../API/igdbAPI";
 import styles from "./Account.module.scss";
 
 import GameList from "../../components/GameList/GameList";
-import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
+import Error from "../Error/Error";
 import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 
 import {setIsFetching} from "../../store/userSlice";
@@ -50,7 +50,7 @@ const Account: React.FC = () => {
     return (
         isError
             ?
-            <ErrorPage/>
+            <Error/>
             :
             <div className={styles.account}>
                 <div className={styles.account__buttons}>

@@ -2,18 +2,18 @@ import React from "react";
 
 import {NavLink} from "react-router-dom";
 
-import styles from "./ErrorPage.module.scss";
+import styles from "./Error.module.scss";
 
-import {HOME_ROUTE} from "../../../utils/consts";
+import {HOME_ROUTE} from "../../utils/consts";
 
-const ErrorPage: React.FC = () => {
+const Error: React.FC = () => {
 
     return (
-        <div className={styles.errorPage}>
+        <div className={styles.page}>
             <h1 className={styles.errorMessage}>Oops, something go wrong...</h1>
             <NavLink
                 to={HOME_ROUTE}
-                className={styles.errorPage__link}
+                className={styles.page__link}
             >
                 Back to main page
             </NavLink>
@@ -21,4 +21,4 @@ const ErrorPage: React.FC = () => {
     );
 };
 
-export default ErrorPage;
+export default Error;

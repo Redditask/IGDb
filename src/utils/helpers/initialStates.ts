@@ -1,8 +1,6 @@
 import {
-    AccountGamesQueryResult,
-    ActivateQueryResult,
-    CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
-    LoginQueryResult, ScreenshotsQueryResult, TrailersQueryResult
+    AccountGamesQueryResult, CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
+    LoginQueryResult, MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
 } from "../../types/queries";
 
 export const initialGameState: GameQueryResult = {
@@ -57,7 +55,7 @@ export const initialIsAddedState: CheckIsAddedQueryResult = {
     wishlist: false,
 };
 
-export const initialActivateState: ActivateQueryResult = {
+export const initialActivateState: MessageQueryResult = {
     message: "",
 };
 

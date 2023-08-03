@@ -9,7 +9,7 @@ import {useAppDispatch} from "../../hooks";
 
 import {useActivateAccountQuery} from "../../API/igdbAPI";
 
-import ErrorPage from "../../components/UI/ErrorPage/ErrorPage";
+import Error from "../Error/Error";
 
 import {initialActivateState} from "../../utils/helpers/initialStates";
 import {LOGIN_ROUTE} from "../../utils/consts";
@@ -32,7 +32,7 @@ const Activate = () => {
     return (
         !!error
             ?
-            <ErrorPage/>
+            <Error/>
             :
             <div className={styles.activate}>
                 <h2>{data.message}</h2>

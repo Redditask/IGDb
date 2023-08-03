@@ -56,7 +56,7 @@ export interface AddReviewQueryArgs {
 }
 
 export interface GetReviewsQueryArgs {
-    slug: SlugQueryArg;
+    slug: StringQueryArg;
     username: string;
 }
 
@@ -79,15 +79,7 @@ export interface CheckIsAddedQueryResult {
     wishlist: boolean;
 }
 
-export interface ActivateQueryResult {
-    message: string;
-}
-
-export interface AddReviewQueryResult {
-    message: string;
-}
-
-export interface RemoveReviewQueryResult {
+export interface MessageQueryResult {
     message: string;
 }
 
@@ -96,8 +88,6 @@ export interface GetReviewsQueryResult {
     isUserReviewThere: boolean;
 }
 
-export type IdQueryArg = number | undefined;
+export type NumberQueryArg = number | undefined;
 
-export type SlugQueryArg = string | undefined;
-
-export type LinkQueryArg = string | undefined;
+export type StringQueryArg = string | undefined;
