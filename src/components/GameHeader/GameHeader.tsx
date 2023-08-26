@@ -139,7 +139,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoadin
                     </div>
                     {
                         !isAuth
-                            ? <p className={styles.errorMessage}>You must be logged in</p>
+                            ? <p className={styles.errorMessage}>You must be logged in to add games</p>
                             : <p className={styles.errorMessage}>{serverError}</p>
                     }
                 </div>

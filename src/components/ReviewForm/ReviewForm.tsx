@@ -103,7 +103,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({setIsError, isShowForm, setIsSho
                 {
                     !isAuth
                     &&
-                    <p className={styles.errorMessage}>You must be logged in</p>
+                    <p className={styles.errorMessage}>You must be logged in to write and like review's</p>
                 }
             </>
     );

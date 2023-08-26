@@ -72,6 +72,9 @@ export interface IGameReview {
     id: number;
     username: string;
     text: string;
+    likedUsers: number;
+    dislikedUsers: number;
+    userReaction: "like" | "dislike" | "null";
 }
 
 export interface NotificationRef {

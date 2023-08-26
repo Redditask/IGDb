@@ -1,4 +1,6 @@
 .review {
+  position: relative;
+
   width: 50rem;
 
   color: gray;
@@ -15,7 +17,7 @@
 
   gap: 0.75rem;
 
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem 4rem 1.5rem;
 
   &:hover {
     color: black;
@@ -30,15 +32,11 @@
     overflow-wrap: break-word;
   }
 
-  &__header {
-    width: 100%;
-
-    display: flex;
-
-    justify-content: space-between;
-  }
-
   &__deleteButton {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.5rem;
+
     cursor: pointer;
 
     color: gray;
@@ -46,5 +44,34 @@
     &:hover {
       color: black;
     }
+  }
+
+  &__stats {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 1.5rem;
+
+    display: flex;
+
+    gap: 1.25rem;
+
+    padding-bottom: 1rem;
+  }
+
+  &__reaction {
+    display: flex;
+    align-items: center;
+
+    user-select: none;
+
+    gap: 0.25rem;
+  }
+
+  &__activeReaction {
+    cursor: pointer;
+  }
+
+  &__inactiveReaction {
+    cursor: auto;
   }
 }

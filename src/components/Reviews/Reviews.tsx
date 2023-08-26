@@ -103,6 +103,9 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
                                     text={review.text}
                                     refetchReviews={refetch}
                                     setIsError={setIsError}
+                                    likedUsers={review.likedUsers}
+                                    dislikedUsers={review.dislikedUsers}
+                                    userReaction={review.userReaction}
                                 />
                             )
                             :

@@ -117,6 +117,18 @@ export const igdbAPI = createApi({
                 url: `review/${id}`,
                 method: "DELETE",
             })
+        }),
+        likeReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
+            query: ({id}) => ({
+                url: `review/like/${id}`,
+                method: "POST",
+            })
+        }),
+        dislikeReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
+            query: ({id}) => ({
+                url: `review/dislike/${id}`,
+                method: "POST",
+            })
         })
     }),
 });
@@ -135,5 +147,7 @@ export const {
     useActivateAccountQuery,
     useAddReviewMutation,
     useGetReviewsQuery,
-    useDeleteReviewMutation
+    useDeleteReviewMutation,
+    useLikeReviewMutation,
+    useDislikeReviewMutation
 } = igdbAPI;

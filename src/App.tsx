@@ -15,7 +15,10 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  дата добавления отзыва (использовать dateFormatting), лайки дизлайки к отзыву, edit ревью
+//  notification на написание, удаление, редактирование review
+//  как-то выделять твоё review (тёмной рамкой ?)
+//  сортировка review's (по лайкам ?)
+//  edit ревью
 //  //
 //  внедрить теги в rtk-query (?)
 //  //
