@@ -13,7 +13,14 @@ interface FilterProps {
     defaultValue: string;
 }
 
-const Filter: React.FC<FilterProps> = ({title, options, setFilter, filterString, resetState, defaultValue}) => {
+const Filter: React.FC<FilterProps> = ({
+        title,
+        options,
+        setFilter,
+        filterString,
+        resetState,
+        defaultValue
+    }) => {
 
     const selectHandler = (event: any): void => {
         if (event.target.value) {

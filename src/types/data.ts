@@ -78,7 +78,7 @@ export interface IGameReview {
 }
 
 export interface NotificationRef {
-    show: () => void;
+    show: (message: string) => void;
 }
 
 export type StringChangeEvent = {

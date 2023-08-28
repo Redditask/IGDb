@@ -4,18 +4,16 @@ import styles from "./Notification.module.scss";
 
 import {NotificationRef} from "../../../types/data";
 
-interface NotificationProps {
-    message: string;
-}
-
-const Notification= forwardRef<NotificationRef, NotificationProps>(({message}, ref) => {
+const Notification= forwardRef<NotificationRef, {}>(({}, ref) => {
     const [isShowNotification, setIsShowNotification] = useState<boolean>(false);
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout>();
+    const [notificationMessage, setNotificationMessage] = useState<string>("");
 
     useImperativeHandle(ref, (): NotificationRef => ({
-        show(): void {
+        show(message: string): void {
             if (timeoutId) clearTimeout(timeoutId);
 
+            setNotificationMessage(message)
             setIsShowNotification(true);
 
             let newTimeout: NodeJS.Timeout = setTimeout((): void => {
@@ -34,7 +32,7 @@ const Notification= forwardRef<NotificationRef, NotificationProps>(({message}, r
                 className={styles.notification}
                 id={idStylesDefinition()}
             >
-                <p>{message}</p>
+                <p>{notificationMessage}</p>
             </div>
         </div>
     );

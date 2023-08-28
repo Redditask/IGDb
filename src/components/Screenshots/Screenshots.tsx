@@ -23,7 +23,13 @@ interface ScreenshotsProps {
     isLoading: boolean;
 }
 
-const Screenshots:React.FC<ScreenshotsProps> = ({gameId, setImageURL, setIsError, isLoading}) => {
+const Screenshots:React.FC<ScreenshotsProps> = ({
+        gameId,
+        setImageURL,
+        setIsError,
+        isLoading
+    }) => {
+
     const dispatch = useAppDispatch();
 
     const {

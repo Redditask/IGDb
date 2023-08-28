@@ -28,10 +28,16 @@ interface GameHeaderProps {
     setIsError: (isError: boolean) => void;
     addedStatus: CheckIsAddedQueryResult;
     refetch: () => void;
-    setActionResponse: (actionResponse: string) => void;
 }
 
-const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoading, setIsError, addedStatus, refetch, setActionResponse}, ref) => {
+const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
+        game,
+        isLoading,
+        setIsError,
+        addedStatus,
+        refetch
+    }, ref) => {
+
     const [addToLibrary,{isLoading: isLoadingAddToLibrary}] = useAddGameToLibraryMutation();
     const [addToWishlist,{isLoading: isLoadingAddToWishlist}] = useAddGameToWishlistMutation();
     const [removeFromLibrary,{isLoading: isLoadingRemoveFromLibrary}] = useRemoveFromLibraryMutation();
@@ -43,8 +49,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({game, isLoadin
 
     const showNotification = (message: string): void => {
         refetch();
-        setActionResponse(message);
-        if (ref && "current" in ref && ref.current) ref.current.show();
+        if (ref && "current" in ref && ref.current) ref.current.show(message);
     };
 
     const addToLibraryHandler = async (): Promise<void> => {

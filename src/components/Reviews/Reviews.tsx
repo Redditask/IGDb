@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {forwardRef, useEffect, useState} from "react";
 
 import {useGetReviewsQuery} from "../../API/igdbAPI";
 
@@ -13,7 +13,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
 import {selectUsername} from "../../store/selectors";
 
-import {IGameReview} from "../../types/data";
+import {IGameReview, NotificationRef} from "../../types/data";
 import {initialReviewsState} from "../../utils/helpers/initialStates";
 
 interface ReviewsProps {
@@ -22,11 +22,17 @@ interface ReviewsProps {
     isLoading: boolean;
 }
 
-const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
+const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
+         slug,
+         setIsError,
+         isLoading
+     }, ref) => {
+
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [isShowReviewForm, setIsShowReviewForm] = useState<boolean>(false);
     const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
+    const [editReviewText, setEditReviewText] = useState<string>("");
 
     const username: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
@@ -90,6 +96,9 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
                     setIsShowForm={setIsShowReviewForm}
                     gameSlug={slug}
                     refetchReviews={refetch}
+                    editReviewText={editReviewText}
+                    setEditReviewText={setEditReviewText}
+                    ref={ref}
                 />
                 <div className={styles.reviews}>
                     {
@@ -106,6 +115,9 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
                                     likedUsers={review.likedUsers}
                                     dislikedUsers={review.dislikedUsers}
                                     userReaction={review.userReaction}
+                                    editReviewText={editReviewText}
+                                    setEditReviewText={setEditReviewText}
+                                    ref={ref}
                                 />
                             )
                             :
@@ -122,6 +134,6 @@ const Reviews: React.FC<ReviewsProps> = ({slug, setIsError, isLoading}) => {
                 }
             </div>
     );
-};
+});
 
 export default Reviews;

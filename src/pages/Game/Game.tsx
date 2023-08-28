@@ -28,7 +28,6 @@ const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/Ad
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
     const [isError, setIsError] = useState<boolean>(false);
-    const [actionResponse, setActionResponse] = useState<string>("");
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
 
     const {slug} = useParams();
@@ -99,7 +98,6 @@ const Game: React.FC = () => {
                                 setIsError={setIsError}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
-                                setActionResponse={setActionResponse}
                                 ref={notificationRef}
                             />
                             <div className={styles.game__body}>
@@ -142,6 +140,7 @@ const Game: React.FC = () => {
                         slug={slug}
                         setIsError={setIsError}
                         isLoading={isFetching || isUpdating}
+                        ref={notificationRef}
                     />
                 </Suspense>
                 <ImageModal
@@ -150,7 +149,6 @@ const Game: React.FC = () => {
                 />
                 <Notification
                     ref={notificationRef}
-                    message={actionResponse}
                 />
                 <div className={styles.scrollUp}>
                     <div

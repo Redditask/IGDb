@@ -60,6 +60,11 @@ export interface GetReviewsQueryArgs {
     username: string;
 }
 
+export interface EditReviewQueryArgs {
+  slug: StringQueryArg;
+  text: string;
+}
+
 export interface LoginQueryResult {
     user: IUserData;
     accessToken: string;

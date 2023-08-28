@@ -1,3 +1,5 @@
+@import url("../../satoshi.scss");
+
 .review {
   position: relative;
 
@@ -26,6 +28,13 @@
     transform: translateY(-0.5rem);
   }
 
+  &__header {
+    display: flex;
+    align-items: end;
+
+    gap: 0.5rem;
+  }
+
   &__text {
     width: 47rem;
 
@@ -36,6 +45,20 @@
     position: absolute;
     bottom: 1.25rem;
     right: 1.5rem;
+
+    cursor: pointer;
+
+    color: gray;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  &__editButton {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 4rem;
 
     cursor: pointer;
 
@@ -73,5 +96,11 @@
 
   &__inactiveReaction {
     cursor: auto;
+  }
+
+  &__userMark {
+    font: italic 1rem "Satoshi-Bold";
+
+    user-select: none;
   }
 }

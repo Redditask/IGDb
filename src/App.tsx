@@ -15,10 +15,9 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  notification на написание, удаление, редактирование review
-//  как-то выделять твоё review (тёмной рамкой ?)
+//  зарефакторить reviews (reviewItem, reviewForm)
+//  //
 //  сортировка review's (по лайкам ?)
-//  edit ревью
 //  //
 //  внедрить теги в rtk-query (?)
 //  //

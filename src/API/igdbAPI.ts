@@ -4,7 +4,7 @@ import {IGameCard} from "../types/data";
 import {
     AccountGamesQueryResult,
     AddReviewQueryArgs,
-    CheckIsAddedQueryResult, GetReviewsQueryArgs,
+    CheckIsAddedQueryResult, EditReviewQueryArgs, GetReviewsQueryArgs,
     GetReviewsQueryResult,
     LoginQueryArgs,
     LoginQueryResult, MessageQueryResult, NumberQueryArg,
@@ -118,6 +118,16 @@ export const igdbAPI = createApi({
                 method: "DELETE",
             })
         }),
+        editReview: builder.mutation<MessageQueryResult, EditReviewQueryArgs>({
+            query: ({slug, text}) => ({
+                url: `review`,
+                method: "PUT",
+                body: {
+                    slug: slug,
+                    newText: text
+                }
+            })
+        }),
         likeReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
             query: ({id}) => ({
                 url: `review/like/${id}`,
@@ -149,5 +159,6 @@ export const {
     useGetReviewsQuery,
     useDeleteReviewMutation,
     useLikeReviewMutation,
-    useDislikeReviewMutation
+    useDislikeReviewMutation,
+    useEditReviewMutation
 } = igdbAPI;
