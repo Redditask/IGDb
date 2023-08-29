@@ -12,14 +12,11 @@ import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
 
-import {NotificationRef} from "../../types/data";
+import {GamePageInfo, NotificationRef} from "../../types/data";
 
 interface ReviewFormProps {
    setIsError: (isError: boolean) => void;
-   isShowForm: boolean;
-   setIsShowForm: (isShowForm: boolean) => void;
-   isUserReviewWritten: boolean;
-   gameSlug: string | undefined;
+   gamePageInfo: GamePageInfo,
    editReviewText: string;
    setEditReviewText: (editReviewText: string) => void;
    refetchReviews: () => void;
@@ -27,21 +24,22 @@ interface ReviewFormProps {
 
 const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
         setIsError,
-        isShowForm,
-        setIsShowForm,
-        isUserReviewWritten,
-        gameSlug,
+        gamePageInfo,
         refetchReviews,
         editReviewText,
         setEditReviewText
     }, ref) => {
 
+    const [reviewText, setReviewText] = useState<string>("");
+    const [isShowForm, setIsShowForm] = useState<boolean>(false);
+
     const [addReview, {isLoading: isAddLoading}] = useAddReviewMutation();
     const [editReview, {isLoading: isEditLoading}] = useEditReviewMutation();
 
-    const [reviewText, setReviewText] = useState<string>("");
+    const buttonDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug);
 
-    const buttonDisabledHandler = (): boolean => !(reviewText.length && gameSlug);
+    const isAuth: boolean = useAppSelector(selectIsAuth);
+    const dispatch = useAppDispatch();
 
     const showNotification = (message: string): void => {
         refetchReviews();
@@ -49,14 +47,15 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     };
 
     const addReviewHandler = async (): Promise<void> => {
-        if (gameSlug?.length) {
+        if (gamePageInfo.slug?.length) {
             const response = await addReview({
                 text: reviewText,
-                slug: gameSlug
+                slug: gamePageInfo.slug
             }).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
                 setIsShowForm(false);
+                setReviewText("");
                 showNotification("Review was added");
             } else if (response?.data?.message) {
                 setIsError(true);
@@ -66,9 +65,9 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     };
 
     const editReviewHandler = async (): Promise<void> => {
-        if (editReviewText.trim() !== reviewText.trim()){
+        if (editReviewText.trim() !== reviewText.trim()) {
             const response = await editReview({
-                slug: gameSlug,
+                reviewId: gamePageInfo.userReviewId,
                 text: reviewText
             }).unwrap().catch((err) => err);
 
@@ -92,9 +91,6 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
         setIsShowForm(true);
     };
 
-    const isAuth: boolean = useAppSelector(selectIsAuth);
-    const dispatch = useAppDispatch();
-
     useEffect((): void => {
         dispatch(setIsFetching(isAddLoading || isEditLoading));
     }, [isAddLoading, isEditLoading]);
@@ -105,6 +101,10 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
             setIsShowForm(true);
         } else setIsShowForm(false);
     }, [editReviewText]);
+
+    useEffect((): void => {
+        setIsShowForm(false);
+    }, [gamePageInfo.slug]);
 
     return (
         isShowForm
@@ -148,7 +148,7 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
             :
             <>
                 {
-                    !isUserReviewWritten
+                    !gamePageInfo.userReviewId
                     &&
                     <Button
                         title="Write a review"
@@ -159,7 +159,9 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                 {
                     !isAuth
                     &&
-                    <p className={styles.errorMessage}>You must be logged in to write and like review's</p>
+                    <p className={styles.errorMessage}>
+                        You must be logged in to write and like review's
+                    </p>
                 }
             </>
     );

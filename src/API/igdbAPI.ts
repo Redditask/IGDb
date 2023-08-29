@@ -119,11 +119,10 @@ export const igdbAPI = createApi({
             })
         }),
         editReview: builder.mutation<MessageQueryResult, EditReviewQueryArgs>({
-            query: ({slug, text}) => ({
-                url: `review`,
+            query: ({reviewId, text}) => ({
+                url: `review/${reviewId}`,
                 method: "PUT",
                 body: {
-                    slug: slug,
                     newText: text
                 }
             })

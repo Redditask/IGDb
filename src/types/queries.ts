@@ -61,7 +61,7 @@ export interface GetReviewsQueryArgs {
 }
 
 export interface EditReviewQueryArgs {
-  slug: StringQueryArg;
+  reviewId: number;
   text: string;
 }
 
@@ -90,7 +90,7 @@ export interface MessageQueryResult {
 
 export interface GetReviewsQueryResult {
     reviews: IGameReview [];
-    isUserReviewThere: boolean;
+    userReviewId: number;
 }
 
 export type NumberQueryArg = number | undefined;

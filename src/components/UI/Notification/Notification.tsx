@@ -13,7 +13,7 @@ const Notification= forwardRef<NotificationRef, {}>(({}, ref) => {
         show(message: string): void {
             if (timeoutId) clearTimeout(timeoutId);
 
-            setNotificationMessage(message)
+            setNotificationMessage(message);
             setIsShowNotification(true);
 
             let newTimeout: NodeJS.Timeout = setTimeout((): void => {

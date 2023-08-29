@@ -13,7 +13,8 @@ import {MdDelete, MdEdit} from "react-icons/md"
 
 import {getDislikeButtonByReaction, getLikeButtonByReaction} from "../../utils/helpers/componentsProcessing";
 
-interface ReviewItemProps extends IGameReview {
+interface ReviewItemProps {
+    reviewData: IGameReview
     refetchReviews: () => void;
     setIsError: (isError: boolean) => void;
     editReviewText: string;
@@ -21,14 +22,9 @@ interface ReviewItemProps extends IGameReview {
 }
 
 const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
-        id,
-        username,
-        text,
+        reviewData,
         refetchReviews,
         setIsError,
-        likedUsers,
-        dislikedUsers,
-        userReaction,
         editReviewText,
         setEditReviewText
     }, ref) => {
@@ -42,7 +38,7 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     const user: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
 
-    const isThisUserReview = (): boolean => username === user;
+    const isThisUserReview = (): boolean => reviewData.username === user;
 
     const buttonStyles: string = (isThisUserReview() || !user)
         ? styles.review__inactiveReaction
@@ -54,7 +50,9 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     };
 
     const deleteReviewHandler = async (): Promise<void> => {
-        const response = await deleteReview({id}).unwrap().catch((err) => err);
+        const response = await deleteReview({
+            id: reviewData.id
+        }).unwrap().catch((err) => err);
 
         if (response?.status === 200) {
             showNotification("Review was deleted");
@@ -64,8 +62,8 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     };
 
     const likeReviewHandler = async (): Promise<void> => {
-        if (user && user !== username) {
-            const response = await likeReview(({id})).unwrap().catch((err) => err);
+        if (user && user !== reviewData.username) {
+            const response = await likeReview(({id: reviewData.id})).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
                 refetchReviews();
@@ -76,8 +74,10 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     };
 
     const dislikeReviewHandler = async (): Promise<void> => {
-        if (user && user !== username) {
-            const response = await dislikeReview(({id})).unwrap().catch((err) => err);
+        if (user && user !== reviewData.username) {
+            const response = await dislikeReview(({
+                id: reviewData.id
+            })).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
                 refetchReviews();
@@ -88,7 +88,7 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     };
 
     const editReviewHandler = (): void => {
-        setEditReviewText(text);
+        setEditReviewText(reviewData.text);
     };
 
     useEffect((): void => {
@@ -113,7 +113,7 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
             ?
             <div className={styles.review}>
                 <div className={styles.review__header}>
-                    <h3>{username}</h3>
+                    <h3>{reviewData.username}</h3>
                     {
                         isThisUserReview()
                         &&
@@ -122,23 +122,23 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                         </h4>
                     }
                 </div>
-                <p className={styles.review__text}>{text}</p>
+                <p className={styles.review__text}>{reviewData.text}</p>
                 <div className={styles.review__stats}>
                     <div className={styles.review__reaction}>
                         {getLikeButtonByReaction(
-                            userReaction,
+                            reviewData.userReaction,
                             likeReviewHandler,
                             buttonStyles
                         )}
-                        {likedUsers}
+                        {reviewData.likedUsers}
                     </div>
                     <div className={styles.review__reaction}>
                         {getDislikeButtonByReaction(
-                            userReaction,
+                            reviewData.userReaction,
                             dislikeReviewHandler,
                             buttonStyles
                         )}
-                        {dislikedUsers}
+                        {reviewData.dislikedUsers}
                     </div>
                 </div>
                 {

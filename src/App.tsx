@@ -15,7 +15,9 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  зарефакторить reviews (reviewItem, reviewForm)
+//  не менять порядок при лайке/дизлайке
+//  добавить схожие моменты в componentsProcessing
+//  setIsError перенести в state (?)
 //  //
 //  сортировка review's (по лайкам ?)
 //  //

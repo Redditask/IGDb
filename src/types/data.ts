@@ -81,6 +81,11 @@ export interface NotificationRef {
     show: (message: string) => void;
 }
 
+export interface GamePageInfo {
+    userReviewId: number;
+    slug: string | undefined;
+}
+
 export type StringChangeEvent = {
     target: {
         value: string

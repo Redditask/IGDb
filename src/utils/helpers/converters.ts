@@ -1,4 +1,4 @@
-import {IDeveloper, ILabel, IPlatform} from "../../types/data";
+import {GamePageInfo, IDeveloper, ILabel, IPlatform} from "../../types/data";
 
 export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];
@@ -24,4 +24,12 @@ export const developersToLabelsConvert = (developers: IDeveloper[]): ILabel[] =>
     });
 
     return labels;
+};
+
+export const gamePageInfoConvert = (userReviewId: number, slug: string | undefined): GamePageInfo => {
+
+    return {
+        userReviewId,
+        slug
+    };
 };

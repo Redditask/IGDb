@@ -15,6 +15,7 @@ import {selectUsername} from "../../store/selectors";
 
 import {IGameReview, NotificationRef} from "../../types/data";
 import {initialReviewsState} from "../../utils/helpers/initialStates";
+import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
 interface ReviewsProps {
     slug: string | undefined;
@@ -30,7 +31,6 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
 
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
-    const [isShowReviewForm, setIsShowReviewForm] = useState<boolean>(false);
     const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
     const [editReviewText, setEditReviewText] = useState<string>("");
 
@@ -56,7 +56,6 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     useEffect((): void => {
         setReviewsRerender((prevState: boolean) => !prevState);
         setIsAllDisplayed(false);
-        setIsShowReviewForm(false);
     }, [slug]);
 
     useEffect((): void => {
@@ -73,15 +72,6 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
         if (error) setIsError(true);
     }, [reviewsResponse, reviewsRerender]);
 
-    useEffect((): void => {
-        if (displayedReviews.length < 5) {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
-        }
-    }, [isShowReviewForm]);
-
     return (
         isLoading
             ?
@@ -91,10 +81,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                 <h2 className={styles.title}>Reviews</h2>
                 <ReviewForm
                     setIsError={setIsError}
-                    isUserReviewWritten={reviewsResponse.isUserReviewThere}
-                    isShowForm={isShowReviewForm}
-                    setIsShowForm={setIsShowReviewForm}
-                    gameSlug={slug}
+                    gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}
                     editReviewText={editReviewText}
                     setEditReviewText={setEditReviewText}
@@ -107,14 +94,9 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                             displayedReviews.map((review) =>
                                 <ReviewItem
                                     key={review.id}
-                                    id={review.id}
-                                    username={review.username}
-                                    text={review.text}
+                                    reviewData={review}
                                     refetchReviews={refetch}
                                     setIsError={setIsError}
-                                    likedUsers={review.likedUsers}
-                                    dislikedUsers={review.dislikedUsers}
-                                    userReaction={review.userReaction}
                                     editReviewText={editReviewText}
                                     setEditReviewText={setEditReviewText}
                                     ref={ref}

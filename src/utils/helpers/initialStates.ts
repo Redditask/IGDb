@@ -61,5 +61,5 @@ export const initialActivateState: MessageQueryResult = {
 
 export const initialReviewsState: GetReviewsQueryResult = {
     reviews: [],
-    isUserReviewThere: false,
+    userReviewId: 0,
 };
