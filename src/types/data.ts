@@ -66,6 +66,7 @@ export interface IUserStore extends IUserData {
     isAuth: boolean;
     isChecked: boolean;
     isFetching: boolean;
+    isError: boolean;
 }
 
 export interface IGameReview {

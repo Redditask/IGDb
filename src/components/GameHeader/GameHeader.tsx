@@ -25,7 +25,6 @@ import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries";
 interface GameHeaderProps {
     game: GameQueryResult;
     isLoading: boolean;
-    setIsError: (isError: boolean) => void;
     addedStatus: CheckIsAddedQueryResult;
     refetch: () => void;
 }
@@ -33,7 +32,6 @@ interface GameHeaderProps {
 const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
         game,
         isLoading,
-        setIsError,
         addedStatus,
         refetch
     }, ref) => {
@@ -132,13 +130,33 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
                     <div className={styles.textSide__buttons}>
                         {
                             addedStatus.library
-                                ? <Button title="Remove from library" onClick={removeFromLibraryHandler} disabled={!isAuth}/>
-                                : <Button title="Add to library" onClick={addToLibraryHandler} disabled={!isAuth}/>
+                                ?
+                                <Button
+                                    title="Remove from library"
+                                    onClick={removeFromLibraryHandler}
+                                    disabled={!isAuth}
+                                />
+                                :
+                                <Button
+                                    title="Add to library"
+                                    onClick={addToLibraryHandler}
+                                    disabled={!isAuth}
+                                />
                         }
                         {
                             addedStatus.wishlist
-                                ? <Button title="Remove from wishlist" onClick={removeFromWishlistHandler} disabled={!isAuth}/>
-                                : <Button title="Add to wishlist" onClick={addToWishlistHandler} disabled={!isAuth}/>
+                                ?
+                                <Button
+                                    title="Remove from wishlist"
+                                    onClick={removeFromWishlistHandler}
+                                    disabled={!isAuth}
+                                />
+                                :
+                                <Button
+                                    title="Add to wishlist"
+                                    onClick={addToWishlistHandler}
+                                    disabled={!isAuth}
+                                />
                         }
 
                     </div>
@@ -148,10 +166,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
                             : <p className={styles.errorMessage}>{serverError}</p>
                     }
                 </div>
-                <Trailer
-                    gameId={game.id}
-                    setIsError={setIsError}
-                />
+                <Trailer gameId={game.id}/>
             </div>
     );
 });

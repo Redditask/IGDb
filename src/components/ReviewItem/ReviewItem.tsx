@@ -7,16 +7,15 @@ import {selectUsername} from "../../store/selectors";
 
 import {IGameReview, NotificationRef} from "../../types/data";
 import {useDeleteReviewMutation, useDislikeReviewMutation, useLikeReviewMutation} from "../../API/igdbAPI";
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import {MdDelete, MdEdit} from "react-icons/md"
 
-import {getDislikeButtonByReaction, getLikeButtonByReaction} from "../../utils/helpers/componentsProcessing";
+import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 
 interface ReviewItemProps {
     reviewData: IGameReview
     refetchReviews: () => void;
-    setIsError: (isError: boolean) => void;
     editReviewText: string;
     setEditReviewText: (editReviewText: string) => void;
 }
@@ -24,16 +23,15 @@ interface ReviewItemProps {
 const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
         reviewData,
         refetchReviews,
-        setIsError,
         editReviewText,
         setEditReviewText
     }, ref) => {
 
     const [isShowUserReview, setIsShowUserReview] = useState<boolean>(true);
 
-    const [deleteReview, {isLoading: isLoadingDelete}] = useDeleteReviewMutation();
-    const [likeReview, {isLoading: isLoadingLike}] = useLikeReviewMutation();
-    const [dislikeReview, {isLoading: isloadingDislike}] = useDislikeReviewMutation();
+    const [deleteReview, {isLoading: isLoadingDelete, isError: isDeleteError}] = useDeleteReviewMutation();
+    const [likeReview, {isLoading: isLoadingLike, isError: isLikeError}] = useLikeReviewMutation();
+    const [dislikeReview, {isLoading: isLoadingDislike, isError: isDislikeError}] = useDislikeReviewMutation();
 
     const user: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
@@ -56,19 +54,17 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
 
         if (response?.status === 200) {
             showNotification("Review was deleted");
-        } else if (response?.data?.message) {
-            setIsError(true);
         }
     };
 
     const likeReviewHandler = async (): Promise<void> => {
         if (user && user !== reviewData.username) {
-            const response = await likeReview(({id: reviewData.id})).unwrap().catch((err) => err);
+            const response = await likeReview(({
+                id: reviewData.id
+            })).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
                 refetchReviews();
-            } else if (response?.data?.message) {
-                setIsError(true);
             }
         }
     };
@@ -81,8 +77,6 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
 
             if (response?.status === 200) {
                 refetchReviews();
-            } else if (response?.data?.message) {
-                setIsError(true);
             }
         }
     };
@@ -95,12 +89,24 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
         dispatch(setIsFetching(
             isLoadingDelete
             || isLoadingLike
-            || isloadingDislike
+            || isLoadingDislike
         ));
     }, [
         isLoadingDelete,
         isLoadingLike,
-        isloadingDislike
+        isLoadingDislike
+    ]);
+
+    useEffect((): void => {
+        dispatch(setIsError(
+            isDeleteError
+            || isLikeError
+            || isDislikeError
+        ));
+    }, [
+        isDeleteError,
+        isLikeError,
+        isDislikeError
     ]);
 
     useEffect((): void => {
@@ -125,19 +131,43 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                 <p className={styles.review__text}>{reviewData.text}</p>
                 <div className={styles.review__stats}>
                     <div className={styles.review__reaction}>
-                        {getLikeButtonByReaction(
-                            reviewData.userReaction,
-                            likeReviewHandler,
-                            buttonStyles
-                        )}
+                        {
+                            (reviewData.userReaction === "like")
+                                ?
+                                <
+                                    AiFillLike
+                                    className={buttonStyles}
+                                    onClick={likeReviewHandler}
+                                    size={25}
+                                />
+                                :
+                                <
+                                    AiOutlineLike
+                                    className={buttonStyles}
+                                    onClick={likeReviewHandler}
+                                    size={25}
+                                />
+                        }
                         {reviewData.likedUsers}
                     </div>
                     <div className={styles.review__reaction}>
-                        {getDislikeButtonByReaction(
-                            reviewData.userReaction,
-                            dislikeReviewHandler,
-                            buttonStyles
-                        )}
+                        {
+                            (reviewData.userReaction === "dislike")
+                                ?
+                                <
+                                    AiFillDislike
+                                    className={buttonStyles}
+                                    onClick={dislikeReviewHandler}
+                                    size={25}
+                                />
+                                :
+                                <
+                                    AiOutlineDislike
+                                    className={buttonStyles}
+                                    onClick={dislikeReviewHandler}
+                                    size={25}
+                                />
+                        }
                         {reviewData.dislikedUsers}
                     </div>
                 </div>

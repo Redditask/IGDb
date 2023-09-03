@@ -10,7 +10,7 @@ import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
 import ReviewForm from "../ReviewForm/ReviewForm";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 import {selectUsername} from "../../store/selectors";
 
 import {IGameReview, NotificationRef} from "../../types/data";
@@ -19,13 +19,11 @@ import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
 interface ReviewsProps {
     slug: string | undefined;
-    setIsError: (isError: boolean) => void;
     isLoading: boolean;
 }
 
 const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
          slug,
-         setIsError,
          isLoading
      }, ref) => {
 
@@ -39,7 +37,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
 
     const {
         data: reviewsResponse = initialReviewsState,
-        error,
+        isError,
         isFetching,
         refetch
     } = useGetReviewsQuery({slug, username}, {skip: !slug});
@@ -69,7 +67,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
             setIsAllDisplayed(true);
         }
 
-        if (error) setIsError(true);
+        dispatch(setIsError(isError));
     }, [reviewsResponse, reviewsRerender]);
 
     return (
@@ -80,7 +78,6 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
             <div className={styles.container}>
                 <h2 className={styles.title}>Reviews</h2>
                 <ReviewForm
-                    setIsError={setIsError}
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}
                     editReviewText={editReviewText}
@@ -96,7 +93,6 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                                     key={review.id}
                                     reviewData={review}
                                     refetchReviews={refetch}
-                                    setIsError={setIsError}
                                     editReviewText={editReviewText}
                                     setEditReviewText={setEditReviewText}
                                     ref={ref}

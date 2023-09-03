@@ -8,7 +8,8 @@ const initialState: IUserStore = {
     username: "",
     isAuth: false,
     isChecked: false,
-    isFetching: false
+    isFetching: false,
+    isError: false
 };
 
 const userSlice = createSlice({
@@ -30,7 +31,10 @@ const userSlice = createSlice({
         },
         setIsFetching: (state, action: PayloadAction<boolean>): void => {
             state.isFetching = action.payload;
-        }
+        },
+        setIsError: (state, action: PayloadAction<boolean>): void => {
+          state.isError = action.payload;
+        },
     }
 });
 
@@ -38,7 +42,8 @@ export const {
     setUser,
     clearUser,
     setIsChecked,
-    setIsFetching
+    setIsFetching,
+    setIsError
 } = userSlice.actions;
 
 export default userSlice.reducer;

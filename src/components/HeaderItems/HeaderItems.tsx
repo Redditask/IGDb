@@ -17,37 +17,33 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, usernam
     return (
         isAuth
             ?
-            <>
-                <nav className={styles.items}>
-                    <NavLink
-                        className={styles.item}
-                        to={ACCOUNT_ROUTE}
-                        title="Your games library"
-                    >
-                        {username}
-                    </NavLink>
-                    <NavLink
-                        className={styles.item}
-                        to={HOME_ROUTE}
-                        title="Log out"
-                        onClick={logoutHandler}
-                    >
-                        Log out
-                    </NavLink>
-                </nav>
-            </>
+            <nav className={styles.items}>
+                <NavLink
+                    className={styles.item}
+                    to={ACCOUNT_ROUTE}
+                    title="Your games library"
+                >
+                    {username}
+                </NavLink>
+                <NavLink
+                    className={styles.item}
+                    to={HOME_ROUTE}
+                    title="Log out"
+                    onClick={logoutHandler}
+                >
+                    Log out
+                </NavLink>
+            </nav>
             :
-            <>
-                <nav className={styles.items}>
-                    <NavLink
-                        className={styles.item}
-                        to={LOGIN_ROUTE}
-                        title="Login"
-                    >
-                        Login
-                    </NavLink>
-                </nav>
-            </>
+            <nav className={styles.items}>
+                <NavLink
+                    className={styles.item}
+                    to={LOGIN_ROUTE}
+                    title="Login"
+                >
+                    Login
+                </NavLink>
+            </nav>
     );
 };
 

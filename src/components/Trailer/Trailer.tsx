@@ -4,28 +4,27 @@ import {useGetGameTrailersQuery} from "../../API/rawgApi";
 
 import styles from "./Trailer.module.scss";
 
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
 
 import {initialTrailersState} from "../../utils/helpers/initialStates";
 
 interface TrailerProps {
     gameId: number;
-    setIsError: (isError: boolean) => void;
 }
 
-const Trailer: React.FC<TrailerProps> = ({gameId, setIsError}) => {
+const Trailer: React.FC<TrailerProps> = ({gameId}) => {
     const dispatch = useAppDispatch();
 
     const {
         data: trailers = initialTrailersState,
-        error: trailerError,
+        isError,
         isFetching
     } = useGetGameTrailersQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
-        if (trailerError) setIsError(true);
-    }, [trailerError]);
+        dispatch(setIsError(isError));
+    }, [isError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));

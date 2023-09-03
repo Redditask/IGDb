@@ -5,7 +5,7 @@ import {useGetGameDLCQuery, useGetSameSeriesGamesQuery} from "../../API/rawgApi"
 import styles from "./AdditionalContent.module.scss";
 
 import {useAppDispatch} from "../../hooks";
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import GamesCarousel from "../GamesCarousel/GamesCarousel";
 
@@ -15,11 +15,10 @@ import {initialGamesState} from "../../utils/helpers/initialStates";
 
 interface AdditionalContentProps {
     gameId: number;
-    setIsError: (isError: boolean) => void;
     isLoading: boolean;
 }
 
-const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError, isLoading}) => {
+const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, isLoading}) => {
     const [sameSeriesGames, setSameSeriesGames] = useState<IGameCard []>([]);
     const [DLC, setDLC] = useState<IGameCard []>([]);
 
@@ -27,24 +26,21 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, setIsError
 
     const {
         data: sameSeriesResponse = initialGamesState,
-        error: sameSeriesError,
+        isError: isSameSeriesError,
         isFetching: isFetchingSameSeries,
-        isSuccess: sameSeriesSuccess
     } = useGetSameSeriesGamesQuery({id: gameId}, {skip: !gameId});
 
     const {
         data: dlcResponse = initialGamesState,
-        error: dlcError,
+        isError: isDlcError,
         isFetching: isFetchingDLC,
-        isSuccess: dlcSuccess
     } = useGetGameDLCQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
         setDLC([...dlcResponse.results]);
-
         setSameSeriesGames([...sameSeriesResponse.results]);
 
-        if (dlcError || sameSeriesError) setIsError(true);
+        dispatch(setIsError(isDlcError || isSameSeriesError));
     }, [dlcResponse, sameSeriesResponse]);
 
     useEffect((): void => {

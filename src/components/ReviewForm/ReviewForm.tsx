@@ -6,7 +6,7 @@ import {useAddReviewMutation, useEditReviewMutation} from "../../API/igdbAPI";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {selectIsAuth} from "../../store/selectors";
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
@@ -15,7 +15,6 @@ import RegularLoader from "../UI/RegularLoader/RegularLoader";
 import {GamePageInfo, NotificationRef} from "../../types/data";
 
 interface ReviewFormProps {
-   setIsError: (isError: boolean) => void;
    gamePageInfo: GamePageInfo,
    editReviewText: string;
    setEditReviewText: (editReviewText: string) => void;
@@ -23,7 +22,6 @@ interface ReviewFormProps {
 }
 
 const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
-        setIsError,
         gamePageInfo,
         refetchReviews,
         editReviewText,
@@ -33,8 +31,8 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     const [reviewText, setReviewText] = useState<string>("");
     const [isShowForm, setIsShowForm] = useState<boolean>(false);
 
-    const [addReview, {isLoading: isAddLoading}] = useAddReviewMutation();
-    const [editReview, {isLoading: isEditLoading}] = useEditReviewMutation();
+    const [addReview, {isLoading: isAddLoading, isError: isAddError}] = useAddReviewMutation();
+    const [editReview, {isLoading: isEditLoading, isError: isEditError}] = useEditReviewMutation();
 
     const buttonDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug);
 
@@ -58,7 +56,6 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                 setReviewText("");
                 showNotification("Review was added");
             } else if (response?.data?.message) {
-                setIsError(true);
                 setIsShowForm(false);
             }
         }
@@ -76,7 +73,6 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                 setEditReviewText("");
                 showNotification("Review was edited");
             } else if (response?.data?.message) {
-                setIsError(true);
                 setIsShowForm(false);
             }
         }
@@ -94,6 +90,10 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     useEffect((): void => {
         dispatch(setIsFetching(isAddLoading || isEditLoading));
     }, [isAddLoading, isEditLoading]);
+
+    useEffect((): void => {
+        dispatch(setIsError(isAddError || isEditError));
+    }, [isAddError, isEditError]);
 
     useEffect((): void => {
         if (editReviewText) {

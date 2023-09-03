@@ -8,6 +8,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
 import Filter from "../../components/Filter/Filter";
 import RangeSlider from "../../components/RangeSlider/RangeSlider";
+import Error from "../Error/Error";
 
 import {useAppDispatch} from "../../hooks";
 import {setIsFetching} from "../../store/userSlice";
@@ -47,7 +48,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
 
     const {
         data: response = initialGamesState,
-        error,
+        isError,
         isFetching,
         isSuccess
     } = useGetGamesQuery({
@@ -145,8 +146,8 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                     </div>
                 </div>
                 {
-                    !!error
-                        ? <h1 className={styles.errorMessage}>Oops, something go wrong...</h1>
+                    isError
+                        ? <Error/>
                         : <GameList games={games} isLimit={isLimit} isEmpty={isEmpty}/>
                 }
             </div>

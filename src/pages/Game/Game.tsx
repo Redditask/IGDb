@@ -7,8 +7,9 @@ import {useParams} from "react-router-dom";
 
 import styles from "./Game.module.scss";
 
-import {useAppDispatch} from "../../hooks";
-import {setIsFetching} from "../../store/userSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {setIsError, setIsFetching} from "../../store/userSlice";
+import {selectIsError} from "../../store/selectors";
 
 import {NotificationRef} from "../../types/data";
 
@@ -27,22 +28,23 @@ const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/Ad
 
 const Game: React.FC = () => {
     const [imageURL, setImageURL] = useState<string>("");
-    const [isError, setIsError] = useState<boolean>(false);
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
 
     const {slug} = useParams();
     const notificationRef = useRef<NotificationRef>(null);
     const dispatch = useAppDispatch();
+    const isError: boolean = useAppSelector(selectIsError);
 
     const {
         data: game = initialGameState,
-        error: gameError,
+        isError: isGameError,
         isFetching
     } = useGetGameDetailsQuery({slug}, {skip: !slug});
 
     const {
         data: addedStatus = initialIsAddedState,
-        isLoading: isUpdating,
+        isError: isCheckError,
+        isFetching: isUpdating,
         refetch
     } = useCheckIsAddedQuery({slug}, {skip: !slug});
 
@@ -73,8 +75,8 @@ const Game: React.FC = () => {
     }, [slug, game]);
 
     useEffect((): void => {
-        if (gameError) setIsError(true);
-    }, [gameError]);
+        dispatch(setIsError(isGameError || isCheckError));
+    }, [isGameError, isCheckError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching || isUpdating));
@@ -95,7 +97,6 @@ const Game: React.FC = () => {
                             <GameHeader
                                 game={game}
                                 isLoading={isFetching || isUpdating}
-                                setIsError={setIsError}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
                                 ref={notificationRef}
@@ -109,7 +110,6 @@ const Game: React.FC = () => {
                                     <Screenshots
                                         setImageURL={setImageURL}
                                         gameId={game.id}
-                                        setIsError={setIsError}
                                         isLoading={isFetching || isUpdating}
                                     />
                                 </div>
@@ -129,7 +129,6 @@ const Game: React.FC = () => {
                         <Suspense fallback={null}>
                             <AdditionalContent
                                 gameId={game.id}
-                                setIsError={setIsError}
                                 isLoading={isFetching || isUpdating}
                             />
                         </Suspense>
@@ -138,7 +137,6 @@ const Game: React.FC = () => {
                 <Suspense fallback={null}>
                     <Reviews
                         slug={slug}
-                        setIsError={setIsError}
                         isLoading={isFetching || isUpdating}
                         ref={notificationRef}
                     />

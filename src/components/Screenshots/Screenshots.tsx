@@ -7,7 +7,7 @@ import styles from "./Screenshots.module.scss";
 import ScreenshotsSkeleton from "../Skeletons/ScreenshotsSkeleton/ScreenshotsSkeleton";
 
 import {useAppDispatch} from "../../hooks";
-import {setIsFetching} from "../../store/userSlice";
+import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
@@ -19,14 +19,12 @@ import {regularCrop} from "../../utils/helpers/systemActions";
 interface ScreenshotsProps {
     gameId: number;
     setImageURL: (url: string) => void;
-    setIsError: (isError: boolean) => void;
     isLoading: boolean;
 }
 
 const Screenshots:React.FC<ScreenshotsProps> = ({
         gameId,
         setImageURL,
-        setIsError,
         isLoading
     }) => {
 
@@ -34,13 +32,13 @@ const Screenshots:React.FC<ScreenshotsProps> = ({
 
     const {
         data: screenshots = initialScreenshotsState,
-        error: screenshotsError,
+        isError,
         isFetching
     } = useGetGameScreenshotsQuery({id: gameId}, {skip: !gameId});
 
     useEffect((): void => {
-        if (screenshotsError) setIsError(true);
-    }, [screenshotsError]);
+       dispatch(setIsError(isError));
+    }, [isError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));

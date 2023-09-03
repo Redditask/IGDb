@@ -15,11 +15,7 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  не менять порядок при лайке/дизлайке
-//  добавить схожие моменты в componentsProcessing
-//  setIsError перенести в state (?)
-//  //
-//  сортировка review's (по лайкам ?)
+//  сортировка review's (по лайкам\последние)
 //  //
 //  внедрить теги в rtk-query (?)
 //  //
@@ -56,7 +52,7 @@ const App: React.FC = () => {
 
         dispatch(setIsChecked(isFetching));
         dispatch(setIsFetching(isFetching));
-    }, [response, isError]);
+    }, [response]);
 
     return (
         <div className={styles}>
