@@ -15,7 +15,7 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  сортировка review's (по лайкам\последние)
+//  придумать что-то с размещением dlc и похожих игр, куда засунуть reviewForm
 //  //
 //  внедрить теги в rtk-query (?)
 //  //

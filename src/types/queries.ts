@@ -58,6 +58,7 @@ export interface AddReviewQueryArgs {
 export interface GetReviewsQueryArgs {
     slug: StringQueryArg;
     username: string;
+    sortOption: string;
 }
 
 export interface EditReviewQueryArgs {

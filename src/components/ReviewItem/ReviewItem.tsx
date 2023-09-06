@@ -134,15 +134,13 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                         {
                             (reviewData.userReaction === "like")
                                 ?
-                                <
-                                    AiFillLike
+                                <AiFillLike
                                     className={buttonStyles}
                                     onClick={likeReviewHandler}
                                     size={25}
                                 />
                                 :
-                                <
-                                    AiOutlineLike
+                                <AiOutlineLike
                                     className={buttonStyles}
                                     onClick={likeReviewHandler}
                                     size={25}
@@ -154,15 +152,13 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                         {
                             (reviewData.userReaction === "dislike")
                                 ?
-                                <
-                                    AiFillDislike
+                                <AiFillDislike
                                     className={buttonStyles}
                                     onClick={dislikeReviewHandler}
                                     size={25}
                                 />
                                 :
-                                <
-                                    AiOutlineDislike
+                                <AiOutlineDislike
                                     className={buttonStyles}
                                     onClick={dislikeReviewHandler}
                                     size={25}
@@ -175,15 +171,13 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                     isThisUserReview()
                     &&
                     <>
-                        <
-                            MdDelete
+                        <MdDelete
                             className={styles.review__deleteButton}
                             size={30}
                             title="Delete review"
                             onClick={deleteReviewHandler}
                         />
-                        <
-                            MdEdit
+                        <MdEdit
                             className={styles.review__editButton}
                             size={30}
                             title="Edit review"

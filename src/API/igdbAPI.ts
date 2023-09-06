@@ -109,8 +109,8 @@ export const igdbAPI = createApi({
             })
         }),
         getReviews: builder.query<GetReviewsQueryResult, GetReviewsQueryArgs>({
-            query: ({slug, username}) =>
-                `reviews/${slug}?username=${username}`,
+            query: ({slug, username, sortOption}) =>
+                `reviews/${slug}?username=${username}&sortOption=${sortOption}`,
         }),
         deleteReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
             query: ({id}) => ({

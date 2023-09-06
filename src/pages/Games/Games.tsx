@@ -6,7 +6,7 @@ import {useGetGamesQuery} from "../../API/rawgApi";
 
 import SideBar from "../../components/SideBar/SideBar";
 import GameList from "../../components/GameList/GameList";
-import Filter from "../../components/Filter/Filter";
+import GamesFilter from "../../components/GamesFilter/GamesFilter";
 import RangeSlider from "../../components/RangeSlider/RangeSlider";
 import Error from "../Error/Error";
 
@@ -127,7 +127,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                         isHaveDefaultRange={isHaveDefaultRange}
                     />
                     <div className={styles.games__filters}>
-                    <Filter
+                    <GamesFilter
                         title="Genre"
                         defaultValue="All"
                         setFilter={setGenres}
@@ -135,7 +135,7 @@ const Games:React.FC<GamesProps> = ({metacritic, dates}) => {
                         options={genresList}
                         resetState={resetState}
                     />
-                    <Filter
+                    <GamesFilter
                         title="Platform"
                         defaultValue="All"
                         setFilter={setPlatforms}

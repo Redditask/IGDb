@@ -40,6 +40,17 @@
       transform: translateY(-0.5rem);
     }
   }
+
+  &__header {
+    width: 50rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 1rem;
+    padding-left: 0.25rem;
+  }
 }
 
 .errorMessage {

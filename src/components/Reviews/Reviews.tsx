@@ -8,9 +8,10 @@ import Button from "../UI/Button/Button";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
 import ReviewForm from "../ReviewForm/ReviewForm";
+import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {setIsError, setIsFetching} from "../../store/userSlice";
+import userSlice, {setIsError, setIsFetching} from "../../store/userSlice";
 import {selectUsername} from "../../store/selectors";
 
 import {IGameReview, NotificationRef} from "../../types/data";
@@ -31,6 +32,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
     const [editReviewText, setEditReviewText] = useState<string>("");
+    const [reviewsSorter, setReviewsSorter] = useState<"latest" | "mostLiked">("latest");
 
     const username: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
@@ -40,7 +42,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
         isError,
         isFetching,
         refetch
-    } = useGetReviewsQuery({slug, username}, {skip: !slug});
+    } = useGetReviewsQuery({slug, username, sortOption: reviewsSorter}, {skip: !slug});
 
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
@@ -76,7 +78,11 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
             <ReviewsSkeleton/>
             :
             <div className={styles.container}>
-                <h2 className={styles.title}>Reviews</h2>
+                <div className={styles.reviews__header}>
+                    <h2 className={styles.title}>Reviews</h2>
+
+                    <ReviewsSorter setSortOption={setReviewsSorter}/>
+                </div>
                 <ReviewForm
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}

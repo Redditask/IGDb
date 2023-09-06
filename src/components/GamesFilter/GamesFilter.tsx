@@ -1,10 +1,10 @@
 import React from "react";
 
-import styles from "./Filter.module.scss";
+import styles from "./GamesFilter.module.scss";
 
 import {ICustomOption} from "../../types/data";
 
-interface FilterProps {
+interface GamesFilterProps {
     title: string;
     options: ICustomOption[];
     filterString: string;
@@ -13,7 +13,7 @@ interface FilterProps {
     defaultValue: string;
 }
 
-const Filter: React.FC<FilterProps> = ({
+const GamesFilter: React.FC<GamesFilterProps> = ({
         title,
         options,
         setFilter,
@@ -57,4 +57,4 @@ const Filter: React.FC<FilterProps> = ({
     );
 };
 
-export default Filter;
+export default GamesFilter;
