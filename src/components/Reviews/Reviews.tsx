@@ -11,8 +11,8 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import userSlice, {setIsError, setIsFetching} from "../../store/userSlice";
-import {selectUsername} from "../../store/selectors";
+import {setIsError, setIsFetching} from "../../store/userSlice";
+import {selectIsAuth, selectUsername} from "../../store/selectors";
 
 import {IGameReview, NotificationRef} from "../../types/data";
 import {initialReviewsState} from "../../utils/helpers/initialStates";
@@ -35,6 +35,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     const [reviewsSorter, setReviewsSorter] = useState<"latest" | "mostLiked">("latest");
 
     const username: string = useAppSelector(selectUsername);
+    const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
 
     const {
@@ -80,7 +81,13 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
             <div className={styles.container}>
                 <div className={styles.reviews__header}>
                     <h2 className={styles.title}>Reviews</h2>
-
+                    {
+                        !isAuth
+                        &&
+                        <h4 className={styles.nonAuthMessage}>
+                            You must be logged in to write and like review's
+                        </h4>
+                    }
                     <ReviewsSorter setSortOption={setReviewsSorter}/>
                 </div>
                 <ReviewForm

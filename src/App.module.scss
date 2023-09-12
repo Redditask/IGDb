@@ -28,7 +28,7 @@ option {
 select {
   border: 0;
   border-radius: 0.5rem;
-  box-shadow: 0 0 20px 2.5px lightgray;
+  box-shadow: 0 0 20px 5px lightgray;
 
   font-size: 1.15rem;
 
@@ -43,13 +43,13 @@ select {
   }
 
   &:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-0.3rem);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 20px 50px;
   }
 
   &:active {
-    transform: translateY(-0.25rem);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-0.3rem);
+    box-shadow: rgba(0, 0, 0, 0.25) 0 20px 50px;
   }
 }
 

@@ -27,18 +27,7 @@
     justify-content: center;
     align-items: center;
 
-    border: 0.12rem solid lightgray;
-    border-radius: 1rem;
-
-    background-color: white;
-    box-shadow: 0 0 10px 5px lightgray;
-
-    &:hover {
-      color: black;
-
-      box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-      transform: translateY(-0.5rem);
-    }
+    margin-bottom: -1rem;
   }
 
   &__header {
@@ -53,13 +42,12 @@
   }
 }
 
-.errorMessage {
-  color: gray;
-
-  padding-top: 0.75rem;
-  margin-top: -2rem;
-}
-
 .title {
   user-select: none;
+}
+
+.nonAuthMessage {
+  color: gray;
+
+  margin-bottom: -1rem;
 }

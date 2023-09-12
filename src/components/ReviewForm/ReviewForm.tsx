@@ -34,10 +34,11 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     const [addReview, {isLoading: isAddLoading, isError: isAddError}] = useAddReviewMutation();
     const [editReview, {isLoading: isEditLoading, isError: isEditError}] = useEditReviewMutation();
 
-    const buttonDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug);
-
     const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
+
+    const buttonsDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug);
+    const mainButtonDisabledHandler = (): () => void => isAuth ? showFormHandler : ()=>{};
 
     const showNotification = (message: string): void => {
         refetchReviews();
@@ -133,13 +134,13 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                                     <Button
                                         title="Edit"
                                         onClick={editReviewHandler}
-                                        disabled={buttonDisabledHandler()}
+                                        disabled={buttonsDisabledHandler()}
                                     />
                                     :
                                     <Button
                                         title="Send"
                                         onClick={addReviewHandler}
-                                        disabled={buttonDisabledHandler()}
+                                        disabled={buttonsDisabledHandler()}
                                     />
                             }
                         </div>
@@ -150,18 +151,12 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                 {
                     !gamePageInfo.userReviewId
                     &&
-                    <Button
-                        title="Write a review"
-                        onClick={showFormHandler}
-                        disabled={!isAuth}
-                    />
-                }
-                {
-                    !isAuth
-                    &&
-                    <p className={styles.errorMessage}>
-                        You must be logged in to write and like review's
-                    </p>
+                    <div
+                        className={styles.mainButton}
+                        onClick={mainButtonDisabledHandler()}
+                    >
+                        Write a review
+                    </div>
                 }
             </>
     );

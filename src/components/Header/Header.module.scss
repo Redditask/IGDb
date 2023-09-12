@@ -7,7 +7,7 @@
 
   z-index: 100;
 
-  box-shadow: 0 0 10px 1px lightgrey;
+  box-shadow: 0 0 20px 5px #cecece;
 }
 
 .header {
@@ -28,7 +28,7 @@
     user-select: none;
 
     &:hover {
-      transform: translateY(-0.25rem);
+      transform: translateY(-0.3rem);
     }
 
     &:active {

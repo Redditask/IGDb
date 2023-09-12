@@ -20,7 +20,7 @@
 
   &__item {
     width: 50rem;
-    height: 5.8rem;
+    height: 5rem;
 
     background-color: darkgrey;
     border-radius: 1rem;
@@ -29,8 +29,19 @@
   }
 
   &__header {
-    width: 10rem;
-    height: 3.5rem;
+    width: 50rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 1rem;
+    padding-left: 0.25rem;
+  }
+
+  &__headerItem {
+    width: 9rem;
+    height: 3rem;
 
     background-color: darkgrey;
     border-radius: 1rem;
