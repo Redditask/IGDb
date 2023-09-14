@@ -64,8 +64,8 @@ const Search: React.FC = () => {
     }, [isFetching]);
 
     return (
-        <div className={styles.search}>
-            <div className={styles.search__line}>
+        <div className={styles.container}>
+            <div className={styles.search}>
                 <div className={styles.search__wrapper}>
                     <input
                         className={styles.search__input}
@@ -76,7 +76,7 @@ const Search: React.FC = () => {
                         onFocus={focusSearch}
                         onBlur={blurSearch}
                     />
-                    <span className={styles.icon}><ImSearch size={15}/></span>
+                    <span className={styles.search__icon}><ImSearch size={15}/></span>
                 </div>
             </div>
             <div
@@ -88,7 +88,7 @@ const Search: React.FC = () => {
                 {
                     !!searchError
                         ?
-                        <h2 className={styles.errorMessage}>Oops, something go wrong...</h2>
+                        <h2 className={styles.search__errorMessage}>Oops, something go wrong...</h2>
                         :
                         <SearchResults
                             list={searchResults}

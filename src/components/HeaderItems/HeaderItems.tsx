@@ -17,7 +17,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, usernam
     return (
         isAuth
             ?
-            <nav className={styles.items}>
+            <nav className={styles.container}>
                 <NavLink
                     className={styles.item}
                     to={ACCOUNT_ROUTE}
@@ -35,7 +35,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, usernam
                 </NavLink>
             </nav>
             :
-            <nav className={styles.items}>
+            <nav className={styles.container}>
                 <NavLink
                     className={styles.item}
                     to={LOGIN_ROUTE}

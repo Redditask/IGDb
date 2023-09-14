@@ -123,11 +123,11 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
             ?
             <GameHeadSkeleton/>
             :
-            <div className={styles.gameHeader}>
-                <div className={styles.textSide}>
+            <div className={styles.container}>
+                <div className={styles.gameHeader}>
                     <h2>{dateFormatting(game.released)}</h2>
-                    <h1 className={styles.textSide__title}>{game.name}</h1>
-                    <div className={styles.textSide__buttons}>
+                    <h1 className={styles.gameHeader__title}>{game.name}</h1>
+                    <div className={styles.gameHeader__buttons}>
                         {
                             addedStatus.library
                                 ?
@@ -162,8 +162,8 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
                     </div>
                     {
                         !isAuth
-                            ? <p className={styles.errorMessage}>You must be logged in to add games</p>
-                            : <p className={styles.errorMessage}>{serverError}</p>
+                            ? <p className={styles.gameHeader__errorMessage}>You must be logged in to add games</p>
+                            : <p className={styles.gameHeader__errorMessage}>{serverError}</p>
                     }
                 </div>
                 <Trailer gameId={game.id}/>

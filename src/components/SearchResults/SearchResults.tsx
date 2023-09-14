@@ -35,7 +35,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({list, clean, isLoading}) =
                         </Suspense>
                     )
                     :
-                    <h2 className={styles.notFounded}>
+                    <h2 className={styles.emptySearch}>
                         No results
                     </h2>
             }

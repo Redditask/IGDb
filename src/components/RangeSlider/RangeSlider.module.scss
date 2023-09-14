@@ -23,10 +23,20 @@
 
     transition: none;
   }
-}
 
-.inputs {
-  position: relative;
+  &__inputs {
+    position: relative;
+  }
+
+  &__value {
+    font-size: 1.25rem;
+
+    user-select: none;
+
+    width: 1rem;
+
+    margin: 0 1.5rem;
+  }
 }
 
 input[type=range] {
@@ -55,14 +65,4 @@ input[type=range]::-webkit-slider-thumb {
   &:active {
     transform: scale(1.45);
   }
-}
-
-.value {
-  font-size: 1.25rem;
-
-  user-select: none;
-
-  width: 1rem;
-
-  margin: 0 1.5rem;
 }

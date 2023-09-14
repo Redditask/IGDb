@@ -23,7 +23,7 @@ const GameLabels: React.FC<GameLabelsProps> = ({game, isLoading}) => {
             ?
             <GameLabelsSkeleton/>
             :
-            <div className={styles.labels}>
+            <div className={styles.container}>
                 <h2>Details about game</h2>
                 <Labels
                     labels={developersToLabelsConvert(game.developers)}

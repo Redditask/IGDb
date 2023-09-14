@@ -36,7 +36,6 @@ const GamesFilter: React.FC<GamesFilterProps> = ({
         <form className={styles.filter}>
             <p className={styles.filter__title}>{title}:</p>
             <select
-                className={styles.select}
                 onChange={selectHandler}
                 title={`Select ${title}`}
             >
@@ -44,7 +43,6 @@ const GamesFilter: React.FC<GamesFilterProps> = ({
                 {
                     options.map((option: ICustomOption)=>
                         <option
-                            className={styles.filter__option}
                             key={option.name}
                             value={option.value}
                         >

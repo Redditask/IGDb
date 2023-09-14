@@ -15,9 +15,6 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  v0.8
-//  стили привести к одному порядку (бэм), проверить на одинаковость стилей
-//  //
 //  v0.9
 //  профили пользователей (как на rawg), придумать что будет в пустом профиле
 //  индивидуальные оценки для игр

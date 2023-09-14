@@ -41,7 +41,7 @@ const SearchItem: React.FC<SearchItemProps> = ({game, clean, isLoading}) => {
                     <PlatformIcons platformsArray={game.parent_platforms}/>
                     <div className={styles.searchItem__about}>
                         <h3>{game.name}</h3>
-                        <p className={styles.searchItem__date}>({dateFormatting(game.released)})</p>
+                        <p>({dateFormatting(game.released)})</p>
                     </div>
                 </div>
             </NavLink>

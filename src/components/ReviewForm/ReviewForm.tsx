@@ -123,7 +123,7 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                             <RegularLoader/>
                         </div>
                         :
-                        <div className={styles.buttons}>
+                        <div className={styles.form__buttons}>
                             <Button
                                 title="Close"
                                 onClick={closeFormHandler}
@@ -152,7 +152,7 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                     !gamePageInfo.userReviewId
                     &&
                     <div
-                        className={styles.mainButton}
+                        className={styles.form__startButton}
                         onClick={mainButtonDisabledHandler()}
                     >
                         Write a review

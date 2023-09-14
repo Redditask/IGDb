@@ -49,7 +49,7 @@ const Screenshots:React.FC<ScreenshotsProps> = ({
             ?
             <ScreenshotsSkeleton/>
             :
-            <div className={styles.screenshots}>
+            <div className={styles.container}>
                 {
                     screenshots.results.map((screenshot: IScreenshot) =>
                         <LazyLoadImage

@@ -45,7 +45,7 @@ const SideBar: React.FC = () => {
                         </NavLink>
                     )
                 }
-                <div className={styles.scrollUp}>
+                <div className={styles.sideBar__scrollUpButton}>
                     <ScrollUpButton showScrollUp={showScrollUp}/>
                 </div>
             </nav>

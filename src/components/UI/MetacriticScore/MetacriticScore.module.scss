@@ -17,28 +17,28 @@
   border: 0.15rem solid $color;
 }
 
-.green {
-  @include scoreColor(#6c3);
-}
-
-.yellow {
-  @include scoreColor(#fc3);
-}
-
-.red {
-  @include scoreColor(#f00);
-}
-
-.notAvailable {
-  @include scoreColor(gray);
-
-  font-size: 0.9rem;
-}
-
 .metacriticScore {
   display: flex;
   justify-content: start;
   align-items: center;
 
   gap: 0.5rem;
+
+  &__green {
+    @include scoreColor(#6c3);
+  }
+
+  &__yellow {
+    @include scoreColor(#fc3);
+  }
+
+  &__red {
+    @include scoreColor(#f00);
+  }
+
+  &__notAvailable {
+    @include scoreColor(gray);
+
+    font-size: 0.9rem;
+  }
 }

@@ -9,8 +9,8 @@ const GameHeadSkeleton:React.FC = () => {
             <span className={styles.skeleton__released}/>
             <span className={styles.skeleton__title}/>
             <div className={styles.skeleton__buttons}>
-                <span className={styles.button}/>
-                <span className={styles.button}/>
+                <span className={styles.skeleton__button}/>
+                <span className={styles.skeleton__button}/>
             </div>
         </div>
     );

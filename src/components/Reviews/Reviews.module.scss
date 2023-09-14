@@ -17,7 +17,11 @@
 
   margin: 1rem 0;
 
-  &__emptyMessage {
+  &__title {
+    user-select: none;
+  }
+
+  &__emptyReviews {
     width: 50rem;
     height: 5rem;
 
@@ -40,14 +44,10 @@
     padding-top: 1rem;
     padding-left: 0.25rem;
   }
-}
 
-.title {
-  user-select: none;
-}
+  &__nonAuthMessage {
+    color: gray;
 
-.nonAuthMessage {
-  color: gray;
-
-  margin-bottom: -1rem;
+    margin-bottom: -1rem;
+  }
 }

@@ -1,4 +1,4 @@
-.textSide {
+.gameHeader {
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -12,20 +12,20 @@
   &__title {
     width: 40rem;
   }
+
+  &__errorMessage {
+    color: gray;
+
+    padding-top: 0.75rem;
+    margin-top: -4rem;
+  }
 }
 
-.gameHeader {
+.container {
   display: flex;
   flex-wrap: wrap;
 
   gap: 5.5vw;
 
   align-items: center;
-}
-
-.errorMessage {
-  color: gray;
-
-  padding-top: 0.75rem;
-  margin-top: -4rem;
 }

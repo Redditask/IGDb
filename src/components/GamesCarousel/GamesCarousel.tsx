@@ -57,15 +57,15 @@ const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) =
                     !!games.length
                     &&
                     <div className={styles.container}>
-                        <h2 className={styles.title}>{title}</h2>
+                        <h2>{title}</h2>
                         <div className={styles.carousel}>
                             <MdArrowBackIos
-                                className={styles.button}
+                                className={styles.carousel__button}
                                 id={leftButtonIdDefinition()}
                                 size={40}
                                 onClick={prevIndexHandler}
                             />
-                            <div className={styles.track}>
+                            <div className={styles.carousel__track}>
                                 <GameList
                                     games={displayedGames}
                                     isLimit={true}
@@ -73,7 +73,7 @@ const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) =
                                 />
                             </div>
                             <MdArrowForwardIos
-                                className={styles.button}
+                                className={styles.carousel__button}
                                 id={rightButtonIdDefinition()}
                                 size={40}
                                 onClick={nextIndexHandler}

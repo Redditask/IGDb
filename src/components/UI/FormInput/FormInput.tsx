@@ -30,7 +30,7 @@ const FormInput: React.FC<FormInputProps> = ({placeholderText, formErrorMessage,
             {
                 (!!formErrorMessage || !!serverErrorMessage)
                 &&
-                <h5 className={styles.formInput__error}>
+                <h5 className={styles.formInput__errorMessage}>
                     {formErrorMessage ?? serverErrorMessage}
                 </h5>
             }

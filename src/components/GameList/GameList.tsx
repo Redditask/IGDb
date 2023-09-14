@@ -20,7 +20,7 @@ const GameList: React.FC<BodyProps> = ({games, isLimit, isEmpty}) => {
             {
                 isEmpty
                     ?
-                    <h1 className={styles.errorMessage}>No games</h1>
+                    <h1 className={styles.emptyList}>No games</h1>
                     :
                     <>
                         <div className={styles.gameList}>

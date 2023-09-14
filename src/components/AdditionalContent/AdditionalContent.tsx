@@ -48,11 +48,11 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, isLoading}
     }, [isFetchingSameSeries, isFetchingDLC]);
 
     return (
-        <div className={styles.additionalContent}>
+        <div className={styles.container}>
             {
                 (!!sameSeriesGames.length || !!DLC.length)
                 &&
-                <div className={styles.container}>
+                <div className={styles.additionalContent}>
                     <GamesCarousel
                         title="DLC"
                         games={DLC}

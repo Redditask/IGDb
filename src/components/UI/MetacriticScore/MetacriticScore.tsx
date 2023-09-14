@@ -7,10 +7,10 @@ interface MetacriticScoreProps {
 }
 
 const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
-    let className: string = styles.green;
+    let scoreScolor: string = styles.metacriticScore__green;
 
-    if (score < 75) className = styles.yellow;
-    else if (score < 50) className = styles.red;
+    if (score < 75) scoreScolor = styles.metacriticScore__yellow;
+    else if (score < 50) scoreScolor = styles.metacriticScore__red;
 
     return (
         <div className={styles.metacriticScore}>
@@ -19,7 +19,7 @@ const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
                 !!score
                     ?
                     <div
-                        className={className}
+                        className={scoreScolor}
                         title="Game rating on metacritic"
                     >
                         {score}

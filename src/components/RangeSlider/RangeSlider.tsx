@@ -58,13 +58,13 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
             className={styles.container}
             title={title}
         >
-            <p className={styles.value}>{firstValue}</p>
+            <p className={styles.rangeSlider__value}>{firstValue}</p>
             <div className={styles.rangeSlider}>
                 <div
                     className={styles.rangeSlider__progress}
                     style={{left: `${left}%`, right: `${max - right}%`}}
                 />
-                <div className={styles.inputs}>
+                <div className={styles.rangeSlider__inputs}>
                     <input
                         type="range"
                         min={lowerBoundDetermining()}
@@ -82,7 +82,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
                     />
                 </div>
             </div>
-            <p className={styles.value}>{secondValue}</p>
+            <p className={styles.rangeSlider__value}>{secondValue}</p>
         </div>
     );
 };

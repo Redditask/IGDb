@@ -80,7 +80,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
             :
             <div className={styles.container}>
                 <div className={styles.reviews__header}>
-                    <h2 className={styles.title}>Reviews</h2>
+                    <h2 className={styles.reviews__title}>Reviews</h2>
                     {
                         !isAuth
                         &&
@@ -112,7 +112,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                                 />
                             )
                             :
-                            <h3 className={styles.reviews__emptyMessage}>No reviews yet, be first!</h3>
+                            <h3 className={styles.reviews__emptyReviews}>No reviews yet, be first!</h3>
                     }
                 </div>
                 {
