@@ -1,6 +1,6 @@
 import {
-    AccountGamesQueryResult, CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
-    LoginQueryResult, MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
+    GetAccountGamesQueryResult, CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
+    LoginQueryResult, MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult, GetAccountInfoQueryResult
 } from "../../types/queries";
 
 export const initialGameState: GameQueryResult = {
@@ -45,7 +45,7 @@ export const initialUserDataState: LoginQueryResult = {
     }
 };
 
-export const initialAccountGamesState: AccountGamesQueryResult = {
+export const initialAccountGamesState: GetAccountGamesQueryResult = {
     library: [],
     wishlist: [],
 };
@@ -62,4 +62,12 @@ export const initialActivateState: MessageQueryResult = {
 export const initialReviewsState: GetReviewsQueryResult = {
     reviews: [],
     userReviewId: 0,
+};
+
+export const initialAccountInfoState: GetAccountInfoQueryResult = {
+    libraryCount: 0,
+    platforms: [],
+    registrationDate: "",
+    reviewsCount: 0,
+    wishlistCount: 0
 };

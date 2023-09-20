@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 10rem;
+  padding: 0 15rem 4rem 15rem;
+}
+
+.profilePhoto {
+  //заглушка
+  width: 20rem;
+  height: 20rem;
+
+  border: 0.12rem solid lightgray;
+  border-radius: 50%;
+
+  box-shadow: 0 0 20px 5px lightgray;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+}

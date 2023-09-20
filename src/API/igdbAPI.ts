@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {IGameCard} from "../types/data";
 import {
-    AccountGamesQueryResult,
+    GetAccountGamesQueryResult,
     AddReviewQueryArgs,
     CheckIsAddedQueryResult, EditReviewQueryArgs, GetReviewsQueryArgs,
     GetReviewsQueryResult,
@@ -10,7 +10,7 @@ import {
     LoginQueryResult, MessageQueryResult, NumberQueryArg,
     RegistrationQueryArgs,
     RegistrationQueryResult,
-    StringQueryArg
+    StringQueryArg, GetAccountInfoQueryResult
 } from "../types/queries";
 
 export const igdbAPI = createApi({
@@ -57,7 +57,7 @@ export const igdbAPI = createApi({
             query: () =>
                 "refresh"
         }),
-        getAccountGames: builder.query<AccountGamesQueryResult, {}>({
+        getAccountGames: builder.query<GetAccountGamesQueryResult, {}>({
             query: () =>
                 "account/games"
         }),
@@ -138,6 +138,10 @@ export const igdbAPI = createApi({
                 url: `review/dislike/${id}`,
                 method: "POST",
             })
+        }),
+        getAccountInfo: builder.query<GetAccountInfoQueryResult, {selectedUser: StringQueryArg}>({
+            query: ({selectedUser}) =>
+                `account/info/${selectedUser}`
         })
     }),
 });
@@ -159,5 +163,6 @@ export const {
     useDeleteReviewMutation,
     useLikeReviewMutation,
     useDislikeReviewMutation,
-    useEditReviewMutation
+    useEditReviewMutation,
+    useGetAccountInfoQuery
 } = igdbAPI;

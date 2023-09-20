@@ -2,11 +2,14 @@ import React, {useEffect, useState} from "react";
 
 import {useGetAccountGamesQuery} from "../../API/igdbAPI";
 
+import {useParams} from "react-router-dom";
+
 import styles from "./Account.module.scss";
 
 import GameList from "../../components/GameList/GameList";
 import Error from "../Error/Error";
 import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
+import AccountInfo from "../../components/AccountInfo/AccountInfo";
 
 import {setIsFetching} from "../../store/userSlice";
 import {useAppDispatch} from "../../hooks";
@@ -17,6 +20,7 @@ import {initialAccountGamesState} from "../../utils/helpers/initialStates";
 
 const Account: React.FC = () => {
     const [isLibrary, setIsLibrary] = useState<boolean>(false);
+    const {username} = useParams();
 
     const dispatch = useAppDispatch();
 
@@ -53,6 +57,7 @@ const Account: React.FC = () => {
             <Error/>
             :
             <div className={styles.account}>
+                <AccountInfo selectedUser={username}/>
                 <div className={styles.account__buttons}>
                     {
                         !!games.library.length

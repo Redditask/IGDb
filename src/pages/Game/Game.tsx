@@ -43,7 +43,6 @@ const Game: React.FC = () => {
 
     const {
         data: addedStatus = initialIsAddedState,
-        isError: isCheckError,
         isFetching: isUpdating,
         refetch
     } = useCheckIsAddedQuery({slug}, {skip: !slug});
@@ -75,8 +74,8 @@ const Game: React.FC = () => {
     }, [slug, game]);
 
     useEffect((): void => {
-        dispatch(setIsError(isGameError || isCheckError));
-    }, [isGameError, isCheckError]);
+        dispatch(setIsError(isGameError));
+    }, [isGameError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching || isUpdating));

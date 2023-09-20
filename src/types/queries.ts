@@ -75,7 +75,7 @@ export interface LoginQueryResult {
 export interface RegistrationQueryResult extends LoginQueryResult {
 }
 
-export interface AccountGamesQueryResult {
+export interface GetAccountGamesQueryResult {
     library: IGameCard[];
     wishlist: IGameCard[];
 }
@@ -92,6 +92,15 @@ export interface MessageQueryResult {
 export interface GetReviewsQueryResult {
     reviews: IGameReview [];
     userReviewId: number;
+}
+
+export interface GetAccountInfoQueryResult {
+    reviewsCount: number;
+    libraryCount: number;
+    wishlistCount: number;
+    registrationDate: string;
+    platforms: string [];
+    //profileImage
 }
 
 export type NumberQueryArg = number | undefined;
