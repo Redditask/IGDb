@@ -1,55 +1,44 @@
 import React, {useEffect, useState} from "react";
 
-import {useGetAccountGamesQuery} from "../../API/igdbAPI";
-
 import {useParams} from "react-router-dom";
 
 import styles from "./Account.module.scss";
 
-import GameList from "../../components/GameList/GameList";
 import Error from "../Error/Error";
-import RegularLoader from "../../components/UI/RegularLoader/RegularLoader";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
+import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
+import AccountGames from "../../components/AccountGames/AccountGames";
 
-import {setIsFetching} from "../../store/userSlice";
-import {useAppDispatch} from "../../hooks";
-
-import {IGameCard} from "../../types/data";
-
-import {initialAccountGamesState} from "../../utils/helpers/initialStates";
+import {selectIsError, selectUsername} from "../../store/selectors";
+import {useAppSelector} from "../../hooks";
 
 const Account: React.FC = () => {
-    const [isLibrary, setIsLibrary] = useState<boolean>(false);
+    const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
+
     const {username} = useParams();
 
-    const dispatch = useAppDispatch();
+    const isError: boolean = useAppSelector(selectIsError);
+    const user: string = useAppSelector(selectUsername);
 
-    const {
-        data: games = initialAccountGamesState,
-        error: isError,
-        isFetching,
-        refetch
-    } = useGetAccountGamesQuery({
-        refetchOnMountOrArgChange: true,
-    });
+    const isUserAccount = (): boolean => user === username;
 
-    const gameListDefinition = (): IGameCard[] => isLibrary ? games.library : games.wishlist;
+    const idDefinition = (): string => showScrollUp ? styles.show : styles.hide;
 
-    const buttonStylesDefinition = (isActive: boolean): string =>
-        isActive ? styles.account__activeButton : styles.account__defaultButton;
+    const scrollHandler = (): void => {
+        if (window.scrollY > 1300) {
+            setShowScrollUp(true);
+        } else {
+            setShowScrollUp(false);
+        }
+    };
 
-    const libraryHandler = (): void => setIsLibrary(true);
+    useEffect(() => {
+        window.addEventListener("scroll", scrollHandler);
 
-    const wishlistHandler = ():void => setIsLibrary(false);
-
-    useEffect((): void=> {
-        refetch();
+        return function (): void {
+            window.removeEventListener("scroll", scrollHandler);
+        }
     }, []);
-
-    useEffect((): void => {
-        setIsLibrary(!!games.library.length);
-        dispatch(setIsFetching(isFetching));
-    }, [isFetching]);
 
     return (
         isError
@@ -58,42 +47,18 @@ const Account: React.FC = () => {
             :
             <div className={styles.account}>
                 <AccountInfo selectedUser={username}/>
-                <div className={styles.account__buttons}>
-                    {
-                        !!games.library.length
-                        &&
-                        <h3
-                            className={buttonStylesDefinition(isLibrary)}
-                            onClick={libraryHandler}
-                        >
-                            Library
-                        </h3>
-                    }
-                    {
-                        !!games.wishlist.length
-                        &&
-                        <h3
-                            className={buttonStylesDefinition(!isLibrary)}
-                            onClick={wishlistHandler}
-                        >
-                            Wishlist
-                        </h3>
-                    }
-                </div>
-                <div className={styles.account__games}>
-                    {
-                        isFetching
-                            ?
-                            <div className={styles.loaderArea}>
-                                <RegularLoader/>
-                            </div>
-                            :
-                            <GameList
-                                games={gameListDefinition()}
-                                isLimit={true}
-                                isEmpty={false}
-                            />
-                    }
+                {
+                    isUserAccount()
+                    &&
+                    <AccountGames/>
+                }
+                <div className={styles.scrollUp}>
+                    <div
+                        className={styles.scrollUp__button}
+                        id={idDefinition()}
+                    >
+                        <ScrollUpButton showScrollUp={showScrollUp}/>
+                    </div>
                 </div>
             </div>
     );

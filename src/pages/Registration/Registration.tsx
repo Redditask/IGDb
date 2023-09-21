@@ -18,7 +18,8 @@ import {useAppDispatch} from "../../hooks";
 import {LOGIN_ROUTE} from "../../utils/consts";
 import {registrationValidationSchema, serverErrorValidation} from "../../utils/helpers/validation";
 import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
-import {RegistrationQueryArgs} from "../../types/queries";
+
+import {RegistrationQueryArgs} from "../../types/queries/args";
 
 const Registration: React.FC = () => {
     const [registration, {isLoading}] = useRegistrationMutation();

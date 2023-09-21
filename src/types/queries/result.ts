@@ -1,17 +1,8 @@
-import {IDeveloper, IGameCard, IGameReview, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "./data";
+import {IDeveloper, IGameCard, IGameReview, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "../data";
 
 export interface GamesQueryResult {
     count: number;
     results: IGameCard[];
-}
-
-export interface GamesQueryArgs {
-    page: number;
-    pageSize: number;
-    metacritic: string;
-    dates: string
-    genres: string;
-    platforms: string;
 }
 
 export interface GameQueryResult {
@@ -39,31 +30,6 @@ export interface ScreenshotsQueryResult {
 export interface TrailersQueryResult {
     count: number;
     results: ITrailer [];
-}
-
-export interface LoginQueryArgs {
-    email: string;
-    password: string;
-}
-
-export interface RegistrationQueryArgs extends LoginQueryArgs {
-    username: string;
-}
-
-export interface AddReviewQueryArgs {
-    slug: string;
-    text: string;
-}
-
-export interface GetReviewsQueryArgs {
-    slug: StringQueryArg;
-    username: string;
-    sortOption: string;
-}
-
-export interface EditReviewQueryArgs {
-  reviewId: number;
-  text: string;
 }
 
 export interface LoginQueryResult {
@@ -102,7 +68,3 @@ export interface GetAccountInfoQueryResult {
     platforms: string [];
     //profileImage
 }
-
-export type NumberQueryArg = number | undefined;
-
-export type StringQueryArg = string | undefined;

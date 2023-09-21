@@ -1,5 +1,6 @@
 import {serverErrorValidation} from "./validation";
-import {GameQueryResult} from "../../types/queries";
+
+import {GameQueryResult} from "../../types/queries/result";
 
 export const getValuesFromMetacriticString = (metacritic: string): [number, number] => {
     const [, values]: string[] = metacritic.split("=");

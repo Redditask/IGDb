@@ -2,16 +2,18 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {IGameCard} from "../types/data";
 import {
-    GetAccountGamesQueryResult,
     AddReviewQueryArgs,
-    CheckIsAddedQueryResult, EditReviewQueryArgs, GetReviewsQueryArgs,
-    GetReviewsQueryResult,
-    LoginQueryArgs,
-    LoginQueryResult, MessageQueryResult, NumberQueryArg,
-    RegistrationQueryArgs,
-    RegistrationQueryResult,
-    StringQueryArg, GetAccountInfoQueryResult
-} from "../types/queries";
+    EditReviewQueryArgs,
+    GetReviewsQueryArgs, LoginQueryArgs,
+    NumberQueryArg, RegistrationQueryArgs,
+    StringQueryArg
+} from "../types/queries/args";
+import {
+    CheckIsAddedQueryResult, GetAccountGamesQueryResult,
+    GetAccountInfoQueryResult,
+    GetReviewsQueryResult, LoginQueryResult,
+    MessageQueryResult, RegistrationQueryResult
+} from "../types/queries/result";
 
 export const igdbAPI = createApi({
     reducerPath: "idbgAPI",

@@ -18,7 +18,8 @@ import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser, setIsFetching} from "../../store/userSlice";
-import {LoginQueryArgs} from "../../types/queries";
+
+import {LoginQueryArgs} from "../../types/queries/args";
 
 const Login: React.FC = () => {
     const [login, {isLoading}] = useLoginMutation();

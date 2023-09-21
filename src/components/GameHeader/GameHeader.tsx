@@ -20,7 +20,8 @@ import GameHeadSkeleton from "../Skeletons/GameHeadSkeleton/GameHeadSkeleton";
 import {NotificationRef} from "../../types/data";
 
 import {dateFormatting} from "../../utils/helpers/dates";
-import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries";
+
+import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries/result";
 
 interface GameHeaderProps {
     game: GameQueryResult;

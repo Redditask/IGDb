@@ -1,11 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-import {
-    GameQueryResult,
-    GamesQueryArgs, GamesQueryResult, NumberQueryArg,
-    ScreenshotsQueryResult, StringQueryArg,
-    TrailersQueryResult
-} from "../types/queries";
+import {GamesQueryArgs, NumberQueryArg, StringQueryArg} from "../types/queries/args";
+import {GameQueryResult, GamesQueryResult, ScreenshotsQueryResult, TrailersQueryResult} from "../types/queries/result";
 
 export const rawgApi = createApi({
     reducerPath: "rawgApi",

@@ -2,13 +2,13 @@ import React, {useEffect} from "react";
 
 import styles from "./AccountInfo.module.scss";
 
+import {setIsError, setIsFetching} from "../../store/userSlice";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {selectUsername} from "../../store/selectors";
 
 import {useGetAccountInfoQuery} from "../../API/igdbAPI";
 
 import {initialAccountInfoState} from "../../utils/helpers/initialStates";
-import {setIsFetching} from "../../store/userSlice";
 import {dateFormatting} from "../../utils/helpers/dates";
 
 interface AccountInfoProps {
@@ -16,19 +16,18 @@ interface AccountInfoProps {
 }
 
 const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
+    const dispatch = useAppDispatch();
+    const username: string = useAppSelector(selectUsername);
 
     const {
         data: info = initialAccountInfoState,
-        error: isError,
+        isError,
         isFetching,
         refetch
     } = useGetAccountInfoQuery({selectedUser}, {skip: !selectedUser});
 
-    const dispatch = useAppDispatch();
-    const username: string = useAppSelector(selectUsername);
-
     const getStringRegistrationDate = (): string => {
-        const date = new Date(info.registrationDate);
+        const date: Date = new Date(info.registrationDate);
 
         return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     };
@@ -36,6 +35,10 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
     useEffect((): void=> {
         refetch();
     }, []);
+
+    useEffect((): void => {
+        dispatch(setIsError(isError));
+    }, [isError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
@@ -49,8 +52,7 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
             <div className={styles.textInfo}>
                 <h2>{username}</h2>
                 <h3>
-                    Registration date:
-                    {dateFormatting(getStringRegistrationDate())}
+                    Registration date: {dateFormatting(getStringRegistrationDate())}
                 </h3>
                 <div>
                     <h1>{info.reviewsCount} REVIEWS</h1>

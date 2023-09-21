@@ -3,7 +3,8 @@ import React, {lazy, Suspense} from "react";
 import styles from "./SearchResults.module.scss";
 
 import {IGameCard} from "../../types/data";
-import {GamesQueryResult} from "../../types/queries";
+
+import {GamesQueryResult} from "../../types/queries/result";
 
 const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 
