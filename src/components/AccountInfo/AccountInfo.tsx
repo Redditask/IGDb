@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from "./AccountInfo.module.scss";
 
@@ -8,6 +8,10 @@ import {selectUsername} from "../../store/selectors";
 
 import {useGetAccountInfoQuery} from "../../API/igdbAPI";
 
+import AccountInfoEditer from "../AccountInfoEditer/AccountInfoEditer";
+import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
+import Button from "../UI/Button/Button";
+
 import {initialAccountInfoState} from "../../utils/helpers/initialStates";
 import {dateFormatting} from "../../utils/helpers/dates";
 
@@ -16,6 +20,8 @@ interface AccountInfoProps {
 }
 
 const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
     const dispatch = useAppDispatch();
     const username: string = useAppSelector(selectUsername);
 
@@ -32,7 +38,9 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
         return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     };
 
-    useEffect((): void=> {
+    const openEditerHandler = (): void => setIsEdit(true);
+
+    useEffect((): void => {
         refetch();
     }, []);
 
@@ -46,22 +54,46 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.profilePhoto}>
-                {/*заглушка*/}
-            </div>
-            <div className={styles.textInfo}>
-                <h2>{username}</h2>
-                <h3>
-                    Registration date: {dateFormatting(getStringRegistrationDate())}
-                </h3>
-                <div>
-                    <h1>{info.reviewsCount} REVIEWS</h1>
-                    <h1>{info.libraryCount} GAME IN LIBRARY</h1>
-                    <h1>{info.wishlistCount} GAME IN WISHLIST</h1>
+            <div className={styles.leftSide}>
+                <div className={styles.leftSide__profilePhoto}>
+                    {/*заглушка*/}
                 </div>
-                {/* v заглушка v */}
-                <h3>PLATFORMS: XBOX, PLAYSTATION</h3>
             </div>
+            {
+                isEdit
+                    ?
+                    <AccountInfoEditer
+                        username={username}
+                        userInfo={info}
+                        setIsEdit={setIsEdit}
+                    />
+                    :
+                    <div className={styles.textSide}>
+                        <h2>{selectedUser}</h2>
+                        <h3>
+                            REGISTRATION DATE: {dateFormatting(getStringRegistrationDate())}
+                        </h3>
+                        <div>
+                            <h2>{info.reviewsCount} REVIEWS</h2>
+                            <h2>{info.libraryCount} GAME IN LIBRARY</h2>
+                            <h2>{info.wishlistCount} GAME IN WISHLIST</h2>
+                        </div>
+                        <div className={styles.textSide__currentPlatforms}>
+                            <h3>PLATFORMS:</h3>
+                            {
+                                !!info.platforms.length
+                                    ?
+                                    <PlatformIcons platformsArray={info.platforms}/>
+                                    :
+                                    <h3 className={styles.textSide__message}>NO SELECTED PLATFORMS</h3>
+                            }
+                        </div>
+                        <Button
+                            title="Edit"
+                            onClick={openEditerHandler}
+                        />
+                    </div>
+            }
         </div>
     );
 };

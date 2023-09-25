@@ -10,7 +10,7 @@ import GameLabelsSkeleton from "../Skeletons/GameLabelsSkeleton/GameLabelsSkelet
 import {developersToLabelsConvert, platformsToLabelsConvert} from "../../utils/helpers/converters";
 import {isHaveLinks} from "../../utils/helpers/dataProcessing";
 
-import {GameQueryResult} from "../../types/queries/result";
+import {GameQueryResult} from "../../types/queries/results";
 
 interface GameLabelsProps {
     game: GameQueryResult;

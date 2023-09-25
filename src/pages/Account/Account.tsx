@@ -11,6 +11,7 @@ import AccountGames from "../../components/AccountGames/AccountGames";
 
 import {selectIsError, selectUsername} from "../../store/selectors";
 import {useAppSelector} from "../../hooks";
+import Button from "../../components/UI/Button/Button";
 
 const Account: React.FC = () => {
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);

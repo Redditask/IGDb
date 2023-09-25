@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-import {IGameCard} from "../types/data";
+import {IGameCard, IPlatform} from "../types/data";
 import {
     AddReviewQueryArgs,
     EditReviewQueryArgs,
@@ -13,7 +13,7 @@ import {
     GetAccountInfoQueryResult,
     GetReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, RegistrationQueryResult
-} from "../types/queries/result";
+} from "../types/queries/results";
 
 export const igdbAPI = createApi({
     reducerPath: "idbgAPI",
@@ -144,6 +144,15 @@ export const igdbAPI = createApi({
         getAccountInfo: builder.query<GetAccountInfoQueryResult, {selectedUser: StringQueryArg}>({
             query: ({selectedUser}) =>
                 `account/info/${selectedUser}`
+        }),
+        updateUserPlatforms: builder.mutation<void, IPlatform []>({
+            query: (platforms) => ({
+                url: `account/platforms`,
+                method: "PUT",
+                body: {
+                    platforms
+                },
+            })
         })
     }),
 });
@@ -166,5 +175,6 @@ export const {
     useLikeReviewMutation,
     useDislikeReviewMutation,
     useEditReviewMutation,
-    useGetAccountInfoQuery
+    useGetAccountInfoQuery,
+    useUpdateUserPlatformsMutation
 } = igdbAPI;

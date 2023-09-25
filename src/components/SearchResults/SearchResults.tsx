@@ -4,7 +4,7 @@ import styles from "./SearchResults.module.scss";
 
 import {IGameCard} from "../../types/data";
 
-import {GamesQueryResult} from "../../types/queries/result";
+import {GamesQueryResult} from "../../types/queries/results";
 
 const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 

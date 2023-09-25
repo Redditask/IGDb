@@ -21,7 +21,7 @@ import {NotificationRef} from "../../types/data";
 
 import {dateFormatting} from "../../utils/helpers/dates";
 
-import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries/result";
+import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries/results";
 
 interface GameHeaderProps {
     game: GameQueryResult;

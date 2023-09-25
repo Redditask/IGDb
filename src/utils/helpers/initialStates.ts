@@ -3,7 +3,7 @@ import {
     GetAccountInfoQueryResult,
     GetReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
-} from "../../types/queries/result";
+} from "../../types/queries/results";
 
 export const initialGameState: GameQueryResult = {
     id: 0,

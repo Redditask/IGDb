@@ -65,6 +65,6 @@ export interface GetAccountInfoQueryResult {
     libraryCount: number;
     wishlistCount: number;
     registrationDate: string;
-    platforms: string [];
+    platforms: IPlatform [];
     //profileImage
 }

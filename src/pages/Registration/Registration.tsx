@@ -73,7 +73,7 @@ const Registration: React.FC = () => {
                         onSubmit={handleSubmit(registrationHandler)}
                     >
                         <h2>Registration</h2>
-                        <div className={styles.inputs}>
+                        <div className={styles.card__inputs}>
                             <FormInput
                                 placeholderText="Username"
                                 type="text"
@@ -122,10 +122,10 @@ const Registration: React.FC = () => {
                                 :
                                 <RegularLoader/>
                         }
-                        <div className={styles.link}>
-                            <p className={styles.link__info}>Already have an account?</p>
+                        <div className={styles.card__link}>
+                            <p className={styles.card__info}>Already have an account?</p>
                             <NavLink
-                                className={styles.link__button}
+                                className={styles.card__button}
                                 to={LOGIN_ROUTE}
                             >
                                 Login now!
@@ -135,14 +135,14 @@ const Registration: React.FC = () => {
                     :
                     <div className={styles.card}>
                         <h2>Success!</h2>
-                        <div className={styles.successfulRegistrationText}>
+                        <div className={styles.card__successfulRegistrationText}>
                             <p>You have successfully registered</p>
                             <p>Now check you email to activate account on link in message</p>
                             <br/>
-                            <div className={styles.link}>
+                            <div className={styles.card__link}>
                                 <p>After activation you can</p>
                                 <NavLink
-                                    className={styles.link__button}
+                                    className={styles.card__button}
                                     to={LOGIN_ROUTE}
                                 >
                                     Login to your account
