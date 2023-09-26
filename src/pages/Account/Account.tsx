@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import {useParams} from "react-router-dom";
 
@@ -8,10 +8,12 @@ import Error from "../Error/Error";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
 import AccountGames from "../../components/AccountGames/AccountGames";
+import Notification from "../../components/UI/Notification/Notification";
 
 import {selectIsError, selectUsername} from "../../store/selectors";
 import {useAppSelector} from "../../hooks";
-import Button from "../../components/UI/Button/Button";
+
+import {NotificationRef} from "../../types/data";
 
 const Account: React.FC = () => {
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
@@ -20,6 +22,8 @@ const Account: React.FC = () => {
 
     const isError: boolean = useAppSelector(selectIsError);
     const user: string = useAppSelector(selectUsername);
+
+    const notificationRef = useRef<NotificationRef>(null);
 
     const isUserAccount = (): boolean => user === username;
 
@@ -47,7 +51,11 @@ const Account: React.FC = () => {
             <Error/>
             :
             <div className={styles.account}>
-                <AccountInfo selectedUser={username}/>
+                <AccountInfo
+                    selectedUser={username}
+                    isUserAccount={isUserAccount()}
+                    ref={notificationRef}
+                />
                 {
                     isUserAccount()
                     &&
@@ -61,6 +69,9 @@ const Account: React.FC = () => {
                         <ScrollUpButton showScrollUp={showScrollUp}/>
                     </div>
                 </div>
+                <Notification
+                    ref={notificationRef}
+                />
             </div>
     );
 };

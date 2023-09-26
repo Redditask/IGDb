@@ -61,6 +61,7 @@ export interface GetReviewsQueryResult {
 }
 
 export interface GetAccountInfoQueryResult {
+    username: string;
     reviewsCount: number;
     libraryCount: number;
     wishlistCount: number;

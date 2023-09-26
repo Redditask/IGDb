@@ -35,9 +35,9 @@ const AccountGames: React.FC = () => {
 
     const libraryHandler = (): void => setIsLibrary(true);
 
-    const wishlistHandler = ():void => setIsLibrary(false);
+    const wishlistHandler = (): void => setIsLibrary(false);
 
-    useEffect((): void=> {
+    useEffect((): void => {
         refetch();
     }, []);
 
@@ -72,6 +72,13 @@ const AccountGames: React.FC = () => {
                     >
                         Wishlist
                     </h3>
+                }
+                {
+                    (!games.wishlist.length && !games.library.length)
+                    &&
+                    <h1 className={styles.accountGames__emptyLists}>
+                        No games was added to the lists
+                    </h1>
                 }
             </div>
             <div className={styles.accountGames}>

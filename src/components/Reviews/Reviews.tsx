@@ -101,7 +101,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                     {
                         !!displayedReviews.length
                             ?
-                            displayedReviews.map((review) =>
+                            displayedReviews.map((review: IGameReview) =>
                                 <ReviewItem
                                     key={review.id}
                                     reviewData={review}

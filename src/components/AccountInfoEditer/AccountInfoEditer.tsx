@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {forwardRef, useEffect, useState} from "react";
 
 import {useUpdateUserPlatformsMutation} from "../../API/igdbAPI";
 
@@ -11,24 +11,34 @@ import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
 import Button from "../UI/Button/Button";
 
 import {GetAccountInfoQueryResult} from "../../types/queries/results";
-import {IPlatform} from "../../types/data";
+import {IPlatform, NotificationRef} from "../../types/data";
 
 import {platformsList} from "../../utils/consts";
 import {platformListToPlatformsConvert} from "../../utils/helpers/converters";
 
 interface AccountInfoEditerProps {
-    username: string;
     userInfo: GetAccountInfoQueryResult;
     setIsEdit: (isEdit: boolean) => void;
+    refetchInfo: () => void;
 }
 
-const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo, setIsEdit}) => {
+const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
+         userInfo,
+         setIsEdit,
+         refetchInfo
+    }, ref) => {
+
     const [selectedPlatforms, setSelectedPlatforms] = useState<IPlatform []>(userInfo.platforms);
     const plaforms = platformListToPlatformsConvert(platformsList);
 
     const [updatePlatforms, {isLoading, isError}] = useUpdateUserPlatformsMutation();
 
     const dispatch = useAppDispatch();
+
+    const showNotification = (message: string): void => {
+        refetchInfo();
+        if (ref && "current" in ref && ref.current) ref.current.show(message);
+    };
 
     const closeEditer = (): void => setIsEdit(false);
 
@@ -38,8 +48,8 @@ const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo
         ).unwrap().catch((err) => err);
 
         if (response?.status === 200){
+            showNotification("Platforms was updated");
             closeEditer();
-            //showNotification("Platforms was updated");
         } else if (response?.data?.message) {
             closeEditer();
         }
@@ -74,7 +84,7 @@ const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo
 
     return (
         <div className={styles.editerForm}>
-            <h2>{username}</h2>
+            <h2>{userInfo.username}</h2>
             <div className={styles.editerForm__currentPlatforms}>
                 <h3>PLATFORMS: </h3>
                 {
@@ -86,7 +96,7 @@ const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo
                 }
             </div>
             <div className={styles.editerForm__checkboxList}>
-                {plaforms.map((platfrom: IPlatform) => (
+                {plaforms.map((platfrom: IPlatform) =>
                     <div
                         className={styles.editerForm__checkboxItem}
                         key={platfrom.platform.id}
@@ -98,7 +108,7 @@ const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo
                         />
                         <h3>{platfrom.platform.name}</h3>
                     </div>
-                ))}
+                )}
             </div>
             <div className={styles.editerForm__buttons}>
                 <Button
@@ -112,6 +122,6 @@ const AccountInfoEditer: React.FC<AccountInfoEditerProps> = ({username, userInfo
             </div>
         </div>
     );
-};
+});
 
 export default AccountInfoEditer;

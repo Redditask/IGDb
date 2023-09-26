@@ -37,7 +37,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({list, clean, isLoading}) =
                     )
                     :
                     <h2 className={styles.emptySearch}>
-                        No results
+                        No games
                     </h2>
             }
         </>

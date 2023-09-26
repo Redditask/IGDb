@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {forwardRef, useEffect, useState} from "react";
 
 import styles from "./AccountInfo.module.scss";
 
 import {setIsError, setIsFetching} from "../../store/userSlice";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {selectUsername} from "../../store/selectors";
+import {useAppDispatch} from "../../hooks";
 
 import {useGetAccountInfoQuery} from "../../API/igdbAPI";
 
@@ -14,16 +13,21 @@ import Button from "../UI/Button/Button";
 
 import {initialAccountInfoState} from "../../utils/helpers/initialStates";
 import {dateFormatting} from "../../utils/helpers/dates";
+import {NotificationRef} from "../../types/data";
 
 interface AccountInfoProps {
     selectedUser: string | undefined;
+    isUserAccount: boolean;
 }
 
-const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
+const AccountInfo = forwardRef<NotificationRef, AccountInfoProps>(({
+         selectedUser,
+         isUserAccount
+    }, ref) => {
+
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-    const username: string = useAppSelector(selectUsername);
 
     const {
         data: info = initialAccountInfoState,
@@ -63,9 +67,10 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
                 isEdit
                     ?
                     <AccountInfoEditer
-                        username={username}
                         userInfo={info}
                         setIsEdit={setIsEdit}
+                        refetchInfo={refetch}
+                        ref={ref}
                     />
                     :
                     <div className={styles.textSide}>
@@ -88,14 +93,18 @@ const AccountInfo: React.FC<AccountInfoProps> = ({selectedUser}) => {
                                     <h3 className={styles.textSide__message}>NO SELECTED PLATFORMS</h3>
                             }
                         </div>
-                        <Button
-                            title="Edit"
-                            onClick={openEditerHandler}
-                        />
+                        {
+                            isUserAccount
+                            &&
+                            <Button
+                                title="Edit"
+                                onClick={openEditerHandler}
+                            />
+                        }
                     </div>
             }
         </div>
     );
-};
+});
 
 export default AccountInfo;

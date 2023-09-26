@@ -67,6 +67,7 @@ export const initialReviewsState: GetReviewsQueryResult = {
 };
 
 export const initialAccountInfoState: GetAccountInfoQueryResult = {
+    username: "",
     libraryCount: 0,
     platforms: [],
     registrationDate: "",

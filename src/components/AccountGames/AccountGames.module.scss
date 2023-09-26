@@ -49,6 +49,12 @@
   &__defaultButton {
     @include button();
   }
+
+  &__emptyLists {
+    color: gray;
+
+    margin-top: 5rem;
+  }
 }
 
 .loaderArea {
