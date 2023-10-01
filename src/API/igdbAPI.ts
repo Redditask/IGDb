@@ -102,11 +102,12 @@ export const igdbAPI = createApi({
                 `activate/${link}`,
         }),
         addReview: builder.mutation<MessageQueryResult, AddReviewQueryArgs>({
-            query: ({slug, text}) => ({
+            query: ({slug, text, rating}) => ({
                 url: `review/${slug}`,
                 method: "POST",
                 body: {
-                    text
+                    text,
+                    rating
                 },
             })
         }),
@@ -121,11 +122,12 @@ export const igdbAPI = createApi({
             })
         }),
         editReview: builder.mutation<MessageQueryResult, EditReviewQueryArgs>({
-            query: ({reviewId, text}) => ({
+            query: ({reviewId, text, rating}) => ({
                 url: `review/${reviewId}`,
                 method: "PUT",
                 body: {
-                    newText: text
+                    newText: text,
+                    newRating: rating
                 }
             })
         }),
@@ -147,7 +149,7 @@ export const igdbAPI = createApi({
         }),
         updateUserPlatforms: builder.mutation<void, IPlatform []>({
             query: (platforms) => ({
-                url: `account/platforms`,
+                url: `account/info/platforms`,
                 method: "PUT",
                 body: {
                     platforms

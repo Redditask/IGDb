@@ -14,8 +14,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsError, setIsFetching} from "../../store/userSlice";
 import {selectIsAuth, selectUsername} from "../../store/selectors";
 
-import {IGameReview, NotificationRef} from "../../types/data";
-import {initialReviewsState} from "../../utils/helpers/initialStates";
+import {IGameReview, IReviewInfo, NotificationRef} from "../../types/data";
+import {initialReviewInfoState, initialReviewsState} from "../../utils/helpers/initialStates";
 import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
 interface ReviewsProps {
@@ -31,7 +31,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
-    const [editReviewText, setEditReviewText] = useState<string>("");
+    const [editReviewInfo, setEditReviewInfo] = useState<IReviewInfo>(initialReviewInfoState);
     const [reviewsSorter, setReviewsSorter] = useState<"latest" | "mostLiked">("latest");
 
     const username: string = useAppSelector(selectUsername);
@@ -84,7 +84,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                     {
                         !isAuth
                         &&
-                        <h4 className={styles.nonAuthMessage}>
+                        <h4 className={styles.reviews__nonAuthMessage}>
                             You must be logged in to write and like review's
                         </h4>
                     }
@@ -93,8 +93,8 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                 <ReviewForm
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}
-                    editReviewText={editReviewText}
-                    setEditReviewText={setEditReviewText}
+                    editReviewInfo={editReviewInfo}
+                    setEditReviewInfo={setEditReviewInfo}
                     ref={ref}
                 />
                 <div className={styles.reviews}>
@@ -106,8 +106,8 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                                     key={review.id}
                                     reviewData={review}
                                     refetchReviews={refetch}
-                                    editReviewText={editReviewText}
-                                    setEditReviewText={setEditReviewText}
+                                    editReviewInfo={editReviewInfo}
+                                    setEditReviewInfo={setEditReviewInfo}
                                     ref={ref}
                                 />
                             )

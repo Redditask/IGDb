@@ -29,10 +29,11 @@
   }
 
   &__header {
-    display: flex;
-    align-items: end;
+    width: 47rem;
 
-    gap: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
   }
 
   &__text {
@@ -102,5 +103,16 @@
     font: italic 1rem "Satoshi-Bold";
 
     user-select: none;
+  }
+
+  &__info {
+    display: flex;
+    align-items: end;
+
+    gap: 0.5rem;
+  }
+
+  &__rating {
+    display: flex;
   }
 }

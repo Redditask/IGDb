@@ -69,10 +69,14 @@ export interface IUserStore extends IUserData {
     isError: boolean;
 }
 
-export interface IGameReview {
+export interface IReviewInfo {
+    text: string;
+    rating: number;
+}
+
+export interface IGameReview extends IReviewInfo{
     id: number;
     username: string;
-    text: string;
     likedUsers: number;
     dislikedUsers: number;
     userReaction: "like" | "dislike" | "null";

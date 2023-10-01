@@ -4,6 +4,7 @@ import {
     GetReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
 } from "../../types/queries/results";
+import {IReviewInfo} from "../../types/data";
 
 export const initialGameState: GameQueryResult = {
     id: 0,
@@ -73,4 +74,9 @@ export const initialAccountInfoState: GetAccountInfoQueryResult = {
     registrationDate: "",
     reviewsCount: 0,
     wishlistCount: 0
+};
+
+export const initialReviewInfoState: IReviewInfo = {
+    text: "",
+    rating: 0
 };

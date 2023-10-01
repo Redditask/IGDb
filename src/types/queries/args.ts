@@ -1,3 +1,5 @@
+import {IReviewInfo} from "../data";
+
 export type NumberQueryArg = number | undefined;
 
 export type StringQueryArg = string | undefined;
@@ -20,9 +22,8 @@ export interface RegistrationQueryArgs extends LoginQueryArgs {
     username: string;
 }
 
-export interface AddReviewQueryArgs {
+export interface AddReviewQueryArgs extends IReviewInfo{
     slug: string;
-    text: string;
 }
 
 export interface GetReviewsQueryArgs {
@@ -31,7 +32,6 @@ export interface GetReviewsQueryArgs {
     sortOption: string;
 }
 
-export interface EditReviewQueryArgs {
+export interface EditReviewQueryArgs extends IReviewInfo{
     reviewId: number;
-    text: string;
 }

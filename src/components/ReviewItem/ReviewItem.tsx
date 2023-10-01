@@ -5,26 +5,26 @@ import styles from "./ReviewItem.module.scss";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {selectUsername} from "../../store/selectors";
 
-import {IGameReview, NotificationRef} from "../../types/data";
+import {IGameReview, IReviewInfo, NotificationRef} from "../../types/data";
 import {useDeleteReviewMutation, useDislikeReviewMutation, useLikeReviewMutation} from "../../API/igdbAPI";
 import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import {MdDelete, MdEdit} from "react-icons/md"
 
-import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
+import {AiFillDislike, AiFillLike, AiFillStar, AiOutlineDislike, AiOutlineLike, AiOutlineStar} from "react-icons/ai";
 
 interface ReviewItemProps {
     reviewData: IGameReview
     refetchReviews: () => void;
-    editReviewText: string;
-    setEditReviewText: (editReviewText: string) => void;
+    editReviewInfo: IReviewInfo;
+    setEditReviewInfo: (editReviewInfo: IReviewInfo) => void;
 }
 
 const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
         reviewData,
         refetchReviews,
-        editReviewText,
-        setEditReviewText
+        editReviewInfo,
+        setEditReviewInfo
     }, ref) => {
 
     const [isShowUserReview, setIsShowUserReview] = useState<boolean>(true);
@@ -82,7 +82,10 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     };
 
     const editReviewHandler = (): void => {
-        setEditReviewText(reviewData.text);
+        setEditReviewInfo({
+            text: reviewData.text,
+            rating: reviewData.rating
+        });
     };
 
     useEffect((): void => {
@@ -110,27 +113,55 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     ]);
 
     useEffect((): void => {
-        if (!editReviewText && isThisUserReview()) setIsShowUserReview(true)
-        else if (editReviewText && isThisUserReview()) setIsShowUserReview(false);
-    }, [editReviewText]);
+        if (!(editReviewInfo.text || editReviewInfo.rating) && isThisUserReview()) setIsShowUserReview(true)
+        else if ((editReviewInfo.text || editReviewInfo.rating) && isThisUserReview()) setIsShowUserReview(false);
+    }, [editReviewInfo.text, editReviewInfo.rating]);
 
     return (
         isShowUserReview
             ?
             <div className={styles.review}>
                 <div className={styles.review__header}>
-                    <h3>{reviewData.username}</h3>
-                    {
-                        isThisUserReview()
-                        &&
-                        <h4 className={styles.review__userMark}>
-                            (Your review)
-                        </h4>
-                    }
+                    <div className={styles.review__info}>
+                        <h3>{reviewData.username}</h3>
+                        {
+                            isThisUserReview()
+                            &&
+                            <h4 className={styles.review__userMark}>
+                                (Your review)
+                            </h4>
+                        }
+                    </div>
+                    {/*вынести*/}
+                    <div
+                        className={styles.review__rating}
+                        title="Game rating"
+                    >
+                        {[...Array(5)].map((star, index: number) => {
+                            const ratingValue: number = index + 1;
+
+                            return (
+                                (reviewData.rating >= ratingValue)
+                                    ?
+                                    <AiFillStar
+                                        key={`fill ${index}`}
+                                        size={22}
+                                    />
+                                    :
+                                    <AiOutlineStar
+                                        key={`outline ${index}`}
+                                        size={22}
+                                    />
+                            );
+                        })}
+                    </div>
                 </div>
                 <p className={styles.review__text}>{reviewData.text}</p>
                 <div className={styles.review__stats}>
-                    <div className={styles.review__reaction}>
+                    <div
+                        className={styles.review__reaction}
+                        title="Like"
+                    >
                         {
                             (reviewData.userReaction === "like")
                                 ?
@@ -148,7 +179,10 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                         }
                         {reviewData.likedUsers}
                     </div>
-                    <div className={styles.review__reaction}>
+                    <div
+                        className={styles.review__reaction}
+                        title="Dislike"
+                    >
                         {
                             (reviewData.userReaction === "dislike")
                                 ?
