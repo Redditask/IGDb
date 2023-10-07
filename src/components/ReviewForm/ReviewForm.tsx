@@ -110,9 +110,9 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
         dispatch(setIsError(isAddError || isEditError));
     }, [isAddError, isEditError]);
 
-    // useTransition (?)
     useEffect((): void => {
         if (editReviewInfo.text) {
+            console.log(editReviewInfo)
             setReviewText(editReviewInfo.text)
             setIsShowForm(true);
         } else setIsShowForm(false);

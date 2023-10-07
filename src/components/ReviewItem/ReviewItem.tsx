@@ -10,8 +10,8 @@ import {useDeleteReviewMutation, useDislikeReviewMutation, useLikeReviewMutation
 import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import {MdDelete, MdEdit} from "react-icons/md"
-
-import {AiFillDislike, AiFillLike, AiFillStar, AiOutlineDislike, AiOutlineLike, AiOutlineStar} from "react-icons/ai";
+import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
+import ReviewRating from "../UI/ReviewRating/ReviewRating";
 
 interface ReviewItemProps {
     reviewData: IGameReview
@@ -132,28 +132,14 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
                             </h4>
                         }
                     </div>
-                    {/*вынести*/}
                     <div
                         className={styles.review__rating}
                         title="Game rating"
                     >
-                        {[...Array(5)].map((star, index: number) => {
-                            const ratingValue: number = index + 1;
-
-                            return (
-                                (reviewData.rating >= ratingValue)
-                                    ?
-                                    <AiFillStar
-                                        key={`fill ${index}`}
-                                        size={22}
-                                    />
-                                    :
-                                    <AiOutlineStar
-                                        key={`outline ${index}`}
-                                        size={22}
-                                    />
-                            );
-                        })}
+                        <ReviewRating
+                            rating={reviewData.rating}
+                            size={22}
+                        />
                     </div>
                 </div>
                 <p className={styles.review__text}>{reviewData.text}</p>
