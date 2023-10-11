@@ -1,5 +1,4 @@
 import {GamePageInfo, ICustomOption, IDeveloper, ILabel, IPlatform} from "../../types/data";
-import {platform} from "os";
 
 export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];

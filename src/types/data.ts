@@ -76,6 +76,7 @@ export interface IReviewInfo {
 
 export interface IGameReview extends IReviewInfo{
     id: number;
+    slug: string;
     username: string;
     likedUsers: number;
     dislikedUsers: number;

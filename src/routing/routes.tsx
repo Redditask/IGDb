@@ -3,6 +3,7 @@ import Game from "../pages/Game/Game";
 import Account from "../pages/Account/Account";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
+import Activate from "../pages/Activate/Activate";
 
 import {ICustomRoute} from "../types/data";
 
@@ -16,7 +17,6 @@ import {
     ACCOUNT_ROUTE, LOGIN_ROUTE,
     REGISTRATION_ROUTE, ACTIVATION_ROUTE,
 } from "../utils/consts";
-import Activate from "../pages/Activate/Activate";
 
 export const publicRoutes: ICustomRoute [] = [
     {

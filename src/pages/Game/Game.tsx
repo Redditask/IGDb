@@ -23,7 +23,7 @@ import Error from "../Error/Error";
 import GameDescription from "../../components/GameDescription/GameDescription";
 import Notification from "../../components/UI/Notification/Notification";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
-import Reviews from "../../components/Reviews/Reviews";
+import GameReviews from "../../components/GameReviews/GameReviews";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -70,7 +70,7 @@ const Game: React.FC = () => {
             top: 0,
             left: 0,
             behavior: "smooth",
-        })
+        });
     }, [slug, game]);
 
     useEffect((): void => {
@@ -134,7 +134,7 @@ const Game: React.FC = () => {
                     </div>
                 </div>
                 <Suspense fallback={null}>
-                    <Reviews
+                    <GameReviews
                         slug={slug}
                         isLoading={isFetching}
                         ref={notificationRef}

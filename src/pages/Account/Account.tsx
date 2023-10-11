@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import styles from "./Account.module.scss";
 
 import Error from "../Error/Error";
+import AccountReviews from "../../components/AccountReviews/AccountReviews";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
 import AccountGames from "../../components/AccountGames/AccountGames";
@@ -40,6 +41,12 @@ const Account: React.FC = () => {
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler);
 
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+
         return function (): void {
             window.removeEventListener("scroll", scrollHandler);
         }
@@ -56,6 +63,7 @@ const Account: React.FC = () => {
                     isUserAccount={isUserAccount()}
                     ref={notificationRef}
                 />
+                <AccountReviews selectedUser={username}/>
                 {
                     isUserAccount()
                     &&

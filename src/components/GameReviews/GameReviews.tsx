@@ -2,12 +2,12 @@ import React, {forwardRef, useEffect, useState} from "react";
 
 import {useGetReviewsQuery} from "../../API/igdbAPI";
 
-import styles from "./Reviews.module.scss";
+import styles from "./GameReviews.module.scss";
 
 import Button from "../UI/Button/Button";
-import ReviewItem from "../ReviewItem/ReviewItem";
+import GameReviewItem from "../GameReviewItem/GameReviewItem";
 import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
-import ReviewForm from "../ReviewForm/ReviewForm";
+import GameReviewForm from "../GameReviewForm/GameReviewForm";
 import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -15,15 +15,15 @@ import {setIsError, setIsFetching} from "../../store/userSlice";
 import {selectIsAuth, selectUsername} from "../../store/selectors";
 
 import {IGameReview, IReviewInfo, NotificationRef} from "../../types/data";
-import {initialReviewInfoState, initialReviewsState} from "../../utils/helpers/initialStates";
+import {initialReviewInfoState, initialGameReviewsState} from "../../utils/helpers/initialStates";
 import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
-interface ReviewsProps {
+interface GameReviewsProps {
     slug: string | undefined;
     isLoading: boolean;
 }
 
-const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
+const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
          slug,
          isLoading
      }, ref) => {
@@ -39,7 +39,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     const dispatch = useAppDispatch();
 
     const {
-        data: reviewsResponse = initialReviewsState,
+        data: reviewsResponse = initialGameReviewsState,
         isError,
         isFetching,
         refetch
@@ -90,7 +90,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                     }
                     <ReviewsSorter setSortOption={setReviewsSorter}/>
                 </div>
-                <ReviewForm
+                <GameReviewForm
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}
                     editReviewInfo={editReviewInfo}
@@ -102,7 +102,7 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
                         !!displayedReviews.length
                             ?
                             displayedReviews.map((review: IGameReview) =>
-                                <ReviewItem
+                                <GameReviewItem
                                     key={review.id}
                                     reviewData={review}
                                     refetchReviews={refetch}
@@ -127,4 +127,4 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     );
 });
 
-export default Reviews;
+export default GameReviews;

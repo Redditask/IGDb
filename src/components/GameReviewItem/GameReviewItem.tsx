@@ -1,6 +1,6 @@
 import React, {forwardRef, useEffect, useState} from "react";
 
-import styles from "./ReviewItem.module.scss";
+import styles from "./GameReviewItem.module.scss";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {selectUsername} from "../../store/selectors";
@@ -9,18 +9,22 @@ import {IGameReview, IReviewInfo, NotificationRef} from "../../types/data";
 import {useDeleteReviewMutation, useDislikeReviewMutation, useLikeReviewMutation} from "../../API/igdbAPI";
 import {setIsError, setIsFetching} from "../../store/userSlice";
 
+import {NavLink} from "react-router-dom";
+
 import {MdDelete, MdEdit} from "react-icons/md"
 import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 import ReviewRating from "../UI/ReviewRating/ReviewRating";
 
-interface ReviewItemProps {
+import {ACCOUNT_ROUTE} from "../../utils/consts";
+
+interface GameReviewItemProps {
     reviewData: IGameReview
     refetchReviews: () => void;
     editReviewInfo: IReviewInfo;
     setEditReviewInfo: (editReviewInfo: IReviewInfo) => void;
 }
 
-const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
+const GameReviewItem = forwardRef<NotificationRef, GameReviewItemProps>(({
         reviewData,
         refetchReviews,
         editReviewInfo,
@@ -123,7 +127,15 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
             <div className={styles.review}>
                 <div className={styles.review__header}>
                     <div className={styles.review__info}>
-                        <h3>{reviewData.username}</h3>
+                        <NavLink
+                            className={styles.review__userLink}
+                            to={ACCOUNT_ROUTE
+                                .replace(":username", `${reviewData.username}`)
+                            }
+                            title="User account"
+                        >
+                            {reviewData.username}
+                        </NavLink>
                         {
                             isThisUserReview()
                             &&
@@ -212,4 +224,4 @@ const ReviewItem = forwardRef<NotificationRef, ReviewItemProps>(({
     );
 });
 
-export default ReviewItem;
+export default GameReviewItem;

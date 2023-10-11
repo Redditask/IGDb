@@ -11,7 +11,7 @@ import {
 import {
     CheckIsAddedQueryResult, GetAccountGamesQueryResult,
     GetAccountInfoQueryResult,
-    GetReviewsQueryResult, LoginQueryResult,
+    GetReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, RegistrationQueryResult
 } from "../types/queries/results";
 
@@ -115,6 +115,10 @@ export const igdbAPI = createApi({
             query: ({slug, username, sortOption}) =>
                 `reviews/${slug}?username=${username}&sortOption=${sortOption}`,
         }),
+        getAccountReviews: builder.query<GetAccountReviewsQueryResult, {username: StringQueryArg}>({
+           query: ({username}) =>
+                `account/reviews/${username}`,
+        }),
         deleteReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
             query: ({id}) => ({
                 url: `review/${id}`,
@@ -178,5 +182,6 @@ export const {
     useDislikeReviewMutation,
     useEditReviewMutation,
     useGetAccountInfoQuery,
-    useUpdateUserPlatformsMutation
+    useUpdateUserPlatformsMutation,
+    useGetAccountReviewsQuery
 } = igdbAPI;

@@ -60,6 +60,11 @@ export interface GetReviewsQueryResult {
     userReviewId: number;
 }
 
+export interface GetAccountReviewsQueryResult {
+    reviews: IGameReview [];
+    medianRating: number;
+}
+
 export interface GetAccountInfoQueryResult {
     username: string;
     reviewsCount: number;

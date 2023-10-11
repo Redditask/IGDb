@@ -1,15 +1,15 @@
 import React from "react";
 
-import styles from "./ReviewRatingSelecter.module.scss";
+import styles from "./GameReviewRatingSelecter.module.scss";
 
 import ReviewRating from "../UI/ReviewRating/ReviewRating";
 
-interface ReviewRatingSelecterProps {
+interface GameReviewRatingSelecterProps {
     rating: number;
     setRating: (rating: number) => void;
 }
 
-const ReviewRatingSelecter: React.FC<ReviewRatingSelecterProps> = ({rating, setRating}) => {
+const GameReviewRatingSelecter: React.FC<GameReviewRatingSelecterProps> = ({rating, setRating}) => {
 
     return (
         <div
@@ -26,4 +26,4 @@ const ReviewRatingSelecter: React.FC<ReviewRatingSelecterProps> = ({rating, setR
     );
 };
 
-export default ReviewRatingSelecter;
+export default GameReviewRatingSelecter;

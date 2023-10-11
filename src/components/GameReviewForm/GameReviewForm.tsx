@@ -1,6 +1,6 @@
 import React, {forwardRef, useEffect, useState} from "react";
 
-import styles from "./ReviewForm.module.scss";
+import styles from "./GameReviewForm.module.scss";
 
 import {useAddReviewMutation, useEditReviewMutation} from "../../API/igdbAPI";
 
@@ -11,18 +11,18 @@ import {setIsError, setIsFetching} from "../../store/userSlice";
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
-import ReviewRatingSelecter from "../ReviewRatingSelecter/ReviewRatingSelecter";
+import GameReviewRatingSelecter from "../GameReviewRatingSelecter/GameReviewRatingSelecter";
 
 import {GamePageInfo, IReviewInfo, NotificationRef} from "../../types/data";
 
-interface ReviewFormProps {
+interface GameReviewFormProps {
    gamePageInfo: GamePageInfo,
    editReviewInfo: IReviewInfo;
    setEditReviewInfo: (editReviewInfo: IReviewInfo) => void;
    refetchReviews: () => void;
 }
 
-const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
+const GameReviewForm = forwardRef<NotificationRef, GameReviewFormProps>(({
         gamePageInfo,
         refetchReviews,
         editReviewInfo,
@@ -112,8 +112,7 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
 
     useEffect((): void => {
         if (editReviewInfo.text) {
-            console.log(editReviewInfo)
-            setReviewText(editReviewInfo.text)
+            setReviewText(editReviewInfo.text);
             setIsShowForm(true);
         } else setIsShowForm(false);
     }, [editReviewInfo.text]);
@@ -139,7 +138,7 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                     placeholder="Write something!"
                 />
                 <div className={styles.form__footer}>
-                <ReviewRatingSelecter
+                <GameReviewRatingSelecter
                     rating={reviewRating}
                     setRating={setReviewRating}
                 />
@@ -190,4 +189,4 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     );
 });
 
-export default ReviewForm;
+export default GameReviewForm;

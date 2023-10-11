@@ -21,7 +21,7 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, usernam
                 <NavLink
                     className={styles.item}
                     to={ACCOUNT_ROUTE.replace(":username", `${username}`)}
-                    title="Your games library"
+                    title="Your account"
                 >
                     {username}
                 </NavLink>
