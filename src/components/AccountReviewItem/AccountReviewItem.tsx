@@ -46,7 +46,8 @@ const AccountReviewItem: React.FC<AccountReviewItemProps> = ({reviewData}) => {
             <div className={styles.container}>
                 <div className={styles.review__infoSide}>
                     <NavLink
-                        title="Go to game page"
+                        className={styles.review__link}
+                        title="Game page"
                         to={GAME_ROUTE.replace(":slug", `${reviewData.slug}`)}
                     >
                         <LazyLoadImage
@@ -55,10 +56,11 @@ const AccountReviewItem: React.FC<AccountReviewItemProps> = ({reviewData}) => {
                             effect="blur"
                             alt="Background"
                         />
+                        <h3>{searchResults.results[0].name}</h3>
                     </NavLink>
                     <div
                         className={styles.review__rating}
-                        title="Game rating"
+                        title="Rating"
                     >
                         <ReviewRating rating={reviewData.rating} size={22}/>
                     </div>

@@ -13,9 +13,38 @@
 
 .reviews {
   display: flex;
+  align-items: center;
   flex-direction: column;
 
   gap: 1.5rem;
 
   margin: 1rem 0;
+
+  &__emptyList {
+    color: gray;
+
+    margin-top: 2.5rem;
+  }
+
+  &__stats {
+    display: flex;
+
+    color: gray;
+
+    margin-top: -1rem;
+
+    gap: 0.5rem;
+  }
+
+  &__greenAverage {
+    color: #6c3;
+  }
+
+  &__yellowAverage {
+    color: #fc3;
+  }
+
+  &__redAverage {
+    color: #f00;
+  }
 }

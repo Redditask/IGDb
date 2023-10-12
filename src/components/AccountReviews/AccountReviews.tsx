@@ -17,6 +17,7 @@ interface AccountReviewsProps {
 }
 
 const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser}) => {
+    let ratingColor: string = styles.reviews__greenAverage;
 
     const dispatch = useAppDispatch();
 
@@ -26,6 +27,9 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser}) => {
         isFetching,
         refetch
     } = useGetAccountReviewsQuery({username: selectedUser}, {skip: !selectedUser});
+
+    if (reviewsData.medianRating < 4) ratingColor = styles.reviews__yellowAverage;
+    if (reviewsData.medianRating < 2.5) ratingColor = styles.reviews__redAverage;
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
@@ -41,17 +45,29 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser}) => {
 
     return (
         <div className={styles.container}>
-            <h2>User review's</h2>
-            {/* тут средняя оценка в ревьюшках */}
-            <div className={styles.reviews}>
-                {reviewsData.reviews.map((review: IGameReview) =>
-                    <AccountReviewItem
-                        key={review.id}
-                        reviewData={review}
-                    />
-                )}
-                {/*фраза если нет ревьюшек*/}
-            </div>
+            <h2>User reviews</h2>
+            {
+                !!reviewsData.reviews.length
+                    ?
+                    <div className={styles.reviews}>
+                        <h3 className={styles.reviews__stats}>
+                            AVERAGE GAME RATING:
+                            <span className={ratingColor}>
+                                {reviewsData.medianRating}
+                            </span>
+                        </h3>
+                        {reviewsData.reviews.map((review: IGameReview) =>
+                            <AccountReviewItem
+                                key={review.id}
+                                reviewData={review}
+                            />
+                        )}
+                    </div>
+                    :
+                    <h1 className={styles.reviews__emptyList}>
+                        User hasn't written any reviews
+                    </h1>
+            }
         </div>
     );
 };
