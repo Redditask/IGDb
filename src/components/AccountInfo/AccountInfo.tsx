@@ -9,6 +9,7 @@ import {useGetAccountInfoQuery} from "../../API/igdbAPI";
 
 import AccountInfoEditer from "../AccountInfoEditer/AccountInfoEditer";
 import PlatformIcons from "../UI/PlatofrmIcons/PlatformIcons";
+import AccountInfoSkeleton from "../Skeletons/AccountInfoSkeleton/AccountInfoSkeleton";
 import Button from "../UI/Button/Button";
 
 import {initialAccountInfoState} from "../../utils/helpers/initialStates";
@@ -17,12 +18,14 @@ import {NotificationRef} from "../../types/data";
 
 interface AccountInfoProps {
     selectedUser: string | undefined;
+    setIsLoadingPage: (isLoadingPage: boolean) => void;
     isUserAccount: boolean;
 }
 
 const AccountInfo = forwardRef<NotificationRef, AccountInfoProps>(({
          selectedUser,
-         isUserAccount
+         isUserAccount,
+         setIsLoadingPage
     }, ref) => {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -54,56 +57,61 @@ const AccountInfo = forwardRef<NotificationRef, AccountInfoProps>(({
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
+        setIsLoadingPage(isFetching);
     }, [isFetching]);
 
     return (
-        <div className={styles.container}>
-            <div className={styles.leftSide}>
-                <div className={styles.leftSide__profilePhoto}>
-                    {/*заглушка*/}
+        isFetching
+            ?
+            <AccountInfoSkeleton/>
+            :
+            <div className={styles.container}>
+                <div className={styles.leftSide}>
+                    <div className={styles.leftSide__profilePhoto}>
+                        {/*заглушка*/}
+                    </div>
                 </div>
-            </div>
-            {
-                isEdit
-                    ?
-                    <AccountInfoEditer
-                        userInfo={info}
-                        setIsEdit={setIsEdit}
-                        refetchInfo={refetch}
-                        ref={ref}
-                    />
-                    :
-                    <div className={styles.textSide}>
-                        <h2>{selectedUser}</h2>
-                        <h3>
-                            REGISTRATION DATE: {dateFormatting(getStringRegistrationDate())}
-                        </h3>
-                        <div>
-                            <h2>{info.reviewsCount} REVIEWS</h2>
-                            <h2>{info.libraryCount} GAME IN LIBRARY</h2>
-                            <h2>{info.wishlistCount} GAME IN WISHLIST</h2>
-                        </div>
-                        <div className={styles.textSide__currentPlatforms}>
-                            <h3>PLATFORMS:</h3>
+                {
+                    isEdit
+                        ?
+                        <AccountInfoEditer
+                            userInfo={info}
+                            setIsEdit={setIsEdit}
+                            refetchInfo={refetch}
+                            ref={ref}
+                        />
+                        :
+                        <div className={styles.textSide}>
+                            <h2>{selectedUser}</h2>
+                            <h3>
+                                REGISTRATION DATE: {dateFormatting(getStringRegistrationDate())}
+                            </h3>
+                            <div>
+                                <h2>{info.reviewsCount} REVIEWS</h2>
+                                <h2>{info.libraryCount} GAME IN LIBRARY</h2>
+                                <h2>{info.wishlistCount} GAME IN WISHLIST</h2>
+                            </div>
+                            <div className={styles.textSide__currentPlatforms}>
+                                <h3>PLATFORMS:</h3>
+                                {
+                                    !!info.platforms.length
+                                        ?
+                                        <PlatformIcons platformsArray={info.platforms}/>
+                                        :
+                                        <h3 className={styles.textSide__message}>NO SELECTED PLATFORMS</h3>
+                                }
+                            </div>
                             {
-                                !!info.platforms.length
-                                    ?
-                                    <PlatformIcons platformsArray={info.platforms}/>
-                                    :
-                                    <h3 className={styles.textSide__message}>NO SELECTED PLATFORMS</h3>
+                                isUserAccount
+                                &&
+                                <Button
+                                    title="Edit"
+                                    onClick={openEditerHandler}
+                                />
                             }
                         </div>
-                        {
-                            isUserAccount
-                            &&
-                            <Button
-                                title="Edit"
-                                onClick={openEditerHandler}
-                            />
-                        }
-                    </div>
-            }
-        </div>
+                }
+            </div>
     );
 });
 

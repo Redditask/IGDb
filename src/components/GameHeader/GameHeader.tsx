@@ -25,14 +25,14 @@ import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries/resu
 
 interface GameHeaderProps {
     game: GameQueryResult;
-    isLoading: boolean;
+    isLoadingPage: boolean;
     addedStatus: CheckIsAddedQueryResult;
     refetch: () => void;
 }
 
 const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
         game,
-        isLoading,
+        isLoadingPage,
         addedStatus,
         refetch
     }, ref) => {
@@ -120,7 +120,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
     ]);
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <GameHeadSkeleton/>
             :

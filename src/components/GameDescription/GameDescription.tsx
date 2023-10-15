@@ -6,10 +6,10 @@ import GameDescriptionSkeleton from "../Skeletons/GameDescriptionSkeleton/GameDe
 
 interface GameDescriptionProps {
     description: string;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoading}) => {
+const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoadingPage}) => {
 
     return (
         <>
@@ -17,7 +17,7 @@ const GameDescription: React.FC<GameDescriptionProps> = ({description, isLoading
                 !!description
                 &&
                 (
-                    isLoading
+                    isLoadingPage
                         ?
                         <GameDescriptionSkeleton/>
                         :

@@ -10,7 +10,6 @@ import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
-import RegularLoader from "../UI/RegularLoader/RegularLoader";
 import GameReviewRatingSelecter from "../GameReviewRatingSelecter/GameReviewRatingSelecter";
 
 import {GamePageInfo, IReviewInfo, NotificationRef} from "../../types/data";
@@ -40,7 +39,8 @@ const GameReviewForm = forwardRef<NotificationRef, GameReviewFormProps>(({
     const dispatch = useAppDispatch();
 
     const buttonsDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug && reviewRating);
-    const mainButtonDisabledHandler = (): () => void => isAuth ? showFormHandler : ()=> {};
+    const mainButtonDisabledHandler = (): () => void => isAuth ? showFormHandler : () => {
+    };
 
     const showNotification = (message: string): void => {
         refetchReviews();
@@ -75,7 +75,7 @@ const GameReviewForm = forwardRef<NotificationRef, GameReviewFormProps>(({
                 rating: reviewRating,
             }).unwrap().catch((err) => err);
 
-            if (response?.status === 200){
+            if (response?.status === 200) {
                 setIsShowForm(false);
                 setEditReviewInfo({
                     text: "",
@@ -138,39 +138,31 @@ const GameReviewForm = forwardRef<NotificationRef, GameReviewFormProps>(({
                     placeholder="Write something!"
                 />
                 <div className={styles.form__footer}>
-                <GameReviewRatingSelecter
-                    rating={reviewRating}
-                    setRating={setReviewRating}
-                />
-                {
-                    (isAddLoading || isEditLoading)
-                        ?
-                        <div className={styles.loader}>
-                            <RegularLoader/>
-                        </div>
-                        :
-                        <div className={styles.form__buttons}>
-                            <Button
-                                title="Close"
-                                onClick={closeFormHandler}
-                            />
-                            {
-                                (editReviewInfo.text || editReviewInfo.rating)
-                                    ?
-                                    <Button
-                                        title="Edit"
-                                        onClick={editReviewHandler}
-                                        disabled={buttonsDisabledHandler()}
-                                    />
-                                    :
-                                    <Button
-                                        title="Send"
-                                        onClick={addReviewHandler}
-                                        disabled={buttonsDisabledHandler()}
-                                    />
-                            }
-                        </div>
-                }
+                    <GameReviewRatingSelecter
+                        rating={reviewRating}
+                        setRating={setReviewRating}
+                    />
+                    <div className={styles.form__buttons}>
+                        <Button
+                            title="Close"
+                            onClick={closeFormHandler}
+                        />
+                        {
+                            (editReviewInfo.text || editReviewInfo.rating)
+                                ?
+                                <Button
+                                    title="Edit"
+                                    onClick={editReviewHandler}
+                                    disabled={buttonsDisabledHandler()}
+                                />
+                                :
+                                <Button
+                                    title="Send"
+                                    onClick={addReviewHandler}
+                                    disabled={buttonsDisabledHandler()}
+                                />
+                        }
+                    </div>
                 </div>
             </div>
             :

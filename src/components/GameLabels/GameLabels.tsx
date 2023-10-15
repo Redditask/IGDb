@@ -14,13 +14,13 @@ import {GameQueryResult} from "../../types/queries/results";
 
 interface GameLabelsProps {
     game: GameQueryResult;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const GameLabels: React.FC<GameLabelsProps> = ({game, isLoading}) => {
+const GameLabels: React.FC<GameLabelsProps> = ({game, isLoadingPage}) => {
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <GameLabelsSkeleton/>
             :

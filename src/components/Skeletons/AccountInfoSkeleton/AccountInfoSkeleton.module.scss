@@ -1,0 +1,98 @@
+.skeleton {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 8rem;
+  padding: 0 15rem 3rem 15rem;
+}
+
+.leftSide {
+  height: 23.75rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__profilePhoto {
+    width: 20rem;
+    height: 20rem;
+
+    border: 0.12rem solid lightgray;
+    border-radius: 50%;
+
+    box-shadow: 0 0 20px 5px lightgray;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+.textSide {
+  width: 27rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  &__currentPlatforms {
+    width: 20rem;
+    height: 1.8rem;
+
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__button {
+    width: 23rem;
+    height: 2.5rem;
+
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__regularText {
+    width: 20rem;
+    height: 1.8rem;
+
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__bigText {
+    width: 23rem;
+    height: 10rem;
+
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+
+  &__username {
+    width: 20rem;
+    height: 3.4rem;
+
+    border-radius: 1rem;
+
+    animation: pulse 2s linear infinite;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    background-color: darkgrey;
+  }
+
+  50% {
+    background-color: gray;
+  }
+
+  100%{
+    background-color: darkgrey;
+  }
+}

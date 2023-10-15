@@ -8,7 +8,6 @@ import Error from "../Error/Error";
 import AccountReviews from "../../components/AccountReviews/AccountReviews";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
-import AccountGames from "../../components/AccountGames/AccountGames";
 import Notification from "../../components/UI/Notification/Notification";
 
 import {selectIsError, selectUsername} from "../../store/selectors";
@@ -17,6 +16,7 @@ import {useAppSelector} from "../../hooks";
 import {NotificationRef} from "../../types/data";
 
 const Account: React.FC = () => {
+    const [isLoadingPage, setIsLoadingPage] = useState<boolean>(false);
     const [showScrollUp, setShowScrollUp] = useState<boolean>(false);
 
     const {username} = useParams();
@@ -60,15 +60,14 @@ const Account: React.FC = () => {
             <div className={styles.account}>
                 <AccountInfo
                     selectedUser={username}
+                    setIsLoadingPage={setIsLoadingPage}
                     isUserAccount={isUserAccount()}
                     ref={notificationRef}
                 />
-                <AccountReviews selectedUser={username}/>
-                {
-                    isUserAccount()
-                    &&
-                    <AccountGames/>
-                }
+                <AccountReviews
+                    selectedUser={username}
+                    isLoadingPage={isLoadingPage}
+                />
                 <div className={styles.scrollUp}>
                     <div
                         className={styles.scrollUp__button}

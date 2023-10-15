@@ -52,6 +52,8 @@
 
     box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
 
+    user-select: none;
+
     &:hover {
       transform: translateY(-0.3rem);
 

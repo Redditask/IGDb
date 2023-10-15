@@ -8,15 +8,17 @@ import {useAppDispatch} from "../../hooks";
 import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import AccountReviewItem from "../AccountReviewItem/AccountReviewItem";
+import RegularLoader from "../UI/RegularLoader/RegularLoader";
 
 import {initialAccountReviewsState} from "../../utils/helpers/initialStates";
 import {IGameReview} from "../../types/data";
 
 interface AccountReviewsProps {
     selectedUser: string | undefined;
+    isLoadingPage: boolean
 }
 
-const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser}) => {
+const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingPage}) => {
     let ratingColor: string = styles.reviews__greenAverage;
 
     const dispatch = useAppDispatch();
@@ -43,32 +45,42 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser}) => {
         refetch();
     }, []);
 
+    console.log(reviewsData.reviews)
+
     return (
-        <div className={styles.container}>
-            <h2>User reviews</h2>
-            {
-                !!reviewsData.reviews.length
-                    ?
-                    <div className={styles.reviews}>
-                        <h3 className={styles.reviews__stats}>
-                            AVERAGE GAME RATING:
-                            <span className={ratingColor}>
-                                {reviewsData.medianRating}
-                            </span>
-                        </h3>
-                        {reviewsData.reviews.map((review: IGameReview) =>
-                            <AccountReviewItem
-                                key={review.id}
-                                reviewData={review}
-                            />
-                        )}
-                    </div>
-                    :
-                    <h1 className={styles.reviews__emptyList}>
-                        User hasn't written any reviews
-                    </h1>
-            }
-        </div>
+        (isLoadingPage || isFetching)
+            ?
+            <div className={styles.loaderArea}>
+                <RegularLoader/>
+            </div>
+            :
+            <div className={styles.container}>
+                {
+                    !!reviewsData.reviews.length
+                        ?
+                        <>
+                            <h2>User reviews</h2>
+                            <div className={styles.reviews}>
+                                <h3 className={styles.reviews__stats}>
+                                    AVERAGE GAME RATING:
+                                    <span className={ratingColor}>
+                                        {reviewsData.medianRating}
+                                    </span>
+                                </h3>
+                                {reviewsData.reviews.map((review: IGameReview) =>
+                                    <AccountReviewItem
+                                        key={review.id}
+                                        reviewData={review}
+                                    />
+                                )}
+                            </div>
+                        </>
+                        :
+                        <h1 className={styles.reviews__emptyList}>
+                            User hasn't written any reviews
+                        </h1>
+                }
+            </div>
     );
 };
 

@@ -20,12 +20,12 @@ import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
 interface GameReviewsProps {
     slug: string | undefined;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
 const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
          slug,
-         isLoading
+         isLoadingPage
      }, ref) => {
 
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
@@ -74,7 +74,7 @@ const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
     }, [reviewsResponse, reviewsRerender]);
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <ReviewsSkeleton/>
             :
