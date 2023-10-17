@@ -1,17 +1,19 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 import styles from "./AccountReviews.module.scss";
 
 import {useGetAccountReviewsQuery} from "../../API/igdbAPI";
 
-import {useAppDispatch} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsError, setIsFetching} from "../../store/userSlice";
+import {selectUsername} from "../../store/selectors";
 
 import AccountReviewItem from "../AccountReviewItem/AccountReviewItem";
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
 
 import {initialAccountReviewsState} from "../../utils/helpers/initialStates";
 import {IGameReview} from "../../types/data";
+import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 interface AccountReviewsProps {
     selectedUser: string | undefined;
@@ -19,18 +21,26 @@ interface AccountReviewsProps {
 }
 
 const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingPage}) => {
+    const [userReviews, setUserReviews] = useState<IGameReview []>([]);
+    const [reviewsSorter, setReviewsSorter] = useState<"latest" | "mostLiked">("latest");
+
     let ratingColor: string = styles.reviews__greenAverage;
 
     const dispatch = useAppDispatch();
+    const currentUser: string = useAppSelector(selectUsername);
 
     const {
         data: reviewsData = initialAccountReviewsState,
         isError,
         isFetching,
         refetch
-    } = useGetAccountReviewsQuery({username: selectedUser}, {skip: !selectedUser});
+    } = useGetAccountReviewsQuery({
+        username: selectedUser,
+        viewer: currentUser,
+        sortOption: reviewsSorter
+    }, {skip: !selectedUser});
 
-    if (reviewsData.medianRating < 4) ratingColor = styles.reviews__yellowAverage;
+    if (reviewsData.medianRating < 3.8) ratingColor = styles.reviews__yellowAverage;
     if (reviewsData.medianRating < 2.5) ratingColor = styles.reviews__redAverage;
 
     useEffect((): void => {
@@ -42,13 +52,11 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingP
     }, [isError]);
 
     useEffect((): void => {
-        refetch();
-    }, []);
-
-    console.log(reviewsData.reviews)
+        setUserReviews([...reviewsData.reviews]);
+    }, [reviewsData]);
 
     return (
-        (isLoadingPage || isFetching)
+        isLoadingPage
             ?
             <div className={styles.loaderArea}>
                 <RegularLoader/>
@@ -59,7 +67,10 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingP
                     !!reviewsData.reviews.length
                         ?
                         <>
-                            <h2>User reviews</h2>
+                            <div className={styles.reviews__header}>
+                                <h2>User reviews</h2>
+                                <ReviewsSorter setSortOption={setReviewsSorter}/>
+                            </div>
                             <div className={styles.reviews}>
                                 <h3 className={styles.reviews__stats}>
                                     AVERAGE GAME RATING:
@@ -67,10 +78,12 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingP
                                         {reviewsData.medianRating}
                                     </span>
                                 </h3>
-                                {reviewsData.reviews.map((review: IGameReview) =>
+                                {userReviews.map((review: IGameReview) =>
                                     <AccountReviewItem
                                         key={review.id}
                                         reviewData={review}
+                                        refetchReviews={refetch}
+                                        currentUser={currentUser}
                                     />
                                 )}
                             </div>

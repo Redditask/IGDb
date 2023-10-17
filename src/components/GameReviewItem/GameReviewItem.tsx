@@ -11,9 +11,9 @@ import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import {NavLink} from "react-router-dom";
 
-import {MdDelete, MdEdit} from "react-icons/md"
-import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
+import {MdDelete, MdEdit} from "react-icons/md";
 import ReviewRating from "../UI/ReviewRating/ReviewRating";
+import ReviewStats from "../UI/ReviewStats/ReviewStats";
 
 import {ACCOUNT_ROUTE} from "../../utils/consts";
 
@@ -37,14 +37,12 @@ const GameReviewItem = forwardRef<NotificationRef, GameReviewItemProps>(({
     const [likeReview, {isLoading: isLoadingLike, isError: isLikeError}] = useLikeReviewMutation();
     const [dislikeReview, {isLoading: isLoadingDislike, isError: isDislikeError}] = useDislikeReviewMutation();
 
-    const user: string = useAppSelector(selectUsername);
+    const currentUser: string = useAppSelector(selectUsername);
     const dispatch = useAppDispatch();
 
-    const isThisUserReview = (): boolean => reviewData.username === user;
+    const isThisUserReview = (): boolean => reviewData.username === currentUser;
 
-    const buttonStyles: string = (isThisUserReview() || !user)
-        ? styles.review__inactiveReaction
-        : styles.review__activeReaction;
+    const isActiveButtons = (): boolean => !(isThisUserReview() || !currentUser);
 
     const showNotification = (message: string): void => {
         refetchReviews();
@@ -62,7 +60,7 @@ const GameReviewItem = forwardRef<NotificationRef, GameReviewItemProps>(({
     };
 
     const likeReviewHandler = async (): Promise<void> => {
-        if (user && user !== reviewData.username) {
+        if (currentUser && currentUser !== reviewData.username) {
             const response = await likeReview(({
                 id: reviewData.id
             })).unwrap().catch((err) => err);
@@ -74,7 +72,7 @@ const GameReviewItem = forwardRef<NotificationRef, GameReviewItemProps>(({
     };
 
     const dislikeReviewHandler = async (): Promise<void> => {
-        if (user && user !== reviewData.username) {
+        if (currentUser && currentUser !== reviewData.username) {
             const response = await dislikeReview(({
                 id: reviewData.id
             })).unwrap().catch((err) => err);
@@ -155,50 +153,12 @@ const GameReviewItem = forwardRef<NotificationRef, GameReviewItemProps>(({
                     </div>
                 </div>
                 <p className={styles.review__text}>{reviewData.text}</p>
-                <div className={styles.review__stats}>
-                    <div
-                        className={styles.review__reaction}
-                        title="Like"
-                    >
-                        {
-                            (reviewData.userReaction === "like")
-                                ?
-                                <AiFillLike
-                                    className={buttonStyles}
-                                    onClick={likeReviewHandler}
-                                    size={25}
-                                />
-                                :
-                                <AiOutlineLike
-                                    className={buttonStyles}
-                                    onClick={likeReviewHandler}
-                                    size={25}
-                                />
-                        }
-                        {reviewData.likedUsers}
-                    </div>
-                    <div
-                        className={styles.review__reaction}
-                        title="Dislike"
-                    >
-                        {
-                            (reviewData.userReaction === "dislike")
-                                ?
-                                <AiFillDislike
-                                    className={buttonStyles}
-                                    onClick={dislikeReviewHandler}
-                                    size={25}
-                                />
-                                :
-                                <AiOutlineDislike
-                                    className={buttonStyles}
-                                    onClick={dislikeReviewHandler}
-                                    size={25}
-                                />
-                        }
-                        {reviewData.dislikedUsers}
-                    </div>
-                </div>
+                <ReviewStats
+                    reviewData={reviewData}
+                    likeHandler={likeReviewHandler}
+                    dislikeHandler={dislikeReviewHandler}
+                    isActiveButtons={isActiveButtons()}
+                />
                 {
                     isThisUserReview()
                     &&

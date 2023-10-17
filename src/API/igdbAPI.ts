@@ -2,16 +2,16 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 import {IGameCard, IPlatform} from "../types/data";
 import {
-    AddReviewQueryArgs,
-    EditReviewQueryArgs,
-    GetReviewsQueryArgs, LoginQueryArgs,
+    AddGameReviewQueryArgs,
+    EditGameReviewQueryArgs, GetAccountReviewsQueryArgs,
+    GetGameReviewsQueryArgs, LoginQueryArgs,
     NumberQueryArg, RegistrationQueryArgs,
     StringQueryArg
 } from "../types/queries/args";
 import {
     CheckIsAddedQueryResult, GetAccountGamesQueryResult,
     GetAccountInfoQueryResult,
-    GetReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
+    GetGameReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, RegistrationQueryResult
 } from "../types/queries/results";
 
@@ -101,7 +101,7 @@ export const igdbAPI = createApi({
             query: ({link}) =>
                 `activate/${link}`,
         }),
-        addReview: builder.mutation<MessageQueryResult, AddReviewQueryArgs>({
+        addReview: builder.mutation<MessageQueryResult, AddGameReviewQueryArgs>({
             query: ({slug, text, rating}) => ({
                 url: `review/${slug}`,
                 method: "POST",
@@ -111,13 +111,13 @@ export const igdbAPI = createApi({
                 },
             })
         }),
-        getReviews: builder.query<GetReviewsQueryResult, GetReviewsQueryArgs>({
+        getReviews: builder.query<GetGameReviewsQueryResult, GetGameReviewsQueryArgs>({
             query: ({slug, username, sortOption}) =>
                 `reviews/${slug}?username=${username}&sortOption=${sortOption}`,
         }),
-        getAccountReviews: builder.query<GetAccountReviewsQueryResult, {username: StringQueryArg}>({
-           query: ({username}) =>
-                `account/reviews/${username}`,
+        getAccountReviews: builder.query<GetAccountReviewsQueryResult, GetAccountReviewsQueryArgs>({
+           query: ({username, viewer, sortOption}) =>
+                `account/reviews/${username}?viewer=${viewer}&sortOption=${sortOption}`,
         }),
         deleteReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
             query: ({id}) => ({
@@ -125,7 +125,7 @@ export const igdbAPI = createApi({
                 method: "DELETE",
             })
         }),
-        editReview: builder.mutation<MessageQueryResult, EditReviewQueryArgs>({
+        editReview: builder.mutation<MessageQueryResult, EditGameReviewQueryArgs>({
             query: ({reviewId, text, rating}) => ({
                 url: `review/${reviewId}`,
                 method: "PUT",

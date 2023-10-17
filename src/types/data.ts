@@ -80,7 +80,7 @@ export interface IGameReview extends IReviewInfo{
     username: string;
     likedUsers: number;
     dislikedUsers: number;
-    userReaction: "like" | "dislike" | "null";
+    userReaction: userReaction;
 }
 
 export interface NotificationRef {
@@ -97,3 +97,5 @@ export type StringChangeEvent = {
         value: string
     }
 };
+
+export type userReaction = "like" | "dislike" | "null";

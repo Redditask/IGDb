@@ -26,7 +26,22 @@
     margin-top: 2.5rem;
   }
 
+  &__header {
+    width: 50.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-top: 1rem;
+    padding-left: 0.25rem;
+  }
+
   &__stats {
+    width: 50rem;
+    align-items: center;
+    justify-content: start;
+
     display: flex;
 
     color: gray;

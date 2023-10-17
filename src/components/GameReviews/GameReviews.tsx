@@ -43,12 +43,16 @@ const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
         isError,
         isFetching,
         refetch
-    } = useGetReviewsQuery({slug, username, sortOption: reviewsSorter}, {skip: !slug});
+    } = useGetReviewsQuery({
+        slug,
+        username,
+        sortOption: reviewsSorter
+    }, {skip: !slug});
 
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
         setIsAllDisplayed(true);
-    }
+    };
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));

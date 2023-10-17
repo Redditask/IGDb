@@ -41,16 +41,18 @@ const Account: React.FC = () => {
     useEffect(() => {
         window.addEventListener("scroll", scrollHandler);
 
+        return function (): void {
+            window.removeEventListener("scroll", scrollHandler);
+        }
+    }, []);
+
+    useEffect((): void => {
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth",
         });
-
-        return function (): void {
-            window.removeEventListener("scroll", scrollHandler);
-        }
-    }, []);
+    }, [username]);
 
     return (
         isError

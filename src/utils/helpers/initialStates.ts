@@ -1,7 +1,7 @@
 import {
     CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetAccountGamesQueryResult,
     GetAccountInfoQueryResult,
-    GetReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
+    GetGameReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
     MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
 } from "../../types/queries/results";
 import {IReviewInfo} from "../../types/data";
@@ -62,7 +62,7 @@ export const initialActivateState: MessageQueryResult = {
     message: "",
 };
 
-export const initialGameReviewsState: GetReviewsQueryResult = {
+export const initialGameReviewsState: GetGameReviewsQueryResult = {
     reviews: [],
     userReviewId: 0,
 };

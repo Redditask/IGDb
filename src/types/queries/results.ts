@@ -55,7 +55,7 @@ export interface MessageQueryResult {
     message: string;
 }
 
-export interface GetReviewsQueryResult {
+export interface GetGameReviewsQueryResult {
     reviews: IGameReview [];
     userReviewId: number;
 }

@@ -71,35 +71,6 @@
     }
   }
 
-  &__stats {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 1.5rem;
-
-    display: flex;
-
-    gap: 1.25rem;
-
-    padding-bottom: 1rem;
-  }
-
-  &__reaction {
-    display: flex;
-    align-items: center;
-
-    user-select: none;
-
-    gap: 0.25rem;
-  }
-
-  &__activeReaction {
-    cursor: pointer;
-  }
-
-  &__inactiveReaction {
-    cursor: auto;
-  }
-
   &__userMark {
     font: italic 1rem "Satoshi-Bold";
 

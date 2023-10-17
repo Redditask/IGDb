@@ -22,16 +22,22 @@ export interface RegistrationQueryArgs extends LoginQueryArgs {
     username: string;
 }
 
-export interface AddReviewQueryArgs extends IReviewInfo{
+export interface AddGameReviewQueryArgs extends IReviewInfo{
     slug: string;
 }
 
-export interface GetReviewsQueryArgs {
+export interface GetGameReviewsQueryArgs {
     slug: StringQueryArg;
     username: string;
     sortOption: string;
 }
 
-export interface EditReviewQueryArgs extends IReviewInfo{
+export interface GetAccountReviewsQueryArgs {
+    username: StringQueryArg;
+    viewer: string;
+    sortOption: string;
+}
+
+export interface EditGameReviewQueryArgs extends IReviewInfo{
     reviewId: number;
 }
