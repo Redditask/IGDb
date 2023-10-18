@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./ReivewStats.module.scss"
+import styles from "./ReviewStats.module.scss"
 
 import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 

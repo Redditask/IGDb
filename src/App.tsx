@@ -16,11 +16,8 @@ import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
 //  v0.9
-//  if/else, ? : зарефакторить
-//  декомпозиция компонентов
-//  ^ (пройтись по всем компонентам) ^
-//  //
-//  фильтр ревьюшек по рейтингу (^ и v)
+//  баг с поздней прогрузкой reviews в Account
+//  добавить average user rating (на странице игры, как в Account)
 //  //
 //  v0.95
 //  динамическая подгрузка ревьюшек (как с играми в Games page) (?)

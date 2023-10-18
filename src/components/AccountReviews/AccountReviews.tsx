@@ -10,10 +10,10 @@ import {selectUsername} from "../../store/selectors";
 
 import AccountReviewItem from "../AccountReviewItem/AccountReviewItem";
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
+import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 import {initialAccountReviewsState} from "../../utils/helpers/initialStates";
 import {IGameReview} from "../../types/data";
-import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 interface AccountReviewsProps {
     selectedUser: string | undefined;
