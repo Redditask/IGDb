@@ -49,6 +49,10 @@ const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
         sortOption: reviewsSorter
     }, {skip: !slug});
 
+    let ratingColor: string = styles.reviews__greenAverage;
+    if (reviewsResponse.medianRating < 3.8) ratingColor = styles.reviews__yellowAverage;
+    if (reviewsResponse.medianRating < 2.5) ratingColor = styles.reviews__redAverage;
+
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
         setIsAllDisplayed(true);
@@ -83,17 +87,27 @@ const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
             <ReviewsSkeleton/>
             :
             <div className={styles.container}>
+                {
+                    !isAuth
+                    &&
+                    <h3 className={styles.reviews__nonAuthMessage}>
+                        YOU MUST BE LOGGED IN TO WRITE AND LIKE REVIEW'S
+                    </h3>
+                }
                 <div className={styles.reviews__header}>
                     <h2 className={styles.reviews__title}>Reviews</h2>
-                    {
-                        !isAuth
-                        &&
-                        <h4 className={styles.reviews__nonAuthMessage}>
-                            You must be logged in to write and like review's
-                        </h4>
-                    }
                     <ReviewsSorter setSortOption={setReviewsSorter}/>
                 </div>
+                {
+                    !!displayedReviews.length
+                    &&
+                    <h3 className={styles.reviews__stats}>
+                        AVERAGE USER RATING:
+                        <span className={ratingColor}>
+                        {reviewsResponse.medianRating}
+                        </span>
+                    </h3>
+                }
                 <GameReviewForm
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}

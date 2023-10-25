@@ -6,7 +6,7 @@ import {useGetAccountReviewsQuery} from "../../API/igdbAPI";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsError, setIsFetching} from "../../store/userSlice";
-import {selectUsername} from "../../store/selectors";
+import {selectIsAuth, selectUsername} from "../../store/selectors";
 
 import AccountReviewItem from "../AccountReviewItem/AccountReviewItem";
 import RegularLoader from "../UI/RegularLoader/RegularLoader";
@@ -27,6 +27,7 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingP
     let ratingColor: string = styles.reviews__greenAverage;
 
     const dispatch = useAppDispatch();
+    const isAuth: boolean = useAppSelector(selectIsAuth);
     const currentUser: string = useAppSelector(selectUsername);
 
     const {
@@ -67,6 +68,13 @@ const AccountReviews: React.FC<AccountReviewsProps> = ({selectedUser, isLoadingP
                     !!reviewsData.reviews.length
                         ?
                         <>
+                            {
+                                !isAuth
+                                &&
+                                <h3 className={styles.reviews__nonAuthMessage}>
+                                    YOU MUST BE LOGGED IN TO WRITE AND LIKE REVIEW'S
+                                </h3>
+                            }
                             <div className={styles.reviews__header}>
                                 <h2>User reviews</h2>
                                 <ReviewsSorter setSortOption={setReviewsSorter}/>

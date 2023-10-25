@@ -16,14 +16,12 @@ import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
 //  v0.9
-//  баг с поздней прогрузкой reviews в Account
-//  добавить average user rating (на странице игры, как в Account)
+//  финальная правка стилей
 //  //
 //  v0.95
 //  динамическая подгрузка ревьюшек (как с играми в Games page) (?)
 //  внедрить теги в rtk-query (?)
 //  добавить в библиотеку аватарку
-//  выбор платформы при написании отзыва (?)
 //  возвращение позиции скролла при переходе на -1 страницу
 //  //
 //  v1.0
@@ -34,7 +32,6 @@ import {initialUserDataState} from "./utils/helpers/initialStates";
 //  v1.1
 //  переработать поиск (как на ютубе?)
 //  поиск user-ов
-//  добавить какие-то доп. фильтры, если позволяет API
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();

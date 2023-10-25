@@ -58,6 +58,7 @@ export interface MessageQueryResult {
 export interface GetGameReviewsQueryResult {
     reviews: IGameReview [];
     userReviewId: number;
+    medianRating: number;
 }
 
 export interface GetAccountReviewsQueryResult {

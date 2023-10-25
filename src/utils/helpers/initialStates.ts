@@ -65,6 +65,7 @@ export const initialActivateState: MessageQueryResult = {
 export const initialGameReviewsState: GetGameReviewsQueryResult = {
     reviews: [],
     userReviewId: 0,
+    medianRating: 0
 };
 
 export const initialAccountReviewsState: GetAccountReviewsQueryResult = {

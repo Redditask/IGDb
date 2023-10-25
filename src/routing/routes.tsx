@@ -71,7 +71,11 @@ export const publicRoutes: ICustomRoute [] = [
     {
         path: ACTIVATION_ROUTE,
         component: () => <Activate/>
-    }
+    },
+    {
+        path: ACCOUNT_ROUTE,
+        component: () => <Account/>
+    },
 ];
 
 export const privateRoutes: ICustomRoute[] = [
