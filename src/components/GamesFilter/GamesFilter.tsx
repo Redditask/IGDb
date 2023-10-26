@@ -41,7 +41,7 @@ const GamesFilter: React.FC<GamesFilterProps> = ({
             >
                 <option value="">{defaultValue}</option>
                 {
-                    options.map((option: ICustomOption)=>
+                    options.map((option: ICustomOption) =>
                         <option
                             key={option.name}
                             value={option.value}

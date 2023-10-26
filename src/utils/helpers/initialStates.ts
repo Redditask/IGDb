@@ -1,7 +1,10 @@
 import {
-    AccountGamesQueryResult, CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetReviewsQueryResult,
-    LoginQueryResult, MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
-} from "../../types/queries";
+    CheckIsAddedQueryResult, GameQueryResult, GamesQueryResult, GetAccountGamesQueryResult,
+    GetAccountInfoQueryResult,
+    GetGameReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
+    MessageQueryResult, ScreenshotsQueryResult, TrailersQueryResult
+} from "../../types/queries/results";
+import {IReviewInfo} from "../../types/data";
 
 export const initialGameState: GameQueryResult = {
     id: 0,
@@ -45,7 +48,7 @@ export const initialUserDataState: LoginQueryResult = {
     }
 };
 
-export const initialAccountGamesState: AccountGamesQueryResult = {
+export const initialAccountGamesState: GetAccountGamesQueryResult = {
     library: [],
     wishlist: [],
 };
@@ -59,7 +62,27 @@ export const initialActivateState: MessageQueryResult = {
     message: "",
 };
 
-export const initialReviewsState: GetReviewsQueryResult = {
+export const initialGameReviewsState: GetGameReviewsQueryResult = {
     reviews: [],
     userReviewId: 0,
+    medianRating: 0
+};
+
+export const initialAccountReviewsState: GetAccountReviewsQueryResult = {
+    medianRating: 0,
+    reviews: []
+};
+
+export const initialAccountInfoState: GetAccountInfoQueryResult = {
+    username: "",
+    libraryCount: 0,
+    platforms: [],
+    registrationDate: "",
+    reviewsCount: 0,
+    wishlistCount: 0
+};
+
+export const initialReviewInfoState: IReviewInfo = {
+    text: "",
+    rating: 0
 };

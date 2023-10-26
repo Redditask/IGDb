@@ -9,17 +9,18 @@ import GameLabelsSkeleton from "../Skeletons/GameLabelsSkeleton/GameLabelsSkelet
 
 import {developersToLabelsConvert, platformsToLabelsConvert} from "../../utils/helpers/converters";
 import {isHaveLinks} from "../../utils/helpers/dataProcessing";
-import {GameQueryResult} from "../../types/queries";
+
+import {GameQueryResult} from "../../types/queries/results";
 
 interface GameLabelsProps {
     game: GameQueryResult;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const GameLabels: React.FC<GameLabelsProps> = ({game, isLoading}) => {
+const GameLabels: React.FC<GameLabelsProps> = ({game, isLoadingPage}) => {
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <GameLabelsSkeleton/>
             :

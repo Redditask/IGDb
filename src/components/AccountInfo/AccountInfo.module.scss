@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 8rem;
+  padding: 0 15rem 3rem 15rem;
+}
+
+.leftSide {
+  height: 23.75rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__profilePhoto {
+    //заглушка
+    width: 20rem;
+    height: 20rem;
+
+    border: 0.12rem solid lightgray;
+    border-radius: 50%;
+
+    box-shadow: 0 0 20px 5px lightgray;
+  }
+}
+
+.textSide {
+  width: 27rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  &__currentPlatforms {
+    display: flex;
+
+    gap: 0.5rem;
+  }
+
+  &__message {
+    color: gray;
+  }
+}

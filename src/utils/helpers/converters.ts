@@ -1,4 +1,4 @@
-import {GamePageInfo, IDeveloper, ILabel, IPlatform} from "../../types/data";
+import {GamePageInfo, ICustomOption, IDeveloper, ILabel, IPlatform} from "../../types/data";
 
 export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     const labels: ILabel[] = [];
@@ -11,6 +11,21 @@ export const platformsToLabelsConvert = (platforms: IPlatform []): ILabel[] => {
     });
 
     return labels;
+};
+
+export const platformListToPlatformsConvert = (platformList: ICustomOption []): IPlatform [] => {
+    const platforms: IPlatform [] = [];
+
+    platformList.forEach((platform: ICustomOption): void => {
+        platforms.push({
+            platform: {
+                id: Number(platform.value),
+                name: platform.name === "Macintosh" ? "Apple Macintosh" : platform.name
+            }
+        });
+    });
+
+    return platforms;
 };
 
 export const developersToLabelsConvert = (developers: IDeveloper[]): ILabel[] => {

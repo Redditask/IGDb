@@ -69,13 +69,18 @@ export interface IUserStore extends IUserData {
     isError: boolean;
 }
 
-export interface IGameReview {
-    id: number;
-    username: string;
+export interface IReviewInfo {
     text: string;
+    rating: number;
+}
+
+export interface IGameReview extends IReviewInfo{
+    id: number;
+    slug: string;
+    username: string;
     likedUsers: number;
     dislikedUsers: number;
-    userReaction: "like" | "dislike" | "null";
+    userReaction: userReaction;
 }
 
 export interface NotificationRef {
@@ -92,3 +97,5 @@ export type StringChangeEvent = {
         value: string
     }
 };
+
+export type userReaction = "like" | "dislike" | "null";

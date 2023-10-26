@@ -18,7 +18,8 @@ import {serverErrorHandler} from "../../utils/helpers/dataProcessing";
 
 import {useAppDispatch} from "../../hooks";
 import {setUser, setIsFetching} from "../../store/userSlice";
-import {LoginQueryArgs} from "../../types/queries";
+
+import {LoginQueryArgs} from "../../types/queries/args";
 
 const Login: React.FC = () => {
     const [login, {isLoading}] = useLoginMutation();
@@ -67,7 +68,7 @@ const Login: React.FC = () => {
                 onSubmit={handleSubmit(loginHandler)}
             >
                 <h2>Login</h2>
-                <div className={styles.inputs}>
+                <div className={styles.card__inputs}>
                     <FormInput
                         placeholderText="Email"
                         type="text"
@@ -104,10 +105,10 @@ const Login: React.FC = () => {
                         :
                         <RegularLoader/>
                 }
-                <div className={styles.link}>
-                    <p className={styles.link__info}>Don't have account?</p>
+                <div className={styles.card__link}>
+                    <p className={styles.card__info}>Don't have account?</p>
                     <NavLink
-                        className={styles.link__button}
+                        className={styles.card__button}
                         to={REGISTRATION_ROUTE}
                     >
                         Create now!

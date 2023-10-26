@@ -15,23 +15,20 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  v0.9
-//  профили пользователей (как на rawg), придумать что будет в пустом профиле
-//  индивидуальные оценки для игр
-//  количество отзывов/оценок, кол-во игр в библиотеке
-//  выбор платформ(ы) при регистрации, будет отображаться в профиле
-//  //
+//  v0.95
+//  динамическая подгрузка ревьюшек (как с играми в Games page) (?)
 //  внедрить теги в rtk-query (?)
+//  добавить в библиотеку аватарку
+//  возвращение позиции скролла при переходе на -1 страницу
 //  //
 //  v1.0
-//  добавить в библиотеку аватарку
-//  выводить в библиотеке дату добавления игры и полосой на основе этого отделять игры, сортировка по дате добавления, по оценкам и т.п.
+//  функция "друзья" (?)
 //  функция "забыл пароль"
+//  темная тема
 //  //
-//  улучшить дизайн
-//  темная тема в header где-нибудь
-//  //
-//  добавить какие-то доп. фильтры, если позволяет API
+//  v1.1
+//  переработать поиск (как на ютубе?)
+//  поиск user-ов
 
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -46,7 +43,7 @@ const App: React.FC = () => {
     });
 
     useEffect((): void => {
-        if (response.user.username.length){
+        if (response.user.username.length) {
             dispatch(setUser(response.user));
         } else if (isError) {
             dispatch(clearUser());
@@ -54,7 +51,7 @@ const App: React.FC = () => {
 
         dispatch(setIsChecked(isFetching));
         dispatch(setIsFetching(isFetching));
-    }, [response]);
+    }, [response, isError, isFetching]);
 
     return (
         <div className={styles}>

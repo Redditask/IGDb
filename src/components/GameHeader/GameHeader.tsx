@@ -20,18 +20,19 @@ import GameHeadSkeleton from "../Skeletons/GameHeadSkeleton/GameHeadSkeleton";
 import {NotificationRef} from "../../types/data";
 
 import {dateFormatting} from "../../utils/helpers/dates";
-import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries";
+
+import {CheckIsAddedQueryResult, GameQueryResult} from "../../types/queries/results";
 
 interface GameHeaderProps {
     game: GameQueryResult;
-    isLoading: boolean;
+    isLoadingPage: boolean;
     addedStatus: CheckIsAddedQueryResult;
     refetch: () => void;
 }
 
 const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
         game,
-        isLoading,
+        isLoadingPage,
         addedStatus,
         refetch
     }, ref) => {
@@ -119,7 +120,7 @@ const GameHeader = forwardRef<NotificationRef, GameHeaderProps>(({
     ]);
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <GameHeadSkeleton/>
             :

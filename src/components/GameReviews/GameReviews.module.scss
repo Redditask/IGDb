@@ -35,19 +35,51 @@
   }
 
   &__header {
-    width: 50rem;
+    width: 51rem;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     padding-top: 1rem;
-    padding-left: 0.25rem;
+    padding-left: 0.5rem;
+  }
+
+  &__stats {
+    width: 50rem;
+    align-items: center;
+    justify-content: start;
+
+    display: flex;
+
+    color: gray;
+
+    margin-top: -1rem;
+
+    gap: 0.5rem;
   }
 
   &__nonAuthMessage {
+    width: 50rem;
+    align-items: center;
+    justify-content: start;
+
+    display: flex;
+
     color: gray;
 
-    margin-bottom: -1rem;
+    margin-bottom: -2rem;
+  }
+
+  &__greenAverage {
+    color: #6c3;
+  }
+
+  &__yellowAverage {
+    color: #fc3;
+  }
+
+  &__redAverage {
+    color: #f00;
   }
 }

@@ -1,21 +1,3 @@
-@mixin button (){
-  font-size: 1.5rem;
-
-  cursor: pointer;
-
-  text-decoration: none;
-
-  user-select: none;
-
-  &:hover {
-    transform: translateY(-0.5rem);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-}
-
 .account {
   display: flex;
   flex-direction: column;
@@ -25,47 +7,43 @@
   padding-top: 7.5rem;
 
   gap: 0.5rem;
-
-  &__buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    padding-left: 15rem;
-
-    gap: 5rem;
-  }
-
-  &__activeButton {
-    @include button();
-
-    &::after {
-      content: "";
-      display: block;
-
-      width: 100%;
-      height: 0.15rem;
-
-      background-color: black;
-
-      margin: 0.2rem 0;
-    }
-  }
-
-  &__defaultButton {
-    @include button();
-  }
-
-  &__games {
-    width: 100%;
-  }
 }
 
-.loaderArea {
+.scrollUp {
+  width: 100%;
+
+  position: fixed;
+  bottom: 1rem;
+
   display: flex;
   justify-content: center;
 
-  width: 100%;
+  z-index: 100;
 
-  margin: 15rem 0;
+  &__button {
+    width: 3rem;
+    height: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+    border-radius: 50%;
+    border: 0.1rem solid lightgray;
+  }
+}
+
+#show {
+  opacity: 1;
+
+  transition: opacity 0.1s ease-in;
+}
+
+#hide {
+  opacity: 0;
+
+  transition: opacity 0.1s ease-in;
 }

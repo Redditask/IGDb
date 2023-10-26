@@ -60,7 +60,7 @@ const Header: React.FC = () => {
                     }
                 </nav>
             </header>
-            <HeaderLoader />
+            <HeaderLoader/>
         </>
     );
 };

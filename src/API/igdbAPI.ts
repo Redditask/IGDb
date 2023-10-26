@@ -1,17 +1,19 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-import {IGameCard} from "../types/data";
+import {IGameCard, IPlatform} from "../types/data";
 import {
-    AccountGamesQueryResult,
-    AddReviewQueryArgs,
-    CheckIsAddedQueryResult, EditReviewQueryArgs, GetReviewsQueryArgs,
-    GetReviewsQueryResult,
-    LoginQueryArgs,
-    LoginQueryResult, MessageQueryResult, NumberQueryArg,
-    RegistrationQueryArgs,
-    RegistrationQueryResult,
+    AddGameReviewQueryArgs,
+    EditGameReviewQueryArgs, GetAccountReviewsQueryArgs,
+    GetGameReviewsQueryArgs, LoginQueryArgs,
+    NumberQueryArg, RegistrationQueryArgs,
     StringQueryArg
-} from "../types/queries";
+} from "../types/queries/args";
+import {
+    CheckIsAddedQueryResult, GetAccountGamesQueryResult,
+    GetAccountInfoQueryResult,
+    GetGameReviewsQueryResult, GetAccountReviewsQueryResult, LoginQueryResult,
+    MessageQueryResult, RegistrationQueryResult
+} from "../types/queries/results";
 
 export const igdbAPI = createApi({
     reducerPath: "idbgAPI",
@@ -57,7 +59,7 @@ export const igdbAPI = createApi({
             query: () =>
                 "refresh"
         }),
-        getAccountGames: builder.query<AccountGamesQueryResult, {}>({
+        getAccountGames: builder.query<GetAccountGamesQueryResult, {}>({
             query: () =>
                 "account/games"
         }),
@@ -99,18 +101,23 @@ export const igdbAPI = createApi({
             query: ({link}) =>
                 `activate/${link}`,
         }),
-        addReview: builder.mutation<MessageQueryResult, AddReviewQueryArgs>({
-            query: ({slug, text}) => ({
+        addReview: builder.mutation<MessageQueryResult, AddGameReviewQueryArgs>({
+            query: ({slug, text, rating}) => ({
                 url: `review/${slug}`,
                 method: "POST",
                 body: {
-                    text
+                    text,
+                    rating
                 },
             })
         }),
-        getReviews: builder.query<GetReviewsQueryResult, GetReviewsQueryArgs>({
+        getReviews: builder.query<GetGameReviewsQueryResult, GetGameReviewsQueryArgs>({
             query: ({slug, username, sortOption}) =>
                 `reviews/${slug}?username=${username}&sortOption=${sortOption}`,
+        }),
+        getAccountReviews: builder.query<GetAccountReviewsQueryResult, GetAccountReviewsQueryArgs>({
+           query: ({username, viewer, sortOption}) =>
+                `account/reviews/${username}?viewer=${viewer}&sortOption=${sortOption}`,
         }),
         deleteReview: builder.mutation<MessageQueryResult, {id: NumberQueryArg}>({
             query: ({id}) => ({
@@ -118,12 +125,13 @@ export const igdbAPI = createApi({
                 method: "DELETE",
             })
         }),
-        editReview: builder.mutation<MessageQueryResult, EditReviewQueryArgs>({
-            query: ({reviewId, text}) => ({
+        editReview: builder.mutation<MessageQueryResult, EditGameReviewQueryArgs>({
+            query: ({reviewId, text, rating}) => ({
                 url: `review/${reviewId}`,
                 method: "PUT",
                 body: {
-                    newText: text
+                    newText: text,
+                    newRating: rating
                 }
             })
         }),
@@ -137,6 +145,19 @@ export const igdbAPI = createApi({
             query: ({id}) => ({
                 url: `review/dislike/${id}`,
                 method: "POST",
+            })
+        }),
+        getAccountInfo: builder.query<GetAccountInfoQueryResult, {selectedUser: StringQueryArg}>({
+            query: ({selectedUser}) =>
+                `account/info/${selectedUser}`
+        }),
+        updateUserPlatforms: builder.mutation<void, IPlatform []>({
+            query: (platforms) => ({
+                url: `account/info/platforms`,
+                method: "PUT",
+                body: {
+                    platforms
+                },
             })
         })
     }),
@@ -159,5 +180,8 @@ export const {
     useDeleteReviewMutation,
     useLikeReviewMutation,
     useDislikeReviewMutation,
-    useEditReviewMutation
+    useEditReviewMutation,
+    useGetAccountInfoQuery,
+    useUpdateUserPlatformsMutation,
+    useGetAccountReviewsQuery
 } = igdbAPI;

@@ -1,17 +1,8 @@
-import {IDeveloper, IGameCard, IGameReview, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "./data";
+import {IDeveloper, IGameCard, IGameReview, ILabel, IPlatform, IScreenshot, ITrailer, IUserData} from "../data";
 
 export interface GamesQueryResult {
     count: number;
     results: IGameCard[];
-}
-
-export interface GamesQueryArgs {
-    page: number;
-    pageSize: number;
-    metacritic: string;
-    dates: string
-    genres: string;
-    platforms: string;
 }
 
 export interface GameQueryResult {
@@ -41,31 +32,6 @@ export interface TrailersQueryResult {
     results: ITrailer [];
 }
 
-export interface LoginQueryArgs {
-    email: string;
-    password: string;
-}
-
-export interface RegistrationQueryArgs extends LoginQueryArgs {
-    username: string;
-}
-
-export interface AddReviewQueryArgs {
-    slug: string;
-    text: string;
-}
-
-export interface GetReviewsQueryArgs {
-    slug: StringQueryArg;
-    username: string;
-    sortOption: string;
-}
-
-export interface EditReviewQueryArgs {
-  reviewId: number;
-  text: string;
-}
-
 export interface LoginQueryResult {
     user: IUserData;
     accessToken: string;
@@ -75,7 +41,7 @@ export interface LoginQueryResult {
 export interface RegistrationQueryResult extends LoginQueryResult {
 }
 
-export interface AccountGamesQueryResult {
+export interface GetAccountGamesQueryResult {
     library: IGameCard[];
     wishlist: IGameCard[];
 }
@@ -89,11 +55,23 @@ export interface MessageQueryResult {
     message: string;
 }
 
-export interface GetReviewsQueryResult {
+export interface GetGameReviewsQueryResult {
     reviews: IGameReview [];
     userReviewId: number;
+    medianRating: number;
 }
 
-export type NumberQueryArg = number | undefined;
+export interface GetAccountReviewsQueryResult {
+    reviews: IGameReview [];
+    medianRating: number;
+}
 
-export type StringQueryArg = string | undefined;
+export interface GetAccountInfoQueryResult {
+    username: string;
+    reviewsCount: number;
+    libraryCount: number;
+    wishlistCount: number;
+    registrationDate: string;
+    platforms: IPlatform [];
+    //profileImage
+}

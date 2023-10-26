@@ -36,8 +36,9 @@ const Activate = () => {
             :
             <div className={styles.activate}>
                 <h2>{data.message}</h2>
+                <h1 className={styles.activate__message}>Please select your platforms in account</h1>
                 <NavLink
-                    className={styles.link}
+                    className={styles.activate__link}
                     to={LOGIN_ROUTE}
                 >
                     Login now!

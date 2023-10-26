@@ -23,7 +23,7 @@ const Search: React.FC = () => {
 
     const {
         data: searchResults = initialGamesState,
-        error: searchError,
+        isError,
         isFetching
     } = useGetSearchResultsQuery({searchText}, {skip: !searchText});
 
@@ -86,7 +86,7 @@ const Search: React.FC = () => {
                 onMouseOut={hideResults}
             >
                 {
-                    !!searchError
+                    isError
                         ?
                         <h2 className={styles.search__errorMessage}>Oops, something go wrong...</h2>
                         :

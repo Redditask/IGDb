@@ -3,6 +3,8 @@ import Game from "../pages/Game/Game";
 import Account from "../pages/Account/Account";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
+import Activate from "../pages/Activate/Activate";
+import Library from "../pages/Library/Library";
 
 import {ICustomRoute} from "../types/data";
 
@@ -15,8 +17,8 @@ import {
     queryParams, GAME_ROUTE,
     ACCOUNT_ROUTE, LOGIN_ROUTE,
     REGISTRATION_ROUTE, ACTIVATION_ROUTE,
+    LIBRARY_ROUTE,
 } from "../utils/consts";
-import Activate from "../pages/Activate/Activate";
 
 export const publicRoutes: ICustomRoute [] = [
     {
@@ -69,7 +71,11 @@ export const publicRoutes: ICustomRoute [] = [
     {
         path: ACTIVATION_ROUTE,
         component: () => <Activate/>
-    }
+    },
+    {
+        path: ACCOUNT_ROUTE,
+        component: () => <Account/>
+    },
 ];
 
 export const privateRoutes: ICustomRoute[] = [
@@ -115,5 +121,9 @@ export const privateRoutes: ICustomRoute[] = [
     {
         path: ACCOUNT_ROUTE,
         component: () => <Account/>
+    },
+    {
+        path: LIBRARY_ROUTE,
+        component: () => <Library/>
     }
 ];

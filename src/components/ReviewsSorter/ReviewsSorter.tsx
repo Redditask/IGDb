@@ -24,6 +24,12 @@ const ReviewsSorter: React.FC<ReviewsSorterProps> = ({setSortOption}) => {
                 <option value="mostLiked">
                     Most liked
                 </option>
+                <option value="ascendingRating">
+                    Rating &#8593;
+                </option>
+                <option value="descendingRating">
+                    Rating &#8595;
+                </option>
             </select>
         </form>
     );

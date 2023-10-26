@@ -2,36 +2,36 @@ import React, {forwardRef, useEffect, useState} from "react";
 
 import {useGetReviewsQuery} from "../../API/igdbAPI";
 
-import styles from "./Reviews.module.scss";
+import styles from "./GameReviews.module.scss";
 
 import Button from "../UI/Button/Button";
-import ReviewItem from "../ReviewItem/ReviewItem";
+import GameReviewItem from "../GameReviewItem/GameReviewItem";
 import ReviewsSkeleton from "../Skeletons/ReviewsSkeleton/ReviewsSkeleton";
-import ReviewForm from "../ReviewForm/ReviewForm";
+import GameReviewForm from "../GameReviewForm/GameReviewForm";
 import ReviewsSorter from "../ReviewsSorter/ReviewsSorter";
 
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {setIsError, setIsFetching} from "../../store/userSlice";
 import {selectIsAuth, selectUsername} from "../../store/selectors";
 
-import {IGameReview, NotificationRef} from "../../types/data";
-import {initialReviewsState} from "../../utils/helpers/initialStates";
+import {IGameReview, IReviewInfo, NotificationRef} from "../../types/data";
+import {initialReviewInfoState, initialGameReviewsState} from "../../utils/helpers/initialStates";
 import {gamePageInfoConvert} from "../../utils/helpers/converters";
 
-interface ReviewsProps {
+interface GameReviewsProps {
     slug: string | undefined;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
+const GameReviews = forwardRef<NotificationRef, GameReviewsProps>(({
          slug,
-         isLoading
+         isLoadingPage
      }, ref) => {
 
     const [displayedReviews, setDisplayedReviews] = useState<IGameReview []>([]);
     const [isAllDisplayed, setIsAllDisplayed] = useState<boolean>(false);
     const [reviewsRerender, setReviewsRerender] = useState<boolean>(false);
-    const [editReviewText, setEditReviewText] = useState<string>("");
+    const [editReviewInfo, setEditReviewInfo] = useState<IReviewInfo>(initialReviewInfoState);
     const [reviewsSorter, setReviewsSorter] = useState<"latest" | "mostLiked">("latest");
 
     const username: string = useAppSelector(selectUsername);
@@ -39,16 +39,24 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     const dispatch = useAppDispatch();
 
     const {
-        data: reviewsResponse = initialReviewsState,
+        data: reviewsResponse = initialGameReviewsState,
         isError,
         isFetching,
         refetch
-    } = useGetReviewsQuery({slug, username, sortOption: reviewsSorter}, {skip: !slug});
+    } = useGetReviewsQuery({
+        slug,
+        username,
+        sortOption: reviewsSorter
+    }, {skip: !slug});
+
+    let ratingColor: string = styles.reviews__greenAverage;
+    if (reviewsResponse.medianRating < 3.8) ratingColor = styles.reviews__yellowAverage;
+    if (reviewsResponse.medianRating < 2.5) ratingColor = styles.reviews__redAverage;
 
     const showAllReviews = (): void => {
         setDisplayedReviews([...displayedReviews, ...reviewsResponse.reviews.slice(5)]);
         setIsAllDisplayed(true);
-    }
+    };
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching));
@@ -74,40 +82,50 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     }, [reviewsResponse, reviewsRerender]);
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <ReviewsSkeleton/>
             :
             <div className={styles.container}>
+                {
+                    !isAuth
+                    &&
+                    <h3 className={styles.reviews__nonAuthMessage}>
+                        YOU MUST BE LOGGED IN TO WRITE AND LIKE REVIEW'S
+                    </h3>
+                }
                 <div className={styles.reviews__header}>
                     <h2 className={styles.reviews__title}>Reviews</h2>
-                    {
-                        !isAuth
-                        &&
-                        <h4 className={styles.nonAuthMessage}>
-                            You must be logged in to write and like review's
-                        </h4>
-                    }
                     <ReviewsSorter setSortOption={setReviewsSorter}/>
                 </div>
-                <ReviewForm
+                {
+                    !!displayedReviews.length
+                    &&
+                    <h3 className={styles.reviews__stats}>
+                        AVERAGE USER RATING:
+                        <span className={ratingColor}>
+                        {reviewsResponse.medianRating}
+                        </span>
+                    </h3>
+                }
+                <GameReviewForm
                     gamePageInfo={gamePageInfoConvert(reviewsResponse.userReviewId, slug)}
                     refetchReviews={refetch}
-                    editReviewText={editReviewText}
-                    setEditReviewText={setEditReviewText}
+                    editReviewInfo={editReviewInfo}
+                    setEditReviewInfo={setEditReviewInfo}
                     ref={ref}
                 />
                 <div className={styles.reviews}>
                     {
                         !!displayedReviews.length
                             ?
-                            displayedReviews.map((review) =>
-                                <ReviewItem
+                            displayedReviews.map((review: IGameReview) =>
+                                <GameReviewItem
                                     key={review.id}
                                     reviewData={review}
                                     refetchReviews={refetch}
-                                    editReviewText={editReviewText}
-                                    setEditReviewText={setEditReviewText}
+                                    editReviewInfo={editReviewInfo}
+                                    setEditReviewInfo={setEditReviewInfo}
                                     ref={ref}
                                 />
                             )
@@ -127,4 +145,4 @@ const Reviews = forwardRef<NotificationRef, ReviewsProps>(({
     );
 });
 
-export default Reviews;
+export default GameReviews;

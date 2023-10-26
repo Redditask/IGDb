@@ -10,7 +10,8 @@
 
   list-style-type: none;
 
-  transition: all 0.25s ease;
+  transition: all 120ms ease-out;
+  transition-delay: 0s;
 }
 
 p, a, select, option, label {

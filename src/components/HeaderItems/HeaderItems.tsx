@@ -4,7 +4,7 @@ import styles from "./HeaderItems.module.scss";
 
 import {NavLink} from "react-router-dom";
 
-import {HOME_ROUTE, ACCOUNT_ROUTE, LOGIN_ROUTE} from "../../utils/consts";
+import {HOME_ROUTE, ACCOUNT_ROUTE, LOGIN_ROUTE, LIBRARY_ROUTE} from "../../utils/consts";
 
 interface HeaderItemsProps {
     isAuth: boolean;
@@ -20,10 +20,17 @@ const HeaderItems: React.FC<HeaderItemsProps> = ({isAuth, logoutHandler, usernam
             <nav className={styles.container}>
                 <NavLink
                     className={styles.item}
-                    to={ACCOUNT_ROUTE}
-                    title="Your games library"
+                    to={ACCOUNT_ROUTE.replace(":username", `${username}`)}
+                    title="Your account"
                 >
                     {username}
+                </NavLink>
+                <NavLink
+                    className={styles.item}
+                    to={LIBRARY_ROUTE}
+                    title="Your library"
+                >
+                    Library
                 </NavLink>
                 <NavLink
                     className={styles.item}

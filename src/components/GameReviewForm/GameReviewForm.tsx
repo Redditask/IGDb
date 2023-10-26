@@ -1,6 +1,6 @@
 import React, {forwardRef, useEffect, useState} from "react";
 
-import styles from "./ReviewForm.module.scss";
+import styles from "./GameReviewForm.module.scss";
 
 import {useAddReviewMutation, useEditReviewMutation} from "../../API/igdbAPI";
 
@@ -10,25 +10,26 @@ import {setIsError, setIsFetching} from "../../store/userSlice";
 
 import Textarea from "../UI/Textarea/Textarea";
 import Button from "../UI/Button/Button";
-import RegularLoader from "../UI/RegularLoader/RegularLoader";
+import GameReviewRatingSelecter from "../GameReviewRatingSelecter/GameReviewRatingSelecter";
 
-import {GamePageInfo, NotificationRef} from "../../types/data";
+import {GamePageInfo, IReviewInfo, NotificationRef} from "../../types/data";
 
-interface ReviewFormProps {
+interface GameReviewFormProps {
    gamePageInfo: GamePageInfo,
-   editReviewText: string;
-   setEditReviewText: (editReviewText: string) => void;
+   editReviewInfo: IReviewInfo;
+   setEditReviewInfo: (editReviewInfo: IReviewInfo) => void;
    refetchReviews: () => void;
 }
 
-const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
+const GameReviewForm = forwardRef<NotificationRef, GameReviewFormProps>(({
         gamePageInfo,
         refetchReviews,
-        editReviewText,
-        setEditReviewText
+        editReviewInfo,
+        setEditReviewInfo
     }, ref) => {
 
     const [reviewText, setReviewText] = useState<string>("");
+    const [reviewRating, setReviewRating] = useState<number>(0);
     const [isShowForm, setIsShowForm] = useState<boolean>(false);
 
     const [addReview, {isLoading: isAddLoading, isError: isAddError}] = useAddReviewMutation();
@@ -37,8 +38,9 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     const isAuth: boolean = useAppSelector(selectIsAuth);
     const dispatch = useAppDispatch();
 
-    const buttonsDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug);
-    const mainButtonDisabledHandler = (): () => void => isAuth ? showFormHandler : ()=>{};
+    const buttonsDisabledHandler = (): boolean => !(reviewText.length && gamePageInfo.slug && reviewRating);
+    const mainButtonDisabledHandler = (): () => void => isAuth ? showFormHandler : () => {
+    };
 
     const showNotification = (message: string): void => {
         refetchReviews();
@@ -49,12 +51,14 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
         if (gamePageInfo.slug?.length) {
             const response = await addReview({
                 text: reviewText,
+                rating: reviewRating,
                 slug: gamePageInfo.slug
             }).unwrap().catch((err) => err);
 
             if (response?.status === 200) {
                 setIsShowForm(false);
                 setReviewText("");
+                setReviewRating(0);
                 showNotification("Review was added");
             } else if (response?.data?.message) {
                 setIsShowForm(false);
@@ -63,15 +67,20 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     };
 
     const editReviewHandler = async (): Promise<void> => {
-        if (editReviewText.trim() !== reviewText.trim()) {
+        if (editReviewInfo.text.trim() !== reviewText.trim()
+            || editReviewInfo.rating !== reviewRating) {
             const response = await editReview({
                 reviewId: gamePageInfo.userReviewId,
-                text: reviewText
+                text: reviewText,
+                rating: reviewRating,
             }).unwrap().catch((err) => err);
 
-            if (response?.status === 200){
+            if (response?.status === 200) {
                 setIsShowForm(false);
-                setEditReviewText("");
+                setEditReviewInfo({
+                    text: "",
+                    rating: 0
+                });
                 showNotification("Review was edited");
             } else if (response?.data?.message) {
                 setIsShowForm(false);
@@ -81,7 +90,12 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
 
     const closeFormHandler = (): void => {
         setIsShowForm(false);
-        if (editReviewText) setEditReviewText("");
+        if (editReviewInfo.text || editReviewInfo.rating) {
+            setEditReviewInfo({
+                text: "",
+                rating: 0
+            });
+        }
     };
 
     const showFormHandler = (): void => {
@@ -97,11 +111,18 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     }, [isAddError, isEditError]);
 
     useEffect((): void => {
-        if (editReviewText) {
-            setReviewText(editReviewText);
+        if (editReviewInfo.text) {
+            setReviewText(editReviewInfo.text);
             setIsShowForm(true);
         } else setIsShowForm(false);
-    }, [editReviewText]);
+    }, [editReviewInfo.text]);
+
+    useEffect((): void => {
+        if (editReviewInfo.rating) {
+            setReviewRating(editReviewInfo.rating);
+            setIsShowForm(true);
+        } else setIsShowForm(false);
+    }, [editReviewInfo.rating]);
 
     useEffect((): void => {
         setIsShowForm(false);
@@ -116,35 +137,33 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
                     setValue={setReviewText}
                     placeholder="Write something!"
                 />
-                {
-                    (isAddLoading || isEditLoading)
-                        ?
-                        <div className={styles.loader}>
-                            <RegularLoader/>
-                        </div>
-                        :
-                        <div className={styles.form__buttons}>
-                            <Button
-                                title="Close"
-                                onClick={closeFormHandler}
-                            />
-                            {
-                                editReviewText
-                                    ?
-                                    <Button
-                                        title="Edit"
-                                        onClick={editReviewHandler}
-                                        disabled={buttonsDisabledHandler()}
-                                    />
-                                    :
-                                    <Button
-                                        title="Send"
-                                        onClick={addReviewHandler}
-                                        disabled={buttonsDisabledHandler()}
-                                    />
-                            }
-                        </div>
-                }
+                <div className={styles.form__footer}>
+                    <GameReviewRatingSelecter
+                        rating={reviewRating}
+                        setRating={setReviewRating}
+                    />
+                    <div className={styles.form__buttons}>
+                        <Button
+                            title="Close"
+                            onClick={closeFormHandler}
+                        />
+                        {
+                            (editReviewInfo.text || editReviewInfo.rating)
+                                ?
+                                <Button
+                                    title="Edit"
+                                    onClick={editReviewHandler}
+                                    disabled={buttonsDisabledHandler()}
+                                />
+                                :
+                                <Button
+                                    title="Send"
+                                    onClick={addReviewHandler}
+                                    disabled={buttonsDisabledHandler()}
+                                />
+                        }
+                    </div>
+                </div>
             </div>
             :
             <>
@@ -162,4 +181,4 @@ const ReviewForm = forwardRef<NotificationRef, ReviewFormProps>(({
     );
 });
 
-export default ReviewForm;
+export default GameReviewForm;

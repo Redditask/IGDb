@@ -1,0 +1,38 @@
+.editerForm {
+  width: 27rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  &__currentPlatforms {
+    display: flex;
+
+    gap: 0.5rem;
+  }
+
+  &__checkboxList {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 1rem;
+  }
+
+  &__checkboxItem {
+    display: flex;
+
+    gap: 0.5rem;
+  }
+
+  &__message {
+    color: gray;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 1rem;
+  }
+}

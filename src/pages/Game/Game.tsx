@@ -23,7 +23,7 @@ import Error from "../Error/Error";
 import GameDescription from "../../components/GameDescription/GameDescription";
 import Notification from "../../components/UI/Notification/Notification";
 import ScrollUpButton from "../../components/UI/ScrollUpButton/ScrollUpButton";
-import Reviews from "../../components/Reviews/Reviews";
+import GameReviews from "../../components/GameReviews/GameReviews";
 const AdditionalContent = lazy(()=>import("../../components/AdditionalContent/AdditionalContent"));
 
 const Game: React.FC = () => {
@@ -43,7 +43,6 @@ const Game: React.FC = () => {
 
     const {
         data: addedStatus = initialIsAddedState,
-        isError: isCheckError,
         isFetching: isUpdating,
         refetch
     } = useCheckIsAddedQuery({slug}, {skip: !slug});
@@ -71,12 +70,12 @@ const Game: React.FC = () => {
             top: 0,
             left: 0,
             behavior: "smooth",
-        })
+        });
     }, [slug, game]);
 
     useEffect((): void => {
-        dispatch(setIsError(isGameError || isCheckError));
-    }, [isGameError, isCheckError]);
+        dispatch(setIsError(isGameError));
+    }, [isGameError]);
 
     useEffect((): void => {
         dispatch(setIsFetching(isFetching || isUpdating));
@@ -87,7 +86,7 @@ const Game: React.FC = () => {
             ?
             <Error/>
             :
-            <div className={styles.container}>
+            <>
                 <div
                     className={styles.background__header}
                     style={{backgroundImage: `url(${game.background_image})`}}
@@ -96,7 +95,7 @@ const Game: React.FC = () => {
                         <div className={styles.game}>
                             <GameHeader
                                 game={game}
-                                isLoading={isFetching || isUpdating}
+                                isLoadingPage={isFetching}
                                 addedStatus={addedStatus}
                                 refetch={refetch}
                                 ref={notificationRef}
@@ -105,12 +104,12 @@ const Game: React.FC = () => {
                                 <div className={styles.game__info}>
                                     <GameLabels
                                         game={game}
-                                        isLoading={isFetching || isUpdating}
+                                        isLoadingPage={isFetching}
                                     />
                                     <Screenshots
                                         setImageURL={setImageURL}
                                         gameId={game.id}
-                                        isLoading={isFetching || isUpdating}
+                                        isLoadingPage={isFetching}
                                     />
                                 </div>
                             </div>
@@ -119,7 +118,7 @@ const Game: React.FC = () => {
                 </div>
                 <GameDescription
                     description={game.description_raw}
-                    isLoading={isFetching || isUpdating}
+                    isLoadingPage={isFetching}
                 />
                 <div
                     className={styles.background__footer}
@@ -129,15 +128,15 @@ const Game: React.FC = () => {
                         <Suspense fallback={null}>
                             <AdditionalContent
                                 gameId={game.id}
-                                isLoading={isFetching || isUpdating}
+                                isLoadingPage={isFetching}
                             />
                         </Suspense>
                     </div>
                 </div>
                 <Suspense fallback={null}>
-                    <Reviews
+                    <GameReviews
                         slug={slug}
-                        isLoading={isFetching || isUpdating}
+                        isLoadingPage={isFetching}
                         ref={notificationRef}
                     />
                 </Suspense>
@@ -156,7 +155,7 @@ const Game: React.FC = () => {
                         <ScrollUpButton showScrollUp={showScrollUp}/>
                     </div>
                 </div>
-            </div>
+            </>
     );
 };
 

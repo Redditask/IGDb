@@ -19,13 +19,13 @@ import {regularCrop} from "../../utils/helpers/systemActions";
 interface ScreenshotsProps {
     gameId: number;
     setImageURL: (url: string) => void;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
 const Screenshots:React.FC<ScreenshotsProps> = ({
         gameId,
         setImageURL,
-        isLoading
+        isLoadingPage
     }) => {
 
     const dispatch = useAppDispatch();
@@ -45,7 +45,7 @@ const Screenshots:React.FC<ScreenshotsProps> = ({
     }, [isFetching]);
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <ScreenshotsSkeleton/>
             :

@@ -12,10 +12,10 @@ import {IGameCard} from "../../types/data";
 interface GamesCarouselProps {
     title: string;
     games: IGameCard[];
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) => {
+const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoadingPage}) => {
     const [displayedGames, setDisplayedGames] = useState<IGameCard []>([]);
     const [startIndex, setStartIndex] = useState<number>(0);
     const [finalIndex, setFinalIndex] = useState<number>(0);
@@ -48,7 +48,7 @@ const GamesCarousel:React.FC<GamesCarouselProps> = ({title, games, isLoading}) =
     const rightButtonIdDefinition = (): string => (finalIndex !== games.length) ? styles.show : styles.hide;
 
     return (
-        isLoading
+        isLoadingPage
             ?
             <GamesCarouselSkeleton/>
             :

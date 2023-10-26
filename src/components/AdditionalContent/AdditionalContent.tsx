@@ -15,10 +15,10 @@ import {initialGamesState} from "../../utils/helpers/initialStates";
 
 interface AdditionalContentProps {
     gameId: number;
-    isLoading: boolean;
+    isLoadingPage: boolean;
 }
 
-const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, isLoading}) => {
+const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, isLoadingPage}) => {
     const [sameSeriesGames, setSameSeriesGames] = useState<IGameCard []>([]);
     const [DLC, setDLC] = useState<IGameCard []>([]);
 
@@ -56,12 +56,12 @@ const AdditionalContent: React.FC<AdditionalContentProps> = ({gameId, isLoading}
                     <GamesCarousel
                         title="DLC"
                         games={DLC}
-                        isLoading={isLoading}
+                        isLoadingPage={isLoadingPage}
                     />
                     <GamesCarousel
                         title="You may be interested"
                         games={sameSeriesGames}
-                        isLoading={isLoading}
+                        isLoadingPage={isLoadingPage}
                     />
                 </div>
             }

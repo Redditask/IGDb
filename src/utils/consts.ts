@@ -18,13 +18,15 @@ export const UPCOMING_RELEASES_ROUTE: string = "/games/upcoming-releases";
 
 export const GAME_ROUTE: string = "/game/:slug";
 
-export const ACCOUNT_ROUTE: string = "/account";
+export const ACCOUNT_ROUTE: string = "/account/:username";
 
 export const LOGIN_ROUTE: string = "/login";
 
 export const REGISTRATION_ROUTE: string = "/registration";
 
 export const ACTIVATION_ROUTE: string = "/activate/:link";
+
+export const LIBRARY_ROUTE: string = "/library"
 
 export const SideBarLinks: ICustomLink [] = [
     {

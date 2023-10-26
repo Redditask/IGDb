@@ -26,7 +26,7 @@ const MetacriticScore:React.FC<MetacriticScoreProps> = ({score}) => {
                     </div>
                     :
                     <div
-                        className={styles.notAvailable}
+                        className={styles.metacriticScore__notAvailable}
                         title="Game rating is not available"
                     >
                         N/A

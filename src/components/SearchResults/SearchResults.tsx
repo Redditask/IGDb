@@ -3,7 +3,8 @@ import React, {lazy, Suspense} from "react";
 import styles from "./SearchResults.module.scss";
 
 import {IGameCard} from "../../types/data";
-import {GamesQueryResult} from "../../types/queries";
+
+import {GamesQueryResult} from "../../types/queries/results";
 
 const SearchItem = lazy(()=>import("../SearchItem/SearchItem"));
 
@@ -36,7 +37,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({list, clean, isLoading}) =
                     )
                     :
                     <h2 className={styles.emptySearch}>
-                        No results
+                        No games
                     </h2>
             }
         </>
