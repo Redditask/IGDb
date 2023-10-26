@@ -15,9 +15,6 @@ import AppRouter from "./routing/AppRouter";
 import {initialUserDataState} from "./utils/helpers/initialStates";
 
 // ToDo:
-//  v0.9
-//  финальная правка стилей
-//  //
 //  v0.95
 //  динамическая подгрузка ревьюшек (как с играми в Games page) (?)
 //  внедрить теги в rtk-query (?)
