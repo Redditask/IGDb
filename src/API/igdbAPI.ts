@@ -159,6 +159,17 @@ export const igdbAPI = createApi({
                     platforms
                 },
             })
+        }),
+        updateUserIcon: builder.mutation<void, File>({
+            query: (file) => ({
+                url: `account/info/icon`,
+                method: "POST",
+                body: file,
+                headers: {
+                    'content-type': file.type,
+                    'content-length': `${file.size}`,
+                },
+            })
         })
     }),
 });
@@ -183,5 +194,6 @@ export const {
     useEditReviewMutation,
     useGetAccountInfoQuery,
     useUpdateUserPlatformsMutation,
-    useGetAccountReviewsQuery
+    useGetAccountReviewsQuery,
+    useUpdateUserIconMutation
 } = igdbAPI;

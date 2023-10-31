@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  gap: 2rem;
+  gap: 1rem;
 
   &__currentPlatforms {
     display: flex;
@@ -31,8 +31,58 @@
 
   &__buttons {
     display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  &__iconButtons {
+    display: flex;
+    flex-direction: row;
     align-items: center;
 
     gap: 1rem;
+  }
+
+  &__actionButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+    gap: 1rem;
+  }
+
+  &__userIconInput {
+    display: block;
+
+    font-size: 1.4rem;
+    font-weight: bolder;
+
+    user-select: none;
+    cursor: pointer;
+    pointer-events: auto;
+
+    color: #b9b9b9;
+    background-color: black;
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+    padding: 0.25rem 1.5rem;
+    margin: 1rem 0;
+
+    &:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+
+      transform: translateY(-0.3rem);
+
+      color: white;
+    }
+
+    &:active {
+      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+
+      transform: scale(0.95);
+    }
   }
 }

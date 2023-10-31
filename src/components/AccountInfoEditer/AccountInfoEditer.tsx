@@ -1,6 +1,6 @@
-import React, {forwardRef, useEffect, useState} from "react";
+import React, {ChangeEvent, forwardRef, useEffect, useState} from "react";
 
-import {useUpdateUserPlatformsMutation} from "../../API/igdbAPI";
+import {useUpdateUserIconMutation, useUpdateUserPlatformsMutation} from "../../API/igdbAPI";
 
 import styles from "./AccountInfoEditer.module.scss";
 
@@ -29,9 +29,11 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
     }, ref) => {
 
     const [selectedPlatforms, setSelectedPlatforms] = useState<IPlatform []>(userInfo.platforms);
+    const [userIcon, setUserIcon] = useState<File>();
     const plaforms = platformListToPlatformsConvert(platformsList);
 
-    const [updatePlatforms, {isLoading, isError}] = useUpdateUserPlatformsMutation();
+    const [updatePlatforms, {isLoading: isLoadingPlatforms, isError: isErrorPlatforms}] = useUpdateUserPlatformsMutation();
+    const [updateUserIcon, {isLoading: isLoadingIcon, isError: isErrorIcon}] = useUpdateUserIconMutation();
 
     const dispatch = useAppDispatch();
 
@@ -42,15 +44,27 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
 
     const closeEditer = (): void => setIsEdit(false);
 
-    const updatePlatformsHandler = async (): Promise<void> => {
-        const response = await updatePlatforms(
+    const updateInfoHandler = async (): Promise<void> => {
+        let isSuccessfulIconUpload: boolean = true;
+
+        const platformsResponse = await updatePlatforms(
             selectedPlatforms
         ).unwrap().catch((err) => err);
 
-        if (response?.status === 200){
-            showNotification("Platforms was updated");
+        if (userIcon) {
+            const iconResponse = await updateUserIcon(
+                userIcon
+            ).unwrap().catch((err) => err);
+
+            if (iconResponse?.status !== 200) {
+                isSuccessfulIconUpload = false;
+            }
+        }
+
+        if (platformsResponse?.status === 200 && isSuccessfulIconUpload) {
+            showNotification("Info was updated");
             closeEditer();
-        } else if (response?.data?.message) {
+        } else if (platformsResponse?.data?.message) {
             closeEditer();
         }
     };
@@ -61,6 +75,12 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
                 currentPlatform.platform.name !== platform.platform.name));
         } else {
             setSelectedPlatforms([...selectedPlatforms, platform]);
+        }
+    };
+
+    const userIconChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+        if(event.target.files) {
+            setUserIcon(event.target.files[0]);
         }
     };
 
@@ -75,12 +95,12 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
     };
 
     useEffect((): void => {
-        dispatch(setIsFetching(isLoading));
-    }, [isLoading]);
+        dispatch(setIsFetching(isLoadingPlatforms || isLoadingIcon));
+    }, [isLoadingPlatforms, isLoadingIcon]);
 
     useEffect((): void => {
-        dispatch(setIsError(isError));
-    }, [isError]);
+        dispatch(setIsError(isErrorPlatforms || isErrorIcon));
+    }, [isErrorPlatforms, isErrorIcon]);
 
     return (
         <div className={styles.editerForm}>
@@ -111,14 +131,30 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
                 )}
             </div>
             <div className={styles.editerForm__buttons}>
-                <Button
-                    title="Close"
-                    onClick={closeEditer}
-                />
-                <Button
-                    title="Save"
-                    onClick={updatePlatformsHandler}
-                />
+                <div className={styles.editerForm__iconButtons}>
+                    <input
+                        id="userIconInput"
+                        type="file"
+                        onChange={userIconChangeHandler}
+                        hidden={true}
+                    />
+                    <label
+                        className={styles.editerForm__userIconInput}
+                        htmlFor="userIconInput"
+                    >
+                        Choose icon
+                    </label>
+                </div>
+                <div className={styles.editerForm__actionButtons}>
+                    <Button
+                        title="Close"
+                        onClick={closeEditer}
+                    />
+                    <Button
+                        title="Save"
+                        onClick={updateInfoHandler}
+                    />
+                </div>
             </div>
         </div>
     );
