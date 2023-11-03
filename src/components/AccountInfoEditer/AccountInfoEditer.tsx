@@ -47,14 +47,14 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
     const updateInfoHandler = async (): Promise<void> => {
         let isSuccessfulIconUpload: boolean = true;
 
-        const platformsResponse = await updatePlatforms(
-            selectedPlatforms
-        ).unwrap().catch((err) => err);
+        const platformsResponse = await updatePlatforms({
+            platforms: selectedPlatforms
+        }).unwrap().catch((err) => err);
 
         if (userIcon) {
-            const iconResponse = await updateUserIcon(
-                userIcon
-            ).unwrap().catch((err) => err);
+            const iconResponse = await updateUserIcon({
+                file: userIcon
+            }).unwrap().catch((err) => err);
 
             if (iconResponse?.status !== 200) {
                 isSuccessfulIconUpload = false;
@@ -79,7 +79,7 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
     };
 
     const userIconChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
-        if(event.target.files) {
+        if (event.target.files) {
             setUserIcon(event.target.files[0]);
         }
     };
@@ -131,7 +131,7 @@ const AccountInfoEditer = forwardRef<NotificationRef, AccountInfoEditerProps>(({
                 )}
             </div>
             <div className={styles.editerForm__buttons}>
-                <div className={styles.editerForm__iconButtons}>
+                <div>
                     <input
                         id="userIconInput"
                         type="file"

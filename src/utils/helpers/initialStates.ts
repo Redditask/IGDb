@@ -80,6 +80,7 @@ export const initialAccountInfoState: GetAccountInfoQueryResult = {
     registrationDate: "",
     reviewsCount: 0,
     wishlistCount: 0
+    //userIcon
 };
 
 export const initialReviewInfoState: IReviewInfo = {

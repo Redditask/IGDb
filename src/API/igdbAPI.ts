@@ -151,8 +151,8 @@ export const igdbAPI = createApi({
             query: ({selectedUser}) =>
                 `account/info/${selectedUser}`
         }),
-        updateUserPlatforms: builder.mutation<void, IPlatform []>({
-            query: (platforms) => ({
+        updateUserPlatforms: builder.mutation<void, {platforms: IPlatform []}>({
+            query: ({platforms}) => ({
                 url: `account/info/platforms`,
                 method: "PUT",
                 body: {
@@ -160,11 +160,13 @@ export const igdbAPI = createApi({
                 },
             })
         }),
-        updateUserIcon: builder.mutation<void, File>({
-            query: (file) => ({
+        updateUserIcon: builder.mutation<void, {file: File}>({
+            query: ({file}) => ({
                 url: `account/info/icon`,
                 method: "POST",
-                body: file,
+                body: {
+                    file
+                },
                 headers: {
                     'content-type': file.type,
                     'content-length': `${file.size}`,
